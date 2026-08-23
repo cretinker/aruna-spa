@@ -24,9 +24,9 @@
       <p style="font-size:17.5px; line-height:1.65; color:rgba(251,246,240,.8); max-width:500px; margin:0;">{{ ui.sub }}</p>
 
       <div style="display:flex; gap:14px; align-items:center; padding-top:6px; flex-wrap:wrap;">
-        <a href="https://maryaruna.glossgenius.com/services" target="_blank" rel="noopener" style="background:#7C2D3A; color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:18px 32px; border-radius:999px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;" style-hover="background:#FBF6F0; color:#7C2D3A;">
-          <span>Book Online ↗</span>
-        </a>
+        <div onClick="{{ goBooking }}" style="background:#7C2D3A; color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:18px 32px; border-radius:999px; cursor:pointer; display:inline-flex; align-items:center; gap:8px;" style-hover="background:#FBF6F0; color:#7C2D3A;">
+          <span>{{ ui.bookOnline }}</span>
+        </div>
         <div onClick="{{ goQuote }}" style="border:1px solid rgba(251,246,240,.35); color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:18px 28px; border-radius:999px; cursor:pointer;" style-hover="border-color:#D9A08C; color:#D9A08C;">
           {{ ui.cta }}
         </div>
@@ -235,9 +235,9 @@
     </div>
     <div style="font-size:16.5px; line-height:1.65; color:rgba(251,246,240,.8); max-width:540px;">{{ ui.ctaSub }}</div>
     <div style="display:flex; gap:14px; flex-wrap:wrap; justify-content:center;">
-      <a href="https://maryaruna.glossgenius.com/services" target="_blank" rel="noopener" style="background:#FBF6F0; color:#7C2D3A; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:20px 40px; border-radius:999px; cursor:pointer; text-decoration:none;" style-hover="background:#140F0D; color:#FBF6F0;">
-        {{ ui.book }} ↗
-      </a>
+      <div onClick="{{ goBooking }}" style="background:#FBF6F0; color:#7C2D3A; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:20px 40px; border-radius:999px; cursor:pointer;" style-hover="background:#140F0D; color:#FBF6F0;">
+        {{ ui.book }}
+      </div>
       <div onClick="{{ goQuote }}" style="border:1px solid rgba(251,246,240,.4); color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:20px 32px; border-radius:999px; cursor:pointer;" style-hover="border-color:#FBF6F0; background:rgba(251,246,240,.12);">
         {{ ui.cta }}
       </div>
@@ -259,6 +259,7 @@ const UI = {
     h1a: 'A Private Sanctuary,', h1b: 'A Dedicated Doorbell, and', h1c: 'Zero Shared Waiting Rooms.',
     sub: 'Aruna Spa operates as a private, medical-grade studio on a quiet residential avenue in Staten Island. One client at a time, with dedicated personal care from start to finish.',
     cta: 'Estimate My Treatment', orCall: 'or call (718) 354-6298',
+    bookOnline: 'Book an Appointment', book: 'Book an Appointment',
     days: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], closed: 'Closed',
     facts: [
       ['Street Parking', 'Ample free street parking directly outside on Wheeler Ave.'],

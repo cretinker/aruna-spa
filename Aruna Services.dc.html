@@ -119,9 +119,9 @@
       <div style="font-size:15px; line-height:1.65; color:rgba(251,246,240,.8);">{{ ui.ctaB }}</div>
     </div>
     <div style="display:flex; gap:14px; flex-wrap:wrap;">
-      <a href="https://maryaruna.glossgenius.com/services" target="_blank" rel="noopener" style="background:#FBF6F0; color:#7C2D3A; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:18px 32px; border-radius:999px; cursor:pointer; white-space:nowrap; text-decoration:none; display:inline-flex; align-items:center; gap:8px;" style-hover="background:#140F0D; color:#FBF6F0;">
-        <span>Book Online ↗</span>
-      </a>
+      <div onClick="{{ goBooking }}" style="background:#FBF6F0; color:#7C2D3A; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:18px 32px; border-radius:999px; cursor:pointer; white-space:nowrap; display:inline-flex; align-items:center; gap:8px;" style-hover="background:#140F0D; color:#FBF6F0;">
+        <span>{{ ui.bookOnline }}</span>
+      </div>
       <div onClick="{{ goQuote }}" style="border:1px solid rgba(251,246,240,.4); color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:18px 30px; border-radius:999px; cursor:pointer; white-space:nowrap;" style-hover="background:rgba(251,246,240,.12); border-color:#FBF6F0;">
         {{ ui.ctaBtn }}
       </div>
@@ -148,7 +148,7 @@ const UI = {
     payT: 'Pay in 4 Installments', payB: 'Financing from $50 to $4,000 via Buy Now Pay Later. Approved in 60 seconds before your visit without delaying your appointment.',
     ctaA: 'Need Help Choosing the Right Service?',
     ctaB: 'Take our 60-second price estimator to match your routine, or book directly with Master Specialist Mary Aruna.',
-    ctaBtn: 'Estimate My Rate'
+    ctaBtn: 'Estimate My Rate', bookOnline: 'Book an Appointment'
   },
   es: {
     eyebrow: 'DIRECTORIO DE PRECIOS VERIFICADOS',
@@ -165,7 +165,7 @@ const UI = {
     payT: 'Pago en 4 Cuotas', payB: 'Financiamiento de $50 a $4,000 aprobado en 60 segundos antes de tu cita.',
     ctaA: '¿Necesitas Ayuda para Elegir?',
     ctaB: 'Usa nuestro calculador de tarifas o agenda directamente con Mary Aruna.',
-    ctaBtn: 'Calcular mi Tarifa'
+    ctaBtn: 'Calcular mi Tarifa', bookOnline: 'Reservar Cita'
   }
 };
 
@@ -269,7 +269,7 @@ class Component extends DCLogic {
       };
     }).filter(g => g.rows.length);
 
-    return { goQuote, tabs, groups, ui, cashMode, toggleCash: this.toggleCash };
+    return { goBooking: () => this.nav('booking'), goQuote, tabs, groups, ui, cashMode, toggleCash: this.toggleCash };
   }
 }
 </script>

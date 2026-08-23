@@ -39,12 +39,12 @@
 
       <!-- Dual High-Contrast Action Cluster -->
       <div style="display:flex; align-items:center; gap:18px; flex-wrap:wrap; animation:arunaRise 1.1s cubic-bezier(.16,1,.3,1) .5s both;">
-        <a href="https://maryaruna.glossgenius.com/services" target="_blank" rel="noopener" style="background:#7C2D3A; color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:18px 32px; border-radius:999px; display:inline-flex; align-items:center; gap:10px; box-shadow:0 10px 30px -10px rgba(124,45,58,.8), inset 0 1px 1px rgba(255,255,255,.2); transition:transform .2s ease, background .3s ease;" style-hover="background:#FBF6F0; color:#7C2D3A; transform:translateY(-1px);">
+        <div onClick="{{ goBooking }}" style="background:#7C2D3A; color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:18px 32px; border-radius:999px; display:inline-flex; align-items:center; gap:10px; cursor:pointer; white-space:nowrap; box-shadow:0 10px 30px -10px rgba(124,45,58,.8), inset 0 1px 1px rgba(255,255,255,.2); transition:transform .2s ease, background .3s ease;" style-hover="background:#FBF6F0; color:#7C2D3A; transform:translateY(-1px);">
           <span>{{ t.heroCtaPrimary }}</span>
-          <span style="width:20px; height:20px; border-radius:50%; background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center; font-size:10px;">&nearr;</span>
-        </a>
+          <span style="width:20px; height:20px; border-radius:50%; background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center; font-size:11px;">&rarr;</span>
+        </div>
 
-        <div onClick="{{ goServices }}" style="border:1px solid rgba(251,246,240,.32); color:#FBF6F0; font-size:12px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; padding:18px 28px; border-radius:999px; cursor:pointer; transition:background .3s ease, border-color .3s ease, color .3s ease;" style-hover="background:rgba(251,246,240,.12); border-color:#D9A08C; color:#D9A08C;">
+        <div onClick="{{ goServices }}" style="border:1px solid rgba(251,246,240,.32); color:#FBF6F0; font-size:12px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; padding:18px 28px; border-radius:999px; cursor:pointer; white-space:nowrap; transition:background .3s ease, border-color .3s ease, color .3s ease;" style-hover="background:rgba(251,246,240,.12); border-color:#D9A08C; color:#D9A08C;">
           {{ t.heroCtaSecondary }}
         </div>
 
@@ -310,7 +310,7 @@ const EN = {
   heroEyebrow: 'STATEN ISLAND \u00b7 PRIVATE PMU & CLINICAL AESTHETICS \u00b7 EST. 2014',
   heroH1a: 'Wake Up', heroH1b: 'Ready Every', heroH1c: 'Single Morning.',
   heroSub: 'Precision microblading, clinical HydraFacials, and medical-grade diode laser hair removal by Master Specialist Mary Aruna. Every rate published upfront with zero sales pressure.',
-  heroCtaPrimary: 'Book Online via GlossGenius',
+  heroCtaPrimary: 'Book an Appointment',
   heroCtaSecondary: 'Explore 32 Treatments',
   heroDirectCall: 'Direct Studio Line',
   heroChips: 'Explore by Treatment Goal',
@@ -394,6 +394,7 @@ class Component extends DCLogic {
     return {
       t,
       heroRef: el => { this.hero = el; },
+      goBooking: () => this.nav('booking'),
       goQuote: () => this.nav('quote'),
       goServices: () => this.nav('services'),
       goHairloss: () => this.nav('segment', 'hairloss'),

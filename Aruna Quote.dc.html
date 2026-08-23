@@ -129,9 +129,9 @@
             <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#25D366; color:#100C0A; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:19px 34px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;" style-hover="background:#1EB854;">
               <span>Send via WhatsApp ↗</span>
             </a>
-            <a href="https://maryaruna.glossgenius.com/services" target="_blank" rel="noopener" style="background:#7C2D3A; color:#FBF6F0; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:19px 34px; text-decoration:none;" style-hover="background:#1A1411;">
-              Book Online ↗
-            </a>
+            <div onClick="{{ goBooking }}" style="background:#7C2D3A; color:#FBF6F0; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:19px 34px; cursor:pointer;" style-hover="background:#1A1411;">
+              {{ ui.pickTime }}
+            </div>
             <a href="tel:+17183546298" style="border:1px solid rgba(26,20,17,.28); color:#1A1411; font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; padding:19px 30px; text-decoration:none;" style-hover="border-color:#7C2D3A; color:#7C2D3A;">{{ ui.callInstead }}</a>
             <div onClick="{{ restart }}" style="font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; padding:19px 8px; color:#8A7A6E; cursor:pointer;" style-hover="color:#7C2D3A;">{{ ui.startOver }}</div>
           </div>
@@ -442,6 +442,11 @@ class Component extends DCLogic {
       doneBody: es
         ? ((val !== null && val > 0 ? 'Tu presupuesto es ' + money(val) + '. ' : '') + 'Aruna te enviar\u00e1 los tres pr\u00f3ximos huecos por mensaje. Si prefieres no esperar, el calendario est\u00e1 abierto ahora, y la consulta es gratis reserves o no.')
         : ((val !== null && val > 0 ? 'Your estimate is ' + money(val) + '. ' : '') + 'Aruna will text you the next three open slots. If you would rather not wait, the calendar is open now, and the consultation is free whether you book or not.'),
+      goBooking: () => this.nav('booking', null, {
+        svc: (b && b.n) || null,
+        dur: (b && b.dur) || 90,
+        price: val !== null ? money(val) : null
+      }),
       restart: () => this.setState({ step: 1, seg: null, svc: null, history: null, place: null, pay: null, name: '', phone: '', when: null, done: false }),
       exitOpen: st.exitOpen && !st.exitSent,
       exitPhone: st.exitPhone,

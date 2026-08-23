@@ -27,9 +27,9 @@
       <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:40px; flex-wrap:wrap; padding-top:6px;">
         <p style="font-size:18px; line-height:1.65; color:rgba(251,246,240,.82); max-width:580px; margin:0;">{{ ui.sub }}</p>
         <div style="display:flex; gap:14px; flex-wrap:wrap; flex-shrink:0;">
-          <a href="https://maryaruna.glossgenius.com/services" target="_blank" rel="noopener" style="background:#7C2D3A; color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:18px 32px; border-radius:999px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;" style-hover="background:#FBF6F0; color:#7C2D3A;">
-            <span>Book Online ↗</span>
-          </a>
+          <div onClick="{{ goBooking }}" style="background:#7C2D3A; color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:18px 32px; border-radius:999px; cursor:pointer; display:inline-flex; align-items:center; gap:8px;" style-hover="background:#FBF6F0; color:#7C2D3A;">
+            <span>{{ ui.bookOnline }}</span>
+          </div>
           <a href="https://www.google.com/maps/search/?api=1&amp;query=41%20Wheeler%20Avenue%2C%20Staten%20Island%2C%20NY%2C%2010314" target="_blank" rel="noopener" style="border:1px solid rgba(251,246,240,.35); color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:18px 28px; border-radius:999px; text-decoration:none;" style-hover="border-color:#D9A08C; color:#D9A08C;">
             {{ ui.dir }}
           </a>
@@ -166,9 +166,9 @@
       <div style="font-size:15px; line-height:1.65; color:rgba(251,246,240,.8);">{{ ui.ctaSub }}</div>
     </div>
     <div style="display:flex; gap:14px; flex-wrap:wrap;">
-      <a href="https://maryaruna.glossgenius.com/services" target="_blank" rel="noopener" style="background:#FBF6F0; color:#7C2D3A; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:18px 34px; border-radius:999px; cursor:pointer; text-decoration:none;" style-hover="background:#140F0D; color:#FBF6F0;">
-        Book Online ↗
-      </a>
+      <div onClick="{{ goBooking }}" style="background:#FBF6F0; color:#7C2D3A; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:18px 34px; border-radius:999px; cursor:pointer;" style-hover="background:#140F0D; color:#FBF6F0;">
+        {{ ui.bookOnline }}
+      </div>
       <div onClick="{{ goQuote }}" style="border:1px solid rgba(251,246,240,.4); color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:18px 30px; border-radius:999px; cursor:pointer;" style-hover="background:rgba(251,246,240,.12); border-color:#FBF6F0;">
         {{ ui.cta }}
       </div>
@@ -184,7 +184,7 @@ const UI = {
     eyebrow: '41 WHEELER AVENUE \u00b7 STATEN ISLAND, NY',
     h1a: 'One Chair, One Client,', h1b: 'and', h1c: 'Zero Waiting Rooms.',
     sub: 'Aruna has practiced in this private sanctuary since 2014. You will never walk across a crowded salon floor, wait behind another client, or be rushed through your treatment. English y español.',
-    cta: 'Estimate My Treatment', dir: 'Get Directions',
+    cta: 'Estimate My Treatment', dir: 'Get Directions', bookOnline: 'Book an Appointment',
     s1: 'Operating on Staten Island since', s2: 'Completed client procedures',
     s3: 'Verified treatments published upfront', s4: 'Fluent English & Spanish spoken',
     storyH: 'Over Twelve Years in Private Practice, and the Exact Same Answer When You Ask', storyHi: 'What It Costs.',
@@ -198,25 +198,25 @@ const UI = {
     polA: 'Studio Policies, in', polB: 'Plain Terms.',
     polSub: 'One chair means each reserved time slot is completely dedicated to you.',
     getA: 'Visiting the', getB: 'Studio Sanctuary.',
-    getSub: '41 Wheeler Avenue, Staten Island, NY 10314. Easy street parking is available directly outside. Ring the front bell upon arrival for your private entrance.',
-    maps: 'Open in Google Maps', hoursT: 'Operating Hours',
-    ctaA: 'Have a Question About', ctaB: 'Your Treatment?',
-    ctaSub: 'Complimentary 20-minute consultations are available before any permanent procedure. You will always receive honest clinical advice.'
+    getSub: '41 Wheeler Avenue, Staten Island, NY 10314. Free on-street parking right in front.',
+    maps: 'Open in Google Maps', hoursT: 'Sanctuary Hours',
+    ctaA: 'Have Questions About', ctaB: 'Your Treatment?',
+    ctaSub: 'Complimentary 20-minute consultations before any permanent procedure.'
   },
   es: {
     eyebrow: '41 WHEELER AVENUE \u00b7 STATEN ISLAND, NY',
     h1a: 'Una Silla, Una Clienta,', h1b: 'y', h1c: 'Cero Salas de Espera.',
-    sub: 'Aruna atiende en este santuario privado desde 2014. Nunca cruzarás un salón concurrido ni serás atendida con prisas. English y español.',
-    cta: 'Calcular mi Tarifa', dir: 'Cómo Llegar',
-    s1: 'En Staten Island desde', s2: 'Procedimientos completados',
-    s3: 'Tratamientos con precio publicado', s4: 'Atención en inglés y español',
-    storyH: 'Más de Doce Años en Práctica Privada, y la Misma Respuesta Cuando Preguntas', storyHi: 'Cuánto Cuesta.',
-    p1: 'La mayoría de estudios venden consultas para negociar precios a puerta cerrada. En Aruna Spa cada tarifa es pública y la consulta previa es gratuita.',
-    p2: 'Por eso tu retoque de perfeccionamiento está incluido en el precio y los descuentos en efectivo están publicados a la vista.',
-    p3: 'Cada procedimiento de cejas recibe 90 minutos ininterrumpidos en un entorno clínico estéril.',
-    teamA: 'Áreas Principales', teamB: 'de Práctica.', teamNote: 'Atención personalizada desde 2014.',
-    r1b: 'Microblading, powder brows, nano-blading, labios, delineado y micropigmentación capilar.',
-    r2b: 'HydraFaciales clínicos, dermaplaning, microneedling y depilación láser diodo con enfriamiento.',
+    sub: 'Aruna atiende en este santuario privado desde 2014. Nunca cruzarás un salón lleno de gente, ni esperarás detrás de otra persona, ni se apurará tu tratamiento. English y español.',
+    cta: 'Calcular Mi Precio', dir: 'Cómo Llegar', bookOnline: 'Reservar Cita',
+    s1: 'Atendiendo en Staten Island desde', s2: 'Procedimientos completados',
+    s3: 'Tratamientos verificados publicados', s4: 'Atención fluida en inglés y español',
+    storyH: 'Doce Años de Práctica Privada, y la Misma Respuesta Exacta Cuando Preguntas', storyHi: 'Cuánto Cuesta.',
+    p1: 'Casi todos los estudios de PMU dependen de consultas cuyo único objetivo es meterte en la silla antes de decirte el precio real. En Aruna Spa, cada tarifa está publicada por escrito y la consulta inicial siempre es gratuita.',
+    p2: 'Por eso tu segundo retoque de perfeccionamiento está incluido en el precio inicial y no se factura cuatro semanas después, por eso los descuentos en efectivo son públicos y los presupuestos nunca cambian en la puerta.',
+    p3: 'Nuestro compromiso es la dedicación individual. Cada diseño de cejas recibe 90 minutos ininterrumpidos, una persona a la vez, en un entorno clínico estéril.',
+    teamA: 'Áreas Principales', teamB: 'de Práctica.', teamNote: 'Atención clínica dedicada desde 2014.',
+    r1b: 'Microblading, powder brows, nano cejas, labios, delineado y micropigmentación capilar. Mary también capacita a artistas en activo.',
+    r2b: 'HydraFacials clínicos, dermaplaning manual, microneedling con células madre y depilación láser con diodo de alta precisión.',
     r3b: 'Drenaje linfático manual, recuperación post-liposucción y moldeado corporal.',
     polA: 'Políticas del Estudio, en', polB: 'Términos Claros.',
     polSub: 'Una sola silla significa que cada horario reservado está 100% dedicado a ti.',
@@ -243,6 +243,7 @@ class Component extends DCLogic {
 
     return {
       ui,
+      goBooking: () => this.nav('booking'),
       goQuote: () => this.nav('quote'),
       hours: HOURS.map((h, i) => ({
         day: h[0],
