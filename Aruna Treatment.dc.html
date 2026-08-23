@@ -9,45 +9,61 @@
 <x-dc>
 <div style="background:#F4EDE6; color:#1A1411; font-family:'DM Sans',sans-serif;">
 
-  <div style="background:#1A1411; color:#FBF6F0; padding:126px 44px 96px; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:70px; align-items:end;">
-    <div style="display:flex; flex-direction:column; gap:26px;">
-      <div style="display:flex; align-items:center; gap:16px;">
-        <div style="width:44px; height:1px; background:#D9A08C;"></div>
-        <div style="font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ t.eyebrow }}</div>
+  <!-- Hero Header -->
+  <div style="background:#140F0D; color:#FBF6F0; padding:80px 44px 72px; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:60px; align-items:end;">
+    <div style="display:flex; flex-direction:column; gap:22px;">
+      <div style="display:inline-flex; align-items:center; gap:10px; padding:6px 14px; background:rgba(217,160,140,.12); border:1px solid rgba(217,160,140,.28); border-radius:999px; width:fit-content;">
+        <span style="width:6px; height:6px; border-radius:50%; background:#D9A08C;"></span>
+        <span style="font-size:10.5px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:#D9A08C;">{{ t.eyebrow }}</span>
       </div>
-      <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(44px,4.7vw,80px); line-height:.93; letter-spacing:-.035em;">{{ t.h1a }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ t.h1b }}</span></div>
-      <div style="font-size:18px; line-height:1.7; color:rgba(251,246,240,.76); max-width:540px;">{{ t.sub }}</div>
-      <div style="display:flex; gap:12px; flex-wrap:wrap; padding-top:4px;">
-        <div onClick="{{ goBooking }}" style="background:#7C2D3A; color:#FBF6F0; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:19px 34px; cursor:pointer;" style-hover="background:#FBF6F0; color:#7C2D3A;">{{ ui.book }}</div>
-        <div onClick="{{ goQuote }}" style="border:1px solid rgba(251,246,240,.34); color:#FBF6F0; font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; padding:19px 28px; cursor:pointer;" style-hover="border-color:#D9A08C; color:#D9A08C;">{{ ui.price }}</div>
+
+      <h1 style="font-family:'Libre Caslon Display',serif; font-size:clamp(42px,4.8vw,78px); line-height:.94; letter-spacing:-.03em; margin:0;">
+        {{ t.h1a }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ t.h1b }}</span>
+      </h1>
+
+      <p style="font-size:17.5px; line-height:1.65; color:rgba(251,246,240,.78); max-width:540px; margin:0;">{{ t.sub }}</p>
+
+      <div style="display:flex; gap:14px; flex-wrap:wrap; padding-top:6px;">
+        <a href="https://maryaruna.glossgenius.com/services" target="_blank" rel="noopener" style="background:#7C2D3A; color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:18px 32px; border-radius:999px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;" style-hover="background:#FBF6F0; color:#7C2D3A;">
+          <span>Book Online ↗</span>
+        </a>
+        <div onClick="{{ goQuote }}" style="border:1px solid rgba(251,246,240,.35); color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:18px 28px; border-radius:999px; cursor:pointer;" style-hover="border-color:#D9A08C; color:#D9A08C;">
+          {{ ui.price }}
+        </div>
       </div>
     </div>
-    <div style="display:flex; flex-direction:column; gap:2px; background:rgba(251,246,240,.16);">
+
+    <!-- Quick Facts Stack -->
+    <div style="display:flex; flex-direction:column; gap:2px; background:rgba(251,246,240,.16); border-radius:8px; overflow:hidden;">
       <sc-for list="{{ t.facts }}" as="f" hint-placeholder-count="5">
-        <div style="background:#1A1411; padding:19px 26px; display:flex; align-items:baseline; justify-content:space-between; gap:20px;">
-          <div style="font-size:13px; color:rgba(251,246,240,.62);">{{ f.k }}</div>
-          <div style="font-family:'Libre Caslon Display',serif; font-size:22px; color:#D9A08C; white-space:nowrap; text-align:right;">{{ f.v }}</div>
+        <div style="background:#1C1512; padding:18px 24px; display:flex; align-items:baseline; justify-content:space-between; gap:20px;">
+          <div style="font-size:13.5px; color:rgba(251,246,240,.68); font-weight:500;">{{ f.k }}</div>
+          <div style="font-family:'Libre Caslon Display',serif; font-size:24px; color:#D9A08C; white-space:nowrap; text-align:right;">{{ f.v }}</div>
         </div>
       </sc-for>
     </div>
   </div>
 
-  <div data-reveal style="padding:110px 44px; display:grid; grid-template-columns:minmax(0,360px) minmax(0,1fr); gap:80px; align-items:start; border-bottom:1px solid rgba(26,20,17,.16);">
-    <div style="display:flex; flex-direction:column; gap:18px; position:sticky; top:150px;">
-      <div style="display:flex; align-items:center; gap:14px;">
-        <div style="width:34px; height:1px; background:#7C2D3A;"></div>
-        <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A;">{{ ui.stepsEyebrow }}</div>
+  <!-- Step-by-Step Minute Breakdown -->
+  <div data-reveal style="padding:100px 44px; display:grid; grid-template-columns:minmax(0,360px) minmax(0,1fr); gap:80px; align-items:start; border-bottom:1px solid rgba(26,20,17,.16);">
+    <div style="display:flex; flex-direction:column; gap:18px; position:sticky; top:24px;">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div style="width:32px; height:1px; background:#7C2D3A;"></div>
+        <div style="font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A; font-weight:600;">{{ ui.stepsEyebrow }}</div>
       </div>
-      <div style="font-family:'Libre Caslon Display',serif; font-size:54px; line-height:.94; letter-spacing:-.03em;">{{ t.stepsA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ t.stepsB }}</span></div>
-      <div style="font-size:16px; line-height:1.72; color:#5C4E46;">{{ t.stepsSub }}</div>
+      <h2 style="font-family:'Libre Caslon Display',serif; font-size:clamp(38px, 4.4vw, 56px); line-height:.96; letter-spacing:-.03em; margin:0;">
+        {{ t.stepsA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ t.stepsB }}</span>
+      </h2>
+      <p style="font-size:16px; line-height:1.7; color:#5C4E46; margin:0;">{{ t.stepsSub }}</p>
     </div>
+
     <div style="display:flex; flex-direction:column;">
       <sc-for list="{{ t.steps }}" as="s" hint-placeholder-count="6">
-        <div style="display:grid; grid-template-columns:110px minmax(0,1fr); gap:34px; padding:26px 0; border-top:1px solid rgba(26,20,17,.18); align-items:start;">
+        <div style="display:grid; grid-template-columns:120px minmax(0,1fr); gap:30px; padding:26px 0; border-top:1px solid rgba(26,20,17,.18); align-items:start;">
           <div style="font-family:'Libre Caslon Display',serif; font-size:24px; line-height:1.05; color:#7C2D3A; white-space:nowrap;">{{ s.when }}</div>
-          <div style="display:flex; flex-direction:column; gap:9px;">
-            <div style="font-family:'Libre Caslon Display',serif; font-size:22px; line-height:1.16;">{{ s.t }}</div>
-            <div style="font-size:15.5px; line-height:1.72; color:#3A312B;">{{ s.b }}</div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <div style="font-family:'Libre Caslon Display',serif; font-size:23px; line-height:1.15; color:#1A1411;">{{ s.t }}</div>
+            <div style="font-size:15.5px; line-height:1.72; color:#5C4E46;">{{ s.b }}</div>
           </div>
         </div>
       </sc-for>
@@ -55,325 +71,339 @@
     </div>
   </div>
 
-  <div data-reveal style="background:#EAE1D6; padding:100px 44px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:70px; align-items:start; border-bottom:1px solid rgba(26,20,17,.16);">
-    <div style="display:flex; flex-direction:column; gap:20px;">
-      <div style="font-family:'Libre Caslon Display',serif; font-size:40px; line-height:1; letter-spacing:-.026em;">{{ ui.forT }}</div>
+  <!-- Candid Suitability: For You vs Not For You -->
+  <div data-reveal style="background:#EAE1D6; padding:100px 44px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:60px; align-items:start; border-bottom:1px solid rgba(26,20,17,.16);">
+    <div style="display:flex; flex-direction:column; gap:18px;">
+      <div style="font-family:'Libre Caslon Display',serif; font-size:36px; line-height:1.05; letter-spacing:-.02em; color:#1A1411;">{{ ui.forT }}</div>
       <div style="display:flex; flex-direction:column;">
         <sc-for list="{{ t.forWho }}" as="x" hint-placeholder-count="3">
-          <div style="display:grid; grid-template-columns:22px minmax(0,1fr); gap:14px; padding:16px 0; border-top:1px solid rgba(26,20,17,.18); align-items:start;">
-            <div style="font-size:15px; line-height:1.5; color:#7C2D3A;">&#10003;</div>
-            <div style="font-size:15.5px; line-height:1.7; color:#3A312B;">{{ x }}</div>
+          <div style="display:grid; grid-template-columns:20px minmax(0,1fr); gap:14px; padding:16px 0; border-top:1px solid rgba(26,20,17,.18); align-items:start;">
+            <div style="font-size:15px; line-height:1.5; color:#2E6930; font-weight:700;">&#10003;</div>
+            <div style="font-size:15px; line-height:1.7; color:#3A312B;">{{ x }}</div>
           </div>
         </sc-for>
       </div>
     </div>
-    <div style="display:flex; flex-direction:column; gap:20px;">
-      <div style="font-family:'Libre Caslon Display',serif; font-size:40px; line-height:1; letter-spacing:-.026em; color:#7C2D3A;">{{ ui.notT }}</div>
+
+    <div style="display:flex; flex-direction:column; gap:18px;">
+      <div style="font-family:'Libre Caslon Display',serif; font-size:36px; line-height:1.05; letter-spacing:-.02em; color:#7C2D3A;">{{ ui.notT }}</div>
       <div style="display:flex; flex-direction:column;">
         <sc-for list="{{ t.notWho }}" as="x" hint-placeholder-count="3">
-          <div style="display:grid; grid-template-columns:22px minmax(0,1fr); gap:14px; padding:16px 0; border-top:1px solid rgba(26,20,17,.18); align-items:start;">
-            <div style="font-family:'Libre Caslon Display',serif; font-size:18px; line-height:1.3; color:#7C2D3A;">&times;</div>
-            <div style="font-size:15.5px; line-height:1.7; color:#3A312B;">{{ x }}</div>
+          <div style="display:grid; grid-template-columns:20px minmax(0,1fr); gap:14px; padding:16px 0; border-top:1px solid rgba(26,20,17,.18); align-items:start;">
+            <div style="font-family:'Libre Caslon Display',serif; font-size:18px; line-height:1.3; color:#7C2D3A; font-weight:700;">&times;</div>
+            <div style="font-size:15px; line-height:1.7; color:#3A312B;">{{ x }}</div>
           </div>
         </sc-for>
       </div>
     </div>
   </div>
 
-  <div data-reveal style="padding:100px 44px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; background:rgba(26,20,17,.16); border-bottom:1px solid rgba(26,20,17,.16);">
+  <!-- Pre-Care & Post-Care Dual Column -->
+  <div data-reveal style="padding:90px 44px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; background:rgba(26,20,17,.16); border-bottom:1px solid rgba(26,20,17,.16);">
     <div style="background:#F4EDE6; padding:44px 40px; display:flex; flex-direction:column; gap:16px;">
-      <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A;">{{ ui.prepT }}</div>
+      <div style="font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A; font-weight:600;">{{ ui.prepT }}</div>
       <sc-for list="{{ t.prep }}" as="p" hint-placeholder-count="4">
-        <div style="font-size:15.5px; line-height:1.7; color:#3A312B; border-bottom:1px solid rgba(26,20,17,.12); padding-bottom:12px;">{{ p }}</div>
+        <div style="font-size:15px; line-height:1.7; color:#3A312B; border-bottom:1px solid rgba(26,20,17,.12); padding-bottom:12px;">{{ p }}</div>
       </sc-for>
     </div>
+
     <div style="background:#F4EDE6; padding:44px 40px; display:flex; flex-direction:column; gap:16px;">
-      <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A;">{{ ui.afterT }}</div>
+      <div style="font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A; font-weight:600;">{{ ui.afterT }}</div>
       <sc-for list="{{ t.after }}" as="p" hint-placeholder-count="4">
-        <div style="font-size:15.5px; line-height:1.7; color:#3A312B; border-bottom:1px solid rgba(26,20,17,.12); padding-bottom:12px;">{{ p }}</div>
+        <div style="font-size:15px; line-height:1.7; color:#3A312B; border-bottom:1px solid rgba(26,20,17,.12); padding-bottom:12px;">{{ p }}</div>
       </sc-for>
-      <div onClick="{{ goAftercare }}" style="font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#7C2D3A; cursor:pointer; padding-top:4px;" style-hover="color:#1A1411;">{{ ui.afterLink }} &rarr;</div>
+      <div onClick="{{ goAftercare }}" style="font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#7C2D3A; cursor:pointer; padding-top:4px;" style-hover="color:#1A1411;">
+        {{ ui.afterLink }} &rarr;
+      </div>
     </div>
   </div>
 
-  <div style="background:#7C2D3A; color:#FBF6F0; padding:110px 44px; display:flex; flex-direction:column; align-items:center; gap:26px; text-align:center;">
-    <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(40px,4.2vw,70px); line-height:.93; letter-spacing:-.034em; max-width:860px;">{{ t.ctaA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#E7C3B4;">{{ t.ctaB }}</span></div>
+  <!-- Bottom Action Banner -->
+  <div style="background:#7C2D3A; color:#FBF6F0; padding:100px 44px; display:flex; flex-direction:column; align-items:center; gap:24px; text-align:center;">
+    <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(38px,4.4vw,68px); line-height:.96; letter-spacing:-.03em; max-width:860px;">
+      {{ t.ctaA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#E7C3B4;">{{ t.ctaB }}</span>
+    </div>
     <div style="font-size:16.5px; line-height:1.65; color:rgba(251,246,240,.8); max-width:520px;">{{ ui.ctaSub }}</div>
-    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; padding-top:4px;">
-      <div onClick="{{ goBooking }}" style="background:#FBF6F0; color:#7C2D3A; font-size:12.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; padding:21px 40px; cursor:pointer;" style-hover="background:#1A1411; color:#FBF6F0;">{{ ui.book }}</div>
-      <div onClick="{{ goResults }}" style="border:1px solid rgba(251,246,240,.4); color:#FBF6F0; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; padding:21px 34px; cursor:pointer;" style-hover="border-color:#FBF6F0; background:rgba(251,246,240,.1);">{{ ui.results }}</div>
+    <div style="display:flex; gap:14px; flex-wrap:wrap; justify-content:center; padding-top:4px;">
+      <a href="https://maryaruna.glossgenius.com/services" target="_blank" rel="noopener" style="background:#FBF6F0; color:#7C2D3A; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:20px 40px; border-radius:999px; cursor:pointer; text-decoration:none;" style-hover="background:#140F0D; color:#FBF6F0;">
+        {{ ui.book }} ↗
+      </a>
+      <div onClick="{{ goResults }}" style="border:1px solid rgba(251,246,240,.4); color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:20px 34px; border-radius:999px; cursor:pointer;" style-hover="border-color:#FBF6F0; background:rgba(251,246,240,.12);">
+        {{ ui.results }}
+      </div>
     </div>
   </div>
-</div>
 
+</div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1400, &quot;height&quot;: 900}, &quot;tkey&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;microblading&quot;, &quot;powder&quot;, &quot;nano&quot;, &quot;scalp&quot;, &quot;lips&quot;, &quot;laser&quot;], &quot;default&quot;: &quot;microblading&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;lang&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;en&quot;, &quot;es&quot;], &quot;default&quot;: &quot;en&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;onNav&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;(page: string, seg?: string) =&gt; void&quot;}}">
+
+<script type="text/x-dc" data-dc-script>
 const COMMON = {
   en: {
-    book: 'Book an appointment', price: 'Price my treatment', results: 'See results',
-    stepsEyebrow: 'Step by step', forT: 'It suits you if', notT: 'Not for you if',
-    prepT: 'The week before', afterT: 'The days after', afterLink: 'Full aftercare, day by day',
-    ctaSub: 'The consultation is free, twenty minutes, and can be the same day. If this treatment is wrong for you, that is where you hear it.'
+    book: 'Book Online', price: 'Estimate My Price', results: 'See Healed Results',
+    stepsEyebrow: 'TREATMENT PROGRESSION', forT: 'Ideal Candidate If', notT: 'Not Recommended If',
+    prepT: 'Pre-Care Preparation', afterT: 'Post-Treatment Healing', afterLink: 'Full Day-by-Day Aftercare Guide',
+    ctaSub: 'Initial consultations are 20 minutes and completely complimentary. If a technique is unsuitable for your skin type, Mary will tell you openly.'
   },
   es: {
-    book: 'Reservar una cita', price: 'Ver mi precio', results: 'Ver resultados',
-    stepsEyebrow: 'Paso a paso', forT: 'Te conviene si', notT: 'No es para ti si',
-    prepT: 'La semana anterior', afterT: 'Los d\u00edas despu\u00e9s', afterLink: 'Cuidados completos, d\u00eda a d\u00eda',
-    ctaSub: 'La consulta es gratis, veinte minutos, y puede ser el mismo d\u00eda. Si este tratamiento no es para ti, ah\u00ed es donde lo escuchas.'
+    book: 'Reservar en Línea', price: 'Calcular mi Tarifa', results: 'Ver Resultados',
+    stepsEyebrow: 'PROGRESIÓN DEL TRATAMIENTO', forT: 'Candidata Ideal Si', notT: 'No Recomendado Si',
+    prepT: 'Preparación Previa', afterT: 'Cicatrización Posterior', afterLink: 'Guía Completa de Cuidados',
+    ctaSub: 'La consulta previa de 20 minutos es gratuita. Si una técnica no es apta para tu piel, Mary te lo dirá con total honestidad.'
   }
 };
 
 const T = {
   microblading: {
     en: {
-      eyebrow: 'Brows \u00b7 $580, cash less \u00b7 90 minutes', h1a: 'Microblading,', h1b: 'minute by minute.',
-      sub: 'Hair-by-hair strokes in the front layer of the skin, for brows that read as brows rather than makeup. The second sitting is inside the price.',
-      facts: [['Price', '$580'], ['Cash', '$500'], ['In the chair', '90 min'], ['Touch-up', 'Included'], ['Lasts', '6\u201324 months']],
-      stepsA: 'The ninety', stepsB: 'minutes.',
-      stepsSub: 'Nothing is permanent until minute forty. Everything before that is drawing, measuring and agreeing \u2014 and it is most of the appointment on purpose.',
+      eyebrow: 'BROWS \u00b7 $580 / $500 CASH \u00b7 90 MINUTES', h1a: 'Microblading,', h1b: 'Minute by Minute.',
+      sub: 'Individual hair strokes created in the upper dermis for a completely natural brow that looks like real hair, not makeup. Second perfecting touch-up is included.',
+      facts: [['Card Price', '$580'], ['Cash Price', '$500'], ['Duration', '90 min'], ['Touch-Up', 'Included (4-6 wks)'], ['Longevity', '12 to 24 months']],
+      stepsA: 'The Ninety', stepsB: 'Minutes.',
+      stepsSub: 'Nothing is permanent until minute forty. Everything prior is measuring, facial mapping, and mirror approval.',
       steps: [
-        ['Min 0\u201310', 'The conversation', 'What you want, what you had, photos of brows you like. Skin type is checked here \u2014 oily skin holds strokes differently, and you will be told if powder would serve you better.'],
-        ['Min 10\u201335', 'Mapping and drawing', 'Your face is measured and the shape drawn on in pencil, adjusted until you agree with it in the mirror. This is the stage where changing your mind costs nothing.'],
-        ['Min 35\u201340', 'Numbing', 'Topical anaesthetic sits while the pigment is mixed against your hair and skin tone. Most clients describe what follows as scratching, not pain.'],
-        ['Min 40\u201380', 'The strokes', 'Hair-by-hair strokes with a manual blade, following the agreed map. You can stop, look and ask at any point \u2014 there is nobody waiting behind you.'],
-        ['Min 80\u201390', 'Seal and instructions', 'Pigment is sealed, aftercare goes with you on paper, and the touch-up is booked for four to six weeks out before you leave.'],
-        ['Week 4\u20136', 'The second sitting', 'Where the work is actually finished: strokes that healed light are reinforced and the shape is trued against how your skin held it. Included, not an upsell.']
+        ['Min 0 to 10', 'Clinical Consultation', 'Discussion of facial goals, skin type assessment, and reviewing brow styles. Oily skin types are evaluated to ensure stroke crispness.'],
+        ['Min 10 to 35', 'Facial Mapping & Symmetry', 'Precise calipers measure bone structure. The brow shape is drawn in pencil and fine-tuned until you are 100% happy in the mirror.'],
+        ['Min 35 to 40', 'Numbing Topical', 'Medical-grade topical anesthetic is applied while custom pigments are matched to your natural undertone and hair.'],
+        ['Min 40 to 80', 'Hair Stroke Placement', 'Manual sterile micro-blade creates individual crisp hair strokes following your natural growth pattern.'],
+        ['Min 80 to 90', 'Pigment Seal & Protocol', 'Soothing balm seals the pigment. Comprehensive take-home instructions are provided.'],
+        ['Weeks 4 to 6', 'Perfecting Sitting', 'Completed four to six weeks later to reinforce density and balance tone. Included in initial rate.']
       ],
-      forWho: ['Brows that thinned with age, over-plucking or alopecia and want their line back.', 'Normal to dry skin \u2014 strokes hold their crispness best there.', 'You want to stop drawing them on every morning and swimming without worry.'],
-      notWho: ['Very oily skin \u2014 strokes blur; powder brows hold and are the same price range.', 'Pregnant or nursing \u2014 pigment work waits, the consultation does not have to.', 'A wedding or sun holiday inside six weeks \u2014 the touch-up needs its window.'],
-      prep: ['No blood thinners, aspirin or fish oil for 72 hours, with your doctor\u2019s okay.', 'No alcohol or heavy caffeine on the day \u2014 both make skin weep more.', 'No brow waxing or tinting for a week before; arrive with brows as they are.', 'No retinol near the brows for five days.'],
-      after: ['Blot hourly on day one; wash and thin ointment days one to five.', 'Flaking starts day three \u2014 never pick it.', 'Days six to nine look too light. That is normal and temporary.', 'No gym for 48 hours, no pools or sun while healing.'],
-      ctaA: 'Ninety minutes,', ctaB: 'then done every morning.'
+      forWho: ['Brows that have thinned with age, over-plucking, or alopecia.', 'Normal to dry skin where individual strokes remain crisp.', 'Clients wanting an effortless natural morning routine.'],
+      notWho: ['Very oily or highly porous skin (powder brows offer superior longevity here).', 'Currently pregnant or nursing.', 'Scheduled for tropical sun vacations inside 4 weeks.'],
+      prep: ['Avoid aspirin, fish oil, and blood thinners 72 hours prior (with doctor approval).', 'Avoid heavy caffeine and alcohol on the day of appointment.', 'No brow waxing or tinting for 7 days before your appointment.', 'Discontinue retinol near brows for 7 days.'],
+      after: ['Blot gently hourly on day one; wash with provided cleanser twice daily.', 'Flaking starts day four (never pick or peel).', 'Color appears slightly lighter during days seven to ten as new skin forms.', 'No vigorous sweating or swimming pools for 7 days.'],
+      ctaA: 'Ninety Minutes in the Chair,', ctaB: 'Ready Every Morning.'
     },
     es: {
-      eyebrow: 'Cejas \u00b7 $580, menos en efectivo \u00b7 90 minutos', h1a: 'Microblading,', h1b: 'minuto a minuto.',
-      sub: 'Trazos pelo a pelo en la capa frontal de la piel, para cejas que se leen como cejas y no como maquillaje. La segunda sesi\u00f3n va dentro del precio.',
-      facts: [['Precio', '$580'], ['Efectivo', '$500'], ['En la silla', '90 min'], ['Retoque', 'Incluido'], ['Dura', '6\u201324 meses']],
-      stepsA: 'Los noventa', stepsB: 'minutos.',
-      stepsSub: 'Nada es permanente hasta el minuto cuarenta. Todo lo anterior es dibujar, medir y acordar, y es la mayor parte de la cita a prop\u00f3sito.',
+      eyebrow: 'CEJAS \u00b7 $580 / $500 EFECTIVO \u00b7 90 MINUTOS', h1a: 'Microblading,', h1b: 'Minuto a Minuto.',
+      sub: 'Trazos pelo a pelo en la dermis superficial para cejas que se leen como vello real y no maquillaje. Retoque de perfeccionamiento incluido.',
+      facts: [['Precio Tarjeta', '$580'], ['Precio Efectivo', '$500'], ['Duración', '90 min'], ['Retoque', 'Incluido (4-6 sem)'], ['Durabilidad', '12 a 24 meses']],
+      stepsA: 'Los Noventa', stepsB: 'Minutos.',
+      stepsSub: 'Nada es permanente hasta el minuto cuarenta. Todo lo anterior es diseño, medición y aprobación en el espejo.',
       steps: [
-        ['Min 0\u201310', 'La conversaci\u00f3n', 'Qu\u00e9 quieres, qu\u00e9 ten\u00edas, fotos de cejas que te gustan. Aqu\u00ed se revisa el tipo de piel: la piel grasa retiene distinto los trazos, y te dir\u00e1n si powder te servir\u00eda mejor.'],
-        ['Min 10\u201335', 'Medir y dibujar', 'Se mide tu cara y la forma se dibuja a l\u00e1piz, ajustada hasta que la apruebes en el espejo. En esta etapa cambiar de opini\u00f3n no cuesta nada.'],
-        ['Min 35\u201340', 'Anestesia', 'El anest\u00e9sico t\u00f3pico act\u00faa mientras se mezcla el pigmento contra tu tono de piel y cabello. La mayor\u00eda describe lo que sigue como un rasgu\u00f1o, no dolor.'],
-        ['Min 40\u201380', 'Los trazos', 'Trazos pelo a pelo con lámina manual, siguiendo el mapa acordado. Puedes parar, mirar y preguntar en cualquier momento: no hay nadie esperando detr\u00e1s.'],
-        ['Min 80\u201390', 'Sellado e instrucciones', 'Se sella el pigmento, los cuidados van contigo en papel, y el retoque queda agendado a cuatro a seis semanas antes de que te vayas.'],
-        ['Semana 4\u20136', 'La segunda sesi\u00f3n', 'Donde el trabajo de verdad se termina: los trazos que sanaron claros se refuerzan y la forma se ajusta a c\u00f3mo tu piel la retuvo. Incluida, no un extra.']
+        ['Min 0 a 10', 'Consulta Clínica', 'Evaluación de metas y tipo de piel. La piel grasa se evalúa para asegurar la máxima retención.'],
+        ['Min 10 a 35', 'Diseño y Simetría', 'Medición precisa y dibujo a lápiz hasta que apruebes la forma en el espejo.'],
+        ['Min 35 a 40', 'Anestesia Tópica', 'Anestésico tópico mientras se mezclan los pigmentos a juego con tu tono natural.'],
+        ['Min 40 a 80', 'Trazos de Microblading', 'Trazos manuales siguiendo la dirección natural del vello.'],
+        ['Min 80 a 90', 'Sellado y Cuidados', 'Sellado del pigmento e instrucciones claras de cuidado posterior.'],
+        ['Semanas 4 a 6', 'Retoque de Perfección', 'Segunda sesión incluida para afinar simetría y reforzar retención.']
       ],
-      forWho: ['Cejas que se afinaron con la edad, las pinzas o la alopecia y quieren su l\u00ednea de vuelta.', 'Piel normal a seca: ah\u00ed los trazos conservan mejor su definici\u00f3n.', 'Quieres dejar de dibujarlas cada ma\u00f1ana y nadar sin preocuparte.'],
-      notWho: ['Piel muy grasa: los trazos se difuminan; las cejas powder aguantan y est\u00e1n en el mismo rango de precio.', 'Embarazo o lactancia: el pigmento espera, la consulta no tiene por qu\u00e9.', 'Una boda o viaje al sol dentro de seis semanas: el retoque necesita su ventana.'],
-      prep: ['Sin anticoagulantes, aspirina ni omega 3 por 72 horas, con el visto bueno de tu m\u00e9dico.', 'Sin alcohol ni mucha cafe\u00edna ese d\u00eda: ambos hacen que la piel supure m\u00e1s.', 'Sin cera ni tinte de cejas una semana antes; llega con las cejas como est\u00e1n.', 'Sin retinol cerca de las cejas por cinco d\u00edas.'],
-      after: ['Seca a toques cada hora el d\u00eda uno; lava y pomada fina los d\u00edas uno a cinco.', 'La descamaci\u00f3n empieza el d\u00eda tres: nunca la arranques.', 'Los d\u00edas seis a nueve se ven demasiado claros. Es normal y temporal.', 'Sin gimnasio 48 horas, sin piscinas ni sol mientras sana.'],
-      ctaA: 'Noventa minutos,', ctaB: 'y listas cada ma\u00f1ana.'
+      forWho: ['Cejas despobladas por depilación previa, edad o alopecia.', 'Piel normal a seca para máxima nitidez.', 'Personas que buscan levantarse con cejas listas cada día.'],
+      notWho: ['Piel muy grasa (las cejas powder son más duraderas).', 'Embarazo o lactancia.', 'Viajes a la playa o exposición solar dentro de 4 semanas.'],
+      prep: ['Sin anticoagulantes ni aspirina 72 horas antes.', 'Sin alcohol ni cafeína el día de la cita.', 'Sin depilación con cera 7 días antes.', 'Sin retinol cerca de las cejas 7 días antes.'],
+      after: ['Seca a toques el día uno; lava dos veces al día.', 'No arranques las pequeñas costritas.', 'El color se aclara temporalmente en los días 7 a 10.', 'Sin gimnasio ni piscinas durante 7 días.'],
+      ctaA: 'Noventa Minutos en la Silla,', ctaB: 'Listas Cada Mañana.'
     }
   },
   powder: {
     en: {
-      eyebrow: 'Brows \u00b7 $580, cash less \u00b7 90 minutes', h1a: 'Powder brows,', h1b: 'minute by minute.',
-      sub: 'Thousands of soft pigment dots building a gradient, like brow powder that never washes off. The technique that holds on oily and mature skin.',
-      facts: [['Price', '$580'], ['Cash', '$500'], ['In the chair', '90 min'], ['Touch-up', 'Included'], ['Lasts', '12\u201324 months']],
-      stepsA: 'The ninety', stepsB: 'minutes.',
-      stepsSub: 'The machine does not touch skin until the shape is agreed in pencil. The gradient is built in passes, so density is decided with you, not to you.',
+      eyebrow: 'BROWS \u00b7 $580 / $500 CASH \u00b7 90 MINUTES', h1a: 'Powder Brows,', h1b: 'Minute by Minute.',
+      sub: 'Micro-pixel shading creating a soft ombre gradient, like brow powder that never smudges or washes away. The premier choice for oily and mature skin.',
+      facts: [['Card Price', '$580'], ['Cash Price', '$500'], ['Duration', '90 min'], ['Touch-Up', 'Included'], ['Longevity', '18 to 36 months']],
+      stepsA: 'The Ninety', stepsB: 'Minutes.',
+      stepsSub: 'The machine is calibrated only after shape symmetry is drawn and approved in the mirror.',
       steps: [
-        ['Min 0\u201310', 'The conversation', 'How you fill your brows now \u2014 pencil, powder, pomade \u2014 decides the density you will actually like. Bring a photo of your best brow day.'],
-        ['Min 10\u201335', 'Mapping and drawing', 'Shape measured and drawn, tail and arch agreed in the mirror. Powder allows a softer front than microblading \u2014 that is agreed here too.'],
-        ['Min 35\u201340', 'Numbing', 'Topical anaesthetic while pigment is matched. Powder uses a machine with a single fine needle \u2014 gentler on skin than a blade, which is why it suits more skin types.'],
-        ['Min 40\u201380', 'Building the gradient', 'Light passes layer dots from tail to front, darkest at the tail. You check the mirror between passes and call the density.'],
-        ['Min 80\u201390', 'Seal and instructions', 'Seal, paper aftercare, and the touch-up booked before you leave.'],
-        ['Week 4\u20136', 'The second sitting', 'Healed density is assessed and evened. Oily skin often heals softer \u2014 the second pass is where the final depth is set. Included.']
+        ['Min 0 to 10', 'Style Discussion', 'Determining your desired density from sheer misty wash to defined makeup gradient.'],
+        ['Min 10 to 35', 'Mapping & Symmetry', 'Precision measurement of arches and tails, tailored to facial balance.'],
+        ['Min 35 to 40', 'Numbing', 'Topical anesthetic ensures a relaxed, gentle experience throughout.'],
+        ['Min 40 to 80', 'Pixel Gradient Shading', 'Layered micro-dot application building soft depth from tail to front.'],
+        ['Min 80 to 90', 'Aftercare Review', 'Sealant application and schedule your 4 to 6-week touch-up.'],
+        ['Weeks 4 to 6', 'Touch-Up Sitting', 'Even out density and finalize gradient. Included in price.']
       ],
-      forWho: ['Oily, combination or mature skin \u2014 powder holds where strokes blur.', 'You fill your brows daily and want that exact finish permanently.', 'Previous microblading faded soft and you want something that lasts longer.'],
-      notWho: ['You want individual visible hairstrokes on bare skin \u2014 that is microblading or nano.', 'Pregnant or nursing.', 'Keloid-prone or on skin medication \u2014 raise it at the consultation first.'],
-      prep: ['No blood thinners, aspirin or fish oil for 72 hours, with your doctor\u2019s okay.', 'No alcohol or heavy caffeine on the day.', 'No chemical peels or laser on the face for two weeks before.', 'No retinol near the brows for five days.'],
-      after: ['Same arc as all PMU: blot day one, wash and thin ointment to day five.', 'Powder flakes finer than microblading \u2014 still never pick.', 'The ghost stage around day seven is expected.', 'True colour lands weeks four to six, at the touch-up.'],
-      ctaA: 'The finish you draw daily,', ctaB: 'made permanent.'
+      forWho: ['Oily, combination, or mature skin where microblading fades quickly.', 'Clients who fill their brows with makeup daily.', 'Covering or correcting faint previous microblading.'],
+      notWho: ['Clients seeking individual distinct hair strokes on bare skin.', 'Pregnant or nursing.', 'Active dermal infections near brow zone.'],
+      prep: ['Avoid blood thinners 72 hours prior with doctor guidance.', 'No caffeine or alcohol morning of appointment.', 'No chemical peels or laser facials 2 weeks prior.', 'Stop retinol near brows 7 days prior.'],
+      after: ['Blot on day one; gentle wash days 1 to 5.', 'Fine flaking occurs days 4 to 6 (do not pick).', 'True color and soft tone emerge weeks 4 to 6.'],
+      ctaA: 'The Polished Finish You Draw Daily,', ctaB: 'Made Permanent.'
     },
     es: {
-      eyebrow: 'Cejas \u00b7 $580, menos en efectivo \u00b7 90 minutos', h1a: 'Cejas powder,', h1b: 'minuto a minuto.',
-      sub: 'Miles de puntos suaves de pigmento formando un degradado, como sombra de cejas que nunca se lava. La t\u00e9cnica que aguanta en piel grasa y madura.',
-      facts: [['Precio', '$580'], ['Efectivo', '$500'], ['En la silla', '90 min'], ['Retoque', 'Incluido'], ['Dura', '12\u201324 meses']],
-      stepsA: 'Los noventa', stepsB: 'minutos.',
-      stepsSub: 'La m\u00e1quina no toca la piel hasta que la forma est\u00e1 acordada a l\u00e1piz. El degradado se construye por pasadas, as\u00ed que la densidad se decide contigo, no por ti.',
+      eyebrow: 'CEJAS \u00b7 $580 / $500 EFECTIVO \u00b7 90 MINUTOS', h1a: 'Cejas Powder,', h1b: 'Minuto a Minuto.',
+      sub: 'Sombreado degradado suave como maquillaje en polvo que nunca se corre. Ideal para piel grasa o madura.',
+      facts: [['Precio Tarjeta', '$580'], ['Precio Efectivo', '$500'], ['Duración', '90 min'], ['Retoque', 'Incluido'], ['Durabilidad', '18 a 36 meses']],
+      stepsA: 'Los Noventa', stepsB: 'Minutos.',
+      stepsSub: 'La máquina se activa únicamente tras acordar la forma en el espejo.',
       steps: [
-        ['Min 0\u201310', 'La conversaci\u00f3n', 'C\u00f3mo rellenas tus cejas hoy \u2014 l\u00e1piz, sombra, pomada \u2014 decide la densidad que de verdad te va a gustar. Trae una foto de tu mejor d\u00eda de cejas.'],
-        ['Min 10\u201335', 'Medir y dibujar', 'Forma medida y dibujada, cola y arco acordados en el espejo. Powder permite un frente m\u00e1s suave que el microblading: eso tambi\u00e9n se acuerda aqu\u00ed.'],
-        ['Min 35\u201340', 'Anestesia', 'Anest\u00e9sico t\u00f3pico mientras se iguala el pigmento. Powder usa una m\u00e1quina con una sola aguja fina: m\u00e1s suave que la l\u00e1mina, por eso le va a m\u00e1s tipos de piel.'],
-        ['Min 40\u201380', 'Construir el degradado', 'Pasadas ligeras acumulan puntos de la cola al frente, m\u00e1s oscuro en la cola. Revisas el espejo entre pasadas y t\u00fa decides la densidad.'],
-        ['Min 80\u201390', 'Sellado e instrucciones', 'Sellado, cuidados en papel, y el retoque agendado antes de irte.'],
-        ['Semana 4\u20136', 'La segunda sesi\u00f3n', 'Se eval\u00faa y empareja la densidad sanada. La piel grasa suele sanar m\u00e1s suave: la segunda pasada fija la profundidad final. Incluida.']
+        ['Min 0 a 10', 'Consulta de Estilo', 'Elegimos la densidad deseada, desde sombreado suave hasta definición completa.'],
+        ['Min 10 a 35', 'Diseño y Medición', 'Medición simétrica de arco y cola.'],
+        ['Min 35 a 40', 'Anestesia', 'Anestésico tópico para máxima comodidad.'],
+        ['Min 40 a 80', 'Sombreado en Capas', 'Micropuntos construyendo el degradado de oscuro a claro.'],
+        ['Min 80 a 90', 'Sellado', 'Instrucciones y agendamiento del retoque.'],
+        ['Semanas 4 a 6', 'Retoque Incluido', 'Afinación de tono y densidad final.']
       ],
-      forWho: ['Piel grasa, mixta o madura: powder aguanta donde los trazos se difuminan.', 'Rellenas tus cejas a diario y quieres exactamente ese acabado permanente.', 'Un microblading previo san\u00f3 suave y quieres algo que dure m\u00e1s.'],
-      notWho: ['Quieres pelitos individuales visibles en piel limpia: eso es microblading o nano.', 'Embarazo o lactancia.', 'Tendencia a queloides o medicaci\u00f3n para la piel: menci\u00f3nalo primero en la consulta.'],
-      prep: ['Sin anticoagulantes, aspirina ni omega 3 por 72 horas, con el visto bueno de tu m\u00e9dico.', 'Sin alcohol ni mucha cafe\u00edna ese d\u00eda.', 'Sin peelings qu\u00edmicos ni l\u00e1ser en la cara dos semanas antes.', 'Sin retinol cerca de las cejas por cinco d\u00edas.'],
-      after: ['El mismo arco de todo PMU: secar el d\u00eda uno, lavar y pomada fina hasta el d\u00eda cinco.', 'Powder descama m\u00e1s fino que el microblading: igual, nunca lo arranques.', 'La etapa fantasma hacia el d\u00eda siete es esperada.', 'El color real llega en las semanas cuatro a seis, en el retoque.'],
-      ctaA: 'El acabado que dibujas a diario,', ctaB: 'hecho permanente.'
+      forWho: ['Piel grasa, mixta o madura.', 'Personas que se maquillan las cejas a diario.', 'Mejorar o cubrir microblading previo difuminado.'],
+      notWho: ['Quienes buscan ver pelos individuales sueltos.', 'Embarazo o lactancia.', 'Infecciones activas en la zona.'],
+      prep: ['Sin anticoagulantes 72 horas antes.', 'Sin alcohol ni cafeína esa mañana.', 'Sin peelings químicos 2 semanas antes.', 'Sin retinol 7 días antes.'],
+      after: ['Secar a toques y lavar suavemente.', 'No arrancar la descamación fina.', 'El color real asienta en 4 a 6 semanas.'],
+      ctaA: 'El Acabado Que Dibujas a Diario,', ctaB: 'Hecho Permanente.'
     }
   },
   nano: {
     en: {
-      eyebrow: 'Brows \u00b7 $650, cash less \u00b7 2 hours', h1a: 'Nano brows,', h1b: 'minute by minute.',
-      sub: 'Machine-drawn hairstrokes with a single nano needle \u2014 the crispness of microblading with the skin-friendliness of powder, on nearly every skin type.',
-      facts: [['Price', '$650'], ['Cash', '$600'], ['In the chair', '2 hrs'], ['Touch-up', 'Included'], ['Lasts', '12\u201330 months']],
-      stepsA: 'The two', stepsB: 'hours.',
-      stepsSub: 'Nano takes longer than microblading because each stroke is drawn, not cut \u2014 slower per stroke, gentler on skin, sharper healed.',
+      eyebrow: 'BROWS \u00b7 $650 / $600 CASH \u00b7 2 HOURS', h1a: 'Nano Brows,', h1b: 'Minute by Minute.',
+      sub: 'Single-needle machine hair strokes offering the crisp definition of microblading with greater pigment retention on oily and combination skin types.',
+      facts: [['Card Price', '$650'], ['Cash Price', '$600'], ['Duration', '120 min'], ['Touch-Up', 'Included'], ['Longevity', '18 to 30 months']],
+      stepsA: 'The Two', stepsB: 'Hours.',
+      stepsSub: 'Nano takes longer because each hair stroke is meticulously placed with ultra-fine machine precision.',
       steps: [
-        ['Min 0\u201315', 'The conversation', 'Nano is the technique most often chosen after research \u2014 bring your questions. Skin is assessed, though nano forgives oily skin far more than a blade does.'],
-        ['Min 15\u201340', 'Mapping and drawing', 'Same discipline as every brow here: measured, drawn, agreed in the mirror before anything is permanent.'],
-        ['Min 40\u201345', 'Numbing', 'Topical anaesthetic while pigment is matched. The nano needle is the finest tool in the studio.'],
-        ['Min 45\u2013110', 'Drawing the strokes', 'Each stroke drawn individually with the machine, following your natural growth direction. Slower than a blade \u2014 and the reason healed nano stays crisp.'],
-        ['Min 110\u2013120', 'Seal and instructions', 'Seal, paper aftercare, touch-up booked four to six weeks out.'],
-        ['Week 4\u20136', 'The second sitting', 'Strokes are reinforced where skin healed them soft. Included in the $650.']
+        ['Min 0 to 15', 'Clinical Consultation', 'Assessing skin elasticity and growth patterns for custom stroke flow.'],
+        ['Min 15 to 40', 'Mapping & Symmetry', 'Full geometric mapping and pencil validation in natural lighting.'],
+        ['Min 40 to 45', 'Numbing', 'Comfort anesthetic applied.'],
+        ['Min 45 to 110', 'Nano Needle Artistry', 'Single nano-needle machine draws individual hyper-realistic hair strokes.'],
+        ['Min 110 to 120', 'Pigment Lock & Aftercare', 'Balm sealant and touch-up booking.'],
+        ['Weeks 4 to 6', 'Perfecting Touch-Up', 'Included sitting to finalize retention.']
       ],
-      forWho: ['You want hairstrokes but were told your skin is too oily for microblading.', 'You want the longest-lasting stroke technique available here.', 'Fine, detailed fronts matter to you \u2014 nano draws the finest.'],
-      notWho: ['You want the soft makeup look \u2014 that is powder, not strokes.', 'Pregnant or nursing.', 'You cannot give it the two hours \u2014 this one is not rushed.'],
-      prep: ['No blood thinners, aspirin or fish oil for 72 hours, with your doctor\u2019s okay.', 'No alcohol or heavy caffeine on the day.', 'No brow waxing or tinting for a week before.', 'No retinol near the brows for five days.'],
-      after: ['Standard PMU arc: blot day one, wash and thin ointment to day five.', 'Flaking day three to five \u2014 hands off.', 'Ghost stage near day seven, colour back by week three.', 'Final result judged at the six-week touch-up.'],
-      ctaA: 'The sharpest strokes,', ctaB: 'on almost any skin.'
+      forWho: ['Clients wanting crisp hair strokes on oily or combination skin.', 'Maximum longevity for hair stroke techniques.', 'Ultra-fine natural front brow definition.'],
+      notWho: ['Clients wanting dense powder makeup wash.', 'Pregnant or nursing.', 'Unwilling to spend 2 full hours in the chair.'],
+      prep: ['No blood thinners or aspirin 72h prior.', 'No caffeine on appointment morning.', 'No brow waxing or tinting 7 days prior.', 'No retinol 7 days prior.'],
+      after: ['Standard PMU aftercare protocol.', 'Flaking resolves days 4 to 6.', 'Touch-up at week 5 ensures complete retention.'],
+      ctaA: 'Hyper-Realistic Hair Strokes,', ctaB: 'On Any Skin Type.'
     },
     es: {
-      eyebrow: 'Cejas \u00b7 $650, menos en efectivo \u00b7 2 horas', h1a: 'Cejas nano,', h1b: 'minuto a minuto.',
-      sub: 'Trazos de pelo dibujados a m\u00e1quina con una sola aguja nano: la definici\u00f3n del microblading con la suavidad del powder, en casi todo tipo de piel.',
-      facts: [['Precio', '$650'], ['Efectivo', '$600'], ['En la silla', '2 hrs'], ['Retoque', 'Incluido'], ['Dura', '12\u201330 meses']],
-      stepsA: 'Las dos', stepsB: 'horas.',
-      stepsSub: 'Nano tarda m\u00e1s que el microblading porque cada trazo se dibuja, no se corta: m\u00e1s lento por trazo, m\u00e1s suave con la piel, m\u00e1s n\u00edtido al sanar.',
+      eyebrow: 'CEJAS \u00b7 $650 / $600 EFECTIVO \u00b7 2 HORAS', h1a: 'Cejas Nano,', h1b: 'Minuto a Minuto.',
+      sub: 'Trazos pelo a pelo con máquina y aguja nano ultra fina. La máxima definición y retención en cualquier tipo de piel.',
+      facts: [['Precio Tarjeta', '$650'], ['Precio Efectivo', '$600'], ['Duración', '120 min'], ['Retoque', 'Incluido'], ['Durabilidad', '18 a 30 meses']],
+      stepsA: 'Las Dos', stepsB: 'Horas.',
+      stepsSub: 'Cada trazo se dibuja con precisión milimétrica sin cortar la piel.',
       steps: [
-        ['Min 0\u201315', 'La conversaci\u00f3n', 'Nano es la t\u00e9cnica que m\u00e1s se elige despu\u00e9s de investigar: trae tus preguntas. Se eval\u00faa la piel, aunque nano perdona la piel grasa mucho m\u00e1s que la l\u00e1mina.'],
-        ['Min 15\u201340', 'Medir y dibujar', 'La misma disciplina de todas las cejas aqu\u00ed: medida, dibujada y acordada en el espejo antes de que nada sea permanente.'],
-        ['Min 40\u201345', 'Anestesia', 'Anest\u00e9sico t\u00f3pico mientras se iguala el pigmento. La aguja nano es la herramienta m\u00e1s fina del estudio.'],
-        ['Min 45\u2013110', 'Dibujar los trazos', 'Cada trazo se dibuja individualmente con la m\u00e1quina, siguiendo la direcci\u00f3n natural de tu vello. M\u00e1s lento que una l\u00e1mina, y la raz\u00f3n de que el nano sanado siga n\u00edtido.'],
-        ['Min 110\u2013120', 'Sellado e instrucciones', 'Sellado, cuidados en papel, retoque agendado a cuatro a seis semanas.'],
-        ['Semana 4\u20136', 'La segunda sesi\u00f3n', 'Los trazos se refuerzan donde la piel los san\u00f3 suaves. Incluida en los $650.']
+        ['Min 0 a 15', 'Consulta Inicial', 'Evaluación de elasticidad y patrón de crecimiento.'],
+        ['Min 15 a 40', 'Diseño Simétrico', 'Medición geométrica aprobada en el espejo.'],
+        ['Min 40 a 45', 'Anestesia', 'Anestésico tópico para total confort.'],
+        ['Min 45 a 110', 'Trazos Nano', 'Trazos pelo a pelo con aguja nano ultra fina.'],
+        ['Min 110 a 120', 'Sellado', 'Entrega de cuidados posteriores.'],
+        ['Semanas 4 a 6', 'Retoque de Perfección', 'Sesión incluida para sellar retención.']
       ],
-      forWho: ['Quieres trazos de pelo pero te dijeron que tu piel es muy grasa para microblading.', 'Quieres la t\u00e9cnica de trazos que m\u00e1s dura de las disponibles aqu\u00ed.', 'Los frentes finos y detallados te importan: nano dibuja lo m\u00e1s fino.'],
-      notWho: ['Quieres el look de maquillaje suave: eso es powder, no trazos.', 'Embarazo o lactancia.', 'No puedes darle las dos horas: este no se apura.'],
-      prep: ['Sin anticoagulantes, aspirina ni omega 3 por 72 horas, con el visto bueno de tu m\u00e9dico.', 'Sin alcohol ni mucha cafe\u00edna ese d\u00eda.', 'Sin cera ni tinte de cejas una semana antes.', 'Sin retinol cerca de las cejas por cinco d\u00edas.'],
-      after: ['El arco est\u00e1ndar de PMU: secar el d\u00eda uno, lavar y pomada fina hasta el d\u00eda cinco.', 'Descamaci\u00f3n del d\u00eda tres al cinco: sin tocar.', 'Etapa fantasma hacia el d\u00eda siete, el color vuelve en la semana tres.', 'El resultado final se juzga en el retoque de la semana seis.'],
-      ctaA: 'Los trazos m\u00e1s n\u00edtidos,', ctaB: 'en casi cualquier piel.'
+      forWho: ['Piel mixta o grasa que busca trazos pelo a pelo.', 'Quienes desean la mayor durabilidad en trazos.', 'Frentes de ceja súper naturales.'],
+      notWho: ['Quienes prefieren sombra compacta.', 'Embarazo o lactancia.'],
+      prep: ['Sin anticoagulantes 72 horas antes.', 'Sin cafeína esa mañana.', 'Sin cera ni tinte 7 días antes.', 'Sin retinol 7 días antes.'],
+      after: ['Seguir cuidados de PMU.', 'No arrancar costritas.', 'Retoque a la quinta semana.'],
+      ctaA: 'Los Trazos Más Nítidos,', ctaB: 'En Casi Cualquier Piel.'
     }
   },
   scalp: {
     en: {
-      eyebrow: 'Hair loss \u00b7 from $1,200 \u00b7 3 hours \u00b7 financed', h1a: 'Scalp micropigmentation,', h1b: 'hour by hour.',
-      sub: 'Pigment placed dot by dot to read as short hair \u2014 a hairline back without surgery, for men and women, from a receding front to full alopecia.',
-      facts: [['From', '$1,200'], ['Full head', 'to $4,500'], ['In the chair', '~3 hrs'], ['Sittings', 'Two'], ['Financed', '4 payments']],
-      stepsA: 'The three', stepsB: 'hours.',
-      stepsSub: 'The hairline is designed with you before the machine is switched on \u2014 the design is most of what you are paying for.',
+      eyebrow: 'SCALP SMP \u00b7 FROM $1,200 \u00b7 3 HOURS \u00b7 4 PAYMENTS', h1a: 'Scalp Micropigmentation,', h1b: 'Hour by Hour.',
+      sub: 'Follicle-by-follicle pigment placement replicating natural buzz-cut density. A non-surgical hairline restoration for men and women with zero surgical downtime.',
+      facts: [['Starting Price', '$1,200'], ['Full Head Alopecia', 'Up to $4,500'], ['Chair Time', '~3 hours'], ['Sessions', '2 scheduled'], ['Financing', 'Split into 4']],
+      stepsA: 'The Three', stepsB: 'Hours.',
+      stepsSub: 'The new hairline is designed and agreed in natural lighting before the machine is switched on.',
       steps: [
-        ['Min 0\u201320', 'The conversation', 'Where the loss is, how it has moved, what you want back. Photos of your hair ten years ago genuinely help. Realistic is the word used most in this chair.'],
-        ['Min 20\u201350', 'Designing the line', 'The new hairline is drawn on and adjusted \u2014 age-appropriate, slightly irregular, matched to your face. A too-perfect line is what makes bad SMP obvious.'],
-        ['Min 50\u201360', 'Pigment matching', 'Pigment is matched to your existing hair and skin tone \u2014 grey included. SMP pigment is designed not to shift blue over time.'],
-        ['Hour 1\u20133', 'Placing the dots', 'Thousands of individual impressions at follicle depth, varied in angle and spacing so the result reads as growth, not print. Breaks whenever you want them.'],
-        ['End', 'Instructions', 'Four dry days \u2014 no washing, no sweating hard, no hats. Paper instructions go with you.'],
-        ['Weeks 4\u20136', 'The second pass', 'Density built up and any light spots evened once the first pass has settled. Part of the price on every scalp treatment here.']
+        ['Min 0 to 20', 'Hairline Consultation', 'Assessing thinning zones, natural hair density, and discussing age-appropriate hairline contours.'],
+        ['Min 20 to 50', 'Hairline Custom Mapping', 'Slightly irregular, natural micro-points drawn to complement facial structure.'],
+        ['Min 50 to 60', 'Custom Pigment Match', 'Carbon-based medical pigments matched to your exact follicle shade (including grey tones; never turns blue).'],
+        ['Hours 1 to 3', 'Follicle Layering', 'Thousands of precise micro-impressions at exact follicle depth with varying angles.'],
+        ['End of Session', 'Post-Care Instructions', '4-day dry healing instructions provided.'],
+        ['Weeks 4 to 6', 'Density Pass', 'Second scheduled session to solidify multi-dimensional density. Included.']
       ],
-      forWho: ['A receding front or widening part you want visually closed.', 'Alopecia, in patches or complete \u2014 coverage is priced by area up to $4,500 full head.', 'You want a non-surgical answer with no daily medication.'],
-      notWho: ['You expect actual regrowth \u2014 this is coverage, not restoration, and that is said plainly.', 'You cannot keep the scalp dry for four days after each sitting.', 'Active scalp conditions \u2014 psoriasis or eczema flare-ups need to settle first.'],
-      prep: ['Wash your hair the morning of \u2014 then nothing goes on the scalp.', 'Wear your hair at the length you plan to keep it \u2014 the work is matched to it.', 'No blood thinners for 72 hours, with your doctor\u2019s okay.', 'Moisturise the scalp daily the week before; hydrated skin takes pigment better.'],
-      after: ['Days 0\u20134: bone dry. No washing, no gym, no helmets.', 'Days 5\u20136: first gentle wash, fingertips only.', 'Day 7+: gym returns, light moisturiser daily.', 'SPF 30 on the exposed scalp, permanently \u2014 sun is what fades this.'],
-      ctaA: 'Three hours,', ctaB: 'no surgery, no pills.'
+      forWho: ['Receding hairline, crown thinning, or widening hair parts.', 'Male or female pattern hair loss and alopecia areata.', 'Scar camouflage from previous hair transplants.'],
+      notWho: ['Expecting biological hair growth (this is visual follicle replication).', 'Active inflammatory scalp conditions like psoriasis flare-ups.'],
+      prep: ['Wash scalp cleanly the morning of appointment; no hair styling products.', 'Keep hair at your desired daily length.', 'No blood thinners 72h prior with physician consent.', 'Moisturize scalp daily the week before.'],
+      after: ['Days 1 to 4: completely dry (no washing, no heavy sweat).', 'Days 5 to 6: first gentle rinse with lukewarm water.', 'Day 7+: light fragrance-free moisturizer and normal workouts.', 'Apply SPF 30+ whenever outdoors to protect pigment.'],
+      ctaA: 'Three Hours in the Chair,', ctaB: 'No Surgery, No Pills.'
     },
     es: {
-      eyebrow: 'Cabello \u00b7 desde $1,200 \u00b7 3 horas \u00b7 financiado', h1a: 'Micropigmentaci\u00f3n capilar,', h1b: 'hora a hora.',
-      sub: 'Pigmento colocado punto a punto para leerse como cabello corto: la l\u00ednea de vuelta sin cirug\u00eda, para hombres y mujeres, desde entradas hasta alopecia completa.',
-      facts: [['Desde', '$1,200'], ['Cabeza completa', 'hasta $4,500'], ['En la silla', '~3 hrs'], ['Sesiones', 'Dos'], ['Financiado', '4 pagos']],
-      stepsA: 'Las tres', stepsB: 'horas.',
-      stepsSub: 'La l\u00ednea del cabello se dise\u00f1a contigo antes de encender la m\u00e1quina: el dise\u00f1o es la mayor parte de lo que est\u00e1s pagando.',
+      eyebrow: 'SCALP SMP \u00b7 DESDE $1,200 \u00b7 3 HORAS \u00b7 4 CUOTAS', h1a: 'Micropigmentación Capilar,', h1b: 'Hora a Hora.',
+      sub: 'Colocación punto a punto que replica densidad folicular natural. Restauración capilar sin cirugía para hombres y mujeres.',
+      facts: [['Precio Inicial', '$1,200'], ['Cabeza Completa', 'Hasta $4,500'], ['Tiempo en Silla', '~3 horas'], ['Sesiones', '2 incluidas'], ['Financiamiento', 'En 4 cuotas']],
+      stepsA: 'Las Tres', stepsB: 'Horas.',
+      stepsSub: 'La nueva línea capilar se diseña contigo antes de iniciar.',
       steps: [
-        ['Min 0\u201320', 'La conversaci\u00f3n', 'D\u00f3nde est\u00e1 la p\u00e9rdida, c\u00f3mo ha avanzado, qu\u00e9 quieres recuperar. Las fotos de tu cabello de hace diez a\u00f1os ayudan de verdad. Realista es la palabra que m\u00e1s se usa en esta silla.'],
-        ['Min 20\u201350', 'Dise\u00f1ar la l\u00ednea', 'La nueva l\u00ednea se dibuja y se ajusta: apropiada a tu edad, ligeramente irregular, a juego con tu cara. Una l\u00ednea demasiado perfecta es lo que delata un mal SMP.'],
-        ['Min 50\u201360', 'Igualar el pigmento', 'El pigmento se iguala a tu cabello y tono de piel actuales, canas incluidas. El pigmento de SMP est\u00e1 dise\u00f1ado para no virar a azul con el tiempo.'],
-        ['Hora 1\u20133', 'Colocar los puntos', 'Miles de impresiones individuales a profundidad de fol\u00edculo, variadas en \u00e1ngulo y espaciado para que el resultado se lea como crecimiento, no como impresi\u00f3n. Pausas cuando quieras.'],
-        ['Final', 'Instrucciones', 'Cuatro d\u00edas en seco: sin lavar, sin sudar fuerte, sin gorras. Las instrucciones van contigo en papel.'],
-        ['Semanas 4\u20136', 'La segunda pasada', 'Se construye densidad y se emparejan puntos claros cuando la primera pasada asent\u00f3. Parte del precio en todo tratamiento capilar aqu\u00ed.']
+        ['Min 0 a 20', 'Consulta Capilar', 'Evaluación de zonas de pérdida y densidad natural.'],
+        ['Min 20 a 50', 'Diseño de Línea Frontal', 'Diseño natural acorde a tu edad y fisionomía.'],
+        ['Min 50 a 60', 'Igualación de Pigmento', 'Pigmento médico que no vira a azul con el tiempo.'],
+        ['Horas 1 a 3', 'Impresiones Foliculares', 'Miles de micropuntos colocados a profundidad folicular.'],
+        ['Final', 'Instrucciones', 'Protocolo de 4 días secos.'],
+        ['Semanas 4 a 6', 'Segunda Sesión de Densidad', 'Refuerzo de densidad incluido en el paquete.']
       ],
-      forWho: ['Entradas o una raya que se ensancha y quieres cerrar visualmente.', 'Alopecia, por zonas o completa: la cobertura se cotiza por \u00e1rea hasta $4,500 la cabeza completa.', 'Quieres una respuesta sin cirug\u00eda y sin medicaci\u00f3n diaria.'],
-      notWho: ['Esperas crecimiento real: esto es cobertura, no restauraci\u00f3n, y se dice claramente.', 'No puedes mantener el cuero cabelludo seco cuatro d\u00edas tras cada sesi\u00f3n.', 'Condiciones activas del cuero cabelludo: brotes de psoriasis o eccema deben calmarse primero.'],
-      prep: ['Lava tu cabello esa ma\u00f1ana; despu\u00e9s nada m\u00e1s toca el cuero cabelludo.', 'Lleva el cabello al largo que piensas mantener: el trabajo se iguala a \u00e9l.', 'Sin anticoagulantes 72 horas, con el visto bueno de tu m\u00e9dico.', 'Hidrata el cuero cabelludo a diario la semana previa; la piel hidratada toma mejor el pigmento.'],
-      after: ['D\u00edas 0\u20134: completamente seco. Sin lavar, sin gimnasio, sin cascos.', 'D\u00edas 5\u20136: primer lavado suave, solo con las yemas.', 'D\u00eda 7+: vuelve el gimnasio, hidratante ligero a diario.', 'SPF 30 en el cuero cabelludo expuesto, para siempre: el sol es lo que lo desvanece.'],
-      ctaA: 'Tres horas,', ctaB: 'sin cirug\u00eda, sin pastillas.'
+      forWho: ['Entradas, coronilla despoblada o raya ensanchada.', 'Alopecia o camuflaje de cicatrices de trasplante.'],
+      notWho: ['Quienes esperan crecimiento biológico de pelo.', 'Brotes activos de dermatitis o psoriasis en el cuero cabelludo.'],
+      prep: ['Lavar el cabello esa mañana sin productos.', 'Mantener el largo de cabello habitual.', 'Sin anticoagulantes 72h antes.'],
+      after: ['Días 1 a 4: completamente seco.', 'Días 5 a 6: enjuague suave.', 'Día 7+: reanudar entrenamientos e hidratación.', 'Usar protector solar SPF 30+.'],
+      ctaA: 'Tres Horas en la Silla,', ctaB: 'Sin Cirugía ni Pastillas.'
     }
   },
   lips: {
     en: {
-      eyebrow: 'Lips \u00b7 $800, cash less \u00b7 2.5 hours', h1a: 'Lip neutralisation,', h1b: 'minute by minute.',
-      sub: 'Corrective pigment that neutralises dark, uneven or cool-toned lips back to a warm, even base \u2014 the most technically demanding pigment work in the studio.',
-      facts: [['Price', '$800'], ['Cash', '$700'], ['In the chair', '~2.5 hrs'], ['Touch-up', 'Included'], ['Sessions', '1\u20132 + touch-up']],
-      stepsA: 'The two and a half', stepsB: 'hours.',
-      stepsSub: 'Neutralisation is colour theory applied to skin \u2014 the analysis at the start matters more than the machine time after it.',
+      eyebrow: 'LIP PMU \u00b7 $800 / $700 CASH \u00b7 2.5 HOURS', h1a: 'Lip Neutralization & Blush,', h1b: 'Minute by Minute.',
+      sub: 'Corrective color theory that neutralizes dark, uneven melanin or cool-toned lips into a warm, harmonious natural pink or peach base.',
+      facts: [['Card Price', '$800'], ['Cash Price', '$700'], ['Duration', '150 min'], ['Touch-Up', 'Included'], ['Sessions', '1 to 2 + touch-up']],
+      stepsA: 'The Two and a Half', stepsB: 'Hours.',
+      stepsSub: 'Neutralization relies on scientific color theory to lift cool tones before applying soft blush tinting.',
       steps: [
-        ['Min 0\u201320', 'Colour analysis', 'Your lip tone is assessed in natural light \u2014 where it is dark, where it is uneven, what undertone is doing it. This decides the corrector shade entirely.'],
-        ['Min 20\u201340', 'Mapping and agreement', 'The border is mapped and the target tone agreed against swatches on your own skin \u2014 not on a chart.'],
-        ['Min 40\u201355', 'Numbing', 'Lips are numbed thoroughly \u2014 they take longer than brows and it is not skipped.'],
-        ['Min 55\u2013140', 'The passes', 'Corrective pigment layered in passes across the full lip, monitored constantly against the border. Warmth builds gradually \u2014 rushing this stage is how lips end up orange.'],
-        ['Min 140\u2013150', 'Seal and instructions', 'Seal, aftercare on paper, touch-up booked. Lips swell for 24\u201348 hours \u2014 plan for it.'],
-        ['Weeks 6\u20138', 'The second sitting', 'Healed tone is assessed; very dark lips sometimes need a second neutralising pass before any tint. That is said before you start, not discovered after.']
+        ['Min 0 to 20', 'Melanin & Undertone Analysis', 'Assessing cool undertones in natural daylight to determine corrective warm pigments.'],
+        ['Min 20 to 40', 'Vermis Border Mapping', 'Symmetry mapping avoiding over-lining the natural vermilion border.'],
+        ['Min 40 to 55', 'Topical Numbing', 'Deep topical anesthetic ensures comfortable lip treatment.'],
+        ['Min 55 to 140', 'Corrective Color Passes', 'Delicate layering of warm corrective pigment across the lip tissue.'],
+        ['Min 140 to 150', 'Sealant Application', 'Hydration barrier applied; mild temporary swelling is normal for 24 hours.'],
+        ['Weeks 6 to 8', 'Perfection Touch-Up', 'Reinforce even tone once deeper melanin has completely stabilized. Included.']
       ],
-      forWho: ['Naturally dark or cool-toned lips you want warmed and evened.', 'Uneven patches or a blurred border from age or old filler.', 'You want a base that makes bare lips look finished.'],
-      notWho: ['Cold sores \u2014 pigment work triggers outbreaks; antiviral cover first, raised at the consultation.', 'Filler less than four weeks old \u2014 the two need spacing.', 'You want a bold lipstick colour \u2014 this is correction toward natural, not a permanent lipstick.'],
-      prep: ['Hydrate lips all week \u2014 balm nightly; dry lips take pigment badly.', 'No filler within four weeks either side.', 'Antiviral prophylaxis if you have any cold-sore history, with your doctor.', 'No blood thinners for 72 hours, with your doctor\u2019s okay.'],
-      after: ['Swelling for 24\u201348 hours is normal \u2014 ice wrapped in clean cloth helps.', 'Balm constantly; lips must not dry out while healing.', 'Flaking days three to five \u2014 never pick, on lips especially.', 'No spicy food, straws or kissing for the first five days.'],
-      ctaA: 'Your lips,', ctaB: 'evened and warm.'
+      forWho: ['Naturally cool or dark lip borders desiring an even warm tone.', 'Loss of definition from age or previous lip fillers.', 'Wanting a fresh healthy tint without daily lipstick.'],
+      notWho: ['History of cold sores without prophylactic antiviral medication.', 'Lip fillers placed within the last 4 weeks (must wait 4 weeks).'],
+      prep: ['Hydrate lips with balm throughout the prior week.', 'No lip fillers 4 weeks before or after appointment.', 'Consult physician for antiviral cover if history of cold sores exists.', 'No blood thinners 72h prior.'],
+      after: ['Mild swelling resolves in 24 to 48 hours (cool compresses help).', 'Keep lips constantly moisturized with provided healing balm.', 'No spicy foods, straws, or active picking during peeling phase.'],
+      ctaA: 'Your Natural Lips,', ctaB: 'Warmed and Symmetrical.'
     },
     es: {
-      eyebrow: 'Labios \u00b7 $800, menos en efectivo \u00b7 2.5 horas', h1a: 'Neutralizaci\u00f3n de labios,', h1b: 'minuto a minuto.',
-      sub: 'Pigmento correctivo que neutraliza labios oscuros, disparejos o de tono fr\u00edo hacia una base c\u00e1lida y pareja: el trabajo de pigmento m\u00e1s exigente del estudio.',
-      facts: [['Precio', '$800'], ['Efectivo', '$700'], ['En la silla', '~2.5 hrs'], ['Retoque', 'Incluido'], ['Sesiones', '1\u20132 + retoque']],
-      stepsA: 'Las dos horas', stepsB: 'y media.',
-      stepsSub: 'La neutralizaci\u00f3n es teor\u00eda del color aplicada a la piel: el an\u00e1lisis del inicio importa m\u00e1s que el tiempo de m\u00e1quina que le sigue.',
+      eyebrow: 'LABIOS \u00b7 $800 / $700 EFECTIVO \u00b7 2.5 HORAS', h1a: 'Neutralización de Labios,', h1b: 'Minuto a Minuto.',
+      sub: 'Teoría del color correctiva para neutralizar tonos oscuros o fríos hacia una base cálida y uniforme.',
+      facts: [['Precio Tarjeta', '$800'], ['Precio Efectivo', '$700'], ['Duración', '150 min'], ['Retoque', 'Incluido'], ['Sesiones', '1 a 2 + retoque']],
+      stepsA: 'Las Dos Horas', stepsB: 'y Media.',
+      stepsSub: 'Análisis de color minucioso para equilibrar la melanina antes del color definitivo.',
       steps: [
-        ['Min 0\u201320', 'An\u00e1lisis de color', 'Tu tono de labios se eval\u00faa con luz natural: d\u00f3nde est\u00e1 oscuro, d\u00f3nde disparejo, qu\u00e9 subtono lo causa. Esto decide por completo el tono corrector.'],
-        ['Min 20\u201340', 'Mapa y acuerdo', 'Se mapea el borde y el tono objetivo se acuerda con muestras sobre tu propia piel, no sobre una carta.'],
-        ['Min 40\u201355', 'Anestesia', 'Los labios se anestesian a fondo: tardan m\u00e1s que las cejas y no se salta.'],
-        ['Min 55\u2013140', 'Las pasadas', 'Pigmento correctivo en capas por todo el labio, vigilado constantemente contra el borde. La calidez se construye gradualmente: apurar esta etapa es c\u00f3mo los labios terminan naranjas.'],
-        ['Min 140\u2013150', 'Sellado e instrucciones', 'Sellado, cuidados en papel, retoque agendado. Los labios se hinchan 24\u201348 horas: planif\u00edcalo.'],
-        ['Semanas 6\u20138', 'La segunda sesi\u00f3n', 'Se eval\u00faa el tono sanado; labios muy oscuros a veces necesitan una segunda pasada neutralizante antes de cualquier tinte. Eso se dice antes de empezar, no se descubre despu\u00e9s.']
+        ['Min 0 a 20', 'Análisis de Subtono', 'Evaluación de melanina con luz natural.'],
+        ['Min 20 a 40', 'Diseño de Bordes', 'Mapeo simétrico del contorno labial.'],
+        ['Min 40 a 55', 'Anestesia', 'Anestésico tópico profundo.'],
+        ['Min 55 a 140', 'Pasadas Correctivas', 'Capas de pigmento cálido neutralizante.'],
+        ['Min 140 a 150', 'Sellado', 'Aplicación de bálsamo hidratante.'],
+        ['Semanas 6 a 8', 'Retoque Incluido', 'Afinación de tono final.']
       ],
-      forWho: ['Labios naturalmente oscuros o de tono fr\u00edo que quieres entibiar y emparejar.', 'Parches disparejos o un borde difuminado por edad o relleno antiguo.', 'Quieres una base que haga que los labios sin nada se vean terminados.'],
-      notWho: ['Herpes labial: el pigmento dispara brotes; primero cobertura antiviral, se plantea en la consulta.', 'Relleno de menos de cuatro semanas: los dos necesitan espacio.', 'Quieres un color de labial intenso: esto es correcci\u00f3n hacia lo natural, no un labial permanente.'],
-      prep: ['Hidrata los labios toda la semana, b\u00e1lsamo cada noche; los labios secos toman mal el pigmento.', 'Sin relleno cuatro semanas antes o despu\u00e9s.', 'Profilaxis antiviral si tienes historial de herpes, con tu m\u00e9dico.', 'Sin anticoagulantes 72 horas, con el visto bueno de tu m\u00e9dico.'],
-      after: ['Hinchaz\u00f3n de 24\u201348 horas es normal: hielo envuelto en tela limpia ayuda.', 'B\u00e1lsamo constante; los labios no deben secarse mientras sanan.', 'Descamaci\u00f3n d\u00edas tres a cinco: nunca la arranques, en labios menos.', 'Sin comida picante, popotes ni besos los primeros cinco d\u00edas.'],
-      ctaA: 'Tus labios,', ctaB: 'parejos y c\u00e1lidos.'
+      forWho: ['Labios con bordes oscuros o tono frío.', 'Bordes difuminados por edad o fillers previos.'],
+      notWho: ['Historial de herpes labial sin antiviral previo.', 'Relleno de labios puesto hace menos de 4 semanas.'],
+      prep: ['Hidratar los labios toda la semana previa.', 'Sin rellenos 4 semanas antes.', 'Antiviral preventivo si has tenido herpes.', 'Sin anticoagulantes 72h antes.'],
+      after: ['Hinchazón leve cede en 24-48 horas.', 'Bálsamo constante para evitar resequedad.', 'Sin comida picante los primeros 5 días.'],
+      ctaA: 'Tus Labios Naturales,', ctaB: 'Cálidos y Definidos.'
     }
   },
   laser: {
     en: {
-      eyebrow: 'Laser \u00b7 8 sessions \u00b7 $2,000 cash / $2,200 card', h1a: 'A laser course,', h1b: 'session by session.',
-      sub: 'Eight sessions, four to six weeks apart, sold as the course the result actually takes. Each visit is under thirty minutes; the plan is what does the work.',
-      facts: [['Course', '8 sessions'], ['Cash', '$2,000'], ['Card', '$2,200'], ['Per visit', '~25 min'], ['Reduction', '80\u2013100%']],
-      stepsA: 'One session,', stepsB: 'inside the plan.',
-      stepsSub: 'Every session runs the same twenty-five minutes. What changes is your hair \u2014 less of it each time, which is the entire point of the rhythm.',
+      eyebrow: 'DIODE LASER \u00b7 8 SESSIONS \u00b7 $2,000 CASH / $2,200 CARD', h1a: 'Diode Laser Course,', h1b: 'Session by Session.',
+      sub: 'Eight clinical sessions spaced 4 to 6 weeks apart for 80% to 100% permanent hair reduction with contact cooling technology.',
+      facts: [['Course Size', '8 sessions'], ['Cash Price', '$2,000'], ['Card Price', '$2,200'], ['Per Visit', '~25 min'], ['Reduction', '80% to 100%']],
+      stepsA: 'Each Session,', stepsB: 'Inside the Plan.',
+      stepsSub: 'Fast, comfortable 25-minute visits targeting active anagen follicles with chilled sapphire diode technology.',
       steps: [
-        ['Before', 'Shave, don\u2019t wax', 'Shave within 24 hours of every session \u2014 the laser needs the root, and waxing removes it. No self-tanner for two weeks before.'],
-        ['Min 0\u20135', 'Skin check', 'The area is checked each visit \u2014 tan, irritation, new medication all change settings. This is why the same person treating you every time matters.'],
-        ['Min 5\u201310', 'Settings and prep', 'Machine calibrated to your skin tone and hair on that day, not copied from last visit. Eye protection on.'],
-        ['Min 10\u201325', 'The passes', 'Systematic passes over the area. It feels like warm snaps of a rubber band \u2014 tolerable enough that nobody books numbing for it.'],
-        ['Min 25\u201330', 'Cool down', 'Cooling gel, SPF if the area is exposed, and you are dressed and out. No downtime \u2014 most clients come at lunch.'],
-        ['Weeks 4\u20136', 'The next one', 'Treated hairs shed over one to three weeks, then the next growth cycle is caught at the next session. Consistency is most of the result.']
+        ['24h Before', 'Clean Smooth Shave', 'Shave the treatment area smoothly 12 to 24 hours prior. Do not wax or tweeze.'],
+        ['Min 0 to 5', 'Skin & Tan Inspection', 'Verifying absence of active sun tanning or photosensitizing medications.'],
+        ['Min 5 to 10', 'Diode Calibration', 'Setting wavelength and pulse duration to your exact Fitzpatrick skin tone.'],
+        ['Min 10 to 25', 'Active Cooling Laser Passes', 'Fast, comfortable glides with integrated cooling sapphire tip.'],
+        ['Min 25 to 30', 'Soothing Gel & Exit', 'Cooling aloe barrier applied. Zero downtime; return to your day immediately.'],
+        ['Weeks 4 to 6', 'Next Growth Cycle', 'Follicles shed over weeks 1 to 2; recurring sessions catch the next growth phase.']
       ],
-      forWho: ['You are done with razor burn, ingrowns and waxing appointments forever.', 'Dark hair on any skin tone \u2014 the contrast is what the laser reads.', 'You can commit to the rhythm \u2014 eight visits across roughly eight months.'],
-      notWho: ['White, grey or true-red hair \u2014 the laser has nothing to read; that is said honestly.', 'You tan constantly \u2014 tanned skin cannot be lasered safely and sessions get postponed.', 'You want one session to see \u2014 one session does nothing worth paying for, which is why it is not sold.'],
-      prep: ['Shave the area within 24 hours of each session.', 'No waxing, plucking or threading for four weeks before and throughout.', 'No sun or self-tanner on the area for two weeks before each visit.', 'Nothing on the skin on the day \u2014 no lotions, deodorant or oils.'],
-      after: ['Redness and bumps settle within hours to two days \u2014 cool compresses help.', 'Loose clothing today, no hot showers, saunas or gym today.', 'Shedding over weeks one to three \u2014 let it fall, never pluck.', 'SPF 30+ on the area every day between sessions.'],
-      ctaA: 'Eight visits,', ctaB: 'then never again.'
+      forWho: ['Permanent freedom from shaving, razor bumps, and ingrown hairs.', 'Dark or coarse hair on all skin tones.', 'Commitment to the 8-session course rhythm.'],
+      notWho: ['White, silver-grey, or bright red hair (lacks target melanin).', 'Active sunbed tanning or sunburns.'],
+      prep: ['Shave smoothly within 24 hours of each session.', 'No waxing, tweezing, or threading for 4 weeks.', 'No direct sun or artificial self-tanners for 2 weeks prior.', 'Skin must be clean of deodorants, lotions, and body oils on the day.'],
+      after: ['Mild erythema resolves within hours to 2 days.', 'Wear loose clothing; avoid hot saunas or hot showers for 24 hours.', 'Hairs naturally shed over 1 to 2 weeks (do not tweeze).', 'Apply SPF 30+ daily on exposed treated areas.'],
+      ctaA: 'Eight Clinical Sessions,', ctaB: 'Smooth Skin Forever.'
     },
     es: {
-      eyebrow: 'L\u00e1ser \u00b7 8 sesiones \u00b7 $2,000 efectivo / $2,200 tarjeta', h1a: 'Un plan de l\u00e1ser,', h1b: 'sesi\u00f3n a sesi\u00f3n.',
-      sub: 'Ocho sesiones, cada cuatro a seis semanas, vendidas como el plan que el resultado realmente necesita. Cada visita dura menos de treinta minutos; el plan es lo que hace el trabajo.',
-      facts: [['Plan', '8 sesiones'], ['Efectivo', '$2,000'], ['Tarjeta', '$2,200'], ['Por visita', '~25 min'], ['Reducci\u00f3n', '80\u2013100%']],
-      stepsA: 'Una sesi\u00f3n,', stepsB: 'dentro del plan.',
-      stepsSub: 'Cada sesi\u00f3n son los mismos veinticinco minutos. Lo que cambia es tu vello: menos cada vez, que es todo el sentido del ritmo.',
+      eyebrow: 'LÁSER DIODO \u00b7 8 SESIONES \u00b7 $2,000 EFECTIVO / $2,200 TARJETA', h1a: 'Plan de Depilación Láser,', h1b: 'Sesión a Sesión.',
+      sub: 'Ocho sesiones clínicas cada 4 a 6 semanas para una reducción permanente del 80% al 100% con cabezal de enfriamiento continuo.',
+      facts: [['Paquete', '8 sesiones'], ['Precio Efectivo', '$2,000'], ['Precio Tarjeta', '$2,200'], ['Por Visita', '~25 min'], ['Reducción', '80% a 100%']],
+      stepsA: 'Cada Sesión,', stepsB: 'Dentro del Plan.',
+      stepsSub: 'Visitas rápidas y cómodas de 25 minutos con enfriamiento continuo en zafiro.',
       steps: [
-        ['Antes', 'Rasura, no cera', 'Rasura dentro de las 24 horas previas a cada sesi\u00f3n: el l\u00e1ser necesita la ra\u00edz, y la cera la quita. Sin autobronceador dos semanas antes.'],
-        ['Min 0\u20135', 'Revisi\u00f3n de piel', 'La zona se revisa en cada visita: bronceado, irritaci\u00f3n o medicaci\u00f3n nueva cambian la calibraci\u00f3n. Por eso importa que te trate la misma persona siempre.'],
-        ['Min 5\u201310', 'Calibraci\u00f3n', 'La m\u00e1quina se calibra a tu tono de piel y vello de ese d\u00eda, no se copia de la visita pasada. Protecci\u00f3n ocular puesta.'],
-        ['Min 10\u201325', 'Las pasadas', 'Pasadas sistem\u00e1ticas sobre la zona. Se siente como chasquidos tibios de liga: tan tolerable que nadie pide anestesia para esto.'],
-        ['Min 25\u201330', 'Enfriar', 'Gel fr\u00edo, SPF si la zona queda expuesta, y sales vestida. Sin recuperaci\u00f3n: la mayor\u00eda viene a la hora del almuerzo.'],
-        ['Semanas 4\u20136', 'La siguiente', 'El vello tratado cae en una a tres semanas, y el siguiente ciclo de crecimiento se atrapa en la siguiente sesi\u00f3n. La constancia es la mayor parte del resultado.']
+        ['24h Antes', 'Rasurado al Ras', 'Rasura la zona 12 a 24 horas antes sin usar cera ni pinzas.'],
+        ['Min 0 a 5', 'Revisión de Piel', 'Comprobación de ausencia de bronceado reciente.'],
+        ['Min 5 a 10', 'Calibración', 'Ajuste de parámetros según tu fototipo de piel.'],
+        ['Min 10 a 25', 'Pasadas con Enfriamiento', 'Deslizamiento cómodo con punta de enfriamiento de zafiro.'],
+        ['Min 25 a 30', 'Gel Calmante', 'Aplicación de gel y retorno inmediato a tus actividades.'],
+        ['Semanas 4 a 6', 'Siguiente Ciclo', 'El vello tratado cae en 1 a 2 semanas; la siguiente cita atrapa el nuevo ciclo.']
       ],
-      forWho: ['Terminaste con la irritaci\u00f3n de rasurar, los vellos enterrados y las citas de cera para siempre.', 'Vello oscuro en cualquier tono de piel: el contraste es lo que el l\u00e1ser lee.', 'Puedes comprometerte con el ritmo: ocho visitas en unos ocho meses.'],
-      notWho: ['Vello blanco, canoso o pelirrojo verdadero: el l\u00e1ser no tiene qu\u00e9 leer; se dice con honestidad.', 'Te bronceas constantemente: la piel bronceada no se puede tratar con seguridad y las sesiones se aplazan.', 'Quieres una sesi\u00f3n para probar: una sesi\u00f3n no logra nada que valga lo que pagas, por eso no se vende.'],
-      prep: ['Rasura la zona dentro de las 24 horas previas a cada sesi\u00f3n.', 'Sin cera, pinzas ni hilo cuatro semanas antes y durante todo el plan.', 'Sin sol ni autobronceador en la zona dos semanas antes de cada visita.', 'Nada sobre la piel ese d\u00eda: sin cremas, desodorante ni aceites.'],
-      after: ['La rojez y los bultitos bajan entre horas y dos d\u00edas: compresas frescas ayudan.', 'Ropa holgada hoy, sin duchas calientes, sauna ni gimnasio hoy.', 'Ca\u00edda del vello en las semanas una a tres: d\u00e9jalo caer, nunca lo arranques.', 'SPF 30+ en la zona todos los d\u00edas entre sesiones.'],
-      ctaA: 'Ocho visitas,', ctaB: 'y nunca m\u00e1s.'
+      forWho: ['Eliminar vellos enterrados, irritación y afeitado diario.', 'Vello oscuro en cualquier tono de piel.'],
+      notWho: ['Vello blanco, canoso o pelirrojo claro (carece de melanina diana).', 'Piel con quemadura solar activa.'],
+      prep: ['Rasurar al ras 24 horas antes.', 'Sin cera ni pinzas 4 semanas antes.', 'Sin sol ni autobronceador 2 semanas antes.', 'Piel limpia sin desodorantes ni aceites el día de la cita.'],
+      after: ['Rojez leve cede en pocas horas.', 'Ropa holgada y evitar duchas muy calientes 24 horas.', 'Dejar que el vello caiga solo.', 'Usar protector solar SPF 30+ en zonas expuestas.'],
+      ctaA: 'Ocho Visitas Clínicas,', ctaB: 'Piel Suave Para Siempre.'
     }
   }
 };
@@ -403,7 +433,6 @@ class Component extends DCLogic {
     };
   }
 }
-
 </script>
 </body>
 </html>

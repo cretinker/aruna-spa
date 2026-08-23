@@ -31,7 +31,7 @@ export const SERVICES = [
 
   { n: 'Mini / teen facial', was: 'Mini/ Teen Facila', cat: 'skin', price: 70, dur: 40 },
   { n: 'Dermaplaning only', cat: 'skin', price: 80, dur: 40, note: 'Manual exfoliation, dead skin and peach fuzz off, immediate glow.' },
-  { n: 'Mini facial', cat: 'skin', price: 80, dur: 35, note: 'The short version — cleanse, exfoliate, hydrate.' },
+  { n: 'Mini facial', cat: 'skin', price: 80, dur: 35, note: 'The short version: cleanse, exfoliate, and hydrate.' },
   { n: 'Lash lift and tint', cat: 'skin', price: 90, dur: 60, note: 'Curl and darken your own lashes. Lasts 6 to 12 weeks with your lash cycle.' },
   { n: 'Lymphatic facial massage', cat: 'skin', price: 100, dur: 50, note: 'Gentle rhythmic drainage to bring puffiness down.' },
   { n: 'Flawless signature facial', cat: 'skin', price: 120, dur: 60, note: 'Deep cleanse built around your skin. Expect some redness after any face treatment.' },
@@ -107,7 +107,7 @@ export const SEGMENTS = {
       ['The consultation is not a sales call', 'Twenty minutes, free, same day as the treatment if you want. If your skin is wrong for a technique you will hear it here, not afterwards.']
     ],
     faq: [
-      ['Which technique is right for me?', 'Microblading suits normal to dry skin and reads as individual hairs. Powder holds better on oily and mature skin and reads as soft makeup. Nano combines both. The consultation exists to answer exactly this — it is free.'],
+      ['Which technique is right for me?', 'Microblading suits normal to dry skin and reads as individual hairs. Powder holds better on oily and mature skin and reads as soft makeup. Nano combines both. The consultation exists to answer exactly this and it is free.'],
       ['How long does it last?', 'Six to twenty-four months before you need a touch-up, and that range is about your skin, not the technique. Anyone who promises you a fixed number is selling.'],
       ['I have brows I am not happy with.', 'Correction work is possible and starts with a consultation to look at the existing pigment and shape. Redone brows for existing clients are $400.']
     ]
@@ -127,7 +127,7 @@ export const SEGMENTS = {
     faq: [
       ['How long does it last?', 'Years, and it fades gradually rather than falling out. Touch-ups keep the density where you want it.'],
       ['Will it look like a tattoo?', 'Not at conversational distance, which is the only distance that matters. Density and colour are matched to your own hair and skin.'],
-      ['What does full coverage cost?', 'It starts at $1,200 and scales with the area — hairline, crown, back of the head, or full head. You get the number at the consultation, before you commit.']
+      ['What does full coverage cost?', 'It starts at $1,200 and scales with the area: hairline, crown, back of the head, or full head. You get the number at the consultation, before you commit.']
     ]
   },
   laser: {
@@ -145,7 +145,7 @@ export const SEGMENTS = {
     faq: [
       ['Does it hurt?', 'Each session hurts less than the one before as there is less hair to treat. Small areas are over in ten minutes.'],
       ['How many will I need?', 'Six to eight for underarms, six to ten for legs and bikini, eight to ten for full face. Men need more sessions than women.'],
-      ['Can I buy a whole body?', 'Yes — eight sessions covering lower body or upper body is $2,000 cash, $2,200 by card, Zelle or Venmo.']
+      ['Can I buy a whole body?', 'Yes: eight sessions covering lower body or upper body is $2,000 cash, $2,200 by card, Zelle or Venmo.']
     ]
   },
   skin: {
@@ -217,7 +217,7 @@ export const SEGMENTS = {
     faq: [
       ['How far ahead should I book?', 'Ten to twelve weeks for permanent makeup. Facials and lashes can be much closer to the day.'],
       ['Can you come to us?', 'For three or more, in Long Island, New Jersey or Whitestone. Micropigmentation only, from $700, text to schedule.'],
-      ['What about the bridesmaids?', 'Group quotes are done on the day of the enquiry — send the number of people and the treatments and you will get a price.']
+      ['What about the bridesmaids?', 'Group quotes are provided the day of your inquiry: send the number of guests and desired treatments for exact pricing.']
     ]
   },
   recovery: {
@@ -252,7 +252,7 @@ export const SEGMENTS = {
     ],
     faq: [
       ['Where do you travel?', 'Long Island, New Jersey and Whitestone. Anywhere else, ask.'],
-      ['How do I book?', 'Text to schedule — house calls are arranged by message, not through the calendar. $100 deposit for new clients.'],
+      ['How do I book?', 'Text to schedule: house calls are arranged by message, not through the calendar. $100 deposit for new clients.'],
       ['Does the touch-up travel too?', 'Yes. The $680 initial price includes the second visit.']
     ]
   },
@@ -270,7 +270,7 @@ export const SEGMENTS = {
     ],
     faq: [
       ['Do I need previous experience?', 'Yes. Perfecting Brows assumes you already work and want to sharpen technique.'],
-      ['What will I be able to do afterwards?', 'Natural, crisp hairstrokes and soft powder brows — the two techniques that make up most paid brow work.'],
+      ['What will I be able to do afterwards?', 'Natural, crisp hairstrokes and soft powder brows: the two techniques that make up most paid brow work.'],
       ['Can I rent the room?', 'Yes, the studio is available for your own courses and classes. Ask for dates.']
     ]
   }
@@ -296,7 +296,7 @@ export const SETTLING = [
   ['Days 5–10', 'Flaking', 'The surface layer sheds and takes some pigment with it. Patchy is normal here. Do not judge the work yet.'],
   ['Weeks 2–4', 'The ghost phase', 'Brows can look faint, even gone. Pigment is still settling in the deeper layer and comes back up.'],
   ['Weeks 4–6', 'Your second sitting', 'The included touch-up. This is where shape and density are finished, because now we can both see what your skin kept.'],
-  ['Months 6–24', 'Real life', 'Gradual softening, not a grey line. How long yours holds is your skin, your sun exposure and your aftercare — not the technique you picked.']
+  ['Months 6–24', 'Real life', 'Gradual softening, not a grey line. How long yours holds is your skin, your sun exposure and your aftercare, never the technique you picked.']
 ];
 
 // ── The decision the client is actually making.
