@@ -105,6 +105,7 @@
         <div style="font-size:13px; line-height:1.6; color:#5C4E46;">{{ depositNote }}</div>
       </div>
       <div onClick="{{ submit }}" style="background:{{ btnBg }}; color:{{ btnFg }}; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:21px 30px; text-align:center; cursor:{{ btnCursor }};" style-hover="{{ btnHover }}">{{ ui.confirm }}</div>
+      <a href="https://maryaruna.glossgenius.com/services" target="_blank" rel="noopener" style="text-align:center; font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:#7C2D3A; text-decoration:none; padding:4px 0;" style-hover="color:#1A1411;">Or Book Direct via GlossGenius ↗</a>
       <div style="font-size:12.5px; line-height:1.6; color:#8A7A6E;">{{ hint }}</div>
       <div style="border-top:1px solid rgba(26,20,17,.16); padding-top:18px; display:flex; flex-direction:column; gap:9px;">
         <sc-for list="{{ reassure }}" as="r" hint-placeholder-count="3">
@@ -135,8 +136,11 @@
             </div>
           </sc-for>
         </div>
-        <div style="display:flex; gap:12px; flex-wrap:wrap; padding-top:12px;">
-          <a href="tel:+17183546298" style="background:#7C2D3A; color:#FBF6F0; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:19px 32px;" style-hover="background:#1A1411;">{{ ui.callStudio }}</a>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; padding-top:12px;">
+          <a href="{{ waBookingLink }}" target="_blank" rel="noopener" style="background:#25D366; color:#100C0A; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:19px 32px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;" style-hover="background:#1EB854;">
+            <span>Send to WhatsApp ↗</span>
+          </a>
+          <a href="tel:+17183546298" style="background:#7C2D3A; color:#FBF6F0; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:19px 32px; text-decoration:none;" style-hover="background:#1A1411;">{{ ui.callStudio }}</a>
           <div onClick="{{ restart }}" style="border:1px solid rgba(26,20,17,.28); color:#1A1411; font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; padding:19px 28px; cursor:pointer;" style-hover="border-color:#7C2D3A; color:#7C2D3A;">{{ ui.bookAnother }}</div>
         </div>
       </div>
@@ -420,6 +424,11 @@ class Component extends DCLogic {
       done: st.done, notDone: !st.done,
       doneTitle: st.name ? ui.thanks + ' ' + st.name.trim().split(' ')[0] + '.' : ui.doneT,
       doneWhen: fmtDay(selDate) + (st.time !== null ? ', ' + clock(st.time, es) : ''),
+      waBookingLink: `https://wa.me/17183546298?text=${encodeURIComponent(
+        es
+          ? `Hola Mary, deseo confirmar mi cita reservada en la web:\n• Tratamiento: ${svcName}\n• Fecha y Hora: ${fmtDay(selDate)}${st.time !== null ? ' a las ' + clock(st.time, true) : ''}\n• Nombre: ${st.name}\n• Teléfono: ${st.phone}\n• Nota: ${st.note || 'Ninguna'}`
+          : `Hello Mary, I'd like to confirm my appointment requested on your website:\n• Treatment: ${svcName}\n• Date & Time: ${fmtDay(selDate)}${st.time !== null ? ' at ' + clock(st.time, false) : ''}\n• Name: ${st.name}\n• Phone: ${st.phone}\n• Note: ${st.note || 'None'}`
+      )}`,
       doneBody: es
         ? 'Aruna tiene tu solicitud y esta hora queda apartada para ti. Te confirma por mensaje al ' + (st.phone || 'n\u00famero que dejaste') + '.'
         : 'Aruna has your request and this time is held for you. She confirms by text to ' + (st.phone || 'the number you left') + '.',

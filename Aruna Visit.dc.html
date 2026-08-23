@@ -215,10 +215,15 @@
     </sc-if>
 
     <sc-if value="{{ formSent }}" hint-placeholder-val="{{ false }}">
-      <div style="background:#FBF8F5; border:1px solid rgba(26,20,17,.1); border-radius:12px; padding:54px 44px; display:flex; flex-direction:column; gap:16px; text-align:center;">
+      <div style="background:#FBF8F5; border:1px solid rgba(26,20,17,.1); border-radius:12px; padding:54px 44px; display:flex; flex-direction:column; gap:18px; text-align:center; align-items:center;">
         <div style="font-family:'Libre Caslon Display',serif; font-size:36px; line-height:1.1; color:#7C2D3A;">{{ sentTitle }}</div>
         <div style="font-size:15.5px; line-height:1.7; color:#5C4E46; max-width:480px; margin:0 auto;">{{ sentBody }}</div>
-        <div onClick="{{ resetForm }}" style="align-self:center; border:1px solid rgba(26,20,17,.3); color:#1A1411; font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:14px 26px; border-radius:999px; cursor:pointer; margin-top:8px;" style-hover="border-color:#7C2D3A; color:#7C2D3A;">{{ ui.askAgain }}</div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; padding-top:6px;">
+          <a href="{{ waConsultLink }}" target="_blank" rel="noopener" style="background:#25D366; color:#100C0A; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:16px 28px; border-radius:999px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;" style-hover="background:#1EB854;">
+            <span>Send Direct via WhatsApp ↗</span>
+          </a>
+          <div onClick="{{ resetForm }}" style="border:1px solid rgba(26,20,17,.3); color:#1A1411; font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:16px 24px; border-radius:999px; cursor:pointer;" style-hover="border-color:#7C2D3A; color:#7C2D3A;">{{ ui.askAgain }}</div>
+        </div>
       </div>
     </sc-if>
   </div>
@@ -434,6 +439,11 @@ class Component extends DCLogic {
       sendHover: fOk ? 'background:#1A1411;' : '',
       formHint,
       formOpen: !st.sent, formSent: st.sent,
+      waConsultLink: `https://wa.me/17183546298?text=${encodeURIComponent(
+        lang === 'es'
+          ? `Hola Mary, te envío una consulta desde la página de Aruna Spa:\n• Nombre: ${st.fName}\n• Teléfono: ${st.fPhone || 'No indicado'}\n• Correo: ${st.fEmail || 'No indicado'}\n• Área de interés: ${st.topic || 'General'}\n• Mensaje: ${st.fMsg}`
+          : `Hello Mary, I'm submitting an inquiry from the Aruna Spa website:\n• Name: ${st.fName}\n• Phone: ${st.fPhone || 'Not provided'}\n• Email: ${st.fEmail || 'Not provided'}\n• Interest: ${st.topic || 'General'}\n• Note: ${st.fMsg}`
+      )}`,
       sentTitle: st.fName.trim() ? ui.thanks + ' ' + st.fName.trim().split(' ')[0] + '.' : ui.sentT,
       sentBody: lang === 'es'
         ? 'Mary Aruna responde ' + (st.reply && ui.replyPhr[st.reply] ? ui.replyPhr[st.reply] + ' ' : '') + 'normalmente el mismo día, y siempre dentro de un día laborable. Si prefieres no esperar, llámala.'
