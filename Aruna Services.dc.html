@@ -77,7 +77,7 @@
         <!-- Itemized Rate Table with Instant Book Button -->
         <div style="padding:48px 44px 72px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:0 64px;">
           <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="8">
-            <div style="display:grid; grid-template-columns:1fr auto; gap:6px 16px; padding:18px 0; border-top:1px solid rgba(26,20,17,.16); align-items:center;">
+            <div onClick="{{ r.click }}" style="display:grid; grid-template-columns:1fr auto; gap:6px 16px; padding:18px 12px; border-top:1px solid rgba(26,20,17,.16); align-items:center; cursor:pointer;" style-hover="background:rgba(124,45,58,.05);">
               <div style="display:flex; flex-direction:column; gap:4px;">
                 <div style="font-size:17px; font-weight:600; line-height:1.35; color:#1A1411;">{{ r.n }}</div>
                 <div style="font-size:12.5px; letter-spacing:.04em; color:#7A6B60;">{{ r.dur }} &bull; {{ r.details }}</div>
@@ -193,7 +193,7 @@ class Component extends DCLogic {
     import('./aruna-data.js').then(d => this.setState({ d }));
   }
 
-  nav = (page, seg) => { const f = this.props.onNav; if (f) f(page, seg); };
+  nav = (page, seg, payload) => { const f = this.props.onNav; if (f) f(page, seg, payload); };
 
   toggleCash = () => {
     this.setState({ cashMode: !this.state.cashMode });
@@ -247,10 +247,18 @@ class Component extends DCLogic {
         return {
           n: s.n,
           dur: s.dur + ' min',
+          durNum: s.dur || 60,
           details: s.note ? s.note.slice(0, 75) + '...' : 'Clinical protocol',
           displayPrice: currentPrice,
           hasSavings: hasCash,
-          savingsText
+          savingsText,
+          click: () => this.nav('booking', null, {
+            svc: s.n,
+            price: currentPrice,
+            dur: s.dur || 60,
+            payMode: cashMode ? 'cash' : 'card',
+            total: s.price
+          })
         };
       });
 

@@ -9,31 +9,61 @@
 <x-dc>
 <div style="background:#F4EDE6; color:#1A1411; font-family:'DM Sans',sans-serif; min-height:100vh;">
 
-  <div style="background:#1A1411; color:#FBF6F0; padding:104px 44px 56px;">
-    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:50px; flex-wrap:wrap;">
-      <div style="display:flex; flex-direction:column; gap:18px;">
+  <!-- Header Banner -->
+  <div style="background:#1A1411; color:#FBF6F0; padding:100px 44px 54px;">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:40px; flex-wrap:wrap;">
+      <div style="display:flex; flex-direction:column; gap:16px;">
         <div style="display:flex; align-items:center; gap:14px;">
           <div style="width:34px; height:1px; background:#D9A08C;"></div>
           <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ ui.eyebrow }}</div>
         </div>
-        <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(40px,4.2vw,68px); line-height:.95; letter-spacing:-.034em;">{{ ui.h1a }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.h1b }}</span></div>
+        <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(38px,4.2vw,64px); line-height:.95; letter-spacing:-.034em;">
+          {{ ui.h1a }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.h1b }}</span>
+        </div>
       </div>
-      <div style="display:flex; flex-direction:column; gap:7px; align-items:flex-end; text-align:right;">
-        <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:rgba(251,246,240,.5);">{{ ui.booking }}</div>
-        <div style="font-family:'Libre Caslon Display',serif; font-size:27px; line-height:1.15; color:#FBF6F0; max-width:330px;">{{ svcName }}</div>
-        <div style="font-size:13px; color:rgba(251,246,240,.62);">{{ svcMeta }}</div>
+      <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-end; text-align:right;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:rgba(251,246,240,.5);">{{ ui.booking }}</span>
+          <span onClick="{{ toggleSvcPicker }}" style="font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#D9A08C; cursor:pointer; text-decoration:underline;" style-hover="color:#FBF6F0;">{{ ui.changeSvc }}</span>
+        </div>
+        <div style="font-family:'Libre Caslon Display',serif; font-size:26px; line-height:1.15; color:#FBF6F0; max-width:380px;">{{ activeSvcName }}</div>
+        <div style="font-size:13px; color:rgba(251,246,240,.7);">{{ activeSvcMeta }}</div>
       </div>
     </div>
   </div>
 
+  <!-- Service Picker Overlay / Drawer -->
+  <sc-if value="{{ svcPickerOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#241B16; color:#FBF6F0; padding:40px 44px 48px; border-bottom:1px solid rgba(217,160,140,.3);">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+        <div style="font-family:'Libre Caslon Display',serif; font-size:28px;">{{ ui.selectTreatment }}</div>
+        <div onClick="{{ toggleSvcPicker }}" style="font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#D9A08C; cursor:pointer;" style-hover="color:#FBF6F0;">&times; {{ ui.close }}</div>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:12px;">
+        <sc-for list="{{ allServices }}" as="s" hint-placeholder-count="8">
+          <div onClick="{{ s.pick }}" style="background:{{ s.bg }}; border:1px solid {{ s.border }}; padding:16px 20px; cursor:pointer; display:flex; flex-direction:column; gap:6px;" style-hover="background:#1A1411; border-color:#D9A08C;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline; gap:10px;">
+              <div style="font-family:'Libre Caslon Display',serif; font-size:18px; color:{{ s.fg }};">{{ s.n }}</div>
+              <div style="font-family:'Libre Caslon Display',serif; font-size:18px; color:#D9A08C; white-space:nowrap;">{{ s.priceTag }}</div>
+            </div>
+            <div style="font-size:12px; color:rgba(251,246,240,.6);">{{ s.meta }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- Booking Flow: Active Steps -->
   <sc-if value="{{ notDone }}" hint-placeholder-val="{{ true }}">
   <div style="display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,.85fr); gap:0; border-bottom:1px solid rgba(26,20,17,.16);">
 
-    <div style="padding:52px 44px 66px; border-right:1px solid rgba(26,20,17,.16); display:flex; flex-direction:column; gap:34px;">
+    <!-- Left Column: Dates, Times, Payment Mode & Client Info -->
+    <div style="padding:52px 44px 66px; border-right:1px solid rgba(26,20,17,.16); display:flex; flex-direction:column; gap:40px;">
 
+      <!-- Step 1: Calendar Day Picker -->
       <div style="display:flex; flex-direction:column; gap:16px;">
         <div style="display:flex; align-items:baseline; justify-content:space-between; gap:20px;">
-          <div style="font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A; white-space:nowrap;">{{ ui.step1 }}</div>
+          <div style="font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A; font-weight:600; white-space:nowrap;">{{ ui.step1 }}</div>
           <div style="display:flex; gap:8px; align-items:center;">
             <div onClick="{{ prevWeek }}" style="border:1px solid {{ prevBorder }}; color:{{ prevColor }}; width:32px; height:32px; display:flex; align-items:center; justify-content:center; font-size:13px; cursor:{{ prevCursor }};" style-hover="border-color:#7C2D3A;">&larr;</div>
             <div style="font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; color:#5C4E46; min-width:150px; text-align:center;">{{ rangeLabel }}</div>
@@ -53,9 +83,10 @@
         </div>
       </div>
 
+      <!-- Step 2: Time Slots -->
       <div style="display:flex; flex-direction:column; gap:16px; border-top:1px solid rgba(26,20,17,.16); padding-top:30px;">
         <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;">
-          <div style="font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A; white-space:nowrap;">{{ ui.step2 }}</div>
+          <div style="font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A; font-weight:600; white-space:nowrap;">{{ ui.step2 }}</div>
           <div style="font-size:13px; color:#8A7A6E;">{{ slotNote }}</div>
         </div>
         <sc-if value="{{ hasSlots }}" hint-placeholder-val="{{ true }}">
@@ -70,8 +101,49 @@
         </sc-if>
       </div>
 
+      <!-- Step 3: Payment Preference (Interactive 3-Option Integration) -->
       <div style="display:flex; flex-direction:column; gap:16px; border-top:1px solid rgba(26,20,17,.16); padding-top:30px;">
-        <div style="font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A; white-space:nowrap;">{{ ui.step3 }}</div>
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+          <div style="font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A; font-weight:600;">{{ ui.stepPay }}</div>
+          <div style="font-size:12px; color:#8A7A6E;">{{ ui.paySub }}</div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:12px;">
+          <sc-for list="{{ payOptions }}" as="po" hint-placeholder-count="3">
+            <div onClick="{{ po.click }}" style="background:{{ po.bg }}; border:2px solid {{ po.border }}; padding:20px 18px; cursor:pointer; display:flex; flex-direction:column; gap:8px; border-radius:4px; position:relative;" style-hover="border-color:#7C2D3A;">
+              <sc-if value="{{ po.badge }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute; top:-10px; right:10px; background:#2E6930; color:#FFFFFF; font-size:9.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:3px 8px; border-radius:999px;">{{ po.badgeText }}</div>
+              </sc-if>
+              <div style="font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:{{ po.subColor }}; font-weight:600;">{{ po.title }}</div>
+              <div style="font-family:'Libre Caslon Display',serif; font-size:26px; line-height:1.1; color:{{ po.priceColor }};">{{ po.displayAmount }}</div>
+              <div style="font-size:12.5px; line-height:1.5; color:{{ po.descColor }}; flex:1;">{{ po.desc }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- BNPL 4-Payment Milestone Schedule when 'split' is chosen -->
+        <sc-if value="{{ isPaySplit }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#EAE1D6; border-left:3px solid #7C2D3A; padding:22px 24px; display:flex; flex-direction:column; gap:12px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#7C2D3A; font-weight:600;">{{ ui.bnplScheduleTitle }}</div>
+              <div style="font-size:11.5px; color:#5C4E46; font-weight:600;">{{ ui.bnplBadge }}</div>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:10px;">
+              <sc-for list="{{ bnplMilestones }}" as="m" hint-placeholder-count="4">
+                <div style="background:#F4EDE6; padding:12px 14px; display:flex; flex-direction:column; gap:4px;">
+                  <div style="font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:#8A7A6E;">{{ m.when }}</div>
+                  <div style="font-family:'Libre Caslon Display',serif; font-size:20px; color:#7C2D3A;">{{ m.amt }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="font-size:12px; line-height:1.55; color:#5C4E46;">{{ ui.bnplFootnote }}</div>
+          </div>
+        </sc-if>
+      </div>
+
+      <!-- Step 4: Client Contact Details -->
+      <div style="display:flex; flex-direction:column; gap:16px; border-top:1px solid rgba(26,20,17,.16); padding-top:30px;">
+        <div style="font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A; font-weight:600; white-space:nowrap;">{{ ui.step4 }}</div>
         <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px; max-width:600px;">
           <input value="{{ name }}" onChange="{{ setName }}" placeholder="{{ ui.phName }}" style="background:#EAE1D6; border:1px solid rgba(26,20,17,.2); padding:16px 18px; font-family:'DM Sans',sans-serif; font-size:15px; color:#1A1411; outline:none;">
           <input value="{{ phone }}" onChange="{{ setPhone }}" placeholder="{{ ui.phPhone }}" style="background:#EAE1D6; border:1px solid rgba(26,20,17,.2); padding:16px 18px; font-family:'DM Sans',sans-serif; font-size:15px; color:#1A1411; outline:none;">
@@ -87,25 +159,31 @@
           </div>
         </div>
       </div>
+
     </div>
 
+    <!-- Right Column: Sticky Summary & Confirmation -->
     <div style="padding:52px 40px 66px; display:flex; flex-direction:column; gap:26px; position:sticky; top:24px; align-self:start; background:#EAE1D6;">
-      <div style="font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A;">{{ ui.summary }}</div>
+      <div style="font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A; font-weight:600;">{{ ui.summary }}</div>
       <div style="display:flex; flex-direction:column;">
-        <sc-for list="{{ lines }}" as="l" hint-placeholder-count="5">
+        <sc-for list="{{ lines }}" as="l" hint-placeholder-count="6">
           <div style="display:flex; justify-content:space-between; gap:22px; padding:14px 0; border-bottom:1px solid rgba(26,20,17,.14); font-size:14px; align-items:baseline;">
             <span style="color:#8A7A6E; letter-spacing:.02em;">{{ l.k }}</span>
             <span style="color:{{ l.color }}; text-align:right; font-weight:{{ l.weight }};">{{ l.v }}</span>
           </div>
         </sc-for>
       </div>
+      
+      <!-- Deposit / Due Now Section -->
       <div style="display:flex; flex-direction:column; gap:5px; padding-top:2px;">
         <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#8A7A6E;">{{ ui.dueNow }}</div>
         <div style="font-family:'Libre Caslon Display',serif; font-size:52px; line-height:1; color:#7C2D3A;">{{ deposit }}</div>
         <div style="font-size:13px; line-height:1.6; color:#5C4E46;">{{ depositNote }}</div>
       </div>
+
       <div onClick="{{ submit }}" style="background:{{ btnBg }}; color:{{ btnFg }}; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:21px 30px; text-align:center; cursor:{{ btnCursor }};" style-hover="{{ btnHover }}">{{ ui.confirm }}</div>
       <div style="font-size:12.5px; line-height:1.6; color:#8A7A6E;">{{ hint }}</div>
+      
       <div style="border-top:1px solid rgba(26,20,17,.16); padding-top:18px; display:flex; flex-direction:column; gap:9px;">
         <sc-for list="{{ reassure }}" as="r" hint-placeholder-count="3">
           <div style="display:grid; grid-template-columns:15px minmax(0,1fr); gap:10px; font-size:13px; line-height:1.6; color:#5C4E46;">
@@ -115,9 +193,11 @@
         </sc-for>
       </div>
     </div>
+
   </div>
   </sc-if>
 
+  <!-- Completed State with Direct WhatsApp & Studio Confirmation -->
   <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
     <div style="padding:120px 44px 130px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.8fr); gap:80px; align-items:start;">
       <div style="display:flex; flex-direction:column; gap:24px;">
@@ -147,7 +227,7 @@
         <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ ui.yourAppt }}</div>
         <div style="font-family:'Libre Caslon Display',serif; font-size:34px; line-height:1.1;">{{ doneWhen }}</div>
         <div style="display:flex; flex-direction:column;">
-          <sc-for list="{{ lines }}" as="l" hint-placeholder-count="5">
+          <sc-for list="{{ lines }}" as="l" hint-placeholder-count="6">
             <div style="display:flex; justify-content:space-between; gap:22px; padding:13px 0; border-bottom:1px solid rgba(251,246,240,.14); font-size:14px; align-items:baseline;">
               <span style="color:rgba(251,246,240,.55);">{{ l.k }}</span>
               <span style="text-align:right;">{{ l.v }}</span>
@@ -161,7 +241,8 @@
 </div>
 
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1400, &quot;height&quot;: 900}, &quot;lang&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;en&quot;, &quot;es&quot;], &quot;default&quot;: &quot;en&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;svc&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;Microblading&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;dur&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 90, &quot;min&quot;: 30, &quot;max&quot;: 240, &quot;step&quot;: 30, &quot;tsType&quot;: &quot;number&quot;}, &quot;price&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;$580&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;onNav&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;(page: string) =&gt; void&quot;}}">
+
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1400, &quot;height&quot;: 900}, &quot;lang&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;en&quot;, &quot;es&quot;], &quot;default&quot;: &quot;en&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;svc&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;Microblading&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;dur&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 90, &quot;min&quot;: 30, &quot;max&quot;: 240, &quot;step&quot;: 30, &quot;tsType&quot;: &quot;number&quot;}, &quot;price&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;$580&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;payMode&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;cash&quot;, &quot;card&quot;, &quot;split&quot;], &quot;default&quot;: &quot;cash&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;total&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 580, &quot;tsType&quot;: &quot;number&quot;}, &quot;split&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 145, &quot;tsType&quot;: &quot;number&quot;}, &quot;onNav&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;(page: string) =&gt; void&quot;}}">
 // Real studio hours: [openMinutes, closeMinutes] from midnight, null = closed.
 const HOURS = [
   [720, 1200], [630, 1200], [720, 1200], [630, 1200], [720, 1200], [780, 900], null
@@ -169,30 +250,35 @@ const HOURS = [
 
 const UI = {
   en: {
-    eyebrow: 'Book an appointment', h1a: 'Pick a day, pick', h1b: 'a time.',
-    booking: 'Booking', step1: '01 \u00b7 Choose a day', step2: '02 \u00b7 Choose a time', step3: '03 \u00b7 Your details',
+    eyebrow: 'Private Studio Booking', h1a: 'Pick a day, pick', h1b: 'a time.',
+    booking: 'Selected Service', changeSvc: 'Change Service', selectTreatment: 'Select Treatment or Package', close: 'Close',
+    step1: '01 · Choose a day', step2: '02 · Choose a time', stepPay: '03 · Select Payment Method',
+    paySub: 'Switch freely between cash savings, card, or 4 bi-weekly payments',
+    step4: '04 · Your Details',
     phName: 'Your name', phPhone: 'Phone number', phEmail: 'Email (optional)',
-    phNote: 'Anything Aruna should know \u2014 previous work, allergies, an event you are working towards',
-    firstT: 'Have you been here before?', firstYes: 'I am a returning client', firstNo: 'This is my first time',
-    summary: 'Your appointment', dueNow: 'Due now', confirm: 'Request this time',
-    lWhat: 'Treatment', lWhen: 'Day', lTime: 'Time', lEnds: 'Ends about', lPrice: 'Price', lWith: 'With',
-    notSet: 'Not chosen yet', aruna: 'Aruna',
-    depNone: 'Nothing is charged now. Aruna confirms by text, usually the same day.',
-    depSome: 'Deposit for this treatment, taken when Aruna confirms. It comes off the price, it is not a booking fee.',
-    hintDay: 'Choose a day to see times', hintTime: 'Choose a time', hintName: 'Add a name and phone number',
-    hintReady: 'No card needed. This sends a request, not a charge.',
-    slotAll: 'All times shown are start times',
-    slotClosed: 'The studio is closed on Sundays. Pick another day.',
-    slotShort: 'Saturday is 1pm to 3pm only, and this treatment needs longer than that. Pick a weekday, or call and ask about a Saturday exception.',
-    slotFull: 'Every time on this day is taken. Try the next day, or call and ask to be put on the cancellation list.',
-    reassure: ['Nothing is charged on this page.', 'Aruna replies by text, usually within the day.', 'Move or cancel free up to 24 hours before.'],
-    heldEyebrow: 'Request sent', yourAppt: 'Your appointment', callStudio: 'Call the studio', bookAnother: 'Book something else',
-    holdNote: 'This time is held for you until Aruna confirms. If it has gone, she will offer you the two nearest slots.',
-    doneT: 'Your time is held.', thanks: 'Thank you,',
+    phNote: 'Anything Aruna should know — previous PMU work, allergies, or questions',
+    firstT: 'Have you been to Aruna Spa before?', firstYes: 'I am a returning client', firstNo: 'This is my first visit',
+    summary: 'Appointment Summary', dueNow: 'Due now', confirm: 'Request this appointment',
+    lWhat: 'Treatment', lWhen: 'Day', lTime: 'Time', lEnds: 'Ends about', lPayment: 'Payment Method', lPrice: 'Price / Plan', lWith: 'Specialist',
+    notSet: 'Not chosen yet', aruna: 'Mary Aruna',
+    depNone: 'Nothing is charged today. Deposit is $0. Pay at studio or via link upon confirmation.',
+    depSome: 'Deposit applies to hold this high-duration slot. It is 100% credited toward your treatment price.',
+    hintDay: 'Select a day to see available start times', hintTime: 'Choose your start time', hintName: 'Enter your name and phone number',
+    hintReady: 'No credit card charged now. This secures your private time slot.',
+    slotAll: 'All times shown are confirmed start times',
+    slotClosed: 'The studio is closed on Sundays. Please choose Monday through Saturday.',
+    slotShort: 'Saturday hours are 1pm to 3pm. This treatment requires a longer weekday session.',
+    slotFull: 'All slots on this date are taken. Please choose another date or call for the waitlist.',
+    reassure: ['Nothing is charged on this page.', 'Mary confirms directly by text, usually the same day.', 'Reschedule free up to 24 hours prior.'],
+    heldEyebrow: 'Appointment Requested', yourAppt: 'Your Confirmed Details', callStudio: 'Call 718 354 6298', bookAnother: 'Book Another Treatment',
+    holdNote: 'This time slot is temporarily reserved for you while Mary verifies schedule spacing.',
+    doneT: 'Your time is reserved.', thanks: 'Thank you,',
+    bnplScheduleTitle: '4-Payment Bi-Weekly Schedule', bnplBadge: '0% Interest · 60s Approval',
+    bnplFootnote: 'Approved in 60 seconds before your appointment via Buy Now Pay Later (Klarna/Afterpay/Affirm). No hard credit check.',
     steps: [
-      ['01', 'Aruna confirms by text, usually the same day and always within one working day.'],
-      ['02', 'If a deposit applies she sends a link. It comes off the treatment price rather than sitting on top of it.'],
-      ['03', 'For permanent makeup, your second sitting gets booked at the appointment itself, four to six weeks out.']
+      ['01', 'Mary reviews your request and confirms by text within 1 business day.'],
+      ['02', 'If a deposit applies (The Beauty Nap/House Calls), a secure payment link is sent.'],
+      ['03', 'For permanent makeup, your second perfecting touch-up is scheduled during your visit.']
     ],
     months: ['January','February','March','April','May','June','July','August','September','October','November','December'],
     dayHeads: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
@@ -200,39 +286,64 @@ const UI = {
     closed: 'Closed', full: 'Full', today: 'Today', open: 'open', short: 'Short day'
   },
   es: {
-    eyebrow: 'Reservar una cita', h1a: 'Elige un d\u00eda,', h1b: 'elige una hora.',
-    booking: 'Reserva', step1: '01 \u00b7 Elige un d\u00eda', step2: '02 \u00b7 Elige una hora', step3: '03 \u00b7 Tus datos',
-    phName: 'Tu nombre', phPhone: 'Tel\u00e9fono', phEmail: 'Correo (opcional)',
-    phNote: 'Algo que Aruna deba saber: trabajo anterior, alergias, un evento para el que te preparas',
-    firstT: '\u00bfHab\u00edas venido antes?', firstYes: 'Ya soy clienta', firstNo: 'Es mi primera vez',
-    summary: 'Tu cita', dueNow: 'A pagar ahora', confirm: 'Solicitar esta hora',
-    lWhat: 'Tratamiento', lWhen: 'D\u00eda', lTime: 'Hora', lEnds: 'Termina hacia', lPrice: 'Precio', lWith: 'Con',
-    notSet: 'Sin elegir', aruna: 'Aruna',
-    depNone: 'No se cobra nada ahora. Aruna confirma por mensaje, normalmente el mismo d\u00eda.',
-    depSome: 'Dep\u00f3sito de este tratamiento, se cobra cuando Aruna confirma. Se descuenta del precio, no es un cargo por reservar.',
-    hintDay: 'Elige un d\u00eda para ver las horas', hintTime: 'Elige una hora', hintName: 'A\u00f1ade un nombre y un tel\u00e9fono',
-    hintReady: 'Sin tarjeta. Esto env\u00eda una solicitud, no un cargo.',
-    slotAll: 'Todas las horas son horas de inicio',
-    slotClosed: 'El estudio cierra los domingos. Elige otro d\u00eda.',
-    slotShort: 'El s\u00e1bado es solo de 1pm a 3pm, y este tratamiento necesita m\u00e1s tiempo. Elige un d\u00eda de semana, o llama y pregunta por una excepci\u00f3n el s\u00e1bado.',
-    slotFull: 'Todas las horas de este d\u00eda est\u00e1n tomadas. Prueba el d\u00eda siguiente, o llama para entrar en la lista de cancelaciones.',
-    reassure: ['En esta p\u00e1gina no se cobra nada.', 'Aruna responde por mensaje, normalmente el mismo d\u00eda.', 'Cambia o cancela gratis hasta 24 horas antes.'],
-    heldEyebrow: 'Solicitud enviada', yourAppt: 'Tu cita', callStudio: 'Llamar al estudio', bookAnother: 'Reservar otra cosa',
-    holdNote: 'Esta hora queda apartada hasta que Aruna confirme. Si ya no est\u00e1, te ofrecer\u00e1 los dos huecos m\u00e1s cercanos.',
-    doneT: 'Tu hora est\u00e1 apartada.', thanks: 'Gracias,',
+    eyebrow: 'Reserva en Estudio Privado', h1a: 'Elige un día,', h1b: 'elige una hora.',
+    booking: 'Servicio Seleccionado', changeSvc: 'Cambiar Servicio', selectTreatment: 'Elige Tratamiento o Paquete', close: 'Cerrar',
+    step1: '01 · Elige un día', step2: '02 · Elige una hora', stepPay: '03 · Método de Pago',
+    paySub: 'Elige entre ahorro en efectivo, tarjeta o 4 pagos quincenales',
+    step4: '04 · Tus Datos',
+    phName: 'Tu nombre completo', phPhone: 'Teléfono', phEmail: 'Correo electrónico (opcional)',
+    phNote: 'Algo que Mary deba saber: pigmentación previa, alergias o preguntas',
+    firstT: '¿Habías visitado Aruna Spa antes?', firstYes: 'Ya soy clienta', firstNo: 'Es mi primera visita',
+    summary: 'Resumen de tu Cita', dueNow: 'A pagar ahora', confirm: 'Solicitar esta cita',
+    lWhat: 'Tratamiento', lWhen: 'Día', lTime: 'Hora', lEnds: 'Termina hacia', lPayment: 'Forma de Pago', lPrice: 'Tarifa / Plan', lWith: 'Especialista',
+    notSet: 'Sin elegir', aruna: 'Mary Aruna',
+    depNone: 'No se cobra nada hoy. Depósito $0. Paga en el estudio al confirmar.',
+    depSome: 'Aplica depósito para asegurar la cita. Se descuenta al 100% del total de tu tratamiento.',
+    hintDay: 'Elige un día para ver horarios disponibles', hintTime: 'Elige tu hora de inicio', hintName: 'Ingresa tu nombre y teléfono',
+    hintReady: 'Sin cobros con tarjeta ahora. Esto aparta tu horario privado.',
+    slotAll: 'Todas las horas mostradas son horas de inicio',
+    slotClosed: 'El estudio cierra los domingos. Elige de lunes a sábado.',
+    slotShort: 'El sábado es solo de 1pm a 3pm. Este tratamiento requiere una cita entre semana.',
+    slotFull: 'Horario completo en esta fecha. Elige otro día o llámanos para lista de espera.',
+    reassure: ['En esta página no se cobra nada.', 'Mary confirma por mensaje, normalmente el mismo día.', 'Cambia o cancela gratis hasta 24h antes.'],
+    heldEyebrow: 'Solicitud Enviada', yourAppt: 'Detalles de tu Cita', callStudio: 'Llamar al 718 354 6298', bookAnother: 'Reservar otro tratamiento',
+    holdNote: 'Tu horario queda apartado temporalmente mientras Mary verifica la agenda.',
+    doneT: 'Tu horario está apartado.', thanks: 'Muchas gracias,',
+    bnplScheduleTitle: 'Calendario de 4 Pagos Quincenales', bnplBadge: '0% Interés · Aprobación en 60s',
+    bnplFootnote: 'Aprobación en 60 segundos antes de tu cita mediante Buy Now Pay Later (Klarna/Afterpay). Sin afectar tu crédito.',
     steps: [
-      ['01', 'Aruna confirma por mensaje, normalmente el mismo d\u00eda y siempre dentro de un d\u00eda laborable.'],
-      ['02', 'Si hay dep\u00f3sito te env\u00eda un enlace. Se descuenta del precio del tratamiento en lugar de sumarse.'],
-      ['03', 'Para maquillaje permanente, tu segunda sesi\u00f3n se agenda en la cita misma, de cuatro a seis semanas despu\u00e9s.']
+      ['01', 'Mary revisa tu solicitud y te confirma por mensaje en menos de 24 horas.'],
+      ['02', 'Si aplica depósito (The Beauty Nap / Domicilio), te enviará un enlace seguro.'],
+      ['03', 'En maquillaje permanente, tu retoque de perfeccionamiento se agenda en tu misma cita.']
     ],
     months: ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'],
-    dayHeads: ['Lun','Mar','Mi\u00e9','Jue','Vie','S\u00e1b','Dom'],
-    dayNames: ['Lunes','Martes','Mi\u00e9rcoles','Jueves','Viernes','S\u00e1bado','Domingo'],
-    closed: 'Cerrado', full: 'Lleno', today: 'Hoy', open: 'libres', short: 'D\u00eda corto'
+    dayHeads: ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'],
+    dayNames: ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'],
+    closed: 'Cerrado', full: 'Lleno', today: 'Hoy', open: 'libres', short: 'Día corto'
   }
 };
 
-// Deposits the studio actually takes, by treatment name fragment.
+const MASTER_SERVICES = [
+  { n: 'Microblading', cardPrice: 580, cashPrice: 500, dur: 90, cat: 'Brows' },
+  { n: 'Powder brows', cardPrice: 580, cashPrice: 500, dur: 90, cat: 'Brows' },
+  { n: 'Nano-blading brows', cardPrice: 650, cashPrice: 600, dur: 90, cat: 'Brows' },
+  { n: 'Lash effect / baby eyeliner', cardPrice: 480, cashPrice: 480, dur: 90, cat: 'Brows' },
+  { n: 'Lip tint / blush', cardPrice: 650, cashPrice: 650, dur: 150, cat: 'Lips' },
+  { n: 'Lip neutralisation', cardPrice: 800, cashPrice: 800, dur: 150, cat: 'Lips' },
+  { n: 'Scalp micropigmentation', cardPrice: 1200, cashPrice: 1200, dur: 180, cat: 'Scalp' },
+  { n: 'The Beauty Nap', cardPrice: 230, cashPrice: 230, dur: 80, cat: 'Skin', deposit: 100 },
+  { n: 'The Dream Facial', cardPrice: 300, cashPrice: 300, dur: 90, cat: 'Skin' },
+  { n: 'HydraFacial + dermaplaning', cardPrice: 200, cashPrice: 200, dur: 75, cat: 'Skin' },
+  { n: 'Microneedling facial + dermaplaning', cardPrice: 350, cashPrice: 350, dur: 90, cat: 'Skin' },
+  { n: 'Brazilian laser', cardPrice: 200, cashPrice: 200, dur: 15, cat: 'Laser' },
+  { n: 'Full legs laser', cardPrice: 250, cashPrice: 250, dur: 75, cat: 'Laser' },
+  { n: 'Post-lipo massage, package of ten', cardPrice: 1200, cashPrice: 900, dur: 60, cat: 'Body' },
+  { n: 'Full body massage', cardPrice: 120, cashPrice: 120, dur: 60, cat: 'Body', deposit: 60 },
+  { n: '4 dermaplaning facials, deep hydration', cardPrice: 480, cashPrice: 480, dur: 75, cat: 'Packages' },
+  { n: 'Laser, 8 sessions', cardPrice: 2200, cashPrice: 2000, dur: 60, cat: 'Packages' },
+  { n: 'Free consultation', cardPrice: 0, cashPrice: 0, dur: 20, cat: 'Consultation' }
+];
+
 const DEPOSITS = [
   [/beauty nap/i, 100], [/house call/i, 100], [/full body massage/i, 60]
 ];
@@ -245,18 +356,63 @@ const clock = (m, es) => {
 };
 
 const iso = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-
-// Deterministic pseudo-bookings so the calendar looks lived-in and stays stable.
 const hash = s => { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return Math.abs(h); };
 
 class Component extends DCLogic {
-  state = { offset: 0, date: null, time: null, name: '', phone: '', email: '', note: '', first: null, done: false, doneAt: null };
+  state = {
+    offset: 0,
+    date: null,
+    time: null,
+    name: '',
+    phone: '',
+    email: '',
+    note: '',
+    first: null,
+    done: false,
+    doneAt: null,
+    svcPickerOpen: false,
+    selectedSvc: null,
+    selectedDur: null,
+    selectedPrice: null,
+    payMode: 'cash',
+    totalNum: 580
+  };
 
-  componentDidMount() { window.scrollTo({ top: 0, behavior: 'auto' }); }
+  componentDidMount() {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    this.syncFromProps();
+  }
 
-  dur() { return Math.max(30, Number(this.props.dur) || 90); }
+  componentDidUpdate(prevProps) {
+    if (prevProps.svc !== this.props.svc || prevProps.price !== this.props.price || prevProps.payMode !== this.props.payMode) {
+      this.syncFromProps();
+    }
+  }
 
-  // Start times every 30 min that fit the treatment inside the day's hours.
+  syncFromProps() {
+    const rawSvc = this.props.svc || 'Microblading';
+    const rawDur = Number(this.props.dur) || 90;
+    const rawPayMode = this.props.payMode || 'cash';
+    
+    let total = Number(this.props.total);
+    if (!total || isNaN(total)) {
+      const match = String(this.props.price || '').replace(/,/g, '').match(/\d+/);
+      total = match ? parseInt(match[0], 10) : 580;
+    }
+
+    this.setState({
+      selectedSvc: rawSvc,
+      selectedDur: rawDur,
+      selectedPrice: this.props.price || ('$' + total),
+      payMode: rawPayMode,
+      totalNum: total
+    });
+  }
+
+  dur() {
+    return Math.max(20, Number(this.state.selectedDur || this.props.dur) || 90);
+  }
+
   slotsFor(d) {
     const idx = (d.getDay() + 6) % 7;
     const win = HOURS[idx];
@@ -274,7 +430,6 @@ class Component extends DCLogic {
     const out = [];
     const base = new Date();
     base.setHours(0, 0, 0, 0);
-    // Start the grid on the Monday of the current week, then page by fortnight.
     const mondayShift = (base.getDay() + 6) % 7;
     const start = new Date(base);
     start.setDate(base.getDate() - mondayShift + this.state.offset * 14);
@@ -306,8 +461,32 @@ class Component extends DCLogic {
     const es = this.props.lang === 'es';
     const ui = UI[es ? 'es' : 'en'];
     const dur = this.dur();
-    const svcName = this.props.svc || (es ? 'Consulta gratuita' : 'Free consultation');
-    const price = this.props.price || (es ? 'Gratis' : 'Free');
+
+    const activeSvcName = st.selectedSvc || this.props.svc || (es ? 'Microblading' : 'Microblading');
+    
+    const matched = MASTER_SERVICES.find(m => m.n.toLowerCase() === activeSvcName.toLowerCase()) || {
+      n: activeSvcName,
+      cardPrice: st.totalNum || 580,
+      cashPrice: st.totalNum || 500,
+      dur: dur
+    };
+
+    const cardPriceNum = matched.cardPrice || st.totalNum || 580;
+    const cashPriceNum = matched.cashPrice || (cardPriceNum > 300 ? cardPriceNum - 80 : cardPriceNum);
+    const cashSavings = cardPriceNum - cashPriceNum;
+
+    const bnplTotal = Math.min(cardPriceNum, 4000);
+    const bnplPer = Math.round(bnplTotal / 4);
+
+    let displayPriceText = '$' + cashPriceNum;
+    let paymentLabel = es ? 'Efectivo en estudio' : 'Cash at Studio';
+    if (st.payMode === 'card') {
+      displayPriceText = '$' + cardPriceNum;
+      paymentLabel = es ? 'Tarjeta / Electrónico' : 'Card / Electronic';
+    } else if (st.payMode === 'split') {
+      displayPriceText = `4 x $${bnplPer} ($${cardPriceNum} total)`;
+      paymentLabel = es ? '4 Pagos (BNPL)' : 'Pay in 4 (BNPL)';
+    }
 
     const today = new Date(); today.setHours(0, 0, 0, 0);
     const days = this.days();
@@ -323,7 +502,7 @@ class Component extends DCLogic {
       let note = ui.closed;
       if (!info.closed && info.tooShort) note = ui.short;
       else if (!info.closed && !past) note = free ? free + ' ' + ui.open : ui.full;
-      else if (past && !info.closed) note = '\u2014';
+      else if (past && !info.closed) note = '—';
       if (d.getTime() === today.getTime() && !info.closed) note = ui.today;
       return {
         num: d.getDate(), note,
@@ -361,19 +540,71 @@ class Component extends DCLogic {
     }
 
     const fmtDay = d => d ? ui.dayNames[(d.getDay() + 6) % 7] + ' ' + d.getDate() + ' ' + ui.months[d.getMonth()] : ui.notSet;
-    const dep = (DEPOSITS.find(x => x[0].test(svcName)) || [null, 0])[1];
+    const dep = (DEPOSITS.find(x => x[0].test(activeSvcName)) || [null, 0])[1];
 
     const first = days[0], last = days[13];
     const rangeLabel = first.getMonth() === last.getMonth()
-      ? ui.months[first.getMonth()] + ' ' + first.getDate() + '\u2013' + last.getDate()
-      : ui.months[first.getMonth()] + ' ' + first.getDate() + ' \u2013 ' + ui.months[last.getMonth()] + ' ' + last.getDate();
+      ? ui.months[first.getMonth()] + ' ' + first.getDate() + '–' + last.getDate()
+      : ui.months[first.getMonth()] + ' ' + first.getDate() + ' – ' + ui.months[last.getMonth()] + ' ' + last.getDate();
+
+    const payOptions = [
+      {
+        k: 'cash',
+        title: es ? 'Efectivo en Estudio' : 'Cash at Studio',
+        displayAmount: '$' + cashPriceNum,
+        badge: cashSavings > 0,
+        badgeText: es ? `Ahorras $${cashSavings}` : `Save $${cashSavings}!`,
+        desc: es ? 'Precio con descuento en efectivo al llegar a tu cita.' : 'Discounted cash rate paid upon arrival at the studio.',
+        bg: st.payMode === 'cash' ? '#FBF6F0' : '#EAE1D6',
+        border: st.payMode === 'cash' ? '#7C2D3A' : 'rgba(26,20,17,.16)',
+        subColor: st.payMode === 'cash' ? '#7C2D3A' : '#8A7A6E',
+        priceColor: st.payMode === 'cash' ? '#7C2D3A' : '#1A1411',
+        descColor: st.payMode === 'cash' ? '#1A1411' : '#5C4E46',
+        click: () => this.setState({ payMode: 'cash' })
+      },
+      {
+        k: 'card',
+        title: es ? 'Tarjeta / Electrónico' : 'Card / Electronic',
+        displayAmount: '$' + cardPriceNum,
+        badge: false,
+        desc: es ? 'Crédito, débito, Apple Pay, Zelle o Venmo. Sin recargos.' : 'Credit card, debit, Apple Pay, Zelle or Venmo. No surcharges.',
+        bg: st.payMode === 'card' ? '#FBF6F0' : '#EAE1D6',
+        border: st.payMode === 'card' ? '#7C2D3A' : 'rgba(26,20,17,.16)',
+        subColor: st.payMode === 'card' ? '#7C2D3A' : '#8A7A6E',
+        priceColor: st.payMode === 'card' ? '#7C2D3A' : '#1A1411',
+        descColor: st.payMode === 'card' ? '#1A1411' : '#5C4E46',
+        click: () => this.setState({ payMode: 'card' })
+      },
+      {
+        k: 'split',
+        title: es ? 'Pagar en 4 Cuotas' : 'Pay in 4 Installments',
+        displayAmount: `4 × $${bnplPer}`,
+        badge: true,
+        badgeText: '0% APR · BNPL',
+        desc: es ? '4 cuotas quincenales vía Klarna/Afterpay/Affirm.' : '4 interest-free bi-weekly payments via Klarna/Afterpay/Affirm.',
+        bg: st.payMode === 'split' ? '#FBF6F0' : '#EAE1D6',
+        border: st.payMode === 'split' ? '#7C2D3A' : 'rgba(26,20,17,.16)',
+        subColor: st.payMode === 'split' ? '#7C2D3A' : '#8A7A6E',
+        priceColor: st.payMode === 'split' ? '#7C2D3A' : '#1A1411',
+        descColor: st.payMode === 'split' ? '#1A1411' : '#5C4E46',
+        click: () => this.setState({ payMode: 'split' })
+      }
+    ];
+
+    const bnplMilestones = [
+      { when: es ? '1º · Hoy / Aprobación' : '1st · At Booking', amt: '$' + bnplPer },
+      { when: es ? '2º · En 2 semanas' : '2nd · In 2 Weeks', amt: '$' + bnplPer },
+      { when: es ? '3º · En 4 semanas' : '3rd · In 4 Weeks', amt: '$' + bnplPer },
+      { when: es ? '4º · En 6 semanas' : '4th · In 6 Weeks', amt: '$' + bnplPer }
+    ];
 
     const lines = [
-      { k: ui.lWhat, v: svcName, color: '#1A1411', weight: '500' },
+      { k: ui.lWhat, v: activeSvcName, color: '#1A1411', weight: '600' },
       { k: ui.lWhen, v: fmtDay(selDate), color: selDate ? '#1A1411' : '#B4A69A', weight: '400' },
       { k: ui.lTime, v: st.time !== null ? clock(st.time, es) : ui.notSet, color: st.time !== null ? '#1A1411' : '#B4A69A', weight: '400' },
-      { k: ui.lEnds, v: st.time !== null ? clock(st.time + dur, es) : '\u2014', color: '#5C4E46', weight: '400' },
-      { k: ui.lPrice, v: price, color: '#7C2D3A', weight: '500' },
+      { k: ui.lEnds, v: st.time !== null ? clock(st.time + dur, es) : '—', color: '#5C4E46', weight: '400' },
+      { k: ui.lPayment, v: paymentLabel, color: '#7C2D3A', weight: '500' },
+      { k: ui.lPrice, v: displayPriceText, color: '#7C2D3A', weight: '600' },
       { k: ui.lWith, v: ui.aruna, color: '#5C4E46', weight: '400' }
     ];
 
@@ -384,8 +615,26 @@ class Component extends DCLogic {
     else if (!ok) hint = ui.hintName;
 
     return {
-      ui, svcName,
-      svcMeta: dur + ' min \u00b7 ' + price,
+      ui,
+      activeSvcName,
+      activeSvcMeta: `${dur} min · ${displayPriceText}`,
+      svcPickerOpen: st.svcPickerOpen,
+      toggleSvcPicker: () => this.setState(s => ({ svcPickerOpen: !s.svcPickerOpen })),
+      allServices: MASTER_SERVICES.map(m => ({
+        n: m.n,
+        priceTag: '$' + m.cashPrice,
+        meta: `${m.dur} min · ${m.cat}`,
+        bg: m.n.toLowerCase() === activeSvcName.toLowerCase() ? '#7C2D3A' : '#1A1411',
+        fg: m.n.toLowerCase() === activeSvcName.toLowerCase() ? '#FBF6F0' : '#FBF6F0',
+        border: m.n.toLowerCase() === activeSvcName.toLowerCase() ? '#D9A08C' : 'rgba(251,246,240,.18)',
+        pick: () => this.setState({
+          selectedSvc: m.n,
+          selectedDur: m.dur,
+          totalNum: m.cardPrice,
+          svcPickerOpen: false,
+          time: null
+        })
+      })),
       dayHeads: ui.dayHeads,
       days: dayCells,
       rangeLabel,
@@ -396,6 +645,9 @@ class Component extends DCLogic {
       prevCursor: st.offset ? 'pointer' : 'default',
       slots, hasSlots: slots.length > 0, noSlots: !!noSlotMsg, noSlotMsg,
       slotNote: selDate ? ui.slotAll : '',
+      payOptions,
+      isPaySplit: st.payMode === 'split',
+      bnplMilestones,
       name: st.name, phone: st.phone, email: st.email, note: st.note,
       setName: e => this.set('name', e.target.value),
       setPhone: e => this.set('phone', e.target.value),
@@ -411,7 +663,7 @@ class Component extends DCLogic {
         click: () => this.setState({ first: o.k })
       })),
       lines,
-      deposit: dep ? '$' + dep : (es ? 'Nada' : 'Nothing'),
+      deposit: dep ? '$' + dep : (es ? '$0' : '$0'),
       depositNote: dep ? ui.depSome : ui.depNone,
       submit: this.submit,
       btnBg: ok ? '#7C2D3A' : '#D8CCC0',
@@ -425,18 +677,17 @@ class Component extends DCLogic {
       doneWhen: fmtDay(selDate) + (st.time !== null ? ', ' + clock(st.time, es) : ''),
       waBookingLink: `https://wa.me/17183546298?text=${encodeURIComponent(
         es
-          ? `Hola Mary, deseo confirmar mi cita reservada en la web:\n• Tratamiento: ${svcName}\n• Fecha y Hora: ${fmtDay(selDate)}${st.time !== null ? ' a las ' + clock(st.time, true) : ''}\n• Nombre: ${st.name}\n• Teléfono: ${st.phone}\n• Nota: ${st.note || 'Ninguna'}`
-          : `Hello Mary, I'd like to confirm my appointment requested on your website:\n• Treatment: ${svcName}\n• Date & Time: ${fmtDay(selDate)}${st.time !== null ? ' at ' + clock(st.time, false) : ''}\n• Name: ${st.name}\n• Phone: ${st.phone}\n• Note: ${st.note || 'None'}`
+          ? `Hola Mary, deseo confirmar mi cita reservada en arunaspa.com:\n• Tratamiento: ${activeSvcName}\n• Fecha y Hora: ${fmtDay(selDate)}${st.time !== null ? ' a las ' + clock(st.time, true) : ''}\n• Duración: ${dur} min\n• Método de Pago: ${paymentLabel} (${displayPriceText})\n• Depósito: ${dep ? '$' + dep : '$0'}\n• Nombre: ${st.name}\n• Teléfono: ${st.phone}\n• Nota: ${st.note || 'Ninguna'}`
+          : `Hello Mary, I'd like to confirm my appointment booked on arunaspa.com:\n• Treatment: ${activeSvcName}\n• Date & Time: ${fmtDay(selDate)}${st.time !== null ? ' at ' + clock(st.time, false) : ''}\n• Duration: ${dur} min\n• Payment Method: ${paymentLabel} (${displayPriceText})\n• Deposit: ${dep ? '$' + dep : '$0'}\n• Name: ${st.name}\n• Phone: ${st.phone}\n• Note: ${st.note || 'None'}`
       )}`,
       doneBody: es
-        ? 'Aruna tiene tu solicitud y esta hora queda apartada para ti. Te confirma por mensaje al ' + (st.phone || 'n\u00famero que dejaste') + '.'
-        : 'Aruna has your request and this time is held for you. She confirms by text to ' + (st.phone || 'the number you left') + '.',
+        ? 'Mary tiene tu solicitud y este horario queda apartado para ti. Te confirmará por mensaje al ' + (st.phone || 'número que dejaste') + '.'
+        : 'Mary has received your booking request and your slot is held. She will confirm by text to ' + (st.phone || 'the number you provided') + '.',
       nextSteps: ui.steps.map(s => ({ n: s[0], b: s[1] })),
       restart: this.restart
     };
   }
 }
-
 </script>
 </body>
 </html>

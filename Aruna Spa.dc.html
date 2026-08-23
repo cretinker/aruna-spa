@@ -200,7 +200,7 @@
     <dc-import name="Aruna About" on-nav="{{ go }}" lang="{{ lang }}" hint-size="100%,2400px"></dc-import>
   </sc-if>
   <sc-if value="{{ isBooking }}" hint-placeholder-val="{{ false }}">
-    <dc-import name="Aruna Booking" on-nav="{{ go }}" lang="{{ lang }}" svc="{{ bookSvc }}" dur="{{ bookDur }}" price="{{ bookPrice }}" hint-size="100%,1200px"></dc-import>
+    <dc-import name="Aruna Booking" on-nav="{{ go }}" lang="{{ lang }}" svc="{{ bookSvc }}" dur="{{ bookDur }}" price="{{ bookPrice }}" pay-mode="{{ bookPayMode }}" total="{{ bookTotal }}" split="{{ bookSplit }}" hint-size="100%,1200px"></dc-import>
   </sc-if>
   <sc-if value="{{ isVisit }}" hint-placeholder-val="{{ false }}">
     <dc-import name="Aruna Visit" on-nav="{{ go }}" lang="{{ lang }}" hint-size="100%,2000px"></dc-import>
@@ -450,7 +450,14 @@ class Component extends DCLogic {
 
   go = (page, seg, payload) => {
     if (page === 'booking' && payload) {
-      this.setState({ bookSvc: payload.svc || null, bookDur: payload.dur || 90, bookPrice: payload.price || null });
+      this.setState({
+        bookSvc: payload.svc || null,
+        bookDur: payload.dur || 90,
+        bookPrice: payload.price || null,
+        bookPayMode: payload.payMode || 'cash',
+        bookTotal: payload.total || null,
+        bookSplit: payload.split || null
+      });
     }
     const target = page === 'segment' ? seg : page;
     if (location.hash.replace(/^#\/?/, '') !== target) location.hash = '#/' + target;
@@ -547,6 +554,7 @@ class Component extends DCLogic {
       isAftercare: st.page === 'aftercare', isGifts: st.page === 'gifts',
       isTreatment: st.page === 'treatment', tKey: st.tKey,
       bookSvc: st.bookSvc, bookDur: st.bookDur, bookPrice: st.bookPrice,
+      bookPayMode: st.bookPayMode || 'cash', bookTotal: st.bookTotal, bookSplit: st.bookSplit,
       seg: st.seg,
       segGroups: [
         { title: D.grpTreat || 'By treatment', keys: ['brows', 'hairloss', 'laser', 'skin', 'body'] },

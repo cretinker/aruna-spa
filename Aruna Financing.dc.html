@@ -270,7 +270,7 @@ class Component extends DCLogic {
 
   componentDidMount() { window.scrollTo({ top: 0, behavior: 'auto' }); }
 
-  nav = (p, seg) => { const f = this.props.onNav; if (f) f(p, seg); };
+  nav = (p, seg, payload) => { const f = this.props.onNav; if (f) f(p, seg, payload); };
 
   renderVals() {
     const es = this.props.lang === 'es';
@@ -314,7 +314,14 @@ class Component extends DCLogic {
       schedule,
       eligibility: over ? ui.tooHigh : (under ? ui.tooLow : ui.eligible),
       noteColor: over || under ? '#D9A08C' : 'rgba(251,246,240,.6)',
-      goBooking: () => this.nav('booking'),
+      goBooking: () => this.nav('booking', null, {
+        svc: st.picked || 'Custom Aesthetic Plan',
+        price: money(per) + ' x 4',
+        dur: 90,
+        payMode: 'split',
+        total: amt,
+        split: per
+      }),
       goHairloss: () => this.nav('segment', 'hairloss')
     };
   }

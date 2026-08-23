@@ -211,7 +211,7 @@
     <!-- Rates 2-Column Table -->
     <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:0 64px;">
       <sc-for list="{{ pmu }}" as="r" hint-placeholder-count="8">
-        <div onClick="{{ goQuote }}" style="display:grid; grid-template-columns:1fr auto; gap:20px; padding:20px 0; border-top:1px solid rgba(26,20,17,.16); align-items:baseline; cursor:pointer; transition:opacity .25s ease;" style-hover="opacity:.6;">
+        <div onClick="{{ r.click }}" style="display:grid; grid-template-columns:1fr auto; gap:20px; padding:20px 10px; border-top:1px solid rgba(26,20,17,.16); align-items:baseline; cursor:pointer;" style-hover="background:rgba(124,45,58,.04);">
           <div style="display:flex; flex-direction:column; gap:4px;">
             <div style="font-size:17.5px; font-weight:600; line-height:1.3; color:#1A1411;">{{ r.n }}</div>
             <div style="font-size:12.5px; letter-spacing:.04em; color:#7A6B60;">{{ r.what }} &middot; {{ r.dur }}</div>
@@ -382,7 +382,7 @@ class Component extends DCLogic {
     import('./aruna-data.js').then(d => this.setState({ d })).catch(() => {});
   }
 
-  nav = (page, seg) => { const f = this.props.onNav; if (f) f(page, seg); };
+  nav = (page, seg, payload) => { const f = this.props.onNav; if (f) f(page, seg, payload); };
 
   renderVals() {
     const lang = this.props.lang || 'en';
@@ -414,7 +414,18 @@ class Component extends DCLogic {
       previewImg: "url('" + (PREVIEW[this.state.hover] ? PREVIEW[this.state.hover][0] : PREVIEW.brows[0]) + "')",
       previewLabel: PREVIEW[this.state.hover] ? PREVIEW[this.state.hover][1] : PREVIEW.brows[1],
       previewNote: PREVIEW[this.state.hover] ? PREVIEW[this.state.hover][2] : PREVIEW.brows[2],
-      pmu: PMU.map(r => ({ n: r[0], what: r[1], dur: r[2], price: r[3] }))
+      pmu: PMU.map(r => ({
+        n: r[0],
+        what: r[1],
+        dur: r[2],
+        price: r[3],
+        click: () => this.nav('booking', null, {
+          svc: r[0],
+          price: r[3],
+          dur: parseInt(r[2], 10) || 90,
+          payMode: 'cash'
+        })
+      }))
     };
   }
 }

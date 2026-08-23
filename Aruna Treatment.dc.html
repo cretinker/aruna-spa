@@ -448,13 +448,22 @@ class Component extends DCLogic {
   componentDidMount() { window.scrollTo({ top: 0, behavior: 'auto' }); }
   componentDidUpdate(prev) { if (prev && prev.tkey !== this.props.tkey) window.scrollTo({ top: 0, behavior: 'auto' }); }
 
-  nav = (p, seg) => { const f = this.props.onNav; if (f) f(p, seg); };
+  nav = (p, seg, payload) => { const f = this.props.onNav; if (f) f(p, seg, payload); };
 
   renderVals() {
     const es = this.props.lang === 'es';
     const ui = COMMON[es ? 'es' : 'en'];
-    const data = T[this.props.tkey] || T.microblading;
+    const tkey = this.props.tkey || 'microblading';
+    const data = T[tkey] || T.microblading;
     const raw = data[es ? 'es' : 'en'];
+
+    const TREATMENT_MAP = {
+      microblading: { svc: 'Microblading', price: '$500', dur: 90, total: 580 },
+      smp: { svc: 'Scalp micropigmentation', price: '$1,200', dur: 180, total: 1200 },
+      lips: { svc: 'Lip neutralisation', price: '$700', dur: 150, total: 800 },
+      laser: { svc: 'Laser, 8 sessions', price: '$2,000', dur: 60, total: 2200 }
+    };
+    const tMeta = TREATMENT_MAP[tkey] || TREATMENT_MAP.microblading;
 
     return {
       ui,
@@ -462,7 +471,13 @@ class Component extends DCLogic {
         facts: raw.facts.map(f => ({ k: f[0], v: f[1] })),
         steps: raw.steps.map(s => ({ when: s[0], t: s[1], b: s[2] }))
       }),
-      goBooking: () => this.nav('booking'),
+      goBooking: () => this.nav('booking', null, {
+        svc: tMeta.svc,
+        price: tMeta.price,
+        dur: tMeta.dur,
+        payMode: 'cash',
+        total: tMeta.total
+      }),
       goQuote: () => this.nav('quote'),
       goResults: () => this.nav('results'),
       goAftercare: () => this.nav('aftercare')
