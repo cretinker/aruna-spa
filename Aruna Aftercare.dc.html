@@ -102,9 +102,9 @@
     </div>
     <div style="font-size:16px; line-height:1.65; color:rgba(251,246,240,.82); max-width:540px;">{{ ui.ctaSub }}</div>
     <div style="display:flex; gap:14px; flex-wrap:wrap; justify-content:center; padding-top:4px;">
-      <a href="https://maryaruna.glossgenius.com/services" target="_blank" rel="noopener" style="background:#FBF6F0; color:#7C2D3A; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:20px 38px; border-radius:999px; cursor:pointer; text-decoration:none;" style-hover="background:#140F0D; color:#FBF6F0;">
-        {{ ui.ctaBook }} ↗
-      </a>
+      <div onClick="{{ goBooking }}" style="background:#FBF6F0; color:#7C2D3A; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:20px 38px; border-radius:999px; cursor:pointer;" style-hover="background:#140F0D; color:#FBF6F0;">
+        {{ ui.ctaBook }}
+      </div>
       <div onClick="{{ goFaq }}" style="border:1px solid rgba(251,246,240,.4); color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:20px 32px; border-radius:999px; cursor:pointer;" style-hover="border-color:#FBF6F0; background:rgba(251,246,240,.12);">
         {{ ui.ctaFaq }}
       </div>

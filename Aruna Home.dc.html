@@ -293,9 +293,9 @@
       <div style="font-size:16.5px; line-height:1.65; color:rgba(251,246,240,.8); max-width:540px;">{{ t.ctaSub }}</div>
     </div>
     <div style="display:flex; gap:14px; flex-wrap:wrap;">
-      <a href="https://maryaruna.glossgenius.com/services" target="_blank" rel="noopener" style="background:#FBF6F0; color:#7C2D3A; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:20px 36px; border-radius:999px; cursor:pointer; white-space:nowrap; display:inline-flex; align-items:center; gap:8px; transition:background .3s ease, color .3s ease;" style-hover="background:#140F0D; color:#FBF6F0;">
-        <span>Book Online ↗</span>
-      </a>
+      <div onClick="{{ goBooking }}" style="background:#FBF6F0; color:#7C2D3A; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:20px 36px; border-radius:999px; cursor:pointer; white-space:nowrap; display:inline-flex; align-items:center; gap:8px; transition:background .3s ease, color .3s ease;" style-hover="background:#140F0D; color:#FBF6F0;">
+        <span>{{ t.heroCtaPrimary }}</span>
+      </div>
       <div onClick="{{ goQuote }}" style="border:1px solid rgba(251,246,240,.4); color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:20px 32px; border-radius:999px; cursor:pointer; white-space:nowrap; transition:background .3s ease, border-color .3s ease;" style-hover="background:rgba(251,246,240,.12); border-color:#FBF6F0;">
         {{ t.ctaBtn }}
       </div>
