@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="./image-slot.js"></script>
+</helmet>
+<div style="background:#F4EDE6; color:#1A1411; font-family:'DM Sans',sans-serif;">
+
+  <div style="background:#1A1411; color:#FBF6F0; display:grid; grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr); align-items:stretch;">
+    <div style="padding:120px 50px 96px 44px; display:flex; flex-direction:column; gap:26px; justify-content:center;">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <div style="width:44px; height:1px; background:#D9A08C;"></div>
+        <div style="font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ ui.eyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(44px,4.4vw,76px); line-height:.93; letter-spacing:-.035em;">{{ ui.h1a }}<br>{{ ui.h1b }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.h1c }}</span></div>
+      <div style="font-size:18.5px; line-height:1.7; color:rgba(251,246,240,.76); max-width:540px;">{{ ui.sub }}</div>
+      <div style="background:#241B16; border-left:2px solid #D9A08C; padding:24px 28px; display:flex; flex-direction:column; gap:10px; max-width:560px;">
+        <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#D9A08C;">{{ ui.honestT }}</div>
+        <div style="font-size:15.5px; line-height:1.7; color:rgba(251,246,240,.8);">{{ ui.honestB }}</div>
+      </div>
+    </div>
+    <div style="position:relative; min-height:620px; background:#241B16;">
+      <image-slot id="aruna-results-hero" shape="rect" src="{{ heroSrc }}" placeholder="{{ ui.heroPh }}"></image-slot>
+      <div style="position:absolute; left:0; top:0; bottom:0; width:130px; background:linear-gradient(90deg,#1A1411,rgba(26,20,17,0)); pointer-events:none;"></div>
+      <div style="position:absolute; left:0; right:0; bottom:0; padding:24px 30px 26px; background:linear-gradient(0deg,rgba(26,20,17,.92),rgba(26,20,17,0)); pointer-events:none;">
+        <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#D9A08C;">{{ ui.heroCap }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex; gap:1px; background:rgba(26,20,17,.16); border-bottom:1px solid rgba(26,20,17,.16); flex-wrap:wrap;">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="5">
+      <div onClick="{{ t.click }}" style="background:{{ t.bg }}; color:{{ t.fg }}; padding:20px 28px; font-size:12px; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; flex:1; text-align:center; min-width:150px;" style-hover="background:#EFE7DE;">{{ t.label }} <span style="font-size:10.5px; opacity:.6;">{{ t.count }}</span></div>
+    </sc-for>
+  </div>
+
+  <div data-reveal style="padding:90px 44px 110px; display:flex; flex-direction:column; gap:70px;">
+    <sc-for list="{{ cases }}" as="c" hint-placeholder-count="4">
+      <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,.68fr); gap:1px; background:rgba(26,20,17,.18); border:1px solid rgba(26,20,17,.18);">
+        <div style="background:#EAE1D6; display:flex; flex-direction:column;">
+          <div style="padding:14px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(26,20,17,.14);">
+            <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#8A7A6E;">{{ ui.before }}</div>
+            <div style="font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#B4A69A;">{{ ui.slotTag }}</div>
+          </div>
+          <div style="position:relative; aspect-ratio:4/5; background:#DDD2C6;">
+            <image-slot id="{{ c.beforeId }}" shape="rect" placeholder="{{ c.beforePh }}"></image-slot>
+          </div>
+        </div>
+        <div style="background:#EAE1D6; display:flex; flex-direction:column;">
+          <div style="padding:14px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(26,20,17,.14);">
+            <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A;">{{ ui.after }}</div>
+            <div style="font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#B4A69A;">{{ c.afterTag }}</div>
+          </div>
+          <div style="position:relative; aspect-ratio:4/5; background:#DDD2C6;">
+            <image-slot id="{{ c.afterId }}" shape="rect" src="{{ c.afterSrc }}" placeholder="{{ c.afterPh }}"></image-slot>
+          </div>
+        </div>
+        <div style="background:#F4EDE6; padding:30px 28px 34px; display:flex; flex-direction:column; gap:16px;">
+          <div style="font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:#7C2D3A;">{{ c.tag }}</div>
+          <div style="font-family:'Libre Caslon Display',serif; font-size:29px; line-height:1.1;">{{ c.n }}</div>
+          <div style="font-size:15px; line-height:1.72; color:#5C4E46; flex:1;">{{ c.body }}</div>
+          <div style="display:flex; flex-direction:column; gap:1px; background:rgba(26,20,17,.14);">
+            <sc-for list="{{ c.facts }}" as="f" hint-placeholder-count="4">
+              <div style="background:#F4EDE6; display:flex; justify-content:space-between; gap:14px; padding:11px 0; font-size:13.5px; border-bottom:1px solid rgba(26,20,17,.12);">
+                <span style="color:#8A7A6E;">{{ f.k }}</span>
+                <span style="color:#1A1411; text-align:right;">{{ f.v }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div onClick="{{ c.click }}" style="border:1px solid rgba(26,20,17,.26); font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; padding:14px 18px; text-align:center; cursor:pointer; color:#1A1411;" style-hover="border-color:#7C2D3A; color:#7C2D3A;">{{ ui.seePrices }}</div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div data-reveal style="background:#1A1411; color:#FBF6F0; padding:120px 44px;">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:56px; flex-wrap:wrap; margin-bottom:48px;">
+      <div style="display:flex; flex-direction:column; gap:18px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="width:34px; height:1px; background:#D9A08C;"></div>
+          <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ ui.revEyebrow }}</div>
+        </div>
+        <div style="font-family:'Libre Caslon Display',serif; font-size:66px; line-height:.94; letter-spacing:-.033em;">{{ ui.revA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.revB }}</span></div>
+      </div>
+      <div style="background:#241B16; border-left:2px solid #D9A08C; padding:22px 26px; max-width:420px; display:flex; flex-direction:column; gap:8px;">
+        <div style="font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#D9A08C;">{{ ui.revFlagT }}</div>
+        <div style="font-size:14.5px; line-height:1.65; color:rgba(251,246,240,.78);">{{ ui.revFlagB }}</div>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2px; background:rgba(251,246,240,.16);">
+      <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="6">
+        <div style="background:#1A1411; padding:32px 30px 36px; display:flex; flex-direction:column; gap:16px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+            <div style="font-size:12px; letter-spacing:.2em; color:#D9A08C;">{{ r.stars }}</div>
+            <div style="font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:rgba(251,246,240,.4);">{{ r.status }}</div>
+          </div>
+          <div style="font-family:'Libre Caslon Text',serif; font-size:18px; line-height:1.65; color:rgba(251,246,240,.9); font-style:italic; flex:1;">{{ r.quote }}</div>
+          <div style="display:flex; flex-direction:column; gap:3px; border-top:1px solid rgba(251,246,240,.16); padding-top:14px;">
+            <div style="font-size:14px; color:#FBF6F0;">{{ r.who }}</div>
+            <div style="font-size:12.5px; color:rgba(251,246,240,.5);">{{ r.what }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div data-reveal style="background:#EAE1D6; padding:120px 44px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr); gap:80px; align-items:start; border-bottom:1px solid rgba(26,20,17,.16);">
+    <div style="display:flex; flex-direction:column; gap:20px; position:sticky; top:150px;">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div style="width:34px; height:1px; background:#7C2D3A;"></div>
+        <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A;">{{ ui.readEyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:56px; line-height:.94; letter-spacing:-.032em;">{{ ui.readA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.readB }}</span></div>
+      <div style="font-size:16.5px; line-height:1.72; color:#5C4E46; max-width:400px;">{{ ui.readSub }}</div>
+    </div>
+    <div style="display:flex; flex-direction:column;">
+      <sc-for list="{{ reading }}" as="r" hint-placeholder-count="4">
+        <div style="display:grid; grid-template-columns:26px minmax(0,1fr); gap:16px; padding:22px 0; border-top:1px solid rgba(26,20,17,.18); align-items:start;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:19px; line-height:1.3; color:#7C2D3A;">{{ r.n }}</div>
+          <div style="font-size:16.5px; line-height:1.72; color:#3A312B;">{{ r.b }}</div>
+        </div>
+      </sc-for>
+      <div style="border-top:1px solid rgba(26,20,17,.18);"></div>
+    </div>
+  </div>
+
+  <div style="background:#7C2D3A; color:#FBF6F0; padding:126px 44px; display:flex; flex-direction:column; align-items:center; gap:28px; text-align:center;">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div style="width:30px; height:1px; background:#E7C3B4;"></div>
+      <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#E7C3B4;">{{ ui.ctaEyebrow }}</div>
+      <div style="width:30px; height:1px; background:#E7C3B4;"></div>
+    </div>
+    <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(46px,4.9vw,84px); line-height:.92; letter-spacing:-.036em; max-width:900px;">{{ ui.ctaA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#E7C3B4;">{{ ui.ctaB }}</span></div>
+    <div style="font-size:17px; line-height:1.65; color:rgba(251,246,240,.8); max-width:520px;">{{ ui.ctaSub }}</div>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; padding-top:6px;">
+      <div onClick="{{ goBooking }}" style="background:#FBF6F0; color:#7C2D3A; font-size:12.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; padding:22px 42px; cursor:pointer;" style-hover="background:#1A1411; color:#FBF6F0;">{{ ui.ctaBtn }}</div>
+      <div onClick="{{ goQuote }}" style="border:1px solid rgba(251,246,240,.4); color:#FBF6F0; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; padding:22px 34px; cursor:pointer;" style-hover="border-color:#FBF6F0; background:rgba(251,246,240,.1);">{{ ui.ctaQuote }}</div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1400, &quot;height&quot;: 900}, &quot;lang&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;en&quot;, &quot;es&quot;], &quot;default&quot;: &quot;en&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;onNav&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;(page: string, seg?: string) =&gt; void&quot;}}">
+const IMG = {
+  microblade: 'https://static.glossgenius.com/public/service/c16d704b7b806e71b6742cfc155d343dd37f0980/image/e8405cbf187a2835ca1331dedb9e1480.jpg',
+  scalp: 'https://static.glossgenius.com/public/service/9f873a9bb5fa51581f6fe2e4063770e82f927485/image/3e0a2a5188a086f5b085f237c8d5feaf.jpg',
+  dream: 'https://static.glossgenius.com/public/service/8dfbe73a0e0f50dd445fc7ffdc503a4cce7acbcd/image/7b42bcde136cba03ce63e11fe2bfe29c.jpg',
+  legs: 'https://static.glossgenius.com/public/service/60493fd5a1dab6010fe839b5ede30d2c7e4078cb/image/bd731cbcaa59a9074256876b9e08112a.jpg',
+  lymph: 'https://static.glossgenius.com/public/service/cda99ee0f6025aecba686761bd1e4bcf63288915/image/fc361061291617e15cc3779533c6f00e.jpg',
+  male: 'https://static.glossgenius.com/public/service/2f25f0eb8c3678ade583983bc6d9a62269f53d2f/image/913bc358852476b39f0c5ecb8e725b16.jpg'
+};
+
+const UI = {
+  en: {
+    heroPh: 'Drop your strongest before-and-after here',
+    heroCap: 'Aruna\u2019s own photograph \u00b7 replace with the studio shoot',
+    eyebrow: 'Results \u00b7 before and after',
+    h1a: 'Judge the work', h1b: 'at six weeks,', h1c: 'not at six days.',
+    sub: 'Every case below shows the same client before, and after the second sitting \u2014 which is the only honest point to photograph permanent makeup. Day-one photographs look better and mean nothing.',
+    honestT: 'Why these are not day-one photos',
+    honestB: 'On day one, pigment sits on the surface as well as in the skin, so the work looks darker and sharper than it will ever look again. Photographing that stage sells treatments. It does not show you a result.',
+    before: 'Before', after: 'After', slotTag: 'Photo slot',
+    seePrices: 'See prices \u2192',
+    tabs: [['all', 'Everything'], ['brows', 'Brows & PMU'], ['hairloss', 'Hair loss'], ['skin', 'Skin'], ['laser', 'Laser']],
+    revEyebrow: 'In their words',
+    revA: 'What clients', revB: 'actually said.',
+    revFlagT: 'Needs Mary\u2019s sign-off',
+    revFlagB: 'These cards are placeholders with the layout finished. Nothing here is a real quotation \u2014 paste her Google and Instagram reviews in, with the client\u2019s permission, before this page goes live.',
+    readEyebrow: 'Reading these fairly',
+    readA: 'How to look at', readB: 'anyone\u2019s gallery.',
+    readSub: 'Including this one. Four questions worth asking of any before-and-after you see, here or anywhere else.',
+    reading: [
+      ['01', 'Ask when the after was taken. If nobody says, assume day one \u2014 the stage where every set of brows looks its best and none of them look like that in a month.'],
+      ['02', 'Look for the same lighting in both frames. A warmer light and a different angle can do more for a photograph than the treatment did.'],
+      ['03', 'Check whether the client had existing work. Correcting somebody else\u2019s pigment is a different job from starting on bare skin, and the before tells you which you are looking at.'],
+      ['04', 'Ask what skin type it was on. Microblading on oily skin does not hold the way it does on dry \u2014 a beautiful result on the wrong skin type is not a prediction of yours.']
+    ],
+    ctaEyebrow: 'Free consultation, no deposit',
+    ctaA: 'See what yours', ctaB: 'would look like.',
+    ctaSub: 'Twenty minutes, free. Shape and colour drawn on and agreed before anything is permanent, and you will hear it if your skin is wrong for a technique.',
+    ctaBtn: 'Book a consultation', ctaQuote: 'Price my treatment',
+    cases: [
+      { k: 'brows', tag: 'Microblading', n: 'Sparse arch, rebuilt', img: 'microblade',
+        body: 'Bare skin, no previous work. Shape drawn and agreed at the consultation, then hair-by-hair strokes in one ninety-minute sitting and the included touch-up five weeks later.',
+        facts: [['Technique', 'Microblading'], ['Sittings', 'Two, second included'], ['Price', '$580'], ['After photo', 'Week 6']] },
+      { k: 'hairloss', tag: 'Scalp micropigmentation', n: 'Receding front, closed', img: 'scalp',
+        body: 'A receding hairline brought forward to a natural line, placed pigment by pigment to read as short hair. Three hours, no surgery, back at work the same day.',
+        facts: [['Area', 'Hairline & temples'], ['Time', '180 minutes'], ['Price', 'From $1,200'], ['Financed', 'Four payments']] },
+      { k: 'skin', tag: 'Four-facial course', n: 'Texture and congestion', img: 'dream',
+        body: 'Four dermaplaning facials spaced five weeks apart, with deep hydration. Photographed before the first and after the fourth, in the same light.',
+        facts: [['Course', '4 dermaplaning facials'], ['Spacing', 'Five weeks'], ['Price', '$480'], ['Per visit', '$120']] },
+      { k: 'laser', tag: 'Laser course', n: 'Full legs, eight sessions', img: 'legs',
+        body: 'Eight sessions across a full course rather than sold one at a time. Reduction builds through the plan, which is why the studio does not sell single appointments.',
+        facts: [['Sessions', 'Eight'], ['Reduction', '80\u2013100%'], ['Price', '$2,000 cash'], ['Card', '$2,200']] },
+      { k: 'hairloss', tag: 'Scalp micropigmentation', n: 'Density at the part', img: 'male',
+        body: 'Thinning through the part filled to read as fuller hair rather than a drawn line. Men and women both, and the consultation is where you find out if it suits you.',
+        facts: [['Area', 'Crown & part'], ['Time', '180 minutes'], ['Price', 'From $1,200'], ['Sittings', 'Two']] },
+      { k: 'skin', tag: 'Post-surgical recovery', n: 'Ten-session drainage plan', img: 'lymph',
+        body: 'Manual lymphatic drainage started as soon as the surgeon cleared it. Less swelling, less bruising and a shorter recovery than waiting it out.',
+        facts: [['Sessions', 'Ten'], ['Price', '$900 cash'], ['Card', '$1,200'], ['Start', 'On clearance']] }
+    ],
+    reviews: [
+      ['Brows \u00b7 microblading'], ['Scalp micropigmentation'], ['Facial course'],
+      ['Laser hair removal'], ['Lip tint'], ['Training course']
+    ]
+  },
+  es: {
+    heroPh: 'Suelta aqu\u00ed tu mejor antes y despu\u00e9s',
+    heroCap: 'Foto propia de Aruna \u00b7 reemplazar con la sesi\u00f3n',
+    eyebrow: 'Resultados \u00b7 antes y despu\u00e9s',
+    h1a: 'Juzga el trabajo', h1b: 'a las seis semanas,', h1c: 'no a los seis d\u00edas.',
+    sub: 'Cada caso de abajo muestra a la misma clienta antes, y despu\u00e9s de la segunda sesi\u00f3n, que es el \u00fanico momento honesto para fotografiar maquillaje permanente. Las fotos del primer d\u00eda se ven mejor y no significan nada.',
+    honestT: 'Por qu\u00e9 estas no son fotos del primer d\u00eda',
+    honestB: 'El primer d\u00eda el pigmento est\u00e1 en la superficie adem\u00e1s de en la piel, as\u00ed que el trabajo se ve m\u00e1s oscuro y m\u00e1s marcado de lo que se ver\u00e1 nunca. Fotografiar esa etapa vende tratamientos. No te muestra un resultado.',
+    before: 'Antes', after: 'Despu\u00e9s', slotTag: 'Espacio para foto',
+    seePrices: 'Ver precios \u2192',
+    tabs: [['all', 'Todo'], ['brows', 'Cejas y PMU'], ['hairloss', 'Cabello'], ['skin', 'Piel'], ['laser', 'L\u00e1ser']],
+    revEyebrow: 'En sus palabras',
+    revA: 'Lo que dijeron', revB: 'las clientas.',
+    revFlagT: 'Falta la aprobaci\u00f3n de Mary',
+    revFlagB: 'Estas tarjetas son huecos con el dise\u00f1o terminado. Nada de aqu\u00ed es una cita real: hay que pegar sus rese\u00f1as de Google e Instagram, con permiso de la clienta, antes de publicar esta p\u00e1gina.',
+    readEyebrow: 'Leerlas con criterio',
+    readA: 'C\u00f3mo mirar', readB: 'cualquier galer\u00eda.',
+    readSub: 'Incluida esta. Cuatro preguntas que vale la pena hacerle a cualquier antes y despu\u00e9s, aqu\u00ed o donde sea.',
+    reading: [
+      ['01', 'Pregunta cu\u00e1ndo se tom\u00f3 la foto del despu\u00e9s. Si nadie lo dice, asume que fue el primer d\u00eda: la etapa en la que todas las cejas se ven en su mejor momento y ninguna se ve as\u00ed en un mes.'],
+      ['02', 'Busca la misma luz en las dos fotos. Una luz m\u00e1s c\u00e1lida y otro \u00e1ngulo pueden hacer m\u00e1s por una foto que lo que hizo el tratamiento.'],
+      ['03', 'Fíjate en si la clienta ten\u00eda trabajo previo. Corregir el pigmento de otra persona es un trabajo distinto a empezar en piel limpia, y el antes te dice cu\u00e1l est\u00e1s viendo.'],
+      ['04', 'Pregunta en qu\u00e9 tipo de piel fue. El microblading en piel grasa no retiene como en piel seca: un resultado bonito en el tipo de piel equivocado no predice el tuyo.']
+    ],
+    ctaEyebrow: 'Consulta gratuita, sin dep\u00f3sito',
+    ctaA: 'Mira c\u00f3mo se ver\u00eda', ctaB: 'el tuyo.',
+    ctaSub: 'Veinte minutos, gratis. La forma y el color se dibujan y se acuerdan antes de que nada sea permanente, y te dir\u00e1n si tu piel no es adecuada para una t\u00e9cnica.',
+    ctaBtn: 'Reservar consulta', ctaQuote: 'Ver mi precio',
+    cases: [
+      { k: 'brows', tag: 'Microblading', n: 'Arco escaso, reconstruido', img: 'microblade',
+        body: 'Piel limpia, sin trabajo previo. La forma se dibuj\u00f3 y se acord\u00f3 en la consulta, luego trazos pelo a pelo en una sesi\u00f3n de noventa minutos y el retoque incluido cinco semanas despu\u00e9s.',
+        facts: [['T\u00e9cnica', 'Microblading'], ['Sesiones', 'Dos, la segunda incluida'], ['Precio', '$580'], ['Foto del despu\u00e9s', 'Semana 6']] },
+      { k: 'hairloss', tag: 'Micropigmentaci\u00f3n capilar', n: 'Entradas, cerradas', img: 'scalp',
+        body: 'Una l\u00ednea que retroced\u00eda tra\u00edda hacia adelante a una l\u00ednea natural, colocada pigmento a pigmento para leerse como cabello corto. Tres horas, sin cirug\u00eda, de vuelta al trabajo el mismo d\u00eda.',
+        facts: [['Zona', 'L\u00ednea frontal y sienes'], ['Tiempo', '180 minutos'], ['Precio', 'Desde $1,200'], ['Financiado', 'Cuatro pagos']] },
+      { k: 'skin', tag: 'Plan de cuatro faciales', n: 'Textura y congesti\u00f3n', img: 'dream',
+        body: 'Cuatro faciales con dermaplaning espaciados cinco semanas, con hidrataci\u00f3n profunda. Fotografiado antes del primero y despu\u00e9s del cuarto, con la misma luz.',
+        facts: [['Plan', '4 faciales con dermaplaning'], ['Espaciado', 'Cinco semanas'], ['Precio', '$480'], ['Por visita', '$120']] },
+      { k: 'laser', tag: 'Plan de l\u00e1ser', n: 'Piernas completas, ocho sesiones', img: 'legs',
+        body: 'Ocho sesiones como plan completo en lugar de vendidas de una en una. La reducci\u00f3n se construye a lo largo del plan, por eso el estudio no vende citas sueltas.',
+        facts: [['Sesiones', 'Ocho'], ['Reducci\u00f3n', '80\u2013100%'], ['Precio', '$2,000 efectivo'], ['Tarjeta', '$2,200']] },
+      { k: 'hairloss', tag: 'Micropigmentaci\u00f3n capilar', n: 'Densidad en la raya', img: 'male',
+        body: 'La raya con poca densidad rellenada para leerse como cabello m\u00e1s poblado y no como una l\u00ednea dibujada. Hombres y mujeres, y la consulta es donde sabes si te conviene.',
+        facts: [['Zona', 'Coronilla y raya'], ['Tiempo', '180 minutos'], ['Precio', 'Desde $1,200'], ['Sesiones', 'Dos']] },
+      { k: 'skin', tag: 'Recuperaci\u00f3n post-cirug\u00eda', n: 'Plan de drenaje de diez sesiones', img: 'lymph',
+        body: 'Drenaje linf\u00e1tico manual empezado en cuanto el cirujano lo autoriz\u00f3. Menos hinchaz\u00f3n, menos moretones y una recuperaci\u00f3n m\u00e1s corta que esperar.',
+        facts: [['Sesiones', 'Diez'], ['Precio', '$900 efectivo'], ['Tarjeta', '$1,200'], ['Inicio', 'Con autorizaci\u00f3n']] }
+    ],
+    reviews: [
+      ['Cejas \u00b7 microblading'], ['Micropigmentaci\u00f3n capilar'], ['Plan de faciales'],
+      ['Depilaci\u00f3n l\u00e1ser'], ['Tinte de labios'], ['Curso de formaci\u00f3n']
+    ]
+  }
+};
+
+const SEG_OF = { brows: 'brows', hairloss: 'hairloss', skin: 'skin', laser: 'laser' };
+
+class Component extends DCLogic {
+  state = { cat: 'all' };
+
+  componentDidMount() { window.scrollTo({ top: 0, behavior: 'auto' }); }
+
+  nav = (p, seg) => { const f = this.props.onNav; if (f) f(p, seg); };
+
+  renderVals() {
+    const es = this.props.lang === 'es';
+    const ui = UI[es ? 'es' : 'en'];
+    const cat = this.state.cat;
+
+    const counts = {};
+    ui.cases.forEach(c => { counts[c.k] = (counts[c.k] || 0) + 1; });
+
+    const shown = ui.cases.filter(c => cat === 'all' || c.k === cat);
+
+    return {
+      ui,
+      heroSrc: 'https://static.glossgenius.com/public/service/91df390255d7dd8557de5865c50b150afc42e9fc/image/8c0d430e5bcdd80703e8d3ba4001e4d4.jpg',
+      tabs: ui.tabs.map(t => ({
+        label: t[1],
+        count: t[0] === 'all' ? ui.cases.length : (counts[t[0]] || 0),
+        bg: cat === t[0] ? '#1A1411' : '#F4EDE6',
+        fg: cat === t[0] ? '#FBF6F0' : '#5C4E46',
+        click: () => this.setState({ cat: t[0] })
+      })),
+      cases: shown.map((c, i) => ({
+        tag: c.tag, n: c.n, body: c.body,
+        facts: c.facts.map(f => ({ k: f[0], v: f[1] })),
+        beforeId: 'aruna-before-' + c.img + '-' + i,
+        afterId: 'aruna-after-' + c.img + '-' + i,
+        beforePh: es ? 'Suelta aqu\u00ed la foto del antes' : 'Drop the before photo here',
+        afterPh: es ? 'Suelta aqu\u00ed la foto del despu\u00e9s' : 'Drop the after photo here',
+        afterSrc: IMG[c.img] || '',
+        afterTag: es ? 'De su p\u00e1gina actual' : 'From her current site',
+        click: () => this.nav('segment', SEG_OF[c.k] || 'brows')
+      })),
+      reviews: ui.reviews.map(r => ({
+        stars: '\u2605\u2605\u2605\u2605\u2605',
+        status: es ? 'Por aprobar' : 'To approve',
+        quote: es
+          ? 'Pega aqu\u00ed la rese\u00f1a real de la clienta. El dise\u00f1o est\u00e1 terminado \u2014 solo falta el texto y el nombre, con su permiso.'
+          : 'Paste the client\u2019s real review here. The layout is finished \u2014 it needs the words and the name, with her permission.',
+        who: es ? 'Nombre de la clienta' : 'Client name',
+        what: r[0]
+      })),
+      reading: ui.reading.map(r => ({ n: r[0], b: r[1] })),
+      goBooking: () => this.nav('booking'),
+      goQuote: () => this.nav('quote')
+    };
+  }
+}
+
+</script>
+</body>
+</html>

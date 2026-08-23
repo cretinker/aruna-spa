@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  html { overflow-x: hidden; scroll-behavior: smooth; }
+  body { margin: 0; background: #F4EDE6; }
+  * { box-sizing: border-box; }
+  a { color: #7C2D3A; text-decoration: none; }
+  a:hover { color: #1A1411; }
+  body::after {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: .05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  @keyframes arunaDrop { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+  @keyframes arunaRise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  [data-reveal] { opacity: 0; transform: translateY(26px); transition: opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1); }
+  [data-reveal][data-seen] { opacity: 1; transform: none; }
+  @media (max-width: 900px) {
+    [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+    [style*="repeat(4"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    [style*="repeat(5"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    [style*="repeat(7"] { grid-template-columns: repeat(7, minmax(0, 1fr)) !important; }
+    [style*="1.5fr) repeat(4"] { grid-template-columns: minmax(0, 1.2fr) repeat(4, minmax(0, 1fr)) !important; }
+    [style*="position:sticky"][style*="top:150px"] { position: static !important; }
+    [data-nav-links] { display: none !important; }
+    [style*="padding:126px 44px"], [style*="padding:130px 44px"], [style*="padding:120px 44px"], [style*="padding:100px 44px"], [style*="padding:90px 44px"] { padding-left: 22px !important; padding-right: 22px !important; }
+  }
+  ::selection { background: #7C2D3A; color: #FBF6F0; }
+</style>
+</helmet>
+
+<div style="background:#F4EDE6; color:#1A1411; font-family:'DM Sans',sans-serif; min-height:100vh;">
+
+  <div style="position:fixed; top:0; left:0; right:0; z-index:80;" onMouseLeave="{{ closeMenu }}">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; padding:9px 40px; background:#1A1411; color:rgba(251,246,240,.82); font-size:12px;">
+      <div style="font-weight:500; color:#D9A08C;">{{ t.utilFinance }}</div>
+      <div style="display:flex; gap:22px; align-items:center;">
+        <span>41 Wheeler Avenue, Staten Island</span>
+        <a href="tel:+17183546298" style="color:#FBF6F0; border-bottom:1px solid rgba(251,246,240,.35);">718 354 6298</a>
+        <span style="font-weight:500;">{{ todayHours }}</span>
+        <span onClick="{{ toggleLang }}" title="{{ langOtherFull }}" style="cursor:pointer; letter-spacing:.16em; color:rgba(251,246,240,.72); border-bottom:1px solid rgba(251,246,240,.3); padding-bottom:1px;" style-hover="color:#D9A08C;">{{ langOther }}</span>
+      </div>
+    </div>
+
+    <div style="position:relative; background:{{ navBg }}; backdrop-filter:blur(16px); border-bottom:1px solid {{ navLine }}; transition:background .4s ease, border-color .4s ease;">
+      <div style="position:absolute; left:0; bottom:-1px; height:1px; width:{{ progress }}; background:linear-gradient(90deg, rgba(232,169,133,.15), #E8A985); transition:width .12s linear;"></div>
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; padding:{{ navPad }} 40px; transition:padding .4s cubic-bezier(.16,1,.3,1);">
+        <div onClick="{{ goHome }}" style="display:flex; flex-direction:column; gap:5px; cursor:pointer; flex-shrink:0;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:{{ logoSize }}; letter-spacing:.2em; line-height:1; color:#FBF6F0; transition:font-size .4s cubic-bezier(.16,1,.3,1);">ARUNA</div>
+          <div style="font-size:8.5px; letter-spacing:.3em; text-transform:uppercase; color:#D9A08C; white-space:nowrap;">Spa &middot; Staten Island &middot; est. 2014</div>
+        </div>
+        <div data-nav-links style="display:flex; gap:14px; font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:rgba(251,246,240,.72); flex:0 1 auto; justify-content:center; white-space:nowrap;">
+          <div onClick="{{ goHome }}" onMouseEnter="{{ closeMenu }}" style="cursor:pointer; color:{{ cHome }}; white-space:nowrap;" style-hover="color:#D9A08C;">{{ t.navHome }}</div>
+          <div onClick="{{ goAbout }}" onMouseEnter="{{ closeMenu }}" style="cursor:pointer; color:{{ cAbout }}; white-space:nowrap;" style-hover="color:#D9A08C;">{{ t.navAbout }}</div>
+          <div onMouseEnter="{{ openTreatments }}" onClick="{{ goServices }}" style="cursor:pointer; color:{{ cTreat }}; display:flex; align-items:center; gap:6px; white-space:nowrap;" style-hover="color:#D9A08C;">{{ t.navTreat }} <span style="font-size:8px; opacity:.6;">&#9660;</span></div>
+          <div onClick="{{ goPackages }}" onMouseEnter="{{ closeMenu }}" style="cursor:pointer; color:{{ cPackages }}; white-space:nowrap;" style-hover="color:#D9A08C;">{{ t.navPackages }}</div>
+          <div onClick="{{ goResults }}" onMouseEnter="{{ closeMenu }}" style="cursor:pointer; color:{{ cResults }}; white-space:nowrap;" style-hover="color:#D9A08C;">{{ t.navResults }}</div>
+          <div onClick="{{ goFinancing }}" onMouseEnter="{{ closeMenu }}" style="cursor:pointer; color:{{ cFinancing }}; white-space:nowrap;" style-hover="color:#D9A08C;">{{ t.navFinancing }}</div>
+          <div onClick="{{ goVisit }}" onMouseEnter="{{ closeMenu }}" style="cursor:pointer; color:{{ cVisit }}; white-space:nowrap;" style-hover="color:#D9A08C;">{{ t.navVisit }}</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:16px; flex-shrink:0;">
+          <div onClick="{{ goBook2 }}" style="font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:{{ cBook }}; cursor:pointer; white-space:nowrap;" style-hover="color:#D9A08C;">{{ t.navCtaBook }}</div>
+          <div onClick="{{ goQuote }}" style="background:#7C2D3A; color:#FBF6F0; font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:14px 22px; cursor:pointer; white-space:nowrap; box-shadow:0 0 0 1px rgba(124,45,58,.35), 0 8px 24px -12px rgba(124,45,58,.7); transition:background .3s ease, color .3s ease;" style-hover="background:#FBF6F0; color:#7C2D3A;">{{ t.navCta }}</div>
+        </div>
+      </div>
+
+      <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#1A1411; border-top:1px solid rgba(232,169,133,.28); padding:32px 40px 36px; animation:arunaDrop .35s cubic-bezier(.16,1,.3,1) both;">
+          <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:22px;">
+            <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ count }} {{ t.menuCount }}</div>
+            <div onClick="{{ goServices }}" style="font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:rgba(251,246,240,.6); cursor:pointer;" style-hover="color:#D9A08C;">{{ t.menuAll }}</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:26px;">
+            <sc-for list="{{ segGroups }}" as="g" hint-placeholder-count="2">
+              <div style="display:flex; flex-direction:column; gap:11px;">
+                <div style="display:flex; align-items:center; gap:13px;">
+                  <div style="font-size:9.5px; letter-spacing:.24em; text-transform:uppercase; color:rgba(251,246,240,.5); white-space:nowrap;">{{ g.title }}</div>
+                  <div style="height:1px; background:rgba(251,246,240,.14); flex:1;"></div>
+                </div>
+                <div style="display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:1px; background:rgba(251,246,240,.14);">
+                  <sc-for list="{{ g.items }}" as="s" hint-placeholder-count="5">
+                    <div onClick="{{ s.click }}" style="background:#1A1411; padding:18px 16px 22px; cursor:pointer; display:flex; flex-direction:column; gap:6px;" style-hover="background:#261E19;">
+                      <div style="font-family:'Libre Caslon Display',serif; font-size:19px; line-height:1.15; color:#FBF6F0;">{{ s.label }}</div>
+                      <div style="font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#D9A08C;">{{ s.from }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <div style="height:{{ topPad }};"></div>
+  <div style="height:{{ heroLift }}; margin-top:{{ heroLiftNeg }};"></div>
+
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <dc-import name="Aruna Home" on-nav="{{ go }}" lang="{{ lang }}" hint-size="100%,2400px"></dc-import>
+  </sc-if>
+  <sc-if value="{{ isSegment }}" hint-placeholder-val="{{ false }}">
+    <dc-import name="Aruna Segment" seg="{{ seg }}" on-nav="{{ go }}" lang="{{ lang }}" hint-size="100%,1800px"></dc-import>
+  </sc-if>
+  <sc-if value="{{ isServices }}" hint-placeholder-val="{{ false }}">
+    <dc-import name="Aruna Services" on-nav="{{ go }}" lang="{{ lang }}" hint-size="100%,2200px"></dc-import>
+  </sc-if>
+  <sc-if value="{{ isQuote }}" hint-placeholder-val="{{ false }}">
+    <dc-import name="Aruna Quote" on-nav="{{ go }}" lang="{{ lang }}" hint-size="100%,1100px"></dc-import>
+  </sc-if>
+  <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+    <dc-import name="Aruna About" on-nav="{{ go }}" lang="{{ lang }}" hint-size="100%,2400px"></dc-import>
+  </sc-if>
+  <sc-if value="{{ isBooking }}" hint-placeholder-val="{{ false }}">
+    <dc-import name="Aruna Booking" on-nav="{{ go }}" lang="{{ lang }}" svc="{{ bookSvc }}" dur="{{ bookDur }}" price="{{ bookPrice }}" hint-size="100%,1200px"></dc-import>
+  </sc-if>
+  <sc-if value="{{ isVisit }}" hint-placeholder-val="{{ false }}">
+    <dc-import name="Aruna Visit" on-nav="{{ go }}" lang="{{ lang }}" hint-size="100%,2000px"></dc-import>
+  </sc-if>
+  <sc-if value="{{ isStudio }}" hint-placeholder-val="{{ false }}">
+    <dc-import name="Aruna Studio" on-nav="{{ go }}" lang="{{ lang }}" hint-size="100%,1900px"></dc-import>
+  </sc-if>
+  <sc-if value="{{ isPackages }}" hint-placeholder-val="{{ false }}">
+    <dc-import name="Aruna Packages" on-nav="{{ go }}" lang="{{ lang }}" hint-size="100%,2400px"></dc-import>
+  </sc-if>
+  <sc-if value="{{ isResults }}" hint-placeholder-val="{{ false }}">
+    <dc-import name="Aruna Results" on-nav="{{ go }}" lang="{{ lang }}" hint-size="100%,2600px"></dc-import>
+  </sc-if>
+  <sc-if value="{{ isFinancing }}" hint-placeholder-val="{{ false }}">
+    <dc-import name="Aruna Financing" on-nav="{{ go }}" lang="{{ lang }}" hint-size="100%,2300px"></dc-import>
+  </sc-if>
+  <sc-if value="{{ isFaq }}" hint-placeholder-val="{{ false }}">
+    <dc-import name="Aruna FAQ" on-nav="{{ go }}" lang="{{ lang }}" hint-size="100%,2200px"></dc-import>
+  </sc-if>
+  <sc-if value="{{ isAftercare }}" hint-placeholder-val="{{ false }}">
+    <dc-import name="Aruna Aftercare" on-nav="{{ go }}" lang="{{ lang }}" hint-size="100%,2200px"></dc-import>
+  </sc-if>
+  <sc-if value="{{ isGifts }}" hint-placeholder-val="{{ false }}">
+    <dc-import name="Aruna Gifts" on-nav="{{ go }}" lang="{{ lang }}" hint-size="100%,1800px"></dc-import>
+  </sc-if>
+  <sc-if value="{{ isTreatment }}" hint-placeholder-val="{{ false }}">
+    <dc-import name="Aruna Treatment" tkey="{{ tKey }}" on-nav="{{ go }}" lang="{{ lang }}" hint-size="100%,2400px"></dc-import>
+  </sc-if>
+
+  <sc-if value="{{ xsShow }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#241B16; color:#FBF6F0; padding:24px 44px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+      <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#D9A08C;">{{ xsTitle }}</div>
+      <sc-for list="{{ xsLinks }}" as="x" hint-placeholder-count="3">
+        <div onClick="{{ x.click }}" style="border:1px solid rgba(251,246,240,.28); color:#FBF6F0; font-size:12.5px; letter-spacing:.06em; padding:12px 20px; cursor:pointer;" style-hover="border-color:#D9A08C; color:#D9A08C;">{{ x.label }}</div>
+      </sc-for>
+    </div>
+  </sc-if>
+  <div style="background:#1A1411; color:#FBF6F0;">
+
+    <div style="display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:56px; align-items:center; padding:64px 40px; border-bottom:1px solid rgba(251,246,240,.14);">
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="font-family:'Libre Caslon Display',serif; font-size:46px; line-height:1.02; letter-spacing:-.03em;">{{ t.ftCtaA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ t.ftCtaB }}</span></div>
+        <div style="font-size:15.5px; line-height:1.65; color:rgba(251,246,240,.66); max-width:520px;">{{ t.barSub }}</div>
+      </div>
+      <div style="display:flex; gap:11px; flex-wrap:wrap; justify-content:flex-end;">
+        <div onClick="{{ goQuote }}" style="background:#D9A08C; color:#1A1411; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:19px 32px; cursor:pointer;" style-hover="background:#FBF6F0;">{{ t.barCta }}</div>
+        <div onClick="{{ goBooking }}" style="border:1px solid rgba(251,246,240,.34); color:#FBF6F0; font-size:12px; letter-spacing:.12em; text-transform:uppercase; padding:19px 30px; cursor:pointer;" style-hover="border-color:#D9A08C; color:#D9A08C;">{{ t.xsBook }}</div>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1.05fr); gap:52px; padding:60px 40px 56px;">
+
+      <div style="display:flex; flex-direction:column; gap:18px;">
+        <div style="font-family:'Libre Caslon Display',serif; font-size:30px; letter-spacing:.2em; color:#FBF6F0;">ARUNA</div>
+        <div style="font-size:14px; line-height:1.7; color:rgba(251,246,240,.62); max-width:310px;">{{ t.ftBlurb }}</div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=41%20Wheeler%20Avenue%2C%20Staten%20Island%2C%20NY%2C%2010314" target="_blank" rel="noopener" style="font-size:14px; line-height:1.6; color:rgba(251,246,240,.72); border-bottom:1px solid rgba(251,246,240,.2); padding-bottom:10px;" style-hover="color:#D9A08C; border-color:#D9A08C;">41 Wheeler Avenue<br>Staten Island, NY 10314</a>
+        <div style="display:flex; flex-direction:column; gap:7px;">
+          <a href="tel:+17183546298" style="font-family:'Libre Caslon Display',serif; font-size:24px; color:#FBF6F0;" style-hover="color:#D9A08C;">718 354 6298</a>
+          <div style="display:flex; gap:14px; font-size:12px;">
+            <a href="https://wa.me/17183546298" target="_blank" rel="noopener" style="color:#D9A08C;" style-hover="color:#FBF6F0;">WhatsApp</a>
+            <a href="https://www.instagram.com/aruna_spa_ny_" target="_blank" rel="noopener" style="color:#D9A08C;" style-hover="color:#FBF6F0;">Instagram</a>
+            <a href="https://www.facebook.com/ArunaSpaNY" target="_blank" rel="noopener" style="color:#D9A08C;" style-hover="color:#FBF6F0;">Facebook</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#D9A08C; padding-bottom:6px; border-bottom:1px solid rgba(251,246,240,.16);">{{ t.ftTreat }}</div>
+        <sc-for list="{{ footerSegs }}" as="s" hint-placeholder-count="10">
+          <div onClick="{{ s.click }}" style="font-size:13.5px; color:rgba(251,246,240,.68); cursor:pointer;" style-hover="color:#D9A08C;">{{ s.label }}</div>
+        </sc-for>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#D9A08C; padding-bottom:6px; border-bottom:1px solid rgba(251,246,240,.16);">{{ t.ftBefore }}</div>
+        <sc-for list="{{ footerPlan }}" as="s" hint-placeholder-count="6">
+          <div onClick="{{ s.click }}" style="font-size:13.5px; color:rgba(251,246,240,.68); cursor:pointer;" style-hover="color:#D9A08C;">{{ s.label }}</div>
+        </sc-for>
+        <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#D9A08C; padding:14px 0 6px; border-bottom:1px solid rgba(251,246,240,.16);">{{ t.ftAfter }}</div>
+        <sc-for list="{{ footerAfter }}" as="s" hint-placeholder-count="4">
+          <div onClick="{{ s.click }}" style="font-size:13.5px; color:rgba(251,246,240,.68); cursor:pointer;" style-hover="color:#D9A08C;">{{ s.label }}</div>
+        </sc-for>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:9px;">
+        <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#D9A08C; padding-bottom:6px; border-bottom:1px solid rgba(251,246,240,.16);">{{ t.ftHours }}</div>
+        <sc-for list="{{ hours }}" as="h" hint-placeholder-count="7">
+          <div style="display:flex; justify-content:space-between; gap:16px; font-size:13px; color:rgba(240,226,214,.7); border-bottom:1px solid rgba(251,246,240,.1); padding-bottom:6px;">
+            <span>{{ h.day }}</span><span style="color:{{ h.color }};">{{ h.time }}</span>
+          </div>
+        </sc-for>
+        <div onClick="{{ toggleLang }}" style="font-size:12.5px; letter-spacing:.08em; color:#D9A08C; cursor:pointer; margin-top:12px; border:1px solid rgba(251,246,240,.24); padding:12px 16px; text-align:center;" style-hover="border-color:#D9A08C; background:rgba(217,160,140,.1);">{{ t.langOtherFull }}</div>
+      </div>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:20px 40px 30px; border-top:1px solid rgba(251,246,240,.14); font-size:11.5px; color:rgba(251,246,240,.42);">
+      <div>{{ t.ftRights }}</div>
+      <div>{{ t.ftFinance }}</div>
+    </div>
+  </div>
+
+  <sc-if value="{{ showBar }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed; bottom:0; left:0; right:0; z-index:70; background:rgba(26,20,17,.97); backdrop-filter:blur(16px); border-top:1px solid rgba(217,160,140,.4); color:#FBF6F0; padding:15px 40px; display:flex; align-items:center; justify-content:space-between; gap:24px; animation:arunaRise .4s cubic-bezier(.16,1,.3,1) both;">
+      <div style="display:flex; align-items:center; gap:26px;">
+        <div style="font-family:'Libre Caslon Display',serif; font-size:21px; color:#FBF6F0;">{{ barLine }}</div>
+        <div style="font-size:12.5px; color:rgba(251,246,240,.6);">{{ t.barSub }}</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:14px;">
+        <a href="tel:+17183546298" style="font-size:12.5px; letter-spacing:.08em; color:rgba(251,246,240,.72);" style-hover="color:#D9A08C;">718 354 6298</a>
+        <div onClick="{{ goQuote }}" style="background:#D9A08C; color:#1A1411; font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; padding:15px 30px; cursor:pointer;" style-hover="background:#FBF6F0;">{{ t.barCta }}</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ exitOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ exitClose }}" style="position:fixed; inset:0; z-index:95; background:rgba(26,20,17,.74); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; padding:24px;">
+      <div onClick="{{ exitStop }}" style="background:#F4EDE6; color:#1A1411; max-width:540px; width:100%; padding:50px 48px 46px; position:relative; animation:arunaRise .35s cubic-bezier(.16,1,.3,1) both;">
+        <div onClick="{{ exitClose }}" style="position:absolute; top:14px; right:20px; font-size:24px; cursor:pointer; color:#8A7A6E;" style-hover="color:#7C2D3A;">&times;</div>
+        <sc-if value="{{ exitFormShow }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex; flex-direction:column; gap:18px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:30px; height:1px; background:#7C2D3A;"></div>
+              <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A;">{{ t.exEyebrow }}</div>
+            </div>
+            <div style="font-family:'Libre Caslon Display',serif; font-size:38px; line-height:1.02; letter-spacing:-.025em;">{{ t.exH }}</div>
+            <div style="font-size:15.5px; line-height:1.68; color:#5C4E46;">{{ t.exSub }}</div>
+            <input value="{{ exName }}" onChange="{{ exSetName }}" placeholder="{{ t.exName }}" style="border:1px solid rgba(26,20,17,.3); background:#FBF6F0; padding:16px 18px; font-size:15px; font-family:'DM Sans',sans-serif; color:#1A1411; outline:none; width:100%; box-sizing:border-box;">
+            <input value="{{ exPhone }}" onChange="{{ exSetPhone }}" placeholder="{{ t.exPhone }}" style="border:1px solid rgba(26,20,17,.3); background:#FBF6F0; padding:16px 18px; font-size:15px; font-family:'DM Sans',sans-serif; color:#1A1411; outline:none; width:100%; box-sizing:border-box;">
+            <div onClick="{{ exitSubmit }}" style="background:#7C2D3A; color:#FBF6F0; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:19px 30px; text-align:center; cursor:pointer;" style-hover="background:#1A1411;">{{ t.exCta }}</div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ exitDone }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:16px; text-align:center; padding:14px 0;">
+            <div style="font-family:'Libre Caslon Display',serif; font-size:38px; line-height:1.02; color:#7C2D3A;">{{ t.exDoneH }}</div>
+            <div style="font-size:15.5px; line-height:1.68; color:#5C4E46;">{{ t.exDoneB }}</div>
+            <div onClick="{{ exitClose }}" style="border:1px solid rgba(26,20,17,.3); color:#1A1411; font-size:12px; letter-spacing:.12em; text-transform:uppercase; padding:15px 26px; cursor:pointer; align-self:center;" style-hover="border-color:#7C2D3A; color:#7C2D3A;">{{ t.exDoneCta }}</div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const EN = {
+  langOther: 'ES', langOtherFull: 'Ver en espa\u00f1ol',
+  navTreat: 'Treatments', navBrows: 'Brows', navHair: 'Hair loss', navLaser: 'Laser',
+  navSkin: 'Skin', navStudio: 'Studio', navCta: 'Get my price',
+  navHome: 'Home', navVisit: 'Visit', navCtaBook: 'Book',
+  grpTreat: 'By treatment', grpWho: 'By who it is for', navAbout: 'About',
+  navPackages: 'Packages', navResults: 'Results', navFinancing: 'Financing', navFaq: 'Questions',
+  navAftercare: 'Aftercare', navGifts: 'Gift cards', ftSteps: 'Step by step',
+  xsTitle: 'Also worth a look', xsBook: 'Book an appointment',
+  detailNames: { microblading: 'Microblading', powder: 'Powder brows', nano: 'Nano brows', scalp: 'Scalp micropigmentation', lips: 'Lip neutralisation', laser: 'Laser course' },
+  exEyebrow: 'Before you go', exH: 'Leave a number. Aruna calls you.',
+  exSub: 'No booking, no deposit. A five-minute call about what you were pricing, usually the same day.',
+  exName: 'Your name', exPhone: 'Your number', exCta: 'Call me back',
+  exDoneH: 'Done. Expect a call.', exDoneB: 'Usually the same day, always within one business day.', exDoneCta: 'Back to the site',
+  utilFinance: 'Pay in four. Approved before you arrive, $50 to $4,000.',
+  utilToday: 'Today', utilClosed: 'Closed today',
+  menuCount: 'treatments, not one of them price on request', menuAll: 'The complete list \u2192',
+  barCta: 'Price my treatment',
+  barLines: { booking: '', aftercare: 'The ten days after, day by day', gifts: 'A gift that actually gets used', treatment: 'Every minute accounted for before you book', packages: 'Bought as a course, priced per visit', results: 'Photographed at six weeks, not six days', financing: 'Four payments, approved before you arrive', faq: 'Every answer in full, no phone call needed', about: 'Twelve years in one room, every price printed', visit: 'Free consultation before anything permanent', home: 'Know the number before you sit down', segment: 'Six questions and you will know the price', services: 'Every price above, or get yours in a minute', studio: 'Free consultation, same day if you want it', quote: '' },
+  barSub: 'Free consultation \u00b7 cash and card price shown together \u00b7 pay in four',
+  ftBlurb: 'A home studio on Staten Island doing permanent makeup, skin, laser and hair-loss work since 2014. One chair, one client, and every price printed.',
+  ftTreat: 'Treatments', ftVisit: 'Visit', ftHours: 'Hours',
+  ftCtaA: 'Every price is on this site.', ftCtaB: 'Start with yours.',
+  ftBefore: 'Before you book', ftAfter: 'After your visit',
+  ftStudio: 'The studio & policies', ftPrices: 'Full price list',
+  ftRights: '\u00a9 2026 Aruna Spa. Prices shown are current booking prices.',
+  ftFinance: 'Pay in four available on bookings from $50 to $4,000.',
+  days: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], closed: 'Closed'
+};
+
+const SEG_META = [
+  ['brows', 'Brows & PMU', 'from $580'],
+  ['hairloss', 'Hair loss & scalp', 'from $1,200'],
+  ['laser', 'Laser hair removal', 'from $75'],
+  ['skin', 'Facials & anti-aging', 'from $70'],
+  ['body', 'Body & massage', 'from $120'],
+  ['men', "Men's treatments", 'from $100'],
+  ['bridal', 'Bridal', 'by the party'],
+  ['recovery', 'After surgery', 'from $1,200'],
+  ['house', 'House calls', 'from $700'],
+  ['training', 'Train with Aruna', 'from $1,800']
+];
+
+const HOURS = [
+  ['Monday', '12pm – 8pm'], ['Tuesday', '10.30am – 8pm'], ['Wednesday', '12pm – 8pm'],
+  ['Thursday', '10.30am – 8pm'], ['Friday', '12pm – 8pm'], ['Saturday', '1pm – 3pm'], ['Sunday', 'Closed']
+];
+
+class Component extends DCLogic {
+  state = { page: 'home', seg: 'brows', menu: false, scrolled: false, showBar: false, count: 48, progress: 0, lang: 'en', d: null, bookSvc: null, bookDur: 90, bookPrice: null, tKey: 'microblading', exitOpen: false, exitDone: false, exName: '', exPhone: '' };
+
+  componentDidMount() {
+    this.readHash();
+    window.addEventListener('hashchange', this.readHash);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+
+    this.observe();
+    import('./aruna-data.js').then(m => this.setState({ d: m, count: m.SERVICES.length })).catch(() => {});
+    try { const L = localStorage.getItem('aruna-lang'); if (L === 'es' || L === 'en') this.setState({ lang: L }); } catch (e) {}
+    this.onExit = e => {
+      if (e.relatedTarget || e.clientY > 40) return;
+      const p = this.state.page;
+      if (p !== 'quote' && p !== 'booking') return;
+      let seen = false; try { seen = sessionStorage.getItem('aruna-exit') === '1'; } catch (err) {}
+      if (seen || this.state.exitOpen) return;
+      try { sessionStorage.setItem('aruna-exit', '1'); } catch (err) {}
+      this.setState({ exitOpen: true });
+    };
+    document.addEventListener('mouseout', this.onExit);
+    this.syncTitle();
+  }
+  componentDidUpdate(prev) {
+    if (prev && (prev.page !== this.state.page || prev.tKey !== this.state.tKey)) this.observe();
+    this.syncTitle();
+  }
+  syncTitle() {
+    const es = this.state.lang === 'es';
+    const M = es
+      ? { home: 'Inicio', services: 'Tratamientos y precios', quote: 'Tu precio', booking: 'Reservar', studio: 'El estudio', visit: 'Tu visita', about: 'Nosotras', packages: 'Paquetes', results: 'Resultados', financing: 'A plazos', faq: 'Preguntas', aftercare: 'Cuidados', gifts: 'Tarjetas de regalo', segment: 'Tratamientos', treatment: 'Paso a paso' }
+      : { home: 'Home', services: 'Treatments & prices', quote: 'Your price', booking: 'Book', studio: 'The studio', visit: 'Your visit', about: 'About', packages: 'Packages', results: 'Results', financing: 'Financing', faq: 'Questions', aftercare: 'Aftercare', gifts: 'Gift cards', segment: 'Treatments', treatment: 'Step by step' };
+    document.title = 'Aruna Spa \u00b7 ' + (M[this.state.page] || 'Staten Island');
+  }
+  componentWillUnmount() {
+    window.removeEventListener('hashchange', this.readHash);
+    document.removeEventListener('mouseout', this.onExit);
+    window.removeEventListener('scroll', this.onScroll);
+    if (this.io) this.io.disconnect();
+  }
+
+  readHash = () => {
+    const h = (location.hash || '').replace(/^#\/?/, '');
+    const known = ['home', 'services', 'quote', 'studio', 'visit', 'booking', 'about', 'packages', 'results', 'financing', 'faq', 'aftercare', 'gifts', 'es'];
+    if (h.indexOf('t/') === 0) return this.setState({ page: 'treatment', tKey: h.slice(2) });
+    if (!h) return this.setState({ page: 'home' });
+    if (h === 'es' || h === 'en') { this.setLang(h); return this.setState({ page: 'home' }); }
+    if (known.indexOf(h) > -1) return this.setState({ page: h });
+    if (SEG_META.some(s => s[0] === h)) return this.setState({ page: 'segment', seg: h });
+    this.setState({ page: 'home' });
+  };
+
+  onScroll = () => {
+    const y = window.scrollY || 0;
+    const sc = y > 40, bar = y > 700 && this.state.page !== 'quote';
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    const pr = h > 0 ? Math.min(1, y / h) : 0;
+    if (sc !== this.state.scrolled || bar !== this.state.showBar || Math.abs(pr - this.state.progress) > 0.004) {
+      this.setState({ scrolled: sc, showBar: bar, progress: pr });
+    }
+  };
+
+  observe() {
+    if (this.io) this.io.disconnect();
+    this.io = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting) { e.target.setAttribute('data-seen', ''); this.io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -12% 0px' });
+    [90, 700, 1800].forEach(ms => setTimeout(() => {
+      document.querySelectorAll('[data-reveal]:not([data-seen])').forEach(el => this.io.observe(el));
+    }, ms));
+  }
+
+  setLang = L => {
+    if (this.state.lang === L) return;
+    this.setState({ lang: L, menu: false });
+    try { localStorage.setItem('aruna-lang', L); } catch (e) {}
+    if (document.documentElement) document.documentElement.lang = L;
+  };
+
+  toggleLang = () => this.setLang(this.state.lang === 'en' ? 'es' : 'en');
+
+  go = (page, seg, payload) => {
+    if (page === 'booking' && payload) {
+      this.setState({ bookSvc: payload.svc || null, bookDur: payload.dur || 90, bookPrice: payload.price || null });
+    }
+    const target = page === 'segment' ? seg : page;
+    if (location.hash.replace(/^#\/?/, '') !== target) location.hash = '#/' + target;
+    else this.setState(page === 'segment' ? { page, seg } : { page });
+    this.setState({ menu: false });
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  };
+
+  renderVals() {
+    const st = this.state;
+    const sc = st.scrolled;
+    const D = st.lang === 'es' && st.d && st.d.T ? st.d.T.es : EN;
+    const esLabels = (st.d && st.d.SEG_LABELS_ES) || {};
+    const segLabel = m => (st.lang === 'es' && esLabels[m[0]] ? esLabels[m[0]][0] : m[1]);
+    const segGo = {};
+    SEG_META.forEach(s => { segGo[s[0]] = () => this.go('segment', s[0]); });
+    const todayIdx = (new Date().getDay() + 6) % 7;
+    const t = HOURS[todayIdx];
+    const barLines = {
+      home: 'Know the number before you sit down',
+      segment: 'Six questions and you will know the price',
+      services: 'Every price above, or get yours in a minute',
+      studio: 'Free consultation, same day if you want it',
+      es: 'Conoce el precio antes de sentarte'
+    };
+
+    return {
+      go: this.go, segGo,
+      goHome: () => this.go('home'),
+      goServices: () => this.go('services'),
+      goQuote: () => this.go('quote'),
+      goBooking: () => this.go('booking'),
+      goAbout: () => this.go('about'),
+      cAbout: st.page === 'about' ? '#D9A08C' : 'rgba(251,246,240,.72)',
+      goPackages: () => this.go('packages'),
+      goResults: () => this.go('results'),
+      goFinancing: () => this.go('financing'),
+      goFaq: () => this.go('faq'),
+      goAftercare: () => this.go('aftercare'),
+      goGifts: () => this.go('gifts'),
+      footerPlan: [
+        { label: D.ftPrices, click: () => this.go('services') },
+        { label: D.navPackages, click: () => this.go('packages') },
+        { label: D.navFinancing, click: () => this.go('financing') },
+        { label: D.navResults, click: () => this.go('results') },
+        { label: D.navFaq, click: () => this.go('faq') },
+        { label: D.navVisit, click: () => this.go('visit') }
+      ],
+      footerAfter: [
+        { label: D.navAftercare, click: () => this.go('aftercare') },
+        { label: D.navGifts, click: () => this.go('gifts') },
+        { label: D.navAbout, click: () => this.go('about') },
+        { label: D.ftStudio, click: () => this.go('studio') }
+      ],
+      xsShow: !!({ segment: 1, services: 1, packages: 1, results: 1, financing: 1, faq: 1, about: 1, studio: 1, visit: 1, aftercare: 1, gifts: 1, treatment: 1 })[st.page],
+      xsTitle: D.xsTitle || 'Also worth a look',
+      xsLinks: (({ segment: ['quote', 'results', 'financing'], services: ['packages', 'quote', 'results'], packages: ['financing', 'results', 'services'], results: ['quote', 'packages', 'financing'], financing: ['packages', 'results', 'booking'], faq: ['aftercare', 'visit', 'booking'], about: ['results', 'studio', 'visit'], studio: ['visit', 'about', 'booking'], visit: ['faq', 'booking', 'aftercare'], aftercare: ['faq', 'booking', 'results'], gifts: ['packages', 'services', 'booking'], treatment: ['quote', 'results', 'aftercare'] })[st.page] || []).map(k => {
+        const L = { quote: D.barCta, booking: D.xsBook, services: D.ftPrices, packages: D.navPackages, results: D.navResults, financing: D.navFinancing, about: D.navAbout, visit: D.navVisit, studio: D.ftStudio, faq: D.navFaq, aftercare: D.navAftercare, gifts: D.navGifts };
+        return { label: L[k] || k, click: () => this.go(k) };
+      }),
+      exitOpen: st.exitOpen, exitFormShow: !st.exitDone, exitDone: st.exitDone,
+      exName: st.exName, exPhone: st.exPhone,
+      exSetName: e => this.setState({ exName: e.target.value }),
+      exSetPhone: e => this.setState({ exPhone: e.target.value }),
+      exitClose: () => this.setState({ exitOpen: false }),
+      exitStop: e => e.stopPropagation(),
+      exitSubmit: () => {
+        try {
+          const arr = JSON.parse(localStorage.getItem('aruna-callbacks') || '[]');
+          arr.push({ name: st.exName, phone: st.exPhone, page: st.page, at: new Date().toISOString() });
+          localStorage.setItem('aruna-callbacks', JSON.stringify(arr));
+        } catch (err) {}
+        this.setState({ exitDone: true });
+      },
+      cPackages: st.page === 'packages' ? '#D9A08C' : 'rgba(251,246,240,.72)',
+      cResults: st.page === 'results' ? '#D9A08C' : 'rgba(251,246,240,.72)',
+      cFinancing: st.page === 'financing' ? '#D9A08C' : 'rgba(251,246,240,.72)',
+      goBook2: () => this.go('booking'),
+      cBook: st.page === 'booking' ? '#D9A08C' : 'rgba(251,246,240,.72)',
+      goStudio: () => this.go('studio'),
+      toggleLang: this.toggleLang,
+      lang: st.lang,
+      t: D,
+      langOther: D.langOther || 'ES',
+      langOtherFull: D.langOtherFull || 'Ver en espa\u00f1ol',
+      openTreatments: () => this.setState({ menu: true }),
+      closeMenu: () => this.setState({ menu: false }),
+      menuOpen: st.menu,
+      count: st.count,
+      navBg: sc ? 'rgba(26,20,17,.96)' : (st.page === 'home' ? 'transparent' : '#1A1411'),
+      navLine: sc ? 'rgba(217,160,140,.3)' : (st.page === 'home' ? 'rgba(251,246,240,.16)' : 'rgba(251,246,240,.14)'),
+      navPad: sc ? '16px' : '24px',
+      logoSize: sc ? '24px' : '30px',
+      topPad: sc ? '104px' : '124px',
+      heroLift: '0px',
+      heroLiftNeg: st.page === 'home' ? (sc ? '-104px' : '-124px') : '0px',
+      progress: Math.round(st.progress * 1000) / 10 + '%',
+      cHome: st.page === 'home' ? '#D9A08C' : 'rgba(251,246,240,.72)',
+      cVisit: st.page === 'visit' ? '#D9A08C' : 'rgba(251,246,240,.72)',
+      goVisit: () => this.go('visit'),
+      cTreat: st.page === 'services' ? '#D9A08C' : 'rgba(251,246,240,.72)',
+      cStudio: st.page === 'studio' ? '#D9A08C' : 'rgba(251,246,240,.72)',
+      todayHours: t[1] === 'Closed' ? (D.utilClosed || 'Closed today') : (D.utilToday || 'Today') + ' ' + t[1],
+      isHome: st.page === 'home', isSegment: st.page === 'segment', isServices: st.page === 'services',
+      isQuote: st.page === 'quote', isStudio: st.page === 'studio', isVisit: st.page === 'visit',
+      isBooking: st.page === 'booking', isAbout: st.page === 'about',
+      isPackages: st.page === 'packages', isResults: st.page === 'results',
+      isFinancing: st.page === 'financing', isFaq: st.page === 'faq',
+      isAftercare: st.page === 'aftercare', isGifts: st.page === 'gifts',
+      isTreatment: st.page === 'treatment', tKey: st.tKey,
+      bookSvc: st.bookSvc, bookDur: st.bookDur, bookPrice: st.bookPrice,
+      seg: st.seg,
+      showBar: st.showBar,
+      barLine: (D.barLines && D.barLines[st.page]) || (D.barLines && D.barLines.home) || barLines.home,
+      segGroups: [
+        { title: D.grpTreat || 'By treatment', keys: ['brows', 'hairloss', 'laser', 'skin', 'body'] },
+        { title: D.grpWho || 'By who it is for', keys: ['men', 'bridal', 'recovery', 'house', 'training'] }
+      ].map(g => ({
+        title: g.title,
+        items: g.keys.map(k => {
+          const m = SEG_META.find(x => x[0] === k);
+          return { label: segLabel(m), from: m[2], click: segGo[k] };
+        })
+      })),
+      footerSegs: SEG_META.map(s => ({ label: segLabel(s), click: segGo[s[0]] })),
+      hours: HOURS.map((h, i) => ({
+        day: (D.days && D.days[i]) || h[0],
+        time: h[1] === 'Closed' ? (D.closed || 'Closed') : h[1],
+        color: i === todayIdx ? '#D9A08C' : 'rgba(251,246,240,.68)'
+      }))
+    };
+  }
+}
+
+</script>
+</body>
+</html>

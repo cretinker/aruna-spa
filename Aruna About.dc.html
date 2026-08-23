@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="./image-slot.js"></script>
+</helmet>
+<div style="background:#F4EDE6; color:#1A1411; font-family:'DM Sans',sans-serif;">
+
+  <div style="background:#1A1411; color:#FBF6F0; display:grid; grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr); align-items:stretch;">
+    <div style="padding:126px 50px 100px 44px; display:flex; flex-direction:column; gap:26px; justify-content:center;">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <div style="width:44px; height:1px; background:#D9A08C;"></div>
+        <div style="font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ ui.eyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(44px,4.4vw,76px); line-height:.93; letter-spacing:-.035em;">{{ ui.h1a }}<br>{{ ui.h1b }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.h1c }}</span></div>
+      <div style="font-size:18.5px; line-height:1.7; color:rgba(251,246,240,.76); max-width:560px;">{{ ui.sub }}</div>
+    </div>
+    <div style="position:relative; min-height:640px; background:#241B16;">
+      <image-slot id="aruna-about-hero" shape="rect" src="{{ heroSrc }}" placeholder="{{ ui.heroPh }}"></image-slot>
+      <div style="position:absolute; left:0; top:0; bottom:0; width:130px; background:linear-gradient(90deg,#1A1411,rgba(26,20,17,0)); pointer-events:none;"></div>
+      <div style="position:absolute; left:0; right:0; bottom:0; padding:24px 30px 26px; background:linear-gradient(0deg,rgba(26,20,17,.92),rgba(26,20,17,0)); pointer-events:none;">
+        <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#D9A08C;">{{ ui.heroCap }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#1A1411; padding:0 44px 100px;">
+    <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:2px; background:rgba(251,246,240,.16); border-top:1px solid rgba(251,246,240,.16);">
+      <sc-for list="{{ marks }}" as="m" hint-placeholder-count="4">
+        <div style="background:#1A1411; padding:28px 26px 30px; display:flex; flex-direction:column; gap:9px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:38px; line-height:1; color:#D9A08C;">{{ m.k }}</div>
+          <div style="font-size:13px; line-height:1.55; color:rgba(251,246,240,.66);">{{ m.v }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div data-reveal style="padding:130px 44px; display:grid; grid-template-columns:minmax(0,380px) minmax(0,1fr); gap:90px; align-items:start; border-bottom:1px solid rgba(26,20,17,.16);">
+    <div style="display:flex; flex-direction:column; gap:20px; position:sticky; top:150px;">
+      <div style="font-family:'Libre Caslon Display',serif; font-size:60px; line-height:.94; letter-spacing:-.032em;">{{ ui.storyA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.storyB }}</span></div>
+      <div style="font-size:10.5px; letter-spacing:.22em; text-transform:uppercase; color:#8A7A6E;">{{ ui.storyNote }}</div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:24px; max-width:660px;">
+      <sc-for list="{{ story }}" as="p" hint-placeholder-count="4">
+        <div style="font-size:18px; line-height:1.78; color:#3A312B;">{{ p }}</div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div data-reveal style="background:#EAE1D6; padding:130px 44px; border-bottom:1px solid rgba(26,20,17,.16);">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:56px; margin-bottom:54px; flex-wrap:wrap;">
+      <div style="display:flex; flex-direction:column; gap:18px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="width:34px; height:1px; background:#7C2D3A;"></div>
+          <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A;">{{ ui.knownEyebrow }}</div>
+        </div>
+        <div style="font-family:'Libre Caslon Display',serif; font-size:66px; line-height:.94; letter-spacing:-.033em;">{{ ui.knownA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.knownB }}</span></div>
+      </div>
+      <div style="font-size:16.5px; line-height:1.7; color:#5C4E46; max-width:400px;">{{ ui.knownSub }}</div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:rgba(26,20,17,.16);">
+      <sc-for list="{{ known }}" as="k" hint-placeholder-count="4">
+        <div onClick="{{ k.click }}" style="background:#EAE1D6; padding:34px 28px 40px; display:flex; flex-direction:column; gap:13px; cursor:pointer;" style-hover="background:#F4EDE6;">
+          <div style="font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:#7C2D3A;">{{ k.from }}</div>
+          <div style="font-family:'Libre Caslon Display',serif; font-size:29px; line-height:1.08;">{{ k.t }}</div>
+          <div style="font-size:14.5px; line-height:1.68; color:#5C4E46;">{{ k.b }}</div>
+          <div style="font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#7C2D3A; padding-top:4px;">{{ ui.readMore }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div data-reveal style="background:#1A1411; color:#FBF6F0; padding:130px 44px;">
+    <div style="display:flex; flex-direction:column; gap:20px; max-width:720px; margin-bottom:56px;">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div style="width:34px; height:1px; background:#D9A08C;"></div>
+        <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ ui.howEyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:70px; line-height:.94; letter-spacing:-.034em;">{{ ui.howA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.howB }}</span></div>
+      <div style="font-size:17px; line-height:1.7; color:rgba(251,246,240,.68);">{{ ui.howSub }}</div>
+    </div>
+    <div style="display:flex; flex-direction:column;">
+      <sc-for list="{{ rules }}" as="r" hint-placeholder-count="5">
+        <div style="display:grid; grid-template-columns:72px minmax(0,340px) minmax(0,1fr); gap:34px; padding:30px 0; border-top:1px solid rgba(251,246,240,.16); align-items:start;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:30px; line-height:1; color:#D9A08C;">{{ r.n }}</div>
+          <div style="font-family:'Libre Caslon Display',serif; font-size:27px; line-height:1.14;">{{ r.t }}</div>
+          <div style="font-size:16px; line-height:1.75; color:rgba(251,246,240,.7);">{{ r.b }}</div>
+        </div>
+      </sc-for>
+      <div style="border-top:1px solid rgba(251,246,240,.16);"></div>
+    </div>
+  </div>
+
+  <div data-reveal style="padding:130px 44px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:80px; align-items:center; border-bottom:1px solid rgba(26,20,17,.16);">
+    <div style="display:flex; flex-direction:column; gap:22px;">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div style="width:34px; height:1px; background:#7C2D3A;"></div>
+        <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A;">{{ ui.teachEyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:62px; line-height:.94; letter-spacing:-.032em;">{{ ui.teachA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.teachB }}</span></div>
+      <div style="font-size:17px; line-height:1.74; color:#5C4E46; max-width:480px;">{{ ui.teachSub }}</div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; padding-top:6px;">
+        <div onClick="{{ goTraining }}" style="background:#7C2D3A; color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:18px 32px; cursor:pointer;" style-hover="background:#1A1411;">{{ ui.teachCta }}</div>
+      </div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:1px; background:rgba(26,20,17,.16); border:1px solid rgba(26,20,17,.16);">
+      <sc-for list="{{ teachFacts }}" as="f" hint-placeholder-count="4">
+        <div style="background:#F4EDE6; padding:24px 28px; display:flex; align-items:baseline; justify-content:space-between; gap:24px;">
+          <div style="font-size:14.5px; color:#5C4E46;">{{ f.k }}</div>
+          <div style="font-family:'Libre Caslon Display',serif; font-size:23px; color:#1A1411; white-space:nowrap;">{{ f.v }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div data-reveal style="background:#EAE1D6; padding:130px 44px; border-bottom:1px solid rgba(26,20,17,.16);">
+    <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:80px; align-items:start;">
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="width:34px; height:1px; background:#7C2D3A;"></div>
+          <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A;">{{ ui.honestEyebrow }}</div>
+        </div>
+        <div style="font-family:'Libre Caslon Display',serif; font-size:58px; line-height:.94; letter-spacing:-.032em;">{{ ui.honestA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.honestB }}</span></div>
+        <div style="font-size:16.5px; line-height:1.72; color:#5C4E46; max-width:420px;">{{ ui.honestSub }}</div>
+      </div>
+      <div style="display:flex; flex-direction:column;">
+        <sc-for list="{{ honest }}" as="x" hint-placeholder-count="4">
+          <div style="display:grid; grid-template-columns:22px minmax(0,1fr); gap:16px; padding:22px 0; border-top:1px solid rgba(26,20,17,.18); align-items:start;">
+            <div style="font-family:'Libre Caslon Display',serif; font-size:20px; line-height:1.2; color:#7C2D3A;">&times;</div>
+            <div style="font-size:16.5px; line-height:1.72; color:#3A312B;">{{ x }}</div>
+          </div>
+        </sc-for>
+        <div style="border-top:1px solid rgba(26,20,17,.18);"></div>
+      </div>
+    </div>
+  </div>
+
+  <div data-reveal style="padding:130px 44px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:80px; align-items:start;">
+    <div style="display:flex; flex-direction:column; gap:22px;">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div style="width:34px; height:1px; background:#7C2D3A;"></div>
+        <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A;">{{ ui.credEyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:58px; line-height:.94; letter-spacing:-.032em;">{{ ui.credA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.credB }}</span></div>
+      <div style="font-size:16.5px; line-height:1.72; color:#5C4E46; max-width:440px;">{{ ui.credSub }}</div>
+    </div>
+    <div style="display:flex; flex-direction:column;">
+      <sc-for list="{{ creds }}" as="c" hint-placeholder-count="5">
+        <div style="display:grid; grid-template-columns:minmax(0,180px) minmax(0,1fr); gap:30px; padding:22px 0; border-top:1px solid rgba(26,20,17,.18); align-items:baseline;">
+          <div style="font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#7C2D3A;">{{ c.k }}</div>
+          <div style="font-size:16.5px; line-height:1.6; color:{{ c.color }};">{{ c.v }}</div>
+        </div>
+      </sc-for>
+      <div style="border-top:1px solid rgba(26,20,17,.18); padding-top:18px; font-size:13px; line-height:1.6; color:#8A7A6E;">{{ ui.credNote }}</div>
+    </div>
+  </div>
+
+  <div style="background:#7C2D3A; color:#FBF6F0; padding:130px 44px; display:flex; flex-direction:column; align-items:center; gap:28px; text-align:center;">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div style="width:30px; height:1px; background:#E7C3B4;"></div>
+      <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#E7C3B4;">{{ ui.ctaEyebrow }}</div>
+      <div style="width:30px; height:1px; background:#E7C3B4;"></div>
+    </div>
+    <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(46px,4.9vw,84px); line-height:.92; letter-spacing:-.036em; max-width:920px;">{{ ui.ctaA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#E7C3B4;">{{ ui.ctaB }}</span></div>
+    <div style="font-size:17px; line-height:1.65; color:rgba(251,246,240,.8); max-width:540px;">{{ ui.ctaSub }}</div>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; padding-top:6px;">
+      <div onClick="{{ goBooking }}" style="background:#FBF6F0; color:#7C2D3A; font-size:12.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; padding:22px 42px; cursor:pointer;" style-hover="background:#1A1411; color:#FBF6F0;">{{ ui.ctaBook }}</div>
+      <div onClick="{{ goVisit }}" style="border:1px solid rgba(251,246,240,.4); color:#FBF6F0; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; padding:22px 36px; cursor:pointer;" style-hover="border-color:#FBF6F0; background:rgba(251,246,240,.1);">{{ ui.ctaVisit }}</div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1400, &quot;height&quot;: 900}, &quot;lang&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;en&quot;, &quot;es&quot;], &quot;default&quot;: &quot;en&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;onNav&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;(page: string, seg?: string) =&gt; void&quot;}}">
+const HERO = 'https://static.glossgenius.com/public/salon/f893e6ce0d22374c613c44780aa0aee205264592/website_cover_image/d400e009fd15fd892a954cee4f0ce2ce.jpeg';
+
+const UI = {
+  en: {
+    heroPh: 'Drop the studio photograph here \u2014 Aruna at work, or the treatment room',
+    heroCap: 'Aruna\u2019s own photograph \u00b7 replace with the studio shoot',
+    eyebrow: 'About \u00b7 Aruna Spa \u00b7 est. 2014',
+    h1a: 'Twelve years,', h1b: 'one room, and', h1c: 'a public price list.',
+    sub: 'Aruna Spa is a single-chair studio inside a home on Staten Island. Permanent makeup, skin, laser and hair-loss work, done one client at a time, with every price printed before you ask for it.',
+    marks: [
+      ['2014', 'Taking clients at the same Wheeler Avenue address since'],
+      ['48', 'Treatments on the list, and not one of them is price on request'],
+      ['1', 'Client in the building at a time, by design rather than by size'],
+      ['EN / ES', 'Consultations and treatments run in either language']
+    ],
+    storyA: 'How a home', storyB: 'studio got here.',
+    storyNote: 'Aruna\u2019s own words to be added',
+    story: [
+      'Most permanent makeup in New York is sold the same way. A consultation is offered free, its real job being to get you through the door before anybody says a number, and the price arrives once you are already invested in the idea. Aruna Spa was built to work the other way round: the list is public, the consultation is genuinely free, and the two are unrelated.',
+      'That decision shapes everything else. Ninety minutes is set aside for a set of brows, because a shape you have not agreed to is not worth tattooing. The second sitting sits inside the price rather than arriving as a bill four weeks later, because pigment settles unevenly on every skin and one session was never the finished result. The cash price is printed rather than negotiated at the door.',
+      'The work grew outward from brows. Lips and eyeliner first, then scalp micropigmentation, which is now the highest-value work in the studio and covers everything from a receding hairline to full alopecia. Skin and laser came next, sold by the course rather than the session, because one laser appointment does nothing and selling it that way would be dishonest.',
+      'Since 2014 the address has not changed, the chair count has not changed, and the calendar fills about three weeks out. The trade-off is capacity: Saturdays are short, Sundays are closed, and there is no waiting room to sit in. What you get for it is a room with nobody else in it.'
+    ],
+    knownEyebrow: 'What the studio is known for',
+    knownA: 'Four kinds of work,', knownB: 'not forty-eight.',
+    knownSub: 'The list runs to forty-eight treatments, but the studio is really known for four things. Each opens its own page with prices and honest timelines.',
+    readMore: 'See prices \u2192',
+    known: [
+      ['brows', 'From $580', 'Brows & permanent makeup', 'Microblading, powder, nano and combo, plus lips and eyeliner. Your second sitting is included, and cash is lower on every one.'],
+      ['hairloss', 'From $1,200', 'Scalp micropigmentation', 'A hairline back without surgery. Receding fronts, thinning parts, scar coverage and full alopecia, financed across four payments.'],
+      ['skin', 'From $70', 'Skin & anti-aging', 'Hydrafacials, dermaplaning, microneedling and radio-frequency, built around what your skin is doing that week rather than a menu.'],
+      ['training', 'From $1,800', 'Training working artists', 'Twelve hours with a machine in your hand across two days, for artists who already tattoo and want cleaner strokes.']
+    ],
+    howEyebrow: 'How the studio works',
+    howA: 'Five rules that', howB: 'do not move.',
+    howSub: 'None of these are unusual promises. They are unusual mainly in being written down where a client can hold the studio to them.',
+    rules: [
+      ['01', 'The price is the price', 'Card and cash are both printed on the site. Nothing is quoted in a direct message and nothing is renegotiated once you are in the chair. If a treatment cannot be priced from a form, that is said plainly instead of guessed at.'],
+      ['02', 'The consultation is not a sale', 'Twenty minutes, free, and it can be the same day as your treatment. If your skin is wrong for a technique you hear it here rather than after it is done. Changing your mind at this stage costs nothing.'],
+      ['03', 'The second sitting is the work', 'For permanent makeup, the touch-up four to six weeks later is inside the price. It is not an upsell and it is not optional \u2014 it is where shape and density are actually finished, once both of you can see what your skin held.'],
+      ['04', 'Courses, not single sessions', 'Laser and body work are sold by the course, because six to ten sessions is what the result honestly takes. Buying one at a time would cost you more and achieve less.'],
+      ['05', 'One client at a time', 'Nobody is booked over the top of you. That is why the calendar fills three weeks out and why Saturday is only two hours \u2014 the constraint is real and it is the reason the room is quiet.']
+    ],
+    teachEyebrow: 'Teaching',
+    teachA: 'Other artists', teachB: 'train here.',
+    teachSub: 'Perfecting Brows is not a beginner course. It assumes you already tattoo and want cleaner natural strokes and softer powder \u2014 the two techniques that make up most paid brow work. The studio is also available to rent for your own classes.',
+    teachCta: 'Course details & price',
+    teachFacts: [
+      ['Course', 'Perfecting Brows'], ['Length', 'Two days'],
+      ['Hands-on practice', 'Twelve hours'], ['Price', '$1,800'],
+      ['For', 'Experienced artists']
+    ],
+    honestEyebrow: 'Honestly',
+    honestA: 'Who this studio', honestB: 'is not for.',
+    honestSub: 'Worth reading before you book. Saying this up front costs the studio a few appointments and saves everybody a bad one.',
+    honest: [
+      'Anyone who wants a fixed guarantee on how long permanent makeup lasts. It is six to twenty-four months and your skin decides, not the technique \u2014 anyone quoting you a number is selling.',
+      'Anyone booking brows or PMU in the week of a wedding or a holiday in the sun. The work needs a touch-up four to six weeks later and a month to settle after that.',
+      'Anyone who wants a single laser or body-contouring session. Both are sold by the course because one appointment does not produce a result worth paying for.',
+      'Anyone who needs a Sunday, a late Saturday, or a walk-in. There is one chair, Saturday runs 1pm to 3pm, and Sunday is closed.'
+    ],
+    credEyebrow: 'The details',
+    credA: 'Facts, and what', credB: 'still needs confirming.',
+    credSub: 'Everything below is drawn from the studio\u2019s own published information. The last few lines are marked because they need Aruna\u2019s sign-off before this page goes live.',
+    creds: [
+      ['Established', '2014', '#1A1411'],
+      ['Address', '41 Wheeler Avenue, Staten Island, NY 10314', '#1A1411'],
+      ['Phone', '718 354 6298', '#1A1411'],
+      ['Languages', 'English y espa\u00f1ol', '#1A1411'],
+      ['Treatments', '48, all with published prices', '#1A1411'],
+      ['Financing', 'Pay in four, on bookings from $50 to $4,000', '#1A1411'],
+      ['Travels to', 'Long Island, New Jersey, Whitestone \u2014 groups of three or more', '#1A1411'],
+      ['Certifications', 'To confirm \u2014 awaiting Aruna\u2019s list', '#8A7A6E'],
+      ['Years in practice', 'To confirm \u2014 combined studio experience', '#8A7A6E'],
+      ['Client reviews', 'To add \u2014 no testimonials published on the current site', '#8A7A6E']
+    ],
+    credNote: 'Marked lines are placeholders, not claims. Nothing on this page states a credential the studio has not published.',
+    ctaEyebrow: 'Free consultation, no deposit',
+    ctaA: 'Come and ask the awkward', ctaB: 'question first.',
+    ctaSub: 'Twenty minutes, free, and it can be the same day as your treatment. If something is wrong for your skin you will hear it before it is booked.',
+    ctaBook: 'Book an appointment', ctaVisit: 'How a visit works'
+  },
+  es: {
+    heroPh: 'Suelta aqu\u00ed la foto del estudio \u2014 Aruna trabajando, o la sala',
+    heroCap: 'Foto propia de Aruna \u00b7 reemplazar con la sesi\u00f3n de fotos',
+    eyebrow: 'Nosotras \u00b7 Aruna Spa \u00b7 desde 2014',
+    h1a: 'Doce a\u00f1os,', h1b: 'una sala y', h1c: 'los precios p\u00fablicos.',
+    sub: 'Aruna Spa es un estudio de una sola silla dentro de una casa en Staten Island. Maquillaje permanente, piel, l\u00e1ser y ca\u00edda del cabello, una clienta a la vez, con todos los precios por escrito antes de que preguntes.',
+    marks: [
+      ['2014', 'Atendiendo clientas en la misma direcci\u00f3n de Wheeler Avenue desde'],
+      ['48', 'Tratamientos en la lista, y ninguno es \u00abprecio a consultar\u00bb'],
+      ['1', 'Clienta en el edificio a la vez, por decisi\u00f3n y no por tama\u00f1o'],
+      ['EN / ES', 'Las consultas y los tratamientos son en cualquiera de los dos idiomas']
+    ],
+    storyA: 'C\u00f3mo lleg\u00f3 aqu\u00ed', storyB: 'un estudio en casa.',
+    storyNote: 'Faltan las palabras de Aruna',
+    story: [
+      'Casi todo el maquillaje permanente en Nueva York se vende igual. Se ofrece una consulta gratis cuyo verdadero trabajo es meterte por la puerta antes de que alguien diga un n\u00famero, y el precio llega cuando ya te ilusionaste con la idea. Aruna Spa se construy\u00f3 al rev\u00e9s: la lista es p\u00fablica, la consulta es de verdad gratis, y las dos cosas no tienen relaci\u00f3n.',
+      'Esa decisi\u00f3n define todo lo dem\u00e1s. Se reservan noventa minutos para unas cejas, porque una forma que no has aprobado no vale la pena tatuar. La segunda sesi\u00f3n va dentro del precio en lugar de llegar como una factura cuatro semanas despu\u00e9s, porque el pigmento se asienta distinto en cada piel y una sola sesi\u00f3n nunca fue el resultado final. El precio en efectivo est\u00e1 por escrito y no se negocia en la puerta.',
+      'El trabajo creci\u00f3 desde las cejas. Primero labios y delineado, despu\u00e9s micropigmentaci\u00f3n capilar, que hoy es el trabajo de mayor valor del estudio y cubre desde unas entradas hasta alopecia completa. Luego piel y l\u00e1ser, vendidos por plan y no por sesi\u00f3n, porque una sola cita de l\u00e1ser no hace nada y venderla as\u00ed ser\u00eda deshonesto.',
+      'Desde 2014 la direcci\u00f3n no ha cambiado, el n\u00famero de sillas no ha cambiado, y la agenda se llena con unas tres semanas de antelaci\u00f3n. El intercambio es la capacidad: los s\u00e1bados son cortos, los domingos cerramos, y no hay sala de espera. Lo que recibes a cambio es una sala sin nadie m\u00e1s dentro.'
+    ],
+    knownEyebrow: 'Por lo que se conoce al estudio',
+    knownA: 'Cuatro tipos de trabajo,', knownB: 'no cuarenta y ocho.',
+    knownSub: 'La lista llega a cuarenta y ocho tratamientos, pero al estudio se le conoce en realidad por cuatro cosas. Cada una abre su propia p\u00e1gina con precios y plazos honestos.',
+    readMore: 'Ver precios \u2192',
+    known: [
+      ['brows', 'Desde $580', 'Cejas y maquillaje permanente', 'Microblading, powder, nano y combo, m\u00e1s labios y delineado. Tu segunda sesi\u00f3n va incluida, y en efectivo baja en todos.'],
+      ['hairloss', 'Desde $1,200', 'Micropigmentaci\u00f3n capilar', 'Recuperar la l\u00ednea sin cirug\u00eda. Entradas, densidad en la raya, cicatrices y alopecia completa, financiado en cuatro pagos.'],
+      ['skin', 'Desde $70', 'Piel y antiedad', 'Hydrafaciales, dermaplaning, microneedling y radiofrecuencia, seg\u00fan lo que est\u00e9 haciendo tu piel esa semana y no seg\u00fan un men\u00fa.'],
+      ['training', 'Desde $1,800', 'Formaci\u00f3n para artistas', 'Doce horas con la m\u00e1quina en la mano en dos d\u00edas, para artistas que ya tat\u00faan y quieren trazos m\u00e1s limpios.']
+    ],
+    howEyebrow: 'C\u00f3mo funciona el estudio',
+    howA: 'Cinco reglas que', howB: 'no se mueven.',
+    howSub: 'Ninguna de estas es una promesa rara. Lo raro es sobre todo que est\u00e9n por escrito donde una clienta pueda exigirlas.',
+    rules: [
+      ['01', 'El precio es el precio', 'La tarjeta y el efectivo est\u00e1n los dos por escrito en la p\u00e1gina. Nada se cotiza por mensaje y nada se renegocia cuando ya est\u00e1s en la silla. Si un tratamiento no se puede cotizar desde un formulario, se dice claramente en lugar de adivinarlo.'],
+      ['02', 'La consulta no es una venta', 'Veinte minutos, gratis, y puede ser el mismo d\u00eda de tu tratamiento. Si tu piel no es adecuada para una t\u00e9cnica lo sabr\u00e1s aqu\u00ed y no despu\u00e9s de hac\u00e9rtelo. Cambiar de opini\u00f3n en esta etapa no cuesta nada.'],
+      ['03', 'La segunda sesi\u00f3n es el trabajo', 'En maquillaje permanente, el retoque de cuatro a seis semanas despu\u00e9s va dentro del precio. No es un extra ni es opcional: es donde de verdad se terminan la forma y la densidad, cuando las dos pueden ver qu\u00e9 retuvo tu piel.'],
+      ['04', 'Planes, no sesiones sueltas', 'El l\u00e1ser y el trabajo corporal se venden por plan, porque de seis a diez sesiones es lo que honestamente tarda el resultado. Comprarlas de una en una te costar\u00eda m\u00e1s y lograr\u00eda menos.'],
+      ['05', 'Una clienta a la vez', 'Nadie est\u00e1 agendado encima de ti. Por eso la agenda se llena con tres semanas de antelaci\u00f3n y por eso el s\u00e1bado son solo dos horas: el l\u00edmite es real y es la raz\u00f3n de que la sala est\u00e9 tranquila.']
+    ],
+    teachEyebrow: 'Formaci\u00f3n',
+    teachA: 'Otras artistas', teachB: 'se forman aqu\u00ed.',
+    teachSub: 'Perfecting Brows no es un curso para principiantes. Da por hecho que ya tat\u00faas y quieres trazos naturales m\u00e1s limpios y powder m\u00e1s suave, las dos t\u00e9cnicas que son la mayor parte del trabajo pagado de cejas. El estudio tambi\u00e9n se renta para tus propias clases.',
+    teachCta: 'Detalles y precio del curso',
+    teachFacts: [
+      ['Curso', 'Perfecting Brows'], ['Duraci\u00f3n', 'Dos d\u00edas'],
+      ['Pr\u00e1ctica', 'Doce horas'], ['Precio', '$1,800'],
+      ['Para', 'Artistas con experiencia']
+    ],
+    honestEyebrow: 'Con honestidad',
+    honestA: 'Para qui\u00e9n no es', honestB: 'este estudio.',
+    honestSub: 'Vale la pena leerlo antes de reservar. Decir esto por adelantado le cuesta al estudio algunas citas y nos ahorra a todas una mala.',
+    honest: [
+      'Quien quiera una garant\u00eda fija de cu\u00e1nto dura el maquillaje permanente. Son de seis a veinticuatro meses y lo decide tu piel, no la t\u00e9cnica: quien te d\u00e9 un n\u00famero te est\u00e1 vendiendo algo.',
+      'Quien reserve cejas o PMU la semana de una boda o de un viaje al sol. El trabajo necesita un retoque de cuatro a seis semanas despu\u00e9s y un mes m\u00e1s para asentarse.',
+      'Quien quiera una sola sesi\u00f3n de l\u00e1ser o de moldeado corporal. Los dos se venden por plan porque una cita no da un resultado que valga lo que pagas.',
+      'Quien necesite un domingo, un s\u00e1bado tarde o entrar sin cita. Hay una silla, el s\u00e1bado es de 1pm a 3pm, y el domingo cerramos.'
+    ],
+    credEyebrow: 'Los datos',
+    credA: 'Datos, y lo que', credB: 'falta confirmar.',
+    credSub: 'Todo lo de abajo sale de la informaci\u00f3n que el propio estudio publica. Las \u00faltimas l\u00edneas est\u00e1n marcadas porque necesitan la aprobaci\u00f3n de Aruna antes de publicar esta p\u00e1gina.',
+    creds: [
+      ['Desde', '2014', '#1A1411'],
+      ['Direcci\u00f3n', '41 Wheeler Avenue, Staten Island, NY 10314', '#1A1411'],
+      ['Tel\u00e9fono', '718 354 6298', '#1A1411'],
+      ['Idiomas', 'English y espa\u00f1ol', '#1A1411'],
+      ['Tratamientos', '48, todos con precio publicado', '#1A1411'],
+      ['Financiaci\u00f3n', 'Paga en cuatro, en reservas de $50 a $4,000', '#1A1411'],
+      ['Viaja a', 'Long Island, Nueva Jersey, Whitestone \u2014 grupos de tres o m\u00e1s', '#1A1411'],
+      ['Certificaciones', 'Por confirmar \u2014 esperando la lista de Aruna', '#8A7A6E'],
+      ['A\u00f1os de pr\u00e1ctica', 'Por confirmar \u2014 experiencia combinada del estudio', '#8A7A6E'],
+      ['Rese\u00f1as', 'Por a\u00f1adir \u2014 la p\u00e1gina actual no publica testimonios', '#8A7A6E']
+    ],
+    credNote: 'Las l\u00edneas marcadas son huecos, no afirmaciones. Nada en esta p\u00e1gina declara una credencial que el estudio no haya publicado.',
+    ctaEyebrow: 'Consulta gratuita, sin dep\u00f3sito',
+    ctaA: 'Ven y haz primero la pregunta', ctaB: 'inc\u00f3moda.',
+    ctaSub: 'Veinte minutos, gratis, y puede ser el mismo d\u00eda de tu tratamiento. Si algo no le va bien a tu piel lo sabr\u00e1s antes de reservarlo.',
+    ctaBook: 'Reservar una cita', ctaVisit: 'C\u00f3mo funciona una visita'
+  }
+};
+
+class Component extends DCLogic {
+  componentDidMount() { window.scrollTo({ top: 0, behavior: 'auto' }); }
+
+  nav = (p, seg) => { const f = this.props.onNav; if (f) f(p, seg); };
+
+  renderVals() {
+    const ui = UI[this.props.lang === 'es' ? 'es' : 'en'];
+    return {
+      ui: Object.assign({}, ui, {
+        eyebrow: String(ui.eyebrow).split(' \u00b7 ').map(p => p.replace(/ /g, '\u00a0')).join(' \u00b7 ')
+      }),
+      heroSrc: HERO,
+      marks: ui.marks.map(m => ({ k: m[0], v: m[1] })),
+      story: ui.story,
+      known: ui.known.map(k => ({
+        from: k[1], t: k[2], b: k[3],
+        click: () => this.nav('segment', k[0])
+      })),
+      rules: ui.rules.map(r => ({ n: r[0], t: r[1], b: r[2] })),
+      teachFacts: ui.teachFacts.map(f => ({ k: f[0], v: f[1] })),
+      honest: ui.honest,
+      creds: ui.creds.map(c => ({ k: c[0], v: c[1], color: c[2] })),
+      goTraining: () => this.nav('segment', 'training'),
+      goBooking: () => this.nav('booking'),
+      goVisit: () => this.nav('visit')
+    };
+  }
+}
+
+</script>
+</body>
+</html>

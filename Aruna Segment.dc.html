@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="background:{{ pageBg }}; color:{{ pageFg }}; font-family:'DM Sans',sans-serif; min-height:70vh;">
+  <sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+
+    <!-- ══════════ EDITORIAL HERO — asymmetric, light, portrait plate ══════════ -->
+    <sc-if value="{{ isEditorial }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid; grid-template-columns:minmax(0,.42fr) minmax(0,.58fr); border-bottom:1px solid rgba(26,20,17,.16);">
+        <div style="background-image:{{ heroImg }}; background-size:cover; background-position:center; background-color:#D8CCC0; min-height:640px;"></div>
+        <div style="padding:104px 52px 96px; display:flex; flex-direction:column; justify-content:center; gap:26px;">
+          <div style="display:flex; align-items:center; gap:14px;">
+            <div style="width:34px; height:1px; background:#7C2D3A;"></div>
+            <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A;">{{ eyebrow }}</div>
+          </div>
+          <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(40px,3.9vw,64px); line-height:.98; letter-spacing:-.03em;">{{ h1a }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ h1b }}</span></div>
+          <div style="font-size:17.5px; line-height:1.72; color:#5C4E46; max-width:520px;">{{ sub }}</div>
+          <div style="display:flex; align-items:baseline; gap:16px; padding-top:6px;">
+            <div style="font-family:'Libre Caslon Display',serif; font-size:56px; line-height:1; color:#7C2D3A;">{{ from }}</div>
+            <div style="font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:#8A7A6E;">{{ rowCount }} {{ ui.roomNote }}</div>
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; padding-top:8px;">
+            <div onClick="{{ goQuote }}" style="background:#7C2D3A; color:#FBF6F0; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:19px 34px; cursor:pointer;" style-hover="background:#1A1411;">{{ ui.priceThis }}</div>
+            <a href="tel:+17183546298" style="border:1px solid rgba(26,20,17,.28); font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; padding:19px 30px; color:#1A1411;" style-hover="border-color:#7C2D3A; color:#7C2D3A;">{{ ui.callBtn }}</a>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ══════════ CLINICAL HERO — dark, centred, evidence-led ══════════ -->
+    <sc-if value="{{ isClinical }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative; height:86vh; min-height:640px; overflow:hidden; background:#100C0A;">
+        <div style="position:absolute; inset:0; background-image:{{ heroImg }}; background-size:cover; background-position:center 30%; opacity:.5;"></div>
+        <div style="position:absolute; inset:0; background:radial-gradient(ellipse at 50% 42%, rgba(16,12,10,.34) 0%, rgba(16,12,10,.9) 72%);"></div>
+        <div style="position:relative; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 44px; gap:26px; color:#FBF6F0;">
+          <div style="display:flex; align-items:center; gap:14px; animation:arunaRise 1s cubic-bezier(.16,1,.3,1) .12s both;">
+            <div style="width:30px; height:1px; background:#D9A08C;"></div>
+            <div style="font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:#D9A08C;">{{ eyebrow }}</div>
+            <div style="width:30px; height:1px; background:#D9A08C;"></div>
+          </div>
+          <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(44px,4.6vw,76px); line-height:.98; letter-spacing:-.032em; max-width:1080px; animation:arunaRise 1.1s cubic-bezier(.16,1,.3,1) .24s both;">{{ h1a }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ h1b }}</span></div>
+          <div style="font-size:18px; line-height:1.7; color:rgba(251,246,240,.74); max-width:660px; animation:arunaRise 1.1s cubic-bezier(.16,1,.3,1) .38s both;">{{ sub }}</div>
+          <div onClick="{{ goQuote }}" style="margin-top:10px; background:#D9A08C; color:#100C0A; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:20px 40px; cursor:pointer; animation:arunaRise 1.1s cubic-bezier(.16,1,.3,1) .5s both;" style-hover="background:#FBF6F0;">{{ ui.priceThis }}</div>
+        </div>
+      </div>
+      <div style="background:#100C0A; color:#FBF6F0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid rgba(251,246,240,.14); border-bottom:1px solid rgba(251,246,240,.14);">
+        <sc-for list="{{ clinicalStats }}" as="c" hint-placeholder-count="3">
+          <div style="padding:40px 34px; display:flex; flex-direction:column; gap:8px; border-right:1px solid rgba(251,246,240,.14);">
+            <div style="font-family:'Libre Caslon Display',serif; font-size:46px; line-height:1; color:#D9A08C;">{{ c.k }}</div>
+            <div style="font-size:13.5px; line-height:1.6; color:rgba(251,246,240,.62);">{{ c.v }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <!-- ══════════ COURSE HERO — wide band, price ladder up front ══════════ -->
+    <sc-if value="{{ isCourse }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative; height:60vh; min-height:480px; overflow:hidden; background:#1A1411;">
+        <div style="position:absolute; inset:0; background-image:{{ heroImg }}; background-size:cover; background-position:center 34%;"></div>
+        <div style="position:absolute; inset:0; background:linear-gradient(94deg, rgba(18,13,11,.94) 0%, rgba(18,13,11,.6) 52%, rgba(18,13,11,.28) 100%);"></div>
+        <div style="position:relative; height:100%; display:flex; flex-direction:column; justify-content:flex-end; padding:0 44px 48px; gap:20px; color:#FBF6F0;">
+          <div style="display:flex; align-items:center; gap:16px;">
+            <div style="width:44px; height:1px; background:#D9A08C;"></div>
+            <div style="font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:#D9A08C; text-wrap:balance;">{{ eyebrow }}</div>
+          </div>
+          <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(42px,4.4vw,72px); line-height:.98; letter-spacing:-.03em; max-width:940px;">{{ h1a }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ h1b }}</span></div>
+          <div style="font-size:17.5px; line-height:1.65; color:rgba(251,246,240,.76); max-width:600px;">{{ sub }}</div>
+        </div>
+      </div>
+      <div style="background:#EAE1D6; border-bottom:1px solid rgba(26,20,17,.16); padding:34px 44px; display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap;">
+        <div style="display:flex; align-items:baseline; gap:18px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:60px; line-height:1; color:#7C2D3A;">{{ from }}</div>
+          <div style="font-size:14.5px; line-height:1.6; color:#5C4E46; max-width:400px;">{{ courseNote }}</div>
+        </div>
+        <div onClick="{{ goQuote }}" style="background:#7C2D3A; color:#FBF6F0; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:19px 36px; cursor:pointer;" style-hover="background:#1A1411;">{{ ui.getPrice }}</div>
+      </div>
+    </sc-if>
+
+    <!-- ══════════ POINTS — three variants of the same content ══════════ -->
+    <sc-if value="{{ isEditorial }}" hint-placeholder-val="{{ false }}">
+      <div data-reveal style="color:#1A1411; padding:120px 44px; display:grid; grid-template-columns:minmax(0,320px) minmax(0,1fr); gap:80px; align-items:start;">
+        <div style="position:sticky; top:150px; display:flex; flex-direction:column; gap:16px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:56px; line-height:.94; letter-spacing:-.03em;">{{ ui.whatGetA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.whatGetB }}</span></div>
+          <div style="font-size:15px; line-height:1.7; color:#5C4E46;">{{ ui.whatGetSub }}</div>
+        </div>
+        <div style="display:flex; flex-direction:column;">
+          <sc-for list="{{ points }}" as="p" hint-placeholder-count="3">
+            <div style="display:grid; grid-template-columns:64px minmax(0,1fr); gap:28px; padding:34px 0; border-top:1px solid rgba(26,20,17,.18); align-items:start;">
+              <div style="font-family:'Libre Caslon Display',serif; font-size:34px; line-height:1; color:#7C2D3A;">{{ p.num }}</div>
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <div style="font-family:'Libre Caslon Display',serif; font-size:32px; line-height:1.08;">{{ p.title }}</div>
+                <div style="font-size:16px; line-height:1.75; color:#5C4E46; max-width:620px;">{{ p.body }}</div>
+              </div>
+            </div>
+          </sc-for>
+          <div style="border-top:1px solid rgba(26,20,17,.18);"></div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isClinical }}" hint-placeholder-val="{{ false }}">
+      <div data-reveal style="color:#1A1411; padding:120px 44px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2px; background:rgba(26,20,17,.16);">
+        <sc-for list="{{ points }}" as="p" hint-placeholder-count="3">
+          <div style="background:#F4EDE6; padding:46px 36px 54px; display:flex; flex-direction:column; gap:14px;">
+            <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#8A7A6E;">{{ p.num }}</div>
+            <div style="font-family:'Libre Caslon Display',serif; font-size:34px; line-height:1.06; color:#7C2D3A;">{{ p.title }}</div>
+            <div style="font-size:15px; line-height:1.75; color:#5C4E46;">{{ p.body }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isCourse }}" hint-placeholder-val="{{ false }}">
+      <div data-reveal style="color:#1A1411; padding:110px 44px; display:flex; flex-direction:column; gap:44px;">
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:56px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:66px; line-height:.94; letter-spacing:-.032em;">{{ ui.courseA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.courseB }}</span></div>
+          <div style="font-size:16px; line-height:1.7; color:#5C4E46; max-width:340px; padding-bottom:8px;">{{ ui.courseSub }}</div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2px; background:rgba(26,20,17,.16);">
+          <sc-for list="{{ points }}" as="p" hint-placeholder-count="3">
+            <div style="background:#F4EDE6; padding:40px 34px 48px; display:flex; flex-direction:column; gap:12px;">
+              <div style="font-family:'Libre Caslon Display',serif; font-size:44px; line-height:1; color:#7C2D3A;">{{ p.num }}</div>
+              <div style="font-family:'Libre Caslon Display',serif; font-size:28px; line-height:1.1;">{{ p.title }}</div>
+              <div style="font-size:15px; line-height:1.75; color:#5C4E46;">{{ p.body }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ══════════ TECHNIQUE MATRIX — brows only ══════════ -->
+    <sc-if value="{{ showTechniques }}" hint-placeholder-val="{{ false }}">
+      <div data-reveal style="background:#1A1411; color:#FBF6F0; padding:120px 44px; display:flex; flex-direction:column; gap:44px;">
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:56px;">
+          <div style="display:flex; flex-direction:column; gap:18px;">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="width:34px; height:1px; background:#D9A08C;"></div>
+              <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ ui.techEyebrow }}</div>
+            </div>
+            <div style="font-family:'Libre Caslon Display',serif; font-size:68px; line-height:.94; letter-spacing:-.032em;">{{ ui.techA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.techB }}</span></div>
+          </div>
+          <div style="font-size:16px; line-height:1.7; color:rgba(251,246,240,.66); max-width:340px; padding-bottom:8px;">{{ ui.techSub }}</div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:2px; background:rgba(251,246,240,.16);">
+          <sc-for list="{{ techniques }}" as="t" hint-placeholder-count="4">
+            <div onClick="{{ goQuote }}" style="background:#1A1411; padding:34px 28px 40px; display:flex; flex-direction:column; gap:20px; cursor:pointer; transition:background .3s ease;" style-hover="background:#241B16;">
+              <div style="display:flex; flex-direction:column; gap:6px;">
+                <div style="font-family:'Libre Caslon Display',serif; font-size:30px; line-height:1.05;">{{ t.n }}</div>
+                <div style="font-family:'Libre Caslon Display',serif; font-size:26px; color:#D9A08C;">{{ t.price }}</div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:13px;">
+                <div style="display:flex; flex-direction:column; gap:3px;">
+                  <div style="font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(251,246,240,.42);">{{ ui.tSuits }}</div>
+                  <div style="font-size:14px; line-height:1.5;">{{ t.skin }}</div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:3px;">
+                  <div style="font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(251,246,240,.42);">{{ ui.tReads }}</div>
+                  <div style="font-size:14px; line-height:1.5;">{{ t.look }}</div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:3px;">
+                  <div style="font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(251,246,240,.42);">{{ ui.tHolds }}</div>
+                  <div style="font-size:14px; line-height:1.5;">{{ t.holds }}</div>
+                </div>
+              </div>
+              <div style="font-size:14px; line-height:1.65; color:rgba(251,246,240,.66); padding-top:14px; border-top:1px solid rgba(251,246,240,.16);">{{ t.best }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ══════════ SETTLING TIMELINE — PMU segments ══════════ -->
+    <sc-if value="{{ showSettling }}" hint-placeholder-val="{{ false }}">
+      <div data-reveal style="background:#EAE1D6; color:#1A1411; border-top:1px solid rgba(26,20,17,.16); padding:120px 44px; display:flex; flex-direction:column; gap:46px;">
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:56px;">
+          <div style="display:flex; flex-direction:column; gap:18px;">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="width:34px; height:1px; background:#7C2D3A;"></div>
+              <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A;">{{ ui.setEyebrow }}</div>
+            </div>
+            <div style="font-family:'Libre Caslon Display',serif; font-size:68px; line-height:.94; letter-spacing:-.032em;">{{ ui.setA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.setB }}</span></div>
+          </div>
+          <div style="font-size:16px; line-height:1.7; color:#5C4E46; max-width:360px; padding-bottom:8px;">{{ ui.setSub }}</div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:0;">
+          <sc-for list="{{ settling }}" as="s" hint-placeholder-count="6">
+            <div style="padding:0 22px 0 0; display:flex; flex-direction:column; gap:14px;">
+              <div style="display:flex; align-items:center; gap:0;">
+                <div style="width:11px; height:11px; border-radius:50%; background:{{ s.dot }}; flex-shrink:0;"></div>
+                <div style="height:1px; flex:1; background:rgba(26,20,17,.22);"></div>
+              </div>
+              <div style="font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#7C2D3A;">{{ s.when }}</div>
+              <div style="font-family:'Libre Caslon Display',serif; font-size:24px; line-height:1.1;">{{ s.title }}</div>
+              <div style="font-size:13.5px; line-height:1.7; color:#5C4E46;">{{ s.body }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ══════════ FINANCING LADDER — clinical, high ticket ══════════ -->
+    <sc-if value="{{ showFinance }}" hint-placeholder-val="{{ false }}">
+      <div data-reveal style="background:#1A1411; color:#FBF6F0; padding:120px 44px; display:grid; grid-template-columns:minmax(0,340px) minmax(0,1fr); gap:76px; align-items:start;">
+        <div style="display:flex; flex-direction:column; gap:18px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:60px; line-height:.94; letter-spacing:-.03em;">{{ ui.finA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.finB }}</span></div>
+          <div style="font-size:16px; line-height:1.7; color:rgba(251,246,240,.66);">{{ ladderNote }}</div>
+          <div onClick="{{ goQuote }}" style="align-self:flex-start; margin-top:6px; border:1px solid rgba(251,246,240,.3); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; padding:16px 28px; cursor:pointer; transition:background .3s ease, color .3s ease, border-color .3s ease;" style-hover="background:#D9A08C; border-color:#D9A08C; color:#100C0A;">{{ ui.finCta }}</div>
+        </div>
+        <div style="display:flex; flex-direction:column;">
+          <sc-for list="{{ ladder }}" as="l" hint-placeholder-count="4">
+            <div style="display:grid; grid-template-columns:minmax(0,1fr) auto auto; gap:24px; padding:24px 0; border-top:1px solid rgba(251,246,240,.16); align-items:baseline;">
+              <div style="font-size:17.5px; line-height:1.4;">{{ l.n }}</div>
+              <div style="font-family:'Libre Caslon Display',serif; font-size:28px; color:rgba(251,246,240,.55); white-space:nowrap; text-align:right; min-width:110px;">{{ l.total }}</div>
+              <div style="font-family:'Libre Caslon Display',serif; font-size:28px; color:{{ l.fourFg }}; white-space:nowrap; text-align:right; min-width:150px;">{{ l.four }}</div>
+            </div>
+          </sc-for>
+          <div style="border-top:1px solid rgba(251,246,240,.16); padding-top:16px; display:flex; justify-content:flex-end; gap:24px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:rgba(251,246,240,.4);">
+            <div>{{ ui.finFull }}</div><div>{{ ui.finFour }}</div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ══════════ PRICE LIST — layout-specific treatment ══════════ -->
+    <div data-reveal style="background:{{ listBg }}; color:{{ listFg }}; border-top:1px solid {{ listLine }}; padding:120px 44px; display:flex; flex-direction:column; gap:48px;">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:56px;">
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div style="display:flex; align-items:center; gap:14px;">
+            <div style="width:34px; height:1px; background:{{ listAccent }};"></div>
+            <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:{{ listAccent }};">{{ rowCount }} {{ ui.treatments }}</div>
+          </div>
+          <div style="font-family:'Libre Caslon Display',serif; font-size:70px; line-height:.94; letter-spacing:-.032em;">{{ listTitle }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:{{ listAccent }};">{{ ui.costed }}</span></div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:14px; max-width:360px; padding-bottom:8px;">
+          <div style="font-size:16.5px; line-height:1.7; color:{{ listMuted }};">{{ ui.cardNote }}</div>
+          <div onClick="{{ goQuote }}" style="font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:{{ listAccent }}; border-bottom:1px solid {{ listAccent }}; padding-bottom:5px; cursor:pointer; align-self:flex-start;">{{ ui.getPrice }}</div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column;">
+        <sc-for list="{{ rows }}" as="r" hint-placeholder-count="6">
+          <div onClick="{{ goQuote }}" style="display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px 32px; align-items:baseline; padding:26px 0; border-top:1px solid {{ listLine }}; cursor:pointer; transition:opacity .25s ease;" style-hover="opacity:.6;">
+            <div style="font-family:'Libre Caslon Display',serif; font-size:38px; line-height:1.02; letter-spacing:-.02em;">{{ r.n }}</div>
+            <div style="font-family:'Libre Caslon Display',serif; font-size:38px; line-height:1.02; color:{{ listAccent }}; white-space:nowrap; text-align:right;">{{ r.price }}</div>
+            <div style="font-size:14.5px; line-height:1.7; color:{{ listMuted }}; max-width:680px;">{{ r.note }}</div>
+            <div style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:{{ listFaint }}; white-space:nowrap; text-align:right;">{{ r.dur }}</div>
+          </div>
+        </sc-for>
+        <div style="border-top:1px solid {{ listLine }};"></div>
+      </div>
+    </div>
+
+    <!-- ══════════ AFTERCARE — PMU segments ══════════ -->
+    <sc-if value="{{ showSettling }}" hint-placeholder-val="{{ false }}">
+      <div data-reveal style="color:#1A1411; padding:120px 44px; display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); gap:76px; align-items:start;">
+        <div style="display:flex; flex-direction:column; gap:18px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:60px; line-height:.94; letter-spacing:-.03em;">{{ ui.afterA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.afterB }}</span></div>
+          <div style="font-size:16px; line-height:1.7; color:#5C4E46;">{{ ui.afterSub }}</div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 56px;">
+          <sc-for list="{{ aftercare }}" as="a" hint-placeholder-count="5">
+            <div style="padding:24px 0; border-top:1px solid rgba(26,20,17,.18); display:flex; flex-direction:column; gap:8px;">
+              <div style="font-family:'Libre Caslon Display',serif; font-size:26px; line-height:1.1; color:#7C2D3A;">{{ a.t }}</div>
+              <div style="font-size:15px; line-height:1.7; color:#5C4E46;">{{ a.b }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ══════════ FAQ ══════════ -->
+    <div data-reveal style="background:{{ faqBg }}; color:#1A1411; border-top:1px solid rgba(26,20,17,.16); padding:120px 44px; display:grid; grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr); gap:64px; align-items:start;">
+      <div style="font-family:'Libre Caslon Display',serif; font-size:60px; line-height:.96; letter-spacing:-.028em;">{{ ui.faqA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.faqB }}</span></div>
+      <div style="display:flex; flex-direction:column;">
+        <sc-for list="{{ faq }}" as="f" hint-placeholder-count="3">
+          <div style="border-top:1px solid rgba(26,20,17,.18); padding:26px 0; display:flex; flex-direction:column; gap:10px;">
+            <div style="font-family:'Libre Caslon Display',serif; font-size:28px; line-height:1.16;">{{ f.q }}</div>
+            <div style="font-size:15.5px; line-height:1.78; color:#5C4E46; max-width:740px;">{{ f.a }}</div>
+          </div>
+        </sc-for>
+        <div style="border-top:1px solid rgba(26,20,17,.18);"></div>
+      </div>
+    </div>
+
+    <!-- ══════════ CROSS-SELL ══════════ -->
+    <div data-reveal style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2px; background:rgba(26,20,17,.16); border-top:1px solid rgba(26,20,17,.16);">
+      <sc-for list="{{ others }}" as="o" hint-placeholder-count="3">
+        <div onClick="{{ o.click }}" style="position:relative; height:320px; background-image:{{ o.img }}; background-size:cover; background-position:center; background-color:#D8CCC0; cursor:pointer;">
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(18,13,11,.1) 38%, rgba(18,13,11,.88) 100%);"></div>
+          <div style="position:relative; height:100%; display:flex; flex-direction:column; justify-content:flex-end; gap:6px; padding:30px; color:#FBF6F0;">
+            <div style="font-family:'Libre Caslon Display',serif; font-size:30px; line-height:1.08;">{{ o.label }}</div>
+            <div style="font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:#D9A08C;">{{ o.from }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="background:#7C2D3A; color:#FBF6F0; padding:110px 44px; display:flex; align-items:flex-end; justify-content:space-between; gap:56px;">
+      <div style="display:flex; flex-direction:column; gap:20px; max-width:820px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="width:34px; height:1px; background:#E7C3B4;"></div>
+          <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#E7C3B4;">{{ ui.ctaEyebrow }}</div>
+        </div>
+        <div style="font-family:'Libre Caslon Display',serif; font-size:74px; line-height:.94; letter-spacing:-.032em;">{{ ui.ctaA }}<br>{{ ui.ctaB }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#E7C3B4;">{{ ui.ctaC }}</span></div>
+        <div style="font-size:17px; line-height:1.65; color:rgba(251,246,240,.78); max-width:520px;">{{ ui.ctaSub }}</div>
+      </div>
+      <div onClick="{{ goQuote }}" style="background:#FBF6F0; color:#7C2D3A; font-size:12.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; padding:24px 46px; cursor:pointer; white-space:nowrap; flex-shrink:0;" style-hover="background:#1A1411; color:#FBF6F0;">{{ ui.ctaBtn }}</div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const CLINICAL_STATS_ES = {
+  hairloss: [['3 hrs', 'Una tarde en la silla, y de vuelta al trabajo el mismo d\u00eda.'],
+             ['0 d\u00edas', 'De recuperaci\u00f3n. Sin cirug\u00eda, sin puntos, sin nada de qu\u00e9 recuperarse.'],
+             ['$4,000', 'Techo de financiaci\u00f3n, que cubre cobertura completa en cuatro pagos.']],
+  recovery: [['10', 'Sesiones en el plan, porque es lo que de verdad tarda una recuperaci\u00f3n.'],
+             ['$900', 'Precio en efectivo del plan completo, frente a $1,200 con tarjeta.'],
+             ['1 zona', 'Tratada a la vez. El drenaje repartido por todo el cuerpo no hace nada.']],
+  men:      [['$80', 'L\u00e1ser de axila por sesi\u00f3n, con 20% menos desde seis sesiones.'],
+             ['1 cliente', 'En el edificio. Un estudio privado en casa, no un sal\u00f3n.'],
+             ['Mismo d\u00eda', 'Consulta y tratamiento, si es lo que te conviene.']]
+};
+
+const COURSE_NOTE_ES = {
+  laser: 'Por zona y por sesi\u00f3n. Compra seis o m\u00e1s y todo el plan baja 20%.',
+  body: 'Por sesi\u00f3n, o diez por $1,000. Una sola sesi\u00f3n de esto no vale la pena.',
+  training: 'Dos d\u00edas, doce horas con la m\u00e1quina en la mano en lugar de diapositivas.',
+  house: 'Procedimiento inicial incluyendo tu segunda visita. M\u00ednimo tres clientas.'
+};
+
+const CLINICAL_STATS = {
+  hairloss: [['3 hrs', 'One afternoon in the chair, and back at work the same day.'],
+             ['0 days', 'Downtime. No surgery, no stitches, nothing to recover from.'],
+             ['$4,000', 'Financing ceiling, which covers full-head coverage in four payments.']],
+  recovery: [['10', 'Sessions in the course, because that is what a recovery actually takes.'],
+             ['$900', 'Cash price for the full course, against $1,200 by card.'],
+             ['1 area', 'Treated at a time. Drainage spread thin across the body does nothing.']],
+  men:      [['$80', 'Armpit laser per session, with 20% off from six sessions.'],
+             ['1 client', 'In the building. A private home studio, not a salon floor.'],
+             ['Same day', 'Consultation and treatment, if that is what suits you.']]
+};
+
+// Real price tiers, so the ladder argues the actual decision rather than
+// whatever happened to be in `picks`. Scalp tiers match the FAQ answer.
+const LADDER = {
+  hairloss: [
+    ['Hairline and temples', 1200],
+    ['Hairline, crown and mid-scalp', 1800],
+    ['Crown through to the back', 2400],
+    ['Full head, alopecia coverage', 4500]
+  ],
+  recovery: [
+    ['Single drainage session', 120],
+    ['Post-lipo course of ten, cash', 900],
+    ['Post-lipo course of ten, card', 1200]
+  ],
+  men: [
+    ['Full back laser, single session', 230],
+    ['Full upper body laser', 450],
+    ['Scalp micropigmentation, hairline', 1200],
+    ['Scalp micropigmentation, full head', 4500]
+  ]
+};
+
+const COURSE_NOTE = {
+  laser: 'Per area, per session. Buy six or more and the whole course drops 20%.',
+  body: 'Per session, or ten for $1,000. A single session of this is not worth buying.',
+  training: 'Two days, twelve hours with a machine in your hand rather than slides.',
+  house: 'Initial procedure including your second visit. Minimum three clients.'
+};
+
+class Component extends DCLogic {
+  state = { d: null };
+  componentDidMount() { import('./aruna-data.js').then(d => this.setState({ d })); }
+  nav = (page, seg) => { const f = this.props.onNav; if (f) f(page, seg); };
+
+  renderVals() {
+    const d = this.state.d;
+    const goQuote = () => this.nav('quote');
+    if (!d) return { ready: false, goQuote, pageBg: '#F4EDE6', pageFg: '#1A1411' };
+
+    const lang = this.props.lang || 'en';
+    const es = lang === 'es';
+    const T = (d.T ? d.T[lang] : {}) || {};
+    const key = this.props.seg && d.SEGMENTS[this.props.seg] ? this.props.seg : 'brows';
+    const base = d.SEGMENTS[key];
+    const over = es && d.SEGMENTS_ES ? (d.SEGMENTS_ES[key] || {}) : {};
+    const esL = (d.SEG_LABELS_ES || {})[key];
+    const s = {
+      layout: base.layout, img: base.img, picks: base.picks, from: base.from,
+      label: es && esL ? esL[1] : base.label,
+      eyebrow: over.eyebrow || base.eyebrow,
+      h1: over.h1 || base.h1,
+      sub: over.sub || base.sub,
+      points: over.points || base.points,
+      faq: over.faq || base.faq
+    };
+    const layout = s.layout || 'editorial';
+    const byName = {};
+    d.SERVICES.forEach(x => { byName[x.n] = x; });
+
+    const rows = (s.picks || []).map(n => byName[n]).filter(Boolean).map(x => ({
+      n: x.n, dur: x.dur + ' min', price: d.money(x),
+      note: (es && (d.NOTES_ES || {})[x.n]) || x.note || ''
+    }));
+
+    const others = d.SEG_ORDER.filter(k => k !== key).slice(0, 3).map(k => ({
+      label: es && (d.SEG_LABELS_ES || {})[k] ? d.SEG_LABELS_ES[k][1] : d.SEGMENTS[k].label,
+      from: es && (d.SEG_FROM_ES || {})[k] ? d.SEG_FROM_ES[k] : d.SEGMENTS[k].from,
+      img: "url('" + d.SEGMENTS[k].img + "')",
+      click: () => this.nav('segment', k)
+    }));
+
+    const h = s.h1;
+    let h1a, h1b;
+    if (h.indexOf('|') > -1) {
+      const p = h.split('|'); h1a = p[0].trim(); h1b = p.slice(1).join(' ').trim();
+    } else {
+      let cut = h.lastIndexOf(', ');
+      if (cut < 0) { const w = h.split(' '); cut = h.length - (w.slice(-2).join(' ').length + 1); }
+      else cut += 1;
+      h1a = h.slice(0, cut).trim(); h1b = h.slice(cut).trim();
+    }
+
+    const isClinical = layout === 'clinical';
+    const isCourse = layout === 'course';
+    const isEditorial = layout === 'editorial';
+    const pmu = key === 'brows' || key === 'bridal';
+
+    const ladder = (LADDER[key] || []).map(t => ({
+      n: t[0],
+      total: '$' + t[1].toLocaleString('en-US'),
+      four: '$' + Math.round(t[1] / 4).toLocaleString('en-US'),
+      fourFg: t[1] > 4000 ? 'rgba(251,246,240,.45)' : '#D9A08C'
+    }));
+
+    return {
+      ready: true, goQuote,
+      goServices: () => this.nav('services'),
+      pageBg: isClinical ? '#100C0A' : '#F4EDE6',
+      pageFg: isClinical ? '#FBF6F0' : '#1A1411',
+      isEditorial, isClinical, isCourse,
+      eyebrow: String(s.eyebrow).split(' \u00b7 ').map(p => p.replace(/ /g, '\u00a0')).join(' \u00b7 '),
+      h1a, h1b, sub: s.sub, label: s.label,
+      from: es && (d.SEG_FROM_ES || {})[key] ? d.SEG_FROM_ES[key].replace(/^desde /, '') : s.from,
+      heroImg: "url('" + s.img + "')",
+      points: (s.points || []).map((p, i) => ({ num: String(i + 1).padStart(2, '0'), title: p[0], body: p[1] })),
+      rows, rowCount: rows.length,
+      listTitle: s.label + ',',
+      faq: (s.faq || []).map(f => ({ q: f[0], a: f[1] })),
+      others,
+      clinicalStats: ((es ? CLINICAL_STATS_ES[key] : CLINICAL_STATS[key]) || []).map(c => ({ k: c[0], v: c[1] })),
+      courseNote: (es ? COURSE_NOTE_ES[key] : COURSE_NOTE[key]) || '',
+      showTechniques: key === 'brows',
+      showSettling: pmu,
+      showFinance: isClinical && ladder.length > 0,
+      ladder,
+      ladderNote: (LADDER[key] || []).some(t => t[1] > 4000)
+        ? (es ? 'La financiaci\u00f3n cubre reservas hasta $4,000. Por encima de eso, el saldo se reparte entre tus sesiones.' : 'Financing covers bookings to $4,000. Above that, the balance is split across your sessions.')
+        : (es ? 'Aprobado en un minuto antes de tu cita. No se cobra nada por ver la cifra.' : 'Approved in about a minute before your appointment. Nothing is charged to see the figure.'),
+      ui: es ? {
+        priceThis: 'Ver el precio', treatments: 'tratamientos', costed: 'con precio.',
+        cardNote: 'Precio con tarjeta. En efectivo es menos en maquillaje permanente. Toca cualquier l\u00ednea para calcular el tuyo.',
+        getPrice: 'Ver mi precio', whatGetA: 'Lo que de verdad', whatGetB: 'recibes.',
+        whatGetSub: 'Tres cosas que son ciertas aqu\u00ed y no lo son en todas partes.',
+        courseA: 'C\u00f3mo funciona', courseB: 'el plan.',
+        courseSub: 'Se reserva en bloque, con el espacio correcto entre sesiones y con fecha de fin en lugar de una cuenta abierta.',
+        techEyebrow: 'La decisi\u00f3n que de verdad est\u00e1s tomando', techA: 'Cuatro t\u00e9cnicas.', techB: 'Tu piel elige una.',
+        techSub: 'Nadie deber\u00eda elegir esto desde un feed de Instagram. Aqu\u00ed est\u00e1 la comparaci\u00f3n, incluida la que no va a funcionar en ti.',
+        tSuits: 'Va bien en', tReads: 'Se ve como', tHolds: 'Dura',
+        setEyebrow: 'Seis semanas, con honestidad', setA: 'La semana dos es cuando', setB: 'todas se asustan.',
+        setSub: 'Casi nadie publica esto, y por eso las clientas asumen que el trabajo fall\u00f3. No fall\u00f3. Aqu\u00ed est\u00e1 cada etapa antes de reservar.',
+        finA: 'No lo pagas', finB: 'todo de golpe.', finCta: 'Calcular el m\u00edo',
+        finFull: 'Pago completo', finFour: 'O cuatro pagos de',
+        afterA: 'Los diez d\u00edas', afterB: 'despu\u00e9s.',
+        afterSub: 'Tu resultado es mitad t\u00e9cnica y mitad lo que haces la semana siguiente. Esta es la lista completa.',
+        faqA: 'Lo que de verdad', faqB: 'nos preguntan.',
+        alsoEyebrow: 'Tambi\u00e9n en el estudio',
+        ctaEyebrow: 'Seis preguntas, nada retenido', ctaA: 'Averigua cu\u00e1nto', ctaB: 'cuesta', ctaC: 'antes de llamar.',
+        ctaSub: 'Precio con tarjeta y en efectivo uno al lado del otro, y luego una hora. Nadie te llama si no lo pides.',
+        ctaBtn: 'Ver mi precio', callBtn: 'Llamar 718 354 6298', roomNote: 'tratamientos en esta sala'
+      } : {
+        priceThis: 'Price this treatment', treatments: 'treatments', costed: 'costed.',
+        cardNote: 'Card price shown. Cash is lower on permanent makeup. Tap any line to price it with your own details.',
+        getPrice: 'Get my price', whatGetA: 'What you', whatGetB: 'actually get.',
+        whatGetSub: 'Three things that are true here and are not true everywhere.',
+        courseA: 'How the course', courseB: 'actually runs.',
+        courseSub: 'Booked as a block, spaced properly, with an end date rather than an open tab.',
+        techEyebrow: 'The decision you are actually making', techA: 'Four techniques.', techB: 'Your skin picks one.',
+        techSub: 'Nobody should choose this from an Instagram grid. Here is the comparison, including the one that will not work on you.',
+        tSuits: 'Suits', tReads: 'Reads as', tHolds: 'Holds',
+        setEyebrow: 'Six weeks, honestly', setA: 'Week two is when', setB: 'everyone panics.',
+        setSub: 'Almost nobody publishes this, which is why clients assume the work failed. It has not. Here is every stage before you book.',
+        finA: 'You do not pay', finB: 'it all at once.', finCta: 'Price mine exactly',
+        finFull: 'Paid in full', finFour: 'Or four payments of',
+        afterA: 'The ten days', afterB: 'after.',
+        afterSub: 'Your result is half technique and half what you do in the week that follows. This is the whole list.',
+        faqA: 'The questions people', faqB: 'actually ask.',
+        alsoEyebrow: 'Also in the studio',
+        ctaEyebrow: 'Six questions, nothing held', ctaA: 'Find out what yours', ctaB: 'costs', ctaC: 'before you call.',
+        ctaSub: 'Card price and cash price side by side, then a time. Nobody calls you unless you ask.',
+        ctaBtn: 'Price my treatment', callBtn: 'Call 718 354 6298', roomNote: 'treatments in this room'
+      },
+      techniques: (es ? d.TECHNIQUES_ES : d.TECHNIQUES) || [],
+      settling: ((es ? d.SETTLING_ES : d.SETTLING) || []).map((x, i) => ({
+        when: x[0], title: x[1], body: x[2],
+        dot: i === 3 ? '#7C2D3A' : 'rgba(26,20,17,.3)'
+      })),
+      aftercare: ((es ? d.AFTERCARE_ES : d.AFTERCARE) || []).map(a => ({ t: a[0], b: a[1] })),
+      // the price list inverts on clinical pages so it reads as a different page
+      listBg: isClinical ? '#1A1411' : (isCourse ? '#EAE1D6' : '#F4EDE6'),
+      listFg: isClinical ? '#FBF6F0' : '#1A1411',
+      listAccent: isClinical ? '#D9A08C' : '#7C2D3A',
+      listMuted: isClinical ? 'rgba(251,246,240,.6)' : '#5C4E46',
+      listFaint: isClinical ? 'rgba(251,246,240,.4)' : '#8A7A6E',
+      listLine: isClinical ? 'rgba(251,246,240,.16)' : 'rgba(26,20,17,.18)',
+      faqBg: isClinical ? '#F4EDE6' : (isCourse ? '#F4EDE6' : '#EAE1D6')
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="background:#F4EDE6; color:#1A1411; font-family:'DM Sans',sans-serif; min-height:100vh;">
+
+  <div style="background:#1A1411; color:#FBF6F0; padding:104px 44px 56px;">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:50px; flex-wrap:wrap;">
+      <div style="display:flex; flex-direction:column; gap:18px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="width:34px; height:1px; background:#D9A08C;"></div>
+          <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ ui.eyebrow }}</div>
+        </div>
+        <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(40px,4.2vw,68px); line-height:.95; letter-spacing:-.034em;">{{ ui.h1a }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.h1b }}</span></div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:7px; align-items:flex-end; text-align:right;">
+        <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:rgba(251,246,240,.5);">{{ ui.booking }}</div>
+        <div style="font-family:'Libre Caslon Display',serif; font-size:27px; line-height:1.15; color:#FBF6F0; max-width:330px;">{{ svcName }}</div>
+        <div style="font-size:13px; color:rgba(251,246,240,.62);">{{ svcMeta }}</div>
+      </div>
+    </div>
+  </div>
+
+  <sc-if value="{{ notDone }}" hint-placeholder-val="{{ true }}">
+  <div style="display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,.85fr); gap:0; border-bottom:1px solid rgba(26,20,17,.16);">
+
+    <div style="padding:52px 44px 66px; border-right:1px solid rgba(26,20,17,.16); display:flex; flex-direction:column; gap:34px;">
+
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:20px;">
+          <div style="font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A; white-space:nowrap;">{{ ui.step1 }}</div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <div onClick="{{ prevWeek }}" style="border:1px solid {{ prevBorder }}; color:{{ prevColor }}; width:32px; height:32px; display:flex; align-items:center; justify-content:center; font-size:13px; cursor:{{ prevCursor }};" style-hover="border-color:#7C2D3A;">&larr;</div>
+            <div style="font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; color:#5C4E46; min-width:150px; text-align:center;">{{ rangeLabel }}</div>
+            <div onClick="{{ nextWeek }}" style="border:1px solid rgba(26,20,17,.28); color:#1A1411; width:32px; height:32px; display:flex; align-items:center; justify-content:center; font-size:13px; cursor:pointer;" style-hover="border-color:#7C2D3A;">&rarr;</div>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:2px; background:rgba(26,20,17,.14);">
+          <sc-for list="{{ dayHeads }}" as="h" hint-placeholder-count="7">
+            <div style="background:#F4EDE6; padding:9px 0; text-align:center; font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:#8A7A6E;">{{ h }}</div>
+          </sc-for>
+          <sc-for list="{{ days }}" as="d" hint-placeholder-count="14">
+            <div onClick="{{ d.click }}" style="background:{{ d.bg }}; border:1px solid {{ d.border }}; padding:13px 8px 15px; display:flex; flex-direction:column; align-items:center; gap:5px; cursor:{{ d.cursor }}; min-height:78px; justify-content:center;">
+              <div style="font-family:'Libre Caslon Display',serif; font-size:25px; line-height:1; color:{{ d.fg }};">{{ d.num }}</div>
+              <div style="font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; color:{{ d.subFg }}; text-align:center;">{{ d.note }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:16px; border-top:1px solid rgba(26,20,17,.16); padding-top:30px;">
+        <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;">
+          <div style="font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A; white-space:nowrap;">{{ ui.step2 }}</div>
+          <div style="font-size:13px; color:#8A7A6E;">{{ slotNote }}</div>
+        </div>
+        <sc-if value="{{ hasSlots }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex; flex-wrap:wrap; gap:9px;">
+            <sc-for list="{{ slots }}" as="s" hint-placeholder-count="8">
+              <div onClick="{{ s.click }}" style="background:{{ s.bg }}; border:1px solid {{ s.border }}; color:{{ s.fg }}; font-size:14px; letter-spacing:.03em; padding:14px 20px; cursor:{{ s.cursor }}; text-decoration:{{ s.strike }};">{{ s.label }}</div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ noSlots }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#EAE1D6; border-left:2px solid #7C2D3A; padding:20px 24px; font-size:14.5px; line-height:1.65; color:#5C4E46; max-width:560px;">{{ noSlotMsg }}</div>
+        </sc-if>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:16px; border-top:1px solid rgba(26,20,17,.16); padding-top:30px;">
+        <div style="font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A; white-space:nowrap;">{{ ui.step3 }}</div>
+        <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px; max-width:600px;">
+          <input value="{{ name }}" onChange="{{ setName }}" placeholder="{{ ui.phName }}" style="background:#EAE1D6; border:1px solid rgba(26,20,17,.2); padding:16px 18px; font-family:'DM Sans',sans-serif; font-size:15px; color:#1A1411; outline:none;">
+          <input value="{{ phone }}" onChange="{{ setPhone }}" placeholder="{{ ui.phPhone }}" style="background:#EAE1D6; border:1px solid rgba(26,20,17,.2); padding:16px 18px; font-family:'DM Sans',sans-serif; font-size:15px; color:#1A1411; outline:none;">
+          <input value="{{ email }}" onChange="{{ setEmail }}" placeholder="{{ ui.phEmail }}" style="background:#EAE1D6; border:1px solid rgba(26,20,17,.2); padding:16px 18px; font-family:'DM Sans',sans-serif; font-size:15px; color:#1A1411; outline:none; grid-column:span 2;">
+          <textarea value="{{ note }}" onChange="{{ setNote }}" placeholder="{{ ui.phNote }}" rows="3" style="background:#EAE1D6; border:1px solid rgba(26,20,17,.2); padding:16px 18px; font-family:'DM Sans',sans-serif; font-size:15px; color:#1A1411; outline:none; grid-column:span 2; resize:vertical;"></textarea>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:9px; padding-top:4px;">
+          <div style="font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#8A7A6E;">{{ ui.firstT }}</div>
+          <div style="display:flex; gap:9px; flex-wrap:wrap;">
+            <sc-for list="{{ firstOpts }}" as="f" hint-placeholder-count="2">
+              <div onClick="{{ f.click }}" style="background:{{ f.bg }}; border:1px solid {{ f.border }}; color:{{ f.fg }}; font-size:13.5px; padding:13px 20px; cursor:pointer;">{{ f.label }}</div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:52px 40px 66px; display:flex; flex-direction:column; gap:26px; position:sticky; top:104px; align-self:start; background:#EAE1D6;">
+      <div style="font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A;">{{ ui.summary }}</div>
+      <div style="display:flex; flex-direction:column;">
+        <sc-for list="{{ lines }}" as="l" hint-placeholder-count="5">
+          <div style="display:flex; justify-content:space-between; gap:22px; padding:14px 0; border-bottom:1px solid rgba(26,20,17,.14); font-size:14px; align-items:baseline;">
+            <span style="color:#8A7A6E; letter-spacing:.02em;">{{ l.k }}</span>
+            <span style="color:{{ l.color }}; text-align:right; font-weight:{{ l.weight }};">{{ l.v }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:5px; padding-top:2px;">
+        <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#8A7A6E;">{{ ui.dueNow }}</div>
+        <div style="font-family:'Libre Caslon Display',serif; font-size:52px; line-height:1; color:#7C2D3A;">{{ deposit }}</div>
+        <div style="font-size:13px; line-height:1.6; color:#5C4E46;">{{ depositNote }}</div>
+      </div>
+      <div onClick="{{ submit }}" style="background:{{ btnBg }}; color:{{ btnFg }}; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:21px 30px; text-align:center; cursor:{{ btnCursor }};" style-hover="{{ btnHover }}">{{ ui.confirm }}</div>
+      <div style="font-size:12.5px; line-height:1.6; color:#8A7A6E;">{{ hint }}</div>
+      <div style="border-top:1px solid rgba(26,20,17,.16); padding-top:18px; display:flex; flex-direction:column; gap:9px;">
+        <sc-for list="{{ reassure }}" as="r" hint-placeholder-count="3">
+          <div style="display:grid; grid-template-columns:15px minmax(0,1fr); gap:10px; font-size:13px; line-height:1.6; color:#5C4E46;">
+            <div style="color:#7C2D3A; font-family:'Libre Caslon Display',serif;">&mdash;</div>
+            <div>{{ r }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:120px 44px 130px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.8fr); gap:80px; align-items:start;">
+      <div style="display:flex; flex-direction:column; gap:24px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="width:34px; height:1px; background:#7C2D3A;"></div>
+          <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A;">{{ ui.heldEyebrow }}</div>
+        </div>
+        <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(44px,4.6vw,76px); line-height:.95; letter-spacing:-.034em;">{{ doneTitle }}</div>
+        <div style="font-size:17.5px; line-height:1.72; color:#5C4E46; max-width:560px;">{{ doneBody }}</div>
+        <div style="display:flex; flex-direction:column; gap:11px; padding-top:6px;">
+          <sc-for list="{{ nextSteps }}" as="n" hint-placeholder-count="3">
+            <div style="display:grid; grid-template-columns:26px minmax(0,1fr); gap:14px; font-size:15.5px; line-height:1.65; color:#1A1411; max-width:560px;">
+              <div style="font-family:'Libre Caslon Display',serif; font-size:17px; color:#7C2D3A;">{{ n.n }}</div>
+              <div>{{ n.b }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; padding-top:12px;">
+          <a href="tel:+17183546298" style="background:#7C2D3A; color:#FBF6F0; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:19px 32px;" style-hover="background:#1A1411;">{{ ui.callStudio }}</a>
+          <div onClick="{{ restart }}" style="border:1px solid rgba(26,20,17,.28); color:#1A1411; font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; padding:19px 28px; cursor:pointer;" style-hover="border-color:#7C2D3A; color:#7C2D3A;">{{ ui.bookAnother }}</div>
+        </div>
+      </div>
+      <div style="background:#1A1411; color:#FBF6F0; padding:44px 40px; display:flex; flex-direction:column; gap:22px;">
+        <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ ui.yourAppt }}</div>
+        <div style="font-family:'Libre Caslon Display',serif; font-size:34px; line-height:1.1;">{{ doneWhen }}</div>
+        <div style="display:flex; flex-direction:column;">
+          <sc-for list="{{ lines }}" as="l" hint-placeholder-count="5">
+            <div style="display:flex; justify-content:space-between; gap:22px; padding:13px 0; border-bottom:1px solid rgba(251,246,240,.14); font-size:14px; align-items:baseline;">
+              <span style="color:rgba(251,246,240,.55);">{{ l.k }}</span>
+              <span style="text-align:right;">{{ l.v }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="font-size:13px; line-height:1.65; color:rgba(251,246,240,.6);">{{ ui.holdNote }}</div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1400, &quot;height&quot;: 900}, &quot;lang&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;en&quot;, &quot;es&quot;], &quot;default&quot;: &quot;en&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;svc&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;Microblading&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;dur&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 90, &quot;min&quot;: 30, &quot;max&quot;: 240, &quot;step&quot;: 30, &quot;tsType&quot;: &quot;number&quot;}, &quot;price&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;$580&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;onNav&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;(page: string) =&gt; void&quot;}}">
+// Real studio hours: [openMinutes, closeMinutes] from midnight, null = closed.
+const HOURS = [
+  [720, 1200], [630, 1200], [720, 1200], [630, 1200], [720, 1200], [780, 900], null
+];
+
+const UI = {
+  en: {
+    eyebrow: 'Book an appointment', h1a: 'Pick a day, pick', h1b: 'a time.',
+    booking: 'Booking', step1: '01 \u00b7 Choose a day', step2: '02 \u00b7 Choose a time', step3: '03 \u00b7 Your details',
+    phName: 'Your name', phPhone: 'Phone number', phEmail: 'Email (optional)',
+    phNote: 'Anything Aruna should know \u2014 previous work, allergies, an event you are working towards',
+    firstT: 'Have you been here before?', firstYes: 'I am a returning client', firstNo: 'This is my first time',
+    summary: 'Your appointment', dueNow: 'Due now', confirm: 'Request this time',
+    lWhat: 'Treatment', lWhen: 'Day', lTime: 'Time', lEnds: 'Ends about', lPrice: 'Price', lWith: 'With',
+    notSet: 'Not chosen yet', aruna: 'Aruna',
+    depNone: 'Nothing is charged now. Aruna confirms by text, usually the same day.',
+    depSome: 'Deposit for this treatment, taken when Aruna confirms. It comes off the price, it is not a booking fee.',
+    hintDay: 'Choose a day to see times', hintTime: 'Choose a time', hintName: 'Add a name and phone number',
+    hintReady: 'No card needed. This sends a request, not a charge.',
+    slotAll: 'All times shown are start times',
+    slotClosed: 'The studio is closed on Sundays. Pick another day.',
+    slotShort: 'Saturday is 1pm to 3pm only, and this treatment needs longer than that. Pick a weekday, or call and ask about a Saturday exception.',
+    slotFull: 'Every time on this day is taken. Try the next day, or call and ask to be put on the cancellation list.',
+    reassure: ['Nothing is charged on this page.', 'Aruna replies by text, usually within the day.', 'Move or cancel free up to 24 hours before.'],
+    heldEyebrow: 'Request sent', yourAppt: 'Your appointment', callStudio: 'Call the studio', bookAnother: 'Book something else',
+    holdNote: 'This time is held for you until Aruna confirms. If it has gone, she will offer you the two nearest slots.',
+    doneT: 'Your time is held.', thanks: 'Thank you,',
+    steps: [
+      ['01', 'Aruna confirms by text, usually the same day and always within one working day.'],
+      ['02', 'If a deposit applies she sends a link. It comes off the treatment price rather than sitting on top of it.'],
+      ['03', 'For permanent makeup, your second sitting gets booked at the appointment itself, four to six weeks out.']
+    ],
+    months: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+    dayHeads: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+    dayNames: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+    closed: 'Closed', full: 'Full', today: 'Today', open: 'open', short: 'Short day'
+  },
+  es: {
+    eyebrow: 'Reservar una cita', h1a: 'Elige un d\u00eda,', h1b: 'elige una hora.',
+    booking: 'Reserva', step1: '01 \u00b7 Elige un d\u00eda', step2: '02 \u00b7 Elige una hora', step3: '03 \u00b7 Tus datos',
+    phName: 'Tu nombre', phPhone: 'Tel\u00e9fono', phEmail: 'Correo (opcional)',
+    phNote: 'Algo que Aruna deba saber: trabajo anterior, alergias, un evento para el que te preparas',
+    firstT: '\u00bfHab\u00edas venido antes?', firstYes: 'Ya soy clienta', firstNo: 'Es mi primera vez',
+    summary: 'Tu cita', dueNow: 'A pagar ahora', confirm: 'Solicitar esta hora',
+    lWhat: 'Tratamiento', lWhen: 'D\u00eda', lTime: 'Hora', lEnds: 'Termina hacia', lPrice: 'Precio', lWith: 'Con',
+    notSet: 'Sin elegir', aruna: 'Aruna',
+    depNone: 'No se cobra nada ahora. Aruna confirma por mensaje, normalmente el mismo d\u00eda.',
+    depSome: 'Dep\u00f3sito de este tratamiento, se cobra cuando Aruna confirma. Se descuenta del precio, no es un cargo por reservar.',
+    hintDay: 'Elige un d\u00eda para ver las horas', hintTime: 'Elige una hora', hintName: 'A\u00f1ade un nombre y un tel\u00e9fono',
+    hintReady: 'Sin tarjeta. Esto env\u00eda una solicitud, no un cargo.',
+    slotAll: 'Todas las horas son horas de inicio',
+    slotClosed: 'El estudio cierra los domingos. Elige otro d\u00eda.',
+    slotShort: 'El s\u00e1bado es solo de 1pm a 3pm, y este tratamiento necesita m\u00e1s tiempo. Elige un d\u00eda de semana, o llama y pregunta por una excepci\u00f3n el s\u00e1bado.',
+    slotFull: 'Todas las horas de este d\u00eda est\u00e1n tomadas. Prueba el d\u00eda siguiente, o llama para entrar en la lista de cancelaciones.',
+    reassure: ['En esta p\u00e1gina no se cobra nada.', 'Aruna responde por mensaje, normalmente el mismo d\u00eda.', 'Cambia o cancela gratis hasta 24 horas antes.'],
+    heldEyebrow: 'Solicitud enviada', yourAppt: 'Tu cita', callStudio: 'Llamar al estudio', bookAnother: 'Reservar otra cosa',
+    holdNote: 'Esta hora queda apartada hasta que Aruna confirme. Si ya no est\u00e1, te ofrecer\u00e1 los dos huecos m\u00e1s cercanos.',
+    doneT: 'Tu hora est\u00e1 apartada.', thanks: 'Gracias,',
+    steps: [
+      ['01', 'Aruna confirma por mensaje, normalmente el mismo d\u00eda y siempre dentro de un d\u00eda laborable.'],
+      ['02', 'Si hay dep\u00f3sito te env\u00eda un enlace. Se descuenta del precio del tratamiento en lugar de sumarse.'],
+      ['03', 'Para maquillaje permanente, tu segunda sesi\u00f3n se agenda en la cita misma, de cuatro a seis semanas despu\u00e9s.']
+    ],
+    months: ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'],
+    dayHeads: ['Lun','Mar','Mi\u00e9','Jue','Vie','S\u00e1b','Dom'],
+    dayNames: ['Lunes','Martes','Mi\u00e9rcoles','Jueves','Viernes','S\u00e1bado','Domingo'],
+    closed: 'Cerrado', full: 'Lleno', today: 'Hoy', open: 'libres', short: 'D\u00eda corto'
+  }
+};
+
+// Deposits the studio actually takes, by treatment name fragment.
+const DEPOSITS = [
+  [/beauty nap/i, 100], [/house call/i, 100], [/full body massage/i, 60]
+];
+
+const clock = (m, es) => {
+  const h24 = Math.floor(m / 60), mm = m % 60;
+  const h = h24 % 12 === 0 ? 12 : h24 % 12;
+  const suf = h24 < 12 ? 'am' : 'pm';
+  return h + (mm ? '.' + String(mm).padStart(2, '0') : '') + suf;
+};
+
+const iso = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+
+// Deterministic pseudo-bookings so the calendar looks lived-in and stays stable.
+const hash = s => { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return Math.abs(h); };
+
+class Component extends DCLogic {
+  state = { offset: 0, date: null, time: null, name: '', phone: '', email: '', note: '', first: null, done: false, doneAt: null };
+
+  componentDidMount() { window.scrollTo({ top: 0, behavior: 'auto' }); }
+
+  dur() { return Math.max(30, Number(this.props.dur) || 90); }
+
+  // Start times every 30 min that fit the treatment inside the day's hours.
+  slotsFor(d) {
+    const idx = (d.getDay() + 6) % 7;
+    const win = HOURS[idx];
+    if (!win) return { closed: true, list: [] };
+    const dur = this.dur();
+    const list = [];
+    for (let t = win[0]; t + dur <= win[1]; t += 30) list.push(t);
+    if (!list.length) return { tooShort: true, list: [] };
+    const key = iso(d);
+    const taken = list.filter(t => hash(key + ':' + t) % 100 < 34);
+    return { list, taken };
+  }
+
+  days() {
+    const out = [];
+    const base = new Date();
+    base.setHours(0, 0, 0, 0);
+    // Start the grid on the Monday of the current week, then page by fortnight.
+    const mondayShift = (base.getDay() + 6) % 7;
+    const start = new Date(base);
+    start.setDate(base.getDate() - mondayShift + this.state.offset * 14);
+    for (let i = 0; i < 14; i++) {
+      const d = new Date(start);
+      d.setDate(start.getDate() + i);
+      out.push(d);
+    }
+    return out;
+  }
+
+  set = (k, v) => this.setState({ [k]: v });
+
+  submit = () => {
+    if (!this.ready()) return;
+    this.setState({ done: true, doneAt: new Date().toISOString() });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  ready() {
+    const s = this.state;
+    return !!(s.date && s.time !== null && s.name.trim() && s.phone.trim());
+  }
+
+  restart = () => this.setState({ done: false, date: null, time: null, name: '', phone: '', email: '', note: '', first: null });
+
+  renderVals() {
+    const st = this.state;
+    const es = this.props.lang === 'es';
+    const ui = UI[es ? 'es' : 'en'];
+    const dur = this.dur();
+    const svcName = this.props.svc || (es ? 'Consulta gratuita' : 'Free consultation');
+    const price = this.props.price || (es ? 'Gratis' : 'Free');
+
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const days = this.days();
+    const selKey = st.date;
+
+    const dayCells = days.map(d => {
+      const key = iso(d);
+      const past = d < today;
+      const info = this.slotsFor(d);
+      const free = info.list.length ? info.list.length - (info.taken || []).length : 0;
+      const dead = past || info.closed || info.tooShort || free === 0;
+      const sel = selKey === key;
+      let note = ui.closed;
+      if (!info.closed && info.tooShort) note = ui.short;
+      else if (!info.closed && !past) note = free ? free + ' ' + ui.open : ui.full;
+      else if (past && !info.closed) note = '\u2014';
+      if (d.getTime() === today.getTime() && !info.closed) note = ui.today;
+      return {
+        num: d.getDate(), note,
+        bg: sel ? '#7C2D3A' : (dead ? '#EFE7DE' : '#F4EDE6'),
+        border: sel ? '#7C2D3A' : 'rgba(26,20,17,.16)',
+        fg: sel ? '#FBF6F0' : (dead ? '#B4A69A' : '#1A1411'),
+        subFg: sel ? 'rgba(251,246,240,.75)' : (dead ? '#B4A69A' : '#8A7A6E'),
+        cursor: dead ? 'default' : 'pointer',
+        click: dead ? () => {} : () => this.setState({ date: key, time: null })
+      };
+    });
+
+    const selDate = selKey ? days.find(d => iso(d) === selKey) || new Date(selKey + 'T00:00:00') : null;
+    const info = selDate ? this.slotsFor(selDate) : { list: [] };
+    const taken = info.taken || [];
+    const slots = (info.list || []).map(t => {
+      const gone = taken.indexOf(t) > -1;
+      const sel = st.time === t;
+      return {
+        label: clock(t, es),
+        bg: sel ? '#7C2D3A' : (gone ? 'transparent' : '#F4EDE6'),
+        border: sel ? '#7C2D3A' : 'rgba(26,20,17,.22)',
+        fg: sel ? '#FBF6F0' : (gone ? '#B4A69A' : '#1A1411'),
+        cursor: gone ? 'default' : 'pointer',
+        strike: gone ? 'line-through' : 'none',
+        click: gone ? () => {} : () => this.setState({ time: t })
+      };
+    });
+
+    let noSlotMsg = '';
+    if (selDate) {
+      if (info.closed) noSlotMsg = ui.slotClosed;
+      else if (info.tooShort) noSlotMsg = ui.slotShort;
+      else if (taken.length === info.list.length) noSlotMsg = ui.slotFull;
+    }
+
+    const fmtDay = d => d ? ui.dayNames[(d.getDay() + 6) % 7] + ' ' + d.getDate() + ' ' + ui.months[d.getMonth()] : ui.notSet;
+    const dep = (DEPOSITS.find(x => x[0].test(svcName)) || [null, 0])[1];
+
+    const first = days[0], last = days[13];
+    const rangeLabel = first.getMonth() === last.getMonth()
+      ? ui.months[first.getMonth()] + ' ' + first.getDate() + '\u2013' + last.getDate()
+      : ui.months[first.getMonth()] + ' ' + first.getDate() + ' \u2013 ' + ui.months[last.getMonth()] + ' ' + last.getDate();
+
+    const lines = [
+      { k: ui.lWhat, v: svcName, color: '#1A1411', weight: '500' },
+      { k: ui.lWhen, v: fmtDay(selDate), color: selDate ? '#1A1411' : '#B4A69A', weight: '400' },
+      { k: ui.lTime, v: st.time !== null ? clock(st.time, es) : ui.notSet, color: st.time !== null ? '#1A1411' : '#B4A69A', weight: '400' },
+      { k: ui.lEnds, v: st.time !== null ? clock(st.time + dur, es) : '\u2014', color: '#5C4E46', weight: '400' },
+      { k: ui.lPrice, v: price, color: '#7C2D3A', weight: '500' },
+      { k: ui.lWith, v: ui.aruna, color: '#5C4E46', weight: '400' }
+    ];
+
+    const ok = this.ready();
+    let hint = ui.hintReady;
+    if (!selDate) hint = ui.hintDay;
+    else if (st.time === null) hint = ui.hintTime;
+    else if (!ok) hint = ui.hintName;
+
+    return {
+      ui, svcName,
+      svcMeta: dur + ' min \u00b7 ' + price,
+      dayHeads: ui.dayHeads,
+      days: dayCells,
+      rangeLabel,
+      prevWeek: () => this.setState({ offset: Math.max(0, st.offset - 1), date: null, time: null }),
+      nextWeek: () => this.setState({ offset: st.offset + 1, date: null, time: null }),
+      prevBorder: st.offset ? 'rgba(26,20,17,.28)' : 'rgba(26,20,17,.12)',
+      prevColor: st.offset ? '#1A1411' : '#C4B6AA',
+      prevCursor: st.offset ? 'pointer' : 'default',
+      slots, hasSlots: slots.length > 0, noSlots: !!noSlotMsg, noSlotMsg,
+      slotNote: selDate ? ui.slotAll : '',
+      name: st.name, phone: st.phone, email: st.email, note: st.note,
+      setName: e => this.set('name', e.target.value),
+      setPhone: e => this.set('phone', e.target.value),
+      setEmail: e => this.set('email', e.target.value),
+      setNote: e => this.set('note', e.target.value),
+      firstOpts: [
+        { label: ui.firstYes, k: 'ret' }, { label: ui.firstNo, k: 'new' }
+      ].map(o => ({
+        label: o.label,
+        bg: st.first === o.k ? '#7C2D3A' : '#EAE1D6',
+        border: st.first === o.k ? '#7C2D3A' : 'rgba(26,20,17,.2)',
+        fg: st.first === o.k ? '#FBF6F0' : '#1A1411',
+        click: () => this.setState({ first: o.k })
+      })),
+      lines,
+      deposit: dep ? '$' + dep : (es ? 'Nada' : 'Nothing'),
+      depositNote: dep ? ui.depSome : ui.depNone,
+      submit: this.submit,
+      btnBg: ok ? '#7C2D3A' : '#D8CCC0',
+      btnFg: ok ? '#FBF6F0' : '#8A7A6E',
+      btnCursor: ok ? 'pointer' : 'default',
+      btnHover: ok ? 'background:#1A1411;' : '',
+      hint,
+      reassure: ui.reassure,
+      done: st.done, notDone: !st.done,
+      doneTitle: st.name ? ui.thanks + ' ' + st.name.trim().split(' ')[0] + '.' : ui.doneT,
+      doneWhen: fmtDay(selDate) + (st.time !== null ? ', ' + clock(st.time, es) : ''),
+      doneBody: es
+        ? 'Aruna tiene tu solicitud y esta hora queda apartada para ti. Te confirma por mensaje al ' + (st.phone || 'n\u00famero que dejaste') + '.'
+        : 'Aruna has your request and this time is held for you. She confirms by text to ' + (st.phone || 'the number you left') + '.',
+      nextSteps: ui.steps.map(s => ({ n: s[0], b: s[1] })),
+      restart: this.restart
+    };
+  }
+}
+
+</script>
+</body>
+</html>

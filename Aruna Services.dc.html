@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="background:#F4EDE6; color:#1A1411; font-family:'DM Sans',sans-serif; min-height:70vh;">
+
+  <div style="position:relative; height:66vh; min-height:540px; overflow:hidden; background:#1A1411;">
+    <div style="position:absolute; inset:0; background-image:url('https://static.glossgenius.com/public/salon/f893e6ce0d22374c613c44780aa0aee205264592/website_cover_image/d400e009fd15fd892a954cee4f0ce2ce.jpeg'); background-size:cover; background-position:center 34%; background-color:#D8CCC0;"></div>
+    <div style="position:absolute; inset:0; background:linear-gradient(100deg, rgba(20,15,12,.93) 0%, rgba(20,15,12,.68) 48%, rgba(20,15,12,.22) 100%);"></div>
+    <div style="position:relative; height:100%; display:flex; flex-direction:column; justify-content:flex-end; padding:0 44px 56px; gap:22px; color:#FBF6F0;">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <div style="width:44px; height:1px; background:#D9A08C;"></div>
+        <div style="font-size:10.5px; letter-spacing:.28em; text-transform:uppercase; color:#D9A08C;">{{ ui.eyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(46px, 5vw, 84px); line-height:.96; letter-spacing:-.032em; max-width:1000px;">{{ ui.h1a }}<br>{{ ui.h1b }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.h1c }}</span></div>
+      <div style="display:flex; gap:48px; flex-wrap:wrap;">
+        <div style="font-size:15.5px; line-height:1.65; color:rgba(251,246,240,.76); max-width:280px;">{{ ui.n1 }}</div>
+        <div style="font-size:15.5px; line-height:1.65; color:rgba(251,246,240,.76); max-width:280px;">{{ ui.n2 }}</div>
+        <div style="font-size:15.5px; line-height:1.65; color:rgba(251,246,240,.76); max-width:280px;">{{ ui.n3 }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:sticky; top:104px; z-index:40; background:rgba(244,237,230,.96); backdrop-filter:blur(14px); border-bottom:1px solid rgba(26,20,17,.18); display:flex; flex-wrap:wrap; align-items:center;">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="9">
+      <div onClick="{{ t.click }}" style="padding:16px 22px; font-size:12.5px; cursor:pointer; border-right:1px solid rgba(26,20,17,.14); background:{{ t.bg }}; color:{{ t.fg }}; transition:background .25s ease, color .25s ease;" style-hover="color:#7C2D3A;">{{ t.label }} <span style="opacity:.55; font-size:11px;">{{ t.count }}</span></div>
+    </sc-for>
+  </div>
+
+  <div style="display:flex; flex-direction:column;">
+    <sc-for list="{{ groups }}" as="g" hint-placeholder-count="4">
+      <div style="border-bottom:1px solid rgba(26,20,17,.16);">
+        <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); min-height:440px;">
+          <div style="order:{{ g.oImg }}; background-image:{{ g.imgCss }}; background-size:cover; background-position:center; background-color:#D8CCC0; min-height:380px;"></div>
+          <div style="order:{{ g.oTxt }}; padding:90px 44px; display:flex; flex-direction:column; justify-content:center; gap:20px;">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="width:34px; height:1px; background:#7C2D3A;"></div>
+              <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A;">{{ g.count }} {{ ui.treatments }}</div>
+            </div>
+            <div style="font-family:'Libre Caslon Display',serif; font-size:60px; line-height:.94; letter-spacing:-.03em;">{{ g.label }}</div>
+            <div style="font-size:16.5px; line-height:1.7; color:#5C4E46; max-width:430px;">{{ g.blurb }}</div>
+            <div style="display:flex; align-items:baseline; gap:14px; padding-top:4px;">
+              <div style="font-family:'Libre Caslon Display',serif; font-size:52px; line-height:1; color:#7C2D3A;">{{ g.from }}</div>
+              <div style="font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:#8A7A6E;">{{ ui.andUp }}</div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:56px 44px 84px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:0 76px;">
+          <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="8">
+            <div onClick="{{ goQuote }}" style="display:grid; grid-template-columns:1fr auto; gap:6px 20px; padding:20px 0; border-top:1px solid rgba(26,20,17,.18); align-items:baseline; cursor:pointer; transition:opacity .25s ease;" style-hover="opacity:.6;">
+              <div style="font-size:17.5px; font-weight:500; line-height:1.35;">{{ r.n }}</div>
+              <div style="font-family:'Libre Caslon Display',serif; font-size:26px; color:#7C2D3A; white-space:nowrap; text-align:right;">{{ r.price }}</div>
+              <div style="font-size:12.5px; letter-spacing:.05em; color:#8A7A6E;">{{ r.dur }}{{ r.cash }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="background:#EAE1D6; padding:56px 44px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:44px; border-top:1px solid rgba(26,20,17,.16);">
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A;">{{ ui.depT }}</div>
+      <div style="font-size:14px; line-height:1.75; color:#5C4E46;">{{ ui.depB }}</div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A;">{{ ui.canT }}</div>
+      <div style="font-size:14px; line-height:1.75; color:#5C4E46;">{{ ui.canB }}</div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A;">{{ ui.payT }}</div>
+      <div style="font-size:14px; line-height:1.75; color:#5C4E46;">{{ ui.payB }}</div>
+    </div>
+  </div>
+
+  <div style="background:#7C2D3A; color:#FBF6F0; padding:56px 44px; display:flex; align-items:center; justify-content:space-between; gap:40px;">
+    <div style="display:flex; flex-direction:column; gap:11px; max-width:620px;">
+      <div style="font-family:'Libre Caslon Display',serif; font-size:44px; line-height:1.08;">{{ ui.ctaA }}</div>
+      <div style="font-size:14.5px; line-height:1.65; color:rgba(251,246,240,.78);">{{ ui.ctaB }}</div>
+    </div>
+    <div onClick="{{ goQuote }}" style="background:#F4EDE6; color:#7C2D3A; font-size:12.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; padding:20px 40px; cursor:pointer; white-space:nowrap;" style-hover="background:#fff; color:#1A1411;">{{ ui.ctaBtn }}</div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const UI = {
+  en: { eyebrow: 'Every treatment, every price', h1a: 'You should not have to', h1b: 'ask', h1c: 'what it costs.',
+    n1: 'Cash is lower on every permanent-makeup service, and it says so here.',
+    n2: 'Laser is sold by the course, because one session does nothing.',
+    n3: 'Nothing quoted in a direct message. Nothing renegotiated at the door.',
+    everything: 'Everything', treatments: 'treatments', andUp: 'and up',
+    depT: 'Deposits', depB: '$100 deposit on the Beauty Nap and on new house-call clients. $60 on full body massage. Deposits come off the treatment price. They are not a booking fee.',
+    canT: 'Cancellations', canB: 'One chair means an empty slot cannot be filled. New brow and PMU clients: $150 for a no-show or a cancellation inside 24 hours. Move it earlier and it costs nothing.',
+    payT: 'Paying over time', payB: 'Anything from $50 to $4,000, split into four. Approved in about a minute before your appointment, and it does not hold up the booking.',
+    ctaA: 'Not sure which line is yours?', ctaB: 'Six questions gets you to the right treatment and what it costs. The consultation after it is free whether you book or not.',
+    ctaBtn: 'Price my treatment', call: 'or call 718 354 6298' },
+  es: { eyebrow: 'Cada tratamiento, cada precio', h1a: 'No deber\u00edas tener que', h1b: 'preguntar', h1c: 'cu\u00e1nto cuesta.',
+    n1: 'En efectivo es menos en cada servicio de maquillaje permanente, y aqu\u00ed lo dice.',
+    n2: 'El l\u00e1ser se vende por plan, porque una sesi\u00f3n no hace nada.',
+    n3: 'Nada cotizado por mensaje. Nada renegociado en la puerta.',
+    everything: 'Todo', treatments: 'tratamientos', andUp: 'y m\u00e1s',
+    depT: 'Dep\u00f3sitos', depB: '$100 de dep\u00f3sito en el Beauty Nap y en clientas nuevas a domicilio. $60 en masaje de cuerpo completo. Los dep\u00f3sitos se descuentan del precio. No son un cargo por reservar.',
+    canT: 'Cancelaciones', canB: 'Una sola silla significa que un hueco vac\u00edo no se puede rellenar. Clientas nuevas de cejas y PMU: $150 por ausencia o cancelaci\u00f3n con menos de 24 horas. Cambiarla antes no cuesta nada.',
+    payT: 'Pagar a plazos', payB: 'De $50 a $4,000, dividido en cuatro. Aprobado en un minuto antes de tu cita, y no retrasa la reserva.',
+    ctaA: '\u00bfNo sabes cu\u00e1l es tu l\u00ednea?', ctaB: 'Seis preguntas te llevan al tratamiento correcto y a su precio. La consulta despu\u00e9s es gratis, reserves o no.',
+    ctaBtn: 'Ver mi precio', call: 'o llama al 718 354 6298' }
+};
+
+const CATS_ES = {
+  pmu: 'Cejas y maquillaje permanente', hairloss: 'Cabello y cuero cabelludo',
+  skin: 'Faciales y piel', laser: 'Depilaci\u00f3n l\u00e1ser', body: 'Cuerpo y masaje',
+  packages: 'Paquetes', training: 'Formaci\u00f3n', mobile: 'A domicilio'
+};
+
+const BLURB_ES = {
+  pmu: 'Cejas, labios y delineado trabajados a mano en sesiones de noventa minutos. Tu primer retoque est\u00e1 incluido, y en efectivo baja cada cifra.',
+  hairloss: 'El aspecto de cabello muy corto, colocado pigmento a pigmento. De entradas a cobertura completa por alopecia, financiado en cuatro pagos.',
+  skin: 'Limpiezas, hydrafaciales, dermaplaning, microneedling y radiofrecuencia. Adaptado a tu piel ese d\u00eda, no elegido de un men\u00fa.',
+  laser: 'Precio por zona, de seis a diez sesiones para reducir entre 80 y 100%. Compra seis o m\u00e1s y todo el plan baja 20%.',
+  body: 'Moldeado, drenaje linf\u00e1tico y masaje, vendidos por plan porque una sola sesi\u00f3n de cualquiera de ellos no vale la pena.',
+  packages: 'Los mismos tratamientos comprados por plan. Cuatro faciales cuestan m\u00e1s o menos lo que tres por separado, y la piel de verdad avanza.',
+  training: 'Para artistas que ya trabajan y quieren trazos m\u00e1s limpios y powder m\u00e1s suave. Doce horas con la m\u00e1quina en la mano.',
+  mobile: 'Micropigmentaci\u00f3n en tu direcci\u00f3n para grupos de tres o m\u00e1s en Long Island, Nueva Jersey y Whitestone.'
+};
+
+class Component extends DCLogic {
+  state = { d: null, cat: 'all' };
+  componentDidMount() { import('./aruna-data.js').then(d => this.setState({ d })); }
+  nav = (page, seg) => { const f = this.props.onNav; if (f) f(page, seg); };
+
+  renderVals() {
+    const d = this.state.d;
+    const goQuote = () => this.nav('quote');
+    if (!d) return { goQuote, tabs: [], groups: [], ui: UI[this.props.lang || 'en'] || UI.en };
+
+    const lang = this.props.lang || 'en';
+    const es = lang === 'es';
+    const ui = UI[lang] || UI.en;
+    const cat = this.state.cat;
+    const counts = {};
+    d.SERVICES.forEach(s => { counts[s.cat] = (counts[s.cat] || 0) + 1; });
+
+    const tabs = [{ key: 'all', label: ui.everything, count: d.SERVICES.length }]
+      .concat(d.CATS.map(c => ({ key: c.key, label: es ? (CATS_ES[c.key] || c.label) : c.label, count: counts[c.key] || 0 })))
+      .map(t => ({
+        label: t.label, count: t.count,
+        bg: cat === t.key ? '#7C2D3A' : 'transparent',
+        fg: cat === t.key ? '#FBF6F0' : '#5C4E46',
+        click: () => this.setState({ cat: t.key })
+      }));
+
+    const BLURB = {
+      pmu: 'Brows, lips and eyeliner worked by hand in ninety-minute sittings. Your first touch-up is inside the price, and cash brings every number down.',
+      hairloss: 'The look of a closely cropped head of hair, placed pigment by pigment. Hairline through to full-head alopecia coverage, financed in four payments.',
+      skin: 'Cleanses, hydrafacials, dermaplaning, microneedling and radio-frequency tightening. Built around your skin on the day rather than picked off a menu.',
+      laser: 'Priced per area, six to ten sessions for 80 to 100% reduction. Buy six or more and the whole course drops 20%.',
+      body: 'Sculpting, lymphatic drainage and massage, sold as courses because a single session of any of them is not worth buying.',
+      packages: 'The same treatments bought as a course. Four facials cost roughly what three cost separately, and the skin actually gets somewhere.',
+      training: 'For artists who already work and want crisper hairstrokes and softer powder. Twelve hours with a machine in your hand.',
+      mobile: 'Micropigmentation at your address for groups of three or more across Long Island, New Jersey and Whitestone.'
+    };
+    const IMGS = {
+      pmu: d.IMG.microblade, hairloss: d.IMG.scalp, skin: d.IMG.dream, laser: d.IMG.legs,
+      body: d.IMG.sculpt, packages: d.IMG.nap, training: d.IMG.training, mobile: d.IMG.house
+    };
+
+    const shown = cat === 'all' ? d.CATS : d.CATS.filter(c => c.key === cat);
+    const groups = shown.map((c, i) => {
+      const rows = d.SERVICES.filter(s => s.cat === c.key).sort((a, b) => a.price - b.price).map(s => ({
+        n: s.n,
+        dur: s.dur + ' min',
+        price: d.money(s),
+        cash: s.cash ? '  ·  $' + s.cash.toLocaleString('en-US') + ' cash' : ''
+      }));
+      const paid = d.SERVICES.filter(s => s.cat === c.key && s.price > 0);
+      const min = paid.length ? Math.min.apply(null, paid.map(s => s.price)) : 0;
+      return {
+        label: es ? (CATS_ES[c.key] || c.label) : c.label, count: rows.length, rows,
+        blurb: es ? (BLURB_ES[c.key] || '') : (BLURB[c.key] || ''),
+        from: '$' + min.toLocaleString('en-US'),
+        imgCss: "url('" + (IMGS[c.key] || d.IMG.cover) + "')",
+        oImg: i % 2 === 0 ? 1 : 2,
+        oTxt: i % 2 === 0 ? 2 : 1
+      };
+    }).filter(g => g.rows.length);
+
+    return { goQuote, tabs, groups, ui };
+  }
+}
+
+</script>
+</body>
+</html>

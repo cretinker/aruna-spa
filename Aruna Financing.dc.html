@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="./image-slot.js"></script>
+</helmet>
+<div style="background:#F4EDE6; color:#1A1411; font-family:'DM Sans',sans-serif;">
+
+  <div style="background:#1A1411; color:#FBF6F0; display:grid; grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr); align-items:stretch;">
+    <div style="padding:120px 50px 96px 44px; display:flex; flex-direction:column; gap:26px; justify-content:center;">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <div style="width:44px; height:1px; background:#D9A08C;"></div>
+        <div style="font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ ui.eyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(44px,4.4vw,76px); line-height:.93; letter-spacing:-.035em;">{{ ui.h1a }}<br>{{ ui.h1b }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.h1c }}</span></div>
+      <div style="font-size:18.5px; line-height:1.7; color:rgba(251,246,240,.76); max-width:540px;">{{ ui.sub }}</div>
+      <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:2px; background:rgba(251,246,240,.16); max-width:560px;">
+        <sc-for list="{{ facts }}" as="ff" hint-placeholder-count="4">
+          <div style="background:#1A1411; padding:22px 22px 24px; display:flex; flex-direction:column; gap:6px;">
+            <div style="font-family:'Libre Caslon Display',serif; font-size:32px; line-height:1; color:#D9A08C;">{{ ff.k }}</div>
+            <div style="font-size:12.5px; line-height:1.55; color:rgba(251,246,240,.66);">{{ ff.v }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex; gap:14px; flex-wrap:wrap; align-items:center;">
+        <div onClick="{{ goBooking }}" style="background:#7C2D3A; color:#FBF6F0; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:20px 36px; cursor:pointer;" style-hover="background:#FBF6F0; color:#7C2D3A;">{{ ui.cta }}</div>
+        <a href="tel:+17183546298" style="border:1px solid rgba(251,246,240,.34); color:#FBF6F0; font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; padding:20px 30px;" style-hover="border-color:#D9A08C; color:#D9A08C;">{{ ui.call }}</a>
+      </div>
+    </div>
+    <div style="position:relative; min-height:620px; background:#241B16;">
+      <image-slot id="aruna-financing-hero" shape="rect" src="{{ heroSrc }}" placeholder="{{ ui.heroPh }}"></image-slot>
+      <div style="position:absolute; left:0; top:0; bottom:0; width:130px; background:linear-gradient(90deg,#1A1411,rgba(26,20,17,0)); pointer-events:none;"></div>
+      <div style="position:absolute; left:0; right:0; bottom:0; padding:24px 30px 26px; background:linear-gradient(0deg,rgba(26,20,17,.92),rgba(26,20,17,0)); pointer-events:none;">
+        <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#D9A08C;">{{ ui.heroCap }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div data-reveal style="padding:120px 44px; border-bottom:1px solid rgba(26,20,17,.16);">
+    <div style="display:flex; flex-direction:column; gap:18px; max-width:660px; margin-bottom:46px;">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div style="width:34px; height:1px; background:#7C2D3A;"></div>
+        <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A;">{{ ui.calcEyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:62px; line-height:.94; letter-spacing:-.032em;">{{ ui.calcA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.calcB }}</span></div>
+      <div style="font-size:16.5px; line-height:1.7; color:#5C4E46;">{{ ui.calcSub }}</div>
+    </div>
+    <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.8fr); gap:0; border:1px solid rgba(26,20,17,.2);">
+      <div style="padding:40px 38px 44px; display:flex; flex-direction:column; gap:28px; border-right:1px solid rgba(26,20,17,.2);">
+        <div style="display:flex; flex-direction:column; gap:13px;">
+          <div style="font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#7C2D3A;">{{ ui.pickT }}</div>
+          <div style="display:flex; flex-direction:column; gap:1px; background:rgba(26,20,17,.14);">
+            <sc-for list="{{ options }}" as="o" hint-placeholder-count="6">
+              <div onClick="{{ o.click }}" style="background:{{ o.bg }}; padding:17px 20px; display:flex; align-items:baseline; justify-content:space-between; gap:18px; cursor:pointer;">
+                <div style="font-size:15.5px; color:{{ o.fg }};">{{ o.n }}</div>
+                <div style="font-family:'Libre Caslon Display',serif; font-size:20px; color:{{ o.priceColor }}; white-space:nowrap;">{{ o.price }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:13px;">
+          <div style="font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#7C2D3A;">{{ ui.orT }}</div>
+          <div style="display:flex; align-items:center; gap:16px;">
+            <input type="range" min="50" max="4500" step="50" value="{{ amount }}" onChange="{{ setAmount }}" style="flex:1; accent-color:#7C2D3A;">
+            <div style="font-family:'Libre Caslon Display',serif; font-size:30px; color:#1A1411; min-width:110px; text-align:right;">{{ amountLabel }}</div>
+          </div>
+        </div>
+      </div>
+      <div style="background:#1A1411; color:#FBF6F0; padding:40px 36px 44px; display:flex; flex-direction:column; gap:22px;">
+        <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#D9A08C;">{{ ui.planT }}</div>
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:66px; line-height:1; color:#D9A08C;">{{ perPayment }}</div>
+          <div style="font-size:14px; color:rgba(251,246,240,.66);">{{ ui.perFour }}</div>
+        </div>
+        <div style="display:flex; flex-direction:column;">
+          <sc-for list="{{ schedule }}" as="s" hint-placeholder-count="4">
+            <div style="display:flex; justify-content:space-between; gap:16px; padding:12px 0; border-bottom:1px solid rgba(251,246,240,.14); font-size:14.5px;">
+              <span style="color:rgba(251,246,240,.62);">{{ s.k }}</span>
+              <span style="white-space:nowrap;">{{ s.v }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="font-size:13.5px; line-height:1.65; color:{{ noteColor }};">{{ eligibility }}</div>
+        <div onClick="{{ goBooking }}" style="background:#7C2D3A; color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:18px 28px; text-align:center; cursor:pointer;" style-hover="background:#FBF6F0; color:#7C2D3A;">{{ ui.cta }}</div>
+      </div>
+    </div>
+    <div style="font-size:13px; line-height:1.6; color:#8A7A6E; padding-top:16px; max-width:720px;">{{ ui.calcNote }}</div>
+  </div>
+
+  <div data-reveal style="background:#EAE1D6; padding:120px 44px; border-bottom:1px solid rgba(26,20,17,.16);">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:56px; flex-wrap:wrap; margin-bottom:48px;">
+      <div style="display:flex; flex-direction:column; gap:18px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="width:34px; height:1px; background:#7C2D3A;"></div>
+          <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A;">{{ ui.howEyebrow }}</div>
+        </div>
+        <div style="font-family:'Libre Caslon Display',serif; font-size:62px; line-height:.94; letter-spacing:-.032em;">{{ ui.howA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.howB }}</span></div>
+      </div>
+      <div style="font-size:16.5px; line-height:1.7; color:#5C4E46; max-width:380px;">{{ ui.howSub }}</div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:rgba(26,20,17,.16); border:1px solid rgba(26,20,17,.16);">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+        <div style="background:#EAE1D6; padding:32px 26px 38px; display:flex; flex-direction:column; gap:13px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:28px; line-height:1; color:#7C2D3A;">{{ s.n }}</div>
+          <div style="font-family:'Libre Caslon Display',serif; font-size:24px; line-height:1.12;">{{ s.t }}</div>
+          <div style="font-size:14.5px; line-height:1.68; color:#5C4E46;">{{ s.b }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div data-reveal style="padding:120px 44px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr); gap:80px; align-items:start; border-bottom:1px solid rgba(26,20,17,.16);">
+    <div style="display:flex; flex-direction:column; gap:20px; position:sticky; top:150px;">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div style="width:34px; height:1px; background:#7C2D3A;"></div>
+        <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A;">{{ ui.plainEyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:58px; line-height:.94; letter-spacing:-.032em;">{{ ui.plainA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.plainB }}</span></div>
+      <div style="font-size:16.5px; line-height:1.72; color:#5C4E46; max-width:400px;">{{ ui.plainSub }}</div>
+    </div>
+    <div style="display:flex; flex-direction:column;">
+      <sc-for list="{{ plain }}" as="p" hint-placeholder-count="5">
+        <div style="display:grid; grid-template-columns:minmax(0,240px) minmax(0,1fr); gap:30px; padding:24px 0; border-top:1px solid rgba(26,20,17,.18); align-items:baseline;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:21px; line-height:1.2;">{{ p.q }}</div>
+          <div style="font-size:16px; line-height:1.74; color:#3A312B;">{{ p.a }}</div>
+        </div>
+      </sc-for>
+      <div style="border-top:1px solid rgba(26,20,17,.18);"></div>
+    </div>
+  </div>
+
+  <div style="background:#7C2D3A; color:#FBF6F0; padding:126px 44px; display:flex; flex-direction:column; align-items:center; gap:28px; text-align:center;">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div style="width:30px; height:1px; background:#E7C3B4;"></div>
+      <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#E7C3B4;">{{ ui.ctaEyebrow }}</div>
+      <div style="width:30px; height:1px; background:#E7C3B4;"></div>
+    </div>
+    <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(46px,4.9vw,84px); line-height:.92; letter-spacing:-.036em; max-width:900px;">{{ ui.ctaA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#E7C3B4;">{{ ui.ctaB }}</span></div>
+    <div style="font-size:17px; line-height:1.65; color:rgba(251,246,240,.8); max-width:520px;">{{ ui.ctaSub }}</div>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; padding-top:6px;">
+      <div onClick="{{ goBooking }}" style="background:#FBF6F0; color:#7C2D3A; font-size:12.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; padding:22px 42px; cursor:pointer;" style-hover="background:#1A1411; color:#FBF6F0;">{{ ui.ctaBtn }}</div>
+      <div onClick="{{ goHairloss }}" style="border:1px solid rgba(251,246,240,.4); color:#FBF6F0; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; padding:22px 34px; cursor:pointer;" style-hover="border-color:#FBF6F0; background:rgba(251,246,240,.1);">{{ ui.ctaHair }}</div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1400, &quot;height&quot;: 900}, &quot;lang&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;en&quot;, &quot;es&quot;], &quot;default&quot;: &quot;en&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;onNav&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;(page: string, seg?: string) =&gt; void&quot;}}">
+const UI = {
+  en: {
+    heroPh: 'Drop a photograph of the high-ticket work here',
+    heroCap: 'Aruna\u2019s own photograph \u00b7 replace with the studio shoot',
+    eyebrow: 'Pay in four \u00b7 $50 to $4,000',
+    h1a: 'The work costs', h1b: 'what it costs.', h1c: 'When you pay is yours.',
+    sub: 'Scalp micropigmentation, a laser course, alopecia coverage \u2014 the treatments that change the most are the ones people put off longest. Every booking from $50 to $4,000 can be split into four payments, approved before you arrive.',
+    cta: 'Book and split it', call: 'Ask about a plan',
+    facts: [
+      ['$4,000', 'Ceiling on a financed booking, which covers almost everything on the list'],
+      ['$50', 'Floor, so it applies to a facial as much as a hairline'],
+      ['4', 'Payments, spread rather than taken on the day'],
+      ['~1 min', 'To be approved, before your appointment rather than at the desk']
+    ],
+    calcEyebrow: 'Work out your own',
+    calcA: 'Pick the treatment,', calcB: 'see the four payments.',
+    calcSub: 'Choose one of the studio\u2019s real prices or drag the slider to any amount. The figures below are simple division \u2014 nothing is hidden in them.',
+    pickT: 'A real treatment price', orT: 'Or any amount',
+    planT: 'Your plan', perFour: 'Four payments, this size each',
+    calcNote: 'Illustrative division of the booking total into four. Exact schedule and any provider terms are confirmed at approval, before your appointment. The studio does not add a fee for paying this way.',
+    eligible: 'Within the $50 to $4,000 range, so this booking can be split into four.',
+    tooHigh: 'Above the $4,000 financing ceiling. The first $4,000 splits into four and the balance is spread across your sessions \u2014 ask when you book.',
+    tooLow: 'Below the $50 floor. Pay on the day instead.',
+    howEyebrow: 'How it works',
+    howA: 'Four steps, and', howB: 'none at the desk.',
+    howSub: 'The approval happens before your appointment, so nothing about paying happens while you are sitting in the chair.',
+    steps: [
+      ['01', 'Book the treatment', 'Choose your day and time as normal. Nothing is charged when you book, and the price you saw on the site is the price.'],
+      ['02', 'Get approved', 'About a minute, before your appointment. If a deposit applies to your treatment it comes off the total rather than sitting on top of it.'],
+      ['03', 'Come in and have it done', 'The payment plan is already settled, so the appointment is the appointment. Nothing is renegotiated at the door.'],
+      ['04', 'Pay across four', 'The balance is spread instead of taken on the day. Cash pricing is separate \u2014 see below.']
+    ],
+    plainEyebrow: 'Plainly',
+    plainA: 'What paying in four', plainB: 'does and does not do.',
+    plainSub: 'The questions people ask on the phone, answered here so the phone call is not necessary.',
+    plain: [
+      ['Does it cost more?', 'The studio does not add anything for paying this way. The treatment price is the same price published on the site.'],
+      ['Can I still get the cash price?', 'No. Cash is lower on every permanent-makeup service, and paying in four is not cash. If the cash saving matters more than the spread, pay on the day \u2014 both numbers are printed so you can compare.'],
+      ['What about work over $4,000?', 'Full-head alopecia coverage runs to $4,500. The first $4,000 can be financed and the balance is spread across your sessions. Raise it at the consultation and it gets worked out before anything is booked.'],
+      ['Does it apply to courses?', 'Yes. A laser course at $2,200 by card or a ten-session recovery plan at $1,200 both sit inside the range, which is often the difference between starting the course and doing one session.'],
+      ['Does it affect the second sitting?', 'No. For permanent makeup, the touch-up four to six weeks later is already inside the price, financed or not.'],
+      ['What if I need to move the appointment?', 'Move or cancel free up to 24 hours before. New brow and PMU clients: $150 inside 24 hours, and that is separate from the payment plan.']
+    ],
+    ctaEyebrow: 'Approved before you arrive',
+    ctaA: 'Stop putting off the', ctaB: 'expensive one.',
+    ctaSub: 'Book the treatment, get approved in about a minute, and pay across four. The consultation before it is free either way.',
+    ctaBtn: 'Book an appointment', ctaHair: 'Hair loss treatment'
+  },
+  es: {
+    heroPh: 'Suelta aqu\u00ed una foto del trabajo de mayor valor',
+    heroCap: 'Foto propia de Aruna \u00b7 reemplazar con la sesi\u00f3n',
+    eyebrow: 'Paga en cuatro \u00b7 de $50 a $4,000',
+    h1a: 'El trabajo cuesta', h1b: 'lo que cuesta.', h1c: 'Cu\u00e1ndo pagas es tu decisi\u00f3n.',
+    sub: 'Micropigmentaci\u00f3n capilar, un plan de l\u00e1ser, cobertura por alopecia: los tratamientos que m\u00e1s cambian son los que la gente m\u00e1s aplaza. Cualquier reserva de $50 a $4,000 se puede dividir en cuatro pagos, aprobados antes de llegar.',
+    cta: 'Reservar a plazos', call: 'Preguntar por un plan',
+    facts: [
+      ['$4,000', 'Techo de una reserva financiada, que cubre casi todo lo de la lista'],
+      ['$50', 'Piso, as\u00ed que aplica a un facial igual que a una l\u00ednea del cabello'],
+      ['4', 'Pagos, repartidos en lugar de cobrados el mismo d\u00eda'],
+      ['~1 min', 'Para aprobarlo, antes de tu cita y no en la puerta']
+    ],
+    calcEyebrow: 'Calcula el tuyo',
+    calcA: 'Elige el tratamiento,', calcB: 'mira los cuatro pagos.',
+    calcSub: 'Elige uno de los precios reales del estudio o mueve la barra a cualquier cantidad. Las cifras de abajo son una divisi\u00f3n simple: no hay nada escondido.',
+    pickT: 'Un precio real del estudio', orT: 'O cualquier cantidad',
+    planT: 'Tu plan', perFour: 'Cuatro pagos, de este tama\u00f1o cada uno',
+    calcNote: 'Divisi\u00f3n ilustrativa del total en cuatro. El calendario exacto y los t\u00e9rminos del proveedor se confirman en la aprobaci\u00f3n, antes de tu cita. El estudio no a\u00f1ade ning\u00fan cargo por pagar as\u00ed.',
+    eligible: 'Est\u00e1 dentro del rango de $50 a $4,000, as\u00ed que esta reserva se puede dividir en cuatro.',
+    tooHigh: 'Por encima del techo de $4,000. Los primeros $4,000 se dividen en cuatro y el resto se reparte entre tus sesiones: preg\u00fantalo al reservar.',
+    tooLow: 'Por debajo del piso de $50. Mejor paga el mismo d\u00eda.',
+    howEyebrow: 'C\u00f3mo funciona',
+    howA: 'Cuatro pasos, y', howB: 'ninguno en la puerta.',
+    howSub: 'La aprobaci\u00f3n ocurre antes de tu cita, as\u00ed que nada relacionado con pagar pasa mientras est\u00e1s sentada en la silla.',
+    steps: [
+      ['01', 'Reserva el tratamiento', 'Elige tu d\u00eda y tu hora como siempre. No se cobra nada al reservar, y el precio que viste en la p\u00e1gina es el precio.'],
+      ['02', 'Aprobaci\u00f3n', 'Alrededor de un minuto, antes de tu cita. Si tu tratamiento lleva dep\u00f3sito, se descuenta del total en lugar de sumarse.'],
+      ['03', 'Ven y h\u00e1ztelo', 'El plan de pago ya est\u00e1 resuelto, as\u00ed que la cita es la cita. Nada se renegocia en la puerta.'],
+      ['04', 'Paga en cuatro', 'El saldo se reparte en lugar de cobrarse ese d\u00eda. El precio en efectivo es aparte: mira abajo.']
+    ],
+    plainEyebrow: 'Claramente',
+    plainA: 'Qu\u00e9 hace y qu\u00e9 no hace', plainB: 'pagar en cuatro.',
+    plainSub: 'Las preguntas que la gente hace por tel\u00e9fono, contestadas aqu\u00ed para que la llamada no sea necesaria.',
+    plain: [
+      ['\u00bfCuesta m\u00e1s?', 'El estudio no a\u00f1ade nada por pagar as\u00ed. El precio del tratamiento es el mismo que est\u00e1 publicado en la p\u00e1gina.'],
+      ['\u00bfPuedo tener igual el precio en efectivo?', 'No. En efectivo baja cada servicio de maquillaje permanente, y pagar en cuatro no es efectivo. Si el ahorro en efectivo te importa m\u00e1s que repartir el pago, paga ese d\u00eda: las dos cifras est\u00e1n por escrito para que compares.'],
+      ['\u00bfY el trabajo de m\u00e1s de $4,000?', 'La cobertura de cabeza completa por alopecia llega a $4,500. Los primeros $4,000 se pueden financiar y el resto se reparte entre tus sesiones. Menci\u00f3nalo en la consulta y se resuelve antes de reservar nada.'],
+      ['\u00bfAplica a los planes?', 'S\u00ed. Un plan de l\u00e1ser de $2,200 con tarjeta o un plan de recuperaci\u00f3n de diez sesiones de $1,200 est\u00e1n los dos dentro del rango, que muchas veces es la diferencia entre empezar el plan y hacer una sola sesi\u00f3n.'],
+      ['\u00bfAfecta a la segunda sesi\u00f3n?', 'No. En maquillaje permanente, el retoque de cuatro a seis semanas despu\u00e9s ya va dentro del precio, financiado o no.'],
+      ['\u00bfY si tengo que mover la cita?', 'Cambia o cancela gratis hasta 24 horas antes. Clientas nuevas de cejas y PMU: $150 con menos de 24 horas, y eso es aparte del plan de pago.']
+    ],
+    ctaEyebrow: 'Aprobado antes de llegar',
+    ctaA: 'Deja de aplazar', ctaB: 'el tratamiento caro.',
+    ctaSub: 'Reserva el tratamiento, aprueba en un minuto y paga en cuatro. La consulta antes es gratis igualmente.',
+    ctaBtn: 'Reservar una cita', ctaHair: 'Tratamiento capilar'
+  }
+};
+
+// Real prices from the studio's list, chosen to span the financing range.
+const OPTS = [
+  { n: 'Microblading', es: 'Microblading', price: 580 },
+  { n: 'Nano-blading', es: 'Nano-blading', price: 650 },
+  { n: 'Lip neutralisation', es: 'Neutralizaci\u00f3n de labios', price: 800 },
+  { n: 'Body sculpting, 10 sessions', es: 'Moldeado, 10 sesiones', price: 1000 },
+  { n: 'Scalp micropigmentation', es: 'Micropigmentaci\u00f3n capilar', price: 1200 },
+  { n: 'Post-lipo drainage, 10 sessions', es: 'Drenaje post-lipo, 10 sesiones', price: 1200 },
+  { n: 'Perfecting Brows training', es: 'Curso Perfecting Brows', price: 1800 },
+  { n: 'Hairline, crown and back', es: 'L\u00ednea, coronilla y parte de atr\u00e1s', price: 1800 },
+  { n: 'Laser course, 8 sessions', es: 'Plan de l\u00e1ser, 8 sesiones', price: 2200 },
+  { n: 'Alopecia, full head', es: 'Alopecia, cabeza completa', price: 4500 }
+];
+
+const money = n => '$' + Math.round(n).toLocaleString('en-US');
+
+class Component extends DCLogic {
+  state = { amount: 1200, picked: 'Scalp micropigmentation' };
+
+  componentDidMount() { window.scrollTo({ top: 0, behavior: 'auto' }); }
+
+  nav = (p, seg) => { const f = this.props.onNav; if (f) f(p, seg); };
+
+  renderVals() {
+    const es = this.props.lang === 'es';
+    const ui = UI[es ? 'es' : 'en'];
+    const st = this.state;
+    const amt = st.amount;
+
+    const capped = Math.min(amt, 4000);
+    const per = capped / 4;
+    const over = amt > 4000;
+    const under = amt < 50;
+
+    const labels = es
+      ? ['Al aprobar', 'En 2 semanas', 'En 4 semanas', 'En 6 semanas']
+      : ['At approval', 'In 2 weeks', 'In 4 weeks', 'In 6 weeks'];
+
+    const schedule = labels.map(l => ({ k: l, v: money(per) }));
+    if (over) schedule.push({ k: es ? 'Resto, entre sesiones' : 'Balance, across sessions', v: money(amt - 4000) });
+
+    return {
+      ui,
+      heroSrc: 'https://static.glossgenius.com/public/service/9f873a9bb5fa51581f6fe2e4063770e82f927485/image/3e0a2a5188a086f5b085f237c8d5feaf.jpg',
+      facts: ui.facts.map(f => ({ k: f[0], v: f[1] })),
+      steps: ui.steps.map(s => ({ n: s[0], t: s[1], b: s[2] })),
+      plain: ui.plain.map(p => ({ q: p[0], a: p[1] })),
+      options: OPTS.map(o => {
+        const on = st.picked === o.n;
+        return {
+          n: es ? o.es : o.n,
+          price: money(o.price),
+          bg: on ? '#EAE1D6' : '#F4EDE6',
+          fg: on ? '#1A1411' : '#3A312B',
+          priceColor: on ? '#7C2D3A' : '#8A7A6E',
+          click: () => this.setState({ amount: o.price, picked: o.n })
+        };
+      }),
+      amount: amt,
+      amountLabel: money(amt),
+      setAmount: e => this.setState({ amount: Number(e.target.value), picked: null }),
+      perPayment: money(per),
+      schedule,
+      eligibility: over ? ui.tooHigh : (under ? ui.tooLow : ui.eligible),
+      noteColor: over || under ? '#D9A08C' : 'rgba(251,246,240,.6)',
+      goBooking: () => this.nav('booking'),
+      goHairloss: () => this.nav('segment', 'hairloss')
+    };
+  }
+}
+
+</script>
+</body>
+</html>

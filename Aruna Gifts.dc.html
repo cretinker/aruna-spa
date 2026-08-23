@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="background:#F4EDE6; color:#1A1411; font-family:'DM Sans',sans-serif;">
+
+  <div style="background:#1A1411; color:#FBF6F0; padding:126px 44px 96px; display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:70px; align-items:center;">
+    <div style="display:flex; flex-direction:column; gap:26px;">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <div style="width:44px; height:1px; background:#D9A08C;"></div>
+        <div style="font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ ui.eyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(46px,4.9vw,84px); line-height:.93; letter-spacing:-.035em;">{{ ui.h1a }}<br>{{ ui.h1b }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.h1c }}</span></div>
+      <div style="font-size:18.5px; line-height:1.7; color:rgba(251,246,240,.76); max-width:540px;">{{ ui.sub }}</div>
+    </div>
+    <div style="background:#241B16; border-left:2px solid #D9A08C; padding:30px 32px; display:flex; flex-direction:column; gap:11px;">
+      <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#D9A08C;">{{ ui.flagT }}</div>
+      <div style="font-size:16px; line-height:1.72; color:rgba(251,246,240,.82);">{{ ui.flagB }}</div>
+    </div>
+  </div>
+
+  <div data-reveal style="padding:110px 44px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.9fr); gap:70px; align-items:start; border-bottom:1px solid rgba(26,20,17,.16);">
+    <div style="display:flex; flex-direction:column; gap:34px;">
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#7C2D3A;">{{ ui.step1 }}</div>
+        <div style="display:flex; flex-wrap:wrap; gap:9px;">
+          <sc-for list="{{ amounts }}" as="a" hint-placeholder-count="5">
+            <div onClick="{{ a.click }}" style="border:1px solid {{ a.border }}; background:{{ a.bg }}; color:{{ a.fg }}; font-family:'Libre Caslon Display',serif; font-size:22px; padding:16px 26px; cursor:pointer;" style-hover="border-color:#7C2D3A;">{{ a.label }}</div>
+          </sc-for>
+        </div>
+        <div style="display:flex; align-items:center; gap:16px; padding-top:6px;">
+          <input type="range" min="50" max="2000" step="25" value="{{ amount }}" onChange="{{ setAmount }}" style="flex:1; accent-color:#7C2D3A;">
+          <div style="font-size:13px; color:#8A7A6E;">{{ ui.orDrag }}</div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#7C2D3A;">{{ ui.step2 }}</div>
+        <div style="display:flex; flex-direction:column; gap:1px; background:rgba(26,20,17,.14);">
+          <sc-for list="{{ ideas }}" as="i" hint-placeholder-count="5">
+            <div onClick="{{ i.click }}" style="background:{{ i.bg }}; padding:16px 20px; display:flex; align-items:baseline; justify-content:space-between; gap:18px; cursor:pointer;">
+              <div style="display:flex; flex-direction:column; gap:3px;">
+                <div style="font-size:15.5px; color:#1A1411;">{{ i.n }}</div>
+                <div style="font-size:12.5px; color:#8A7A6E;">{{ i.note }}</div>
+              </div>
+              <div style="font-family:'Libre Caslon Display',serif; font-size:20px; color:{{ i.priceColor }}; white-space:nowrap;">{{ i.price }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#7C2D3A;">{{ ui.step3 }}</div>
+        <input value="{{ toName }}" onChange="{{ setToName }}" placeholder="{{ ui.toPh }}" style="border:1px solid rgba(26,20,17,.3); background:#FBF6F0; padding:16px 18px; font-size:15px; font-family:'DM Sans',sans-serif; color:#1A1411; outline:none; width:100%; box-sizing:border-box;">
+        <input value="{{ fromName }}" onChange="{{ setFromName }}" placeholder="{{ ui.fromPh }}" style="border:1px solid rgba(26,20,17,.3); background:#FBF6F0; padding:16px 18px; font-size:15px; font-family:'DM Sans',sans-serif; color:#1A1411; outline:none; width:100%; box-sizing:border-box;">
+      </div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:22px; position:sticky; top:150px;">
+      <div style="background:#7C2D3A; color:#FBF6F0; aspect-ratio:16/9; padding:34px 36px; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 30px 60px -30px rgba(26,20,17,.5);">
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:20px;">
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <div style="font-family:'Libre Caslon Display',serif; font-size:24px; letter-spacing:.2em;">ARUNA</div>
+            <div style="font-size:8.5px; letter-spacing:.3em; text-transform:uppercase; color:#E7C3B4;">Spa &middot; Staten Island</div>
+          </div>
+          <div style="font-size:9.5px; letter-spacing:.24em; text-transform:uppercase; color:#E7C3B4;">{{ ui.cardTag }}</div>
+        </div>
+        <div style="font-family:'Libre Caslon Display',serif; font-size:56px; line-height:1;">{{ amountLabel }}</div>
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:20px;">
+          <div style="display:flex; flex-direction:column; gap:2px; font-size:13px;">
+            <div style="color:rgba(251,246,240,.66);">{{ ui.cardFor }} <span style="color:#FBF6F0;">{{ toShown }}</span></div>
+            <div style="color:rgba(251,246,240,.66);">{{ ui.cardFrom }} <span style="color:#FBF6F0;">{{ fromShown }}</span></div>
+          </div>
+          <div style="font-size:11px; letter-spacing:.12em; color:#E7C3B4;">718 354 6298</div>
+        </div>
+      </div>
+      <div style="border:1px solid rgba(26,20,17,.2); padding:24px 26px; display:flex; flex-direction:column; gap:12px;">
+        <div style="font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:#7C2D3A;">{{ ui.howT }}</div>
+        <div style="font-size:14.5px; line-height:1.7; color:#3A312B;">{{ ui.howB }}</div>
+        <div style="display:flex; gap:9px; flex-wrap:wrap; padding-top:4px;">
+          <a href="sms:+17183546298" style="background:#7C2D3A; color:#FBF6F0; font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:15px 24px;" style-hover="background:#1A1411;">{{ ui.howText }}</a>
+          <a href="tel:+17183546298" style="border:1px solid rgba(26,20,17,.26); color:#1A1411; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; padding:15px 22px;" style-hover="border-color:#7C2D3A; color:#7C2D3A;">{{ ui.howCall }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div data-reveal style="background:#EAE1D6; padding:100px 44px;">
+    <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:rgba(26,20,17,.16); border:1px solid rgba(26,20,17,.16);">
+      <sc-for list="{{ rules }}" as="r" hint-placeholder-count="3">
+        <div style="background:#EAE1D6; padding:30px 28px 34px; display:flex; flex-direction:column; gap:12px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:24px; line-height:1.14;">{{ r.t }}</div>
+          <div style="font-size:14.5px; line-height:1.7; color:#5C4E46;">{{ r.b }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1400, &quot;height&quot;: 900}, &quot;lang&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;en&quot;, &quot;es&quot;], &quot;default&quot;: &quot;en&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;onNav&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;(page: string) =&gt; void&quot;}}">
+const IDEAS = [
+  { n: 'Signature facial', es: 'Facial de firma', price: 120, note: 'The safe first gift', esNote: 'El primer regalo seguro' },
+  { n: 'Beauty Nap lash set', es: 'Pesta\u00f1as Beauty Nap', price: 250, note: 'Her most-loved indulgence', esNote: 'El capricho m\u00e1s querido' },
+  { n: 'Four-facial course', es: 'Plan de cuatro faciales', price: 380, note: 'A season of skin, not one visit', esNote: 'Una temporada de piel, no una visita' },
+  { n: 'Microblading', es: 'Microblading', price: 580, note: 'Includes the second sitting', esNote: 'Incluye la segunda sesi\u00f3n' },
+  { n: 'Bridal make-over', es: 'Arreglo de novia', price: 350, note: 'Hair and makeup on the day', esNote: 'Peinado y maquillaje ese d\u00eda' }
+];
+
+const UI = {
+  en: {
+    eyebrow: 'Gift cards \u00b7 any amount',
+    h1a: 'Give ninety minutes', h1b: 'in a room with', h1c: 'nobody else in it.',
+    sub: 'A gift card here is not a discount voucher \u2014 it is a booked chair, one client at a time, in either language. Build it below and it is ready the same day.',
+    flagT: 'For Mary to confirm',
+    flagB: 'This page is designed and ready but gift cards are not yet advertised anywhere on the current site \u2014 confirm she wants to sell them, and at what amounts, before this goes live.',
+    step1: '1 \u00b7 Pick an amount', orDrag: 'or drag any amount',
+    step2: '2 \u00b7 Or give a specific treatment',
+    step3: '3 \u00b7 Who is it for?',
+    toPh: 'For \u2014 their name', fromPh: 'From \u2014 your name',
+    cardTag: 'Gift card', cardFor: 'For', cardFrom: 'From',
+    howT: 'How buying works',
+    howB: 'Text or call the studio with the amount and both names. Pay by card over the phone or cash at the studio, and the card is ready the same day \u2014 collected, or sent as a photo to forward.',
+    howText: 'Text the studio', howCall: 'Call 718 354 6298',
+    rules: [
+      ['It never expires', 'The balance stays until it is used, across as many visits as it takes. No activation fees, no monthly erosion.'],
+      ['It works on everything', 'Any of the 48 treatments, any package, and the training course. If they want something bigger, the card pays the difference down.'],
+      ['They choose, not you', 'The recipient books their own consultation, free, and decides with Aruna what the amount becomes. A gift, not a prescription.']
+    ]
+  },
+  es: {
+    eyebrow: 'Tarjetas de regalo \u00b7 cualquier monto',
+    h1a: 'Regala noventa minutos', h1b: 'en una sala sin', h1c: 'nadie m\u00e1s dentro.',
+    sub: 'Una tarjeta de regalo aqu\u00ed no es un cup\u00f3n de descuento: es una silla reservada, una clienta a la vez, en cualquiera de los dos idiomas. \u00c1rmala abajo y est\u00e1 lista el mismo d\u00eda.',
+    flagT: 'Para que Mary confirme',
+    flagB: 'Esta p\u00e1gina est\u00e1 dise\u00f1ada y lista, pero las tarjetas de regalo a\u00fan no se anuncian en la p\u00e1gina actual: confirmar que quiere venderlas, y en qu\u00e9 montos, antes de publicar.',
+    step1: '1 \u00b7 Elige un monto', orDrag: 'o arrastra cualquier monto',
+    step2: '2 \u00b7 O regala un tratamiento espec\u00edfico',
+    step3: '3 \u00b7 \u00bfPara qui\u00e9n es?',
+    toPh: 'Para \u2014 su nombre', fromPh: 'De \u2014 tu nombre',
+    cardTag: 'Tarjeta de regalo', cardFor: 'Para', cardFrom: 'De',
+    howT: 'C\u00f3mo se compra',
+    howB: 'Escribe o llama al estudio con el monto y los dos nombres. Paga con tarjeta por tel\u00e9fono o en efectivo en el estudio, y la tarjeta queda lista el mismo d\u00eda: se recoge, o se env\u00eda como foto para reenviar.',
+    howText: 'Escribir al estudio', howCall: 'Llamar 718 354 6298',
+    rules: [
+      ['Nunca caduca', 'El saldo se queda hasta que se usa, en las visitas que haga falta. Sin cargos de activaci\u00f3n, sin erosi\u00f3n mensual.'],
+      ['Sirve para todo', 'Cualquiera de los 48 tratamientos, cualquier paquete y el curso de formaci\u00f3n. Si quiere algo m\u00e1s grande, la tarjeta abona la diferencia.'],
+      ['Elige quien lo recibe, no t\u00fa', 'Quien lo recibe reserva su propia consulta, gratis, y decide con Aruna en qu\u00e9 se convierte el monto. Un regalo, no una receta.']
+    ]
+  }
+};
+
+const money = n => '$' + Math.round(n).toLocaleString('en-US');
+
+class Component extends DCLogic {
+  state = { amount: 250, picked: 250, toName: '', fromName: '' };
+
+  componentDidMount() { window.scrollTo({ top: 0, behavior: 'auto' }); }
+
+  renderVals() {
+    const es = this.props.lang === 'es';
+    const ui = UI[es ? 'es' : 'en'];
+    const st = this.state;
+
+    return {
+      ui,
+      rules: ui.rules.map(r => ({ t: r[0], b: r[1] })),
+      amounts: [100, 150, 250, 500, 1000].map(v => ({
+        label: money(v),
+        bg: st.picked === v ? '#EAE1D6' : 'transparent',
+        fg: '#1A1411',
+        border: st.picked === v ? '#7C2D3A' : 'rgba(26,20,17,.26)',
+        click: () => this.setState({ amount: v, picked: v })
+      })),
+      ideas: IDEAS.map(i => ({
+        n: es ? i.es : i.n,
+        note: es ? i.esNote : i.note,
+        price: money(i.price),
+        bg: st.picked === 'i' + i.price ? '#EAE1D6' : '#F4EDE6',
+        priceColor: st.picked === 'i' + i.price ? '#7C2D3A' : '#8A7A6E',
+        click: () => this.setState({ amount: i.price, picked: 'i' + i.price })
+      })),
+      amount: st.amount,
+      amountLabel: money(st.amount),
+      setAmount: e => this.setState({ amount: Number(e.target.value), picked: null }),
+      toName: st.toName, fromName: st.fromName,
+      toShown: st.toName || '\u2014', fromShown: st.fromName || '\u2014',
+      setToName: e => this.setState({ toName: e.target.value }),
+      setFromName: e => this.setState({ fromName: e.target.value })
+    };
+  }
+}
+
+</script>
+</body>
+</html>

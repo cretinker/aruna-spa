@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="./image-slot.js"></script>
+</helmet>
+<div style="background:#F4EDE6; color:#1A1411; font-family:'DM Sans',sans-serif;">
+
+  <div style="background:#1A1411; color:#FBF6F0; display:grid; grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr); align-items:stretch;">
+    <div style="padding:120px 50px 96px 44px; display:flex; flex-direction:column; gap:26px; justify-content:center;">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <div style="width:44px; height:1px; background:#D9A08C;"></div>
+        <div style="font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ ui.eyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(44px,4.4vw,76px); line-height:.93; letter-spacing:-.035em;">{{ ui.h1a }}<br>{{ ui.h1b }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.h1c }}</span></div>
+      <div style="font-size:18.5px; line-height:1.7; color:rgba(251,246,240,.76); max-width:560px;">{{ ui.sub }}</div>
+      <div style="background:#241B16; border-left:2px solid #D9A08C; padding:24px 28px; display:flex; flex-direction:column; gap:10px; max-width:560px;">
+        <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#D9A08C;">{{ ui.whyT }}</div>
+        <div style="font-size:15.5px; line-height:1.7; color:rgba(251,246,240,.8);">{{ ui.whyB }}</div>
+      </div>
+    </div>
+    <div style="position:relative; min-height:620px; background:#241B16;">
+      <image-slot id="aruna-packages-hero" shape="rect" src="{{ heroSrc }}" placeholder="{{ ui.heroPh }}"></image-slot>
+      <div style="position:absolute; left:0; top:0; bottom:0; width:130px; background:linear-gradient(90deg,#1A1411,rgba(26,20,17,0)); pointer-events:none;"></div>
+      <div style="position:absolute; left:0; right:0; bottom:0; padding:24px 30px 26px; background:linear-gradient(0deg,rgba(26,20,17,.92),rgba(26,20,17,0)); pointer-events:none;">
+        <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#D9A08C;">{{ ui.heroCap }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div data-reveal style="padding:100px 44px 40px; display:flex; flex-direction:column; gap:16px; border-bottom:1px solid rgba(26,20,17,.16);">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:40px; flex-wrap:wrap; margin-bottom:24px;">
+      <div style="font-family:'Libre Caslon Display',serif; font-size:56px; line-height:.95; letter-spacing:-.03em;">{{ ui.skinA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.skinB }}</span></div>
+      <div style="font-size:15.5px; line-height:1.7; color:#5C4E46; max-width:420px;">{{ ui.skinSub }}</div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:rgba(26,20,17,.16); border:1px solid rgba(26,20,17,.16); margin-bottom:60px;">
+      <sc-for list="{{ skin }}" as="p" hint-placeholder-count="4">
+        <div style="background:{{ p.bg }}; padding:34px 28px 36px; display:flex; flex-direction:column; gap:14px;">
+          <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px;">
+            <div style="font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:#7C2D3A;">{{ p.tag }}</div>
+            <div style="font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:{{ p.saveColor }};">{{ p.save }}</div>
+          </div>
+          <div style="font-family:'Libre Caslon Display',serif; font-size:27px; line-height:1.1; min-height:60px;">{{ p.n }}</div>
+          <div style="display:flex; align-items:baseline; gap:10px;">
+            <div style="font-family:'Libre Caslon Display',serif; font-size:44px; line-height:1; color:#7C2D3A;">{{ p.price }}</div>
+            <div style="font-size:13px; color:#8A7A6E;">{{ p.per }}</div>
+          </div>
+          <div style="font-size:14px; line-height:1.65; color:#5C4E46; flex:1;">{{ p.note }}</div>
+          <div onClick="{{ p.click }}" style="border:1px solid rgba(26,20,17,.26); font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; padding:14px 18px; text-align:center; cursor:pointer; color:#1A1411;" style-hover="border-color:#7C2D3A; color:#7C2D3A;">{{ ui.book }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:40px; flex-wrap:wrap; margin-bottom:24px;">
+      <div style="font-family:'Libre Caslon Display',serif; font-size:56px; line-height:.95; letter-spacing:-.03em;">{{ ui.courseA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.courseB }}</span></div>
+      <div style="font-size:15.5px; line-height:1.7; color:#5C4E46; max-width:420px;">{{ ui.courseSub }}</div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:rgba(26,20,17,.16); border:1px solid rgba(26,20,17,.16); margin-bottom:40px;">
+      <sc-for list="{{ courses }}" as="p" hint-placeholder-count="3">
+        <div style="background:#F4EDE6; padding:36px 30px 38px; display:flex; flex-direction:column; gap:15px;">
+          <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px;">
+            <div style="font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:#7C2D3A;">{{ p.tag }}</div>
+            <div style="font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#8A7A6E;">{{ p.sessions }}</div>
+          </div>
+          <div style="font-family:'Libre Caslon Display',serif; font-size:30px; line-height:1.1;">{{ p.n }}</div>
+          <div style="display:flex; align-items:flex-end; gap:20px; flex-wrap:wrap;">
+            <div style="display:flex; flex-direction:column; gap:3px;">
+              <div style="font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:#8A7A6E;">{{ ui.cash }}</div>
+              <div style="font-family:'Libre Caslon Display',serif; font-size:42px; line-height:1; color:#7C2D3A;">{{ p.cash }}</div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:3px;">
+              <div style="font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:#8A7A6E;">{{ ui.card }}</div>
+              <div style="font-family:'Libre Caslon Display',serif; font-size:28px; line-height:1; color:#5C4E46;">{{ p.card }}</div>
+            </div>
+          </div>
+          <div style="font-size:14.5px; line-height:1.7; color:#5C4E46; flex:1;">{{ p.note }}</div>
+          <div style="display:flex; gap:9px;">
+            <div onClick="{{ p.click }}" style="background:#7C2D3A; color:#FBF6F0; font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:15px 22px; cursor:pointer;" style-hover="background:#1A1411;">{{ ui.book }}</div>
+            <div onClick="{{ goFinancing }}" style="border:1px solid rgba(26,20,17,.26); font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; padding:15px 20px; cursor:pointer; color:#1A1411;" style-hover="border-color:#7C2D3A; color:#7C2D3A;">{{ ui.split }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div data-reveal style="background:#EAE1D6; padding:120px 44px; border-bottom:1px solid rgba(26,20,17,.16);">
+    <div style="display:flex; flex-direction:column; gap:18px; margin-bottom:46px; max-width:660px;">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div style="width:34px; height:1px; background:#7C2D3A;"></div>
+        <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A;">{{ ui.cmpEyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:62px; line-height:.94; letter-spacing:-.032em;">{{ ui.cmpA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.cmpB }}</span></div>
+      <div style="font-size:16.5px; line-height:1.7; color:#5C4E46;">{{ ui.cmpSub }}</div>
+    </div>
+    <div style="border:1px solid rgba(26,20,17,.2); background:#F4EDE6;">
+      <div style="display:grid; grid-template-columns:minmax(0,1.5fr) repeat(4,minmax(0,1fr)); background:#1A1411; color:#FBF6F0;">
+        <div style="padding:18px 22px; font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:#D9A08C;">{{ ui.cmpWhat }}</div>
+        <sc-for list="{{ cmpHeads }}" as="c" hint-placeholder-count="4">
+          <div style="padding:18px 16px; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; text-align:center; border-left:1px solid rgba(251,246,240,.16);">{{ c }}</div>
+        </sc-for>
+      </div>
+      <sc-for list="{{ cmpRows }}" as="r" hint-placeholder-count="6">
+        <div style="display:grid; grid-template-columns:minmax(0,1.5fr) repeat(4,minmax(0,1fr)); border-top:1px solid rgba(26,20,17,.14);">
+          <div style="padding:17px 22px; font-size:15px; color:#1A1411;">{{ r.label }}</div>
+          <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="4">
+            <div style="padding:17px 16px; text-align:center; border-left:1px solid rgba(26,20,17,.12); font-size:14.5px; color:{{ c.color }};">{{ c.v }}</div>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+    <div style="font-size:13px; line-height:1.6; color:#8A7A6E; padding-top:16px; max-width:700px;">{{ ui.cmpNote }}</div>
+  </div>
+
+  <div data-reveal style="background:#1A1411; color:#FBF6F0; padding:120px 44px;">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:56px; flex-wrap:wrap; margin-bottom:48px;">
+      <div style="display:flex; flex-direction:column; gap:18px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="width:34px; height:1px; background:#D9A08C;"></div>
+          <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ ui.mathEyebrow }}</div>
+        </div>
+        <div style="font-family:'Libre Caslon Display',serif; font-size:66px; line-height:.94; letter-spacing:-.033em;">{{ ui.mathA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.mathB }}</span></div>
+      </div>
+      <div style="font-size:16.5px; line-height:1.7; color:rgba(251,246,240,.68); max-width:400px;">{{ ui.mathSub }}</div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2px; background:rgba(251,246,240,.16);">
+      <sc-for list="{{ maths }}" as="m" hint-placeholder-count="3">
+        <div style="background:#1A1411; padding:34px 30px 38px; display:flex; flex-direction:column; gap:16px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:25px; line-height:1.14;">{{ m.t }}</div>
+          <div style="display:flex; flex-direction:column; gap:9px;">
+            <sc-for list="{{ m.lines }}" as="l" hint-placeholder-count="3">
+              <div style="display:flex; justify-content:space-between; gap:16px; padding-bottom:8px; border-bottom:1px solid rgba(251,246,240,.14); font-size:14.5px;">
+                <span style="color:rgba(251,246,240,.62);">{{ l.k }}</span>
+                <span style="color:{{ l.color }}; white-space:nowrap;">{{ l.v }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="font-size:14px; line-height:1.65; color:rgba(251,246,240,.6);">{{ m.note }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="background:#7C2D3A; color:#FBF6F0; padding:126px 44px; display:flex; flex-direction:column; align-items:center; gap:28px; text-align:center;">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div style="width:30px; height:1px; background:#E7C3B4;"></div>
+      <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#E7C3B4;">{{ ui.ctaEyebrow }}</div>
+      <div style="width:30px; height:1px; background:#E7C3B4;"></div>
+    </div>
+    <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(46px,4.9vw,84px); line-height:.92; letter-spacing:-.036em; max-width:900px;">{{ ui.ctaA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#E7C3B4;">{{ ui.ctaB }}</span></div>
+    <div style="font-size:17px; line-height:1.65; color:rgba(251,246,240,.8); max-width:520px;">{{ ui.ctaSub }}</div>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; padding-top:6px;">
+      <div onClick="{{ goQuote }}" style="background:#FBF6F0; color:#7C2D3A; font-size:12.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; padding:22px 42px; cursor:pointer;" style-hover="background:#1A1411; color:#FBF6F0;">{{ ui.ctaBtn }}</div>
+      <div onClick="{{ goServices }}" style="border:1px solid rgba(251,246,240,.4); color:#FBF6F0; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; padding:22px 34px; cursor:pointer;" style-hover="border-color:#FBF6F0; background:rgba(251,246,240,.1);">{{ ui.ctaAll }}</div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1400, &quot;height&quot;: 900}, &quot;lang&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;en&quot;, &quot;es&quot;], &quot;default&quot;: &quot;en&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;onNav&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;(page: string, seg?: string) =&gt; void&quot;}}">
+const UI = {
+  en: {
+    heroPh: 'Drop a treatment-room or course photograph here',
+    heroCap: 'Aruna\u2019s own photograph \u00b7 replace with the studio shoot',
+    eyebrow: 'Packages \u00b7 bought as a course',
+    h1a: 'One session', h1b: 'of anything is', h1c: 'a trial, not a plan.',
+    sub: 'Skin, laser and body work build across a course rather than an appointment. Every package below is the same treatment bought as a block, and every one costs less per visit than paying as you go.',
+    whyT: 'Why the studio sells this way',
+    whyB: 'Six to ten laser sessions is what 80 to 100% reduction honestly takes. Four facials is where skin actually changes. Selling those one at a time would cost you more and achieve less, so they are priced as courses.',
+    book: 'Book this', split: 'Split it', cash: 'Cash', card: 'Card',
+    skinA: 'Skin,', skinB: 'four at a time.',
+    skinSub: 'Booked as a block and spaced four to six weeks apart. The per-visit price drops by roughly a third against paying each time.',
+    courseA: 'Laser and body,', courseB: 'by the course.',
+    courseSub: 'Priced for the number of sessions the result actually needs. Cash is lower, and anything to $4,000 splits into four payments.',
+    cmpEyebrow: 'Side by side',
+    cmpA: 'What each skin package', cmpB: 'actually includes.',
+    cmpSub: 'The four skin courses differ by what happens in each visit, not by how many visits you get. This is the whole difference.',
+    cmpWhat: 'Included', cmpNote: 'All four are four visits, spaced four to six weeks apart. Prices are the studio\u2019s current booking prices and include the consultation.',
+    mathEyebrow: 'The arithmetic',
+    mathA: 'What the course', mathB: 'actually saves you.',
+    mathSub: 'Three worked examples using the studio\u2019s own published single-visit prices. Nothing here is a projection.',
+    ctaEyebrow: 'Six questions, no deposit',
+    ctaA: 'Not sure which course', ctaB: 'is yours?',
+    ctaSub: 'Answer six questions and you get the right course, its cash and card price, and a time. The consultation after it is free either way.',
+    ctaBtn: 'Price my course', ctaAll: 'All 48 treatments'
+  },
+  es: {
+    heroPh: 'Suelta aqu\u00ed una foto de la sala o del plan',
+    heroCap: 'Foto propia de Aruna \u00b7 reemplazar con la sesi\u00f3n',
+    eyebrow: 'Paquetes \u00b7 comprados por plan',
+    h1a: 'Una sola sesi\u00f3n', h1b: 'de cualquier cosa es', h1c: 'una prueba, no un plan.',
+    sub: 'La piel, el l\u00e1ser y el trabajo corporal se construyen a lo largo de un plan y no en una cita. Cada paquete de abajo es el mismo tratamiento comprado en bloque, y todos cuestan menos por visita que pagar sobre la marcha.',
+    whyT: 'Por qu\u00e9 el estudio lo vende as\u00ed',
+    whyB: 'De seis a diez sesiones de l\u00e1ser es lo que honestamente tarda una reducci\u00f3n del 80 al 100%. Cuatro faciales es donde la piel de verdad cambia. Venderlos de uno en uno te costar\u00eda m\u00e1s y lograr\u00eda menos, as\u00ed que se cotizan por plan.',
+    book: 'Reservar', split: 'A plazos', cash: 'Efectivo', card: 'Tarjeta',
+    skinA: 'La piel,', skinB: 'de cuatro en cuatro.',
+    skinSub: 'Se reserva en bloque y se espacia de cuatro a seis semanas. El precio por visita baja alrededor de un tercio frente a pagar cada vez.',
+    courseA: 'L\u00e1ser y cuerpo,', courseB: 'por plan.',
+    courseSub: 'Cotizado para el n\u00famero de sesiones que el resultado realmente necesita. En efectivo es menos, y hasta $4,000 se divide en cuatro pagos.',
+    cmpEyebrow: 'Uno al lado del otro',
+    cmpA: 'Qu\u00e9 incluye de verdad', cmpB: 'cada paquete de piel.',
+    cmpSub: 'Los cuatro planes de piel se diferencian por lo que pasa en cada visita, no por cu\u00e1ntas visitas son. Esta es toda la diferencia.',
+    cmpWhat: 'Incluye', cmpNote: 'Los cuatro son cuatro visitas, espaciadas de cuatro a seis semanas. Los precios son los vigentes de reserva e incluyen la consulta.',
+    mathEyebrow: 'La aritm\u00e9tica',
+    mathA: 'Lo que el plan', mathB: 'te ahorra de verdad.',
+    mathSub: 'Tres ejemplos con los propios precios por visita que el estudio publica. Aqu\u00ed no hay proyecciones.',
+    ctaEyebrow: 'Seis preguntas, sin dep\u00f3sito',
+    ctaA: '\u00bfNo sabes cu\u00e1l plan', ctaB: 'es el tuyo?',
+    ctaSub: 'Responde seis preguntas y tienes el plan correcto, su precio en efectivo y con tarjeta, y una hora. La consulta despu\u00e9s es gratis igualmente.',
+    ctaBtn: 'Ver mi plan', ctaAll: 'Los 48 tratamientos'
+  }
+};
+
+// Her published package prices, and the single-visit prices they compare against.
+const SKIN = [
+  { n: '4 signature facials', price: 380, single: 120, tag: 'Four visits', note: 'The signature deep cleanse, four times. The starting point if you have not had a facial here before.' },
+  { n: 'Microneedling special', price: 400, single: 200, sessions: 3, tag: 'Three visits', note: 'Stem cells, dermaplaning and extractions across three sessions. Red for one to three days each time.' },
+  { n: '4 dermaplaning facials', price: 480, single: 150, tag: 'Four visits', note: 'Full facial plus manual exfoliation and deep hydration. The one most clients settle on.' },
+  { n: '4 HydraFacial + derma + RF', price: 600, single: 190, tag: 'Four visits', note: 'Hydrafacial, dermaplaning and radio-frequency tightening together. The most complete skin course.' }
+];
+
+const COURSES = [
+  { n: 'Laser, 8 sessions', cash: 2000, card: 2200, sessions: 'Eight sessions', tag: 'Laser', note: 'Lower body (brazilian, full legs) or upper body (underarms, face). Six to ten sessions is the honest range, so eight is priced as the plan.' },
+  { n: 'Body sculpting, 10 sessions', cash: 1000, card: 1000, sessions: 'Ten sessions', tag: 'Body', note: 'Fat reduction, skin tightening and muscle definition in one area. $135 a session bought singly, so the block saves $350.' },
+  { n: 'Post-lipo drainage, 10 sessions', cash: 900, card: 1200, sessions: 'Ten sessions', tag: 'Recovery', note: 'Manual lymphatic drainage after liposuction. Start as soon as your surgeon clears you \u2014 the earlier it begins, the less fluid there is to move.' }
+];
+
+const CMP = [
+  ['Deep cleanse', 1, 1, 1, 1],
+  ['Extractions', 1, 1, 1, 1],
+  ['Dermaplaning', 0, 1, 1, 1],
+  ['Stem cells', 0, 1, 0, 0],
+  ['HydraFacial', 0, 0, 0, 1],
+  ['Radio-frequency', 0, 0, 0, 1],
+  ['Deep hydration', 0, 0, 1, 1],
+  ['Visits', '4', '3', '4', '4'],
+  ['Price', '$380', '$400', '$480', '$600'],
+  ['Per visit', '$95', '$133', '$120', '$150']
+];
+
+const money = n => '$' + n.toLocaleString('en-US');
+
+class Component extends DCLogic {
+  componentDidMount() { window.scrollTo({ top: 0, behavior: 'auto' }); }
+
+  nav = (p, seg) => { const f = this.props.onNav; if (f) f(p, seg); };
+
+  renderVals() {
+    const es = this.props.lang === 'es';
+    const ui = UI[es ? 'es' : 'en'];
+
+    const skin = SKIN.map((p, i) => {
+      const visits = p.sessions || 4;
+      const per = Math.round(p.price / visits);
+      const full = p.single * visits;
+      const save = full - p.price;
+      return {
+        n: p.n, tag: p.tag, note: p.note,
+        price: money(p.price),
+        per: money(per) + (es ? ' por visita' : ' a visit'),
+        save: save > 0 ? (es ? 'Ahorras ' : 'Saves ') + money(save) : '',
+        saveColor: save > 0 ? '#7C2D3A' : 'transparent',
+        bg: i === 2 ? '#EFE7DE' : '#F4EDE6',
+        click: () => this.nav('booking')
+      };
+    });
+
+    const courses = COURSES.map(c => ({
+      n: c.n, tag: c.tag, sessions: c.sessions, note: c.note,
+      cash: money(c.cash), card: money(c.card),
+      click: () => this.nav('booking')
+    }));
+
+    const yes = es ? 'S\u00ed' : 'Yes';
+    const cmpRows = CMP.map(r => ({
+      label: r[0],
+      cells: r.slice(1).map(v => ({
+        v: v === 1 ? yes : (v === 0 ? '\u2014' : v),
+        color: v === 0 ? '#C4B6AA' : (v === 1 ? '#7C2D3A' : '#1A1411')
+      }))
+    }));
+
+    const maths = es ? [
+      { t: 'Cuatro faciales con dermaplaning', lines: [
+        { k: 'Sueltos, $150 \u00d7 4', v: '$600', color: 'rgba(251,246,240,.8)' },
+        { k: 'Como plan', v: '$480', color: '#D9A08C' },
+        { k: 'Te ahorras', v: '$120', color: '#FBF6F0' }
+      ], note: 'Y la piel avanza de verdad, porque las cuatro visitas ya est\u00e1n agendadas.' },
+      { t: 'L\u00e1ser, ocho sesiones', lines: [
+        { k: 'Sueltas, precio de lista', v: '$2,500+', color: 'rgba(251,246,240,.8)' },
+        { k: 'Plan en efectivo', v: '$2,000', color: '#D9A08C' },
+        { k: 'Te ahorras', v: '20%', color: '#FBF6F0' }
+      ], note: 'El descuento del 20% aplica desde seis sesiones en cualquier zona.' },
+      { t: 'Moldeado, diez sesiones', lines: [
+        { k: 'Sueltas, $135 \u00d7 10', v: '$1,350', color: 'rgba(251,246,240,.8)' },
+        { k: 'Como plan', v: '$1,000', color: '#D9A08C' },
+        { k: 'Te ahorras', v: '$350', color: '#FBF6F0' }
+      ], note: 'Una sola sesi\u00f3n de moldeado no da un resultado que valga lo que pagas.' }
+    ] : [
+      { t: 'Four dermaplaning facials', lines: [
+        { k: 'Bought singly, $150 \u00d7 4', v: '$600', color: 'rgba(251,246,240,.8)' },
+        { k: 'As a course', v: '$480', color: '#D9A08C' },
+        { k: 'You save', v: '$120', color: '#FBF6F0' }
+      ], note: 'And the skin actually gets somewhere, because all four visits are already in the calendar.' },
+      { t: 'Laser, eight sessions', lines: [
+        { k: 'Bought singly, list price', v: '$2,500+', color: 'rgba(251,246,240,.8)' },
+        { k: 'Course, cash', v: '$2,000', color: '#D9A08C' },
+        { k: 'You save', v: '20%', color: '#FBF6F0' }
+      ], note: 'The 20% course discount applies from six sessions on any area.' },
+      { t: 'Body sculpting, ten sessions', lines: [
+        { k: 'Bought singly, $135 \u00d7 10', v: '$1,350', color: 'rgba(251,246,240,.8)' },
+        { k: 'As a course', v: '$1,000', color: '#D9A08C' },
+        { k: 'You save', v: '$350', color: '#FBF6F0' }
+      ], note: 'A single sculpting session does not produce a result worth paying for.' }
+    ];
+
+    return {
+      ui,
+      heroSrc: 'https://static.glossgenius.com/public/service/8dfbe73a0e0f50dd445fc7ffdc503a4cce7acbcd/image/7b42bcde136cba03ce63e11fe2bfe29c.jpg',
+      skin, courses, cmpRows, maths,
+      cmpHeads: es
+        ? ['4 firma', '3 microneedling', '4 dermaplaning', '4 completo']
+        : ['4 signature', '3 microneedling', '4 dermaplaning', '4 complete'],
+      goQuote: () => this.nav('quote'),
+      goServices: () => this.nav('services'),
+      goFinancing: () => this.nav('financing')
+    };
+  }
+}
+
+</script>
+</body>
+</html>

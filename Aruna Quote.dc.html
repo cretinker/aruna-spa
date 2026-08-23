@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="background:#F4EDE6; color:#1A1411; font-family:'DM Sans',sans-serif; min-height:80vh;">
+
+  <div style="display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr); align-items:stretch; min-height:760px;">
+
+    <div style="padding:56px 44px 64px; display:flex; flex-direction:column; gap:30px;">
+
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:20px;">
+          <div style="font-size:10.5px; letter-spacing:.3em; text-transform:uppercase; color:#7C2D3A;">{{ ui.stepPrefix }} {{ stepNum }} {{ ui.of }} 6 &middot; {{ stepName }}</div>
+          <div style="font-size:11.5px; color:#8A7A6E;">{{ ui.nothingHeld }}</div>
+        </div>
+        <div style="height:2px; background:rgba(26,20,17,.16); position:relative;">
+          <div style="position:absolute; left:0; top:0; bottom:0; width:{{ pct }}; background:#7C2D3A; transition:width .5s cubic-bezier(.16,1,.3,1);"></div>
+        </div>
+      </div>
+
+      <sc-if value="{{ s1 }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; flex-direction:column; gap:24px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:60px; line-height:.98; letter-spacing:-.028em;">{{ ui.q1 }}</div>
+          <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; background:rgba(26,20,17,.16); border:1px solid rgba(26,20,17,.16);">
+            <sc-for list="{{ segs }}" as="s" hint-placeholder-count="10">
+              <div onClick="{{ s.click }}" style="background:{{ s.bg }}; color:{{ s.fg }}; padding:20px 22px; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:14px; transition:background .2s ease;" style-hover="background:#E2D7C9;">
+                <div style="font-family:'Libre Caslon Display',serif; font-size:23px;">{{ s.label }}</div>
+                <div style="font-size:12px; letter-spacing:.1em; color:{{ s.accent }};">{{ s.from }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:24px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:60px; line-height:.98; letter-spacing:-.028em;">{{ ui.q2 }}</div>
+          <div style="display:flex; flex-direction:column; border-top:1px solid rgba(26,20,17,.16);">
+            <sc-for list="{{ svcOptions }}" as="o" hint-placeholder-count="6">
+              <div onClick="{{ o.click }}" style="display:grid; grid-template-columns:minmax(0,1.5fr) auto auto; gap:6px 22px; align-items:baseline; padding:18px 14px; border-bottom:1px solid rgba(26,20,17,.14); cursor:pointer; background:{{ o.bg }}; transition:background .2s ease;" style-hover="background:#EAE1D6;">
+                <div style="font-family:'Libre Caslon Display',serif; font-size:24px; color:{{ o.fg }};">{{ o.n }}</div>
+                <div style="font-size:13px; color:#8A7A6E;">{{ o.dur }}</div>
+                <div style="font-size:18px; text-align:right; min-width:96px; color:{{ o.accent }};">{{ o.price }}</div>
+                <div style="grid-column:1 / -1; font-size:12.5px; line-height:1.6; color:#8A7A6E; max-width:640px; padding-left:14px;">{{ o.note }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:24px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:60px; line-height:.98; letter-spacing:-.028em;">{{ ui.q3 }}</div>
+          <div style="font-size:15.5px; line-height:1.7; color:#5C4E46; max-width:560px;">{{ ui.q3sub }}</div>
+          <div style="display:flex; flex-direction:column; gap:1px; background:rgba(26,20,17,.16); border:1px solid rgba(26,20,17,.16);">
+            <sc-for list="{{ historyOpts }}" as="o" hint-placeholder-count="3">
+              <div onClick="{{ o.click }}" style="background:{{ o.bg }}; color:{{ o.fg }}; padding:22px 24px; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:20px;" style-hover="background:#E2D7C9;">
+                <div style="display:flex; flex-direction:column; gap:5px;">
+                  <div style="font-family:'Libre Caslon Display',serif; font-size:25px;">{{ o.label }}</div>
+                  <div style="font-size:13px; color:{{ o.subFg }};">{{ o.sub }}</div>
+                </div>
+                <div style="font-size:14px; color:{{ o.accent }}; white-space:nowrap;">{{ o.delta }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ s4 }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:24px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:60px; line-height:.98; letter-spacing:-.028em;">{{ ui.q4 }}</div>
+          <div style="display:flex; flex-direction:column; gap:1px; background:rgba(26,20,17,.16); border:1px solid rgba(26,20,17,.16);">
+            <sc-for list="{{ placeOpts }}" as="o" hint-placeholder-count="3">
+              <div onClick="{{ o.click }}" style="background:{{ o.bg }}; color:{{ o.fg }}; padding:22px 24px; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:20px;" style-hover="background:#E2D7C9;">
+                <div style="display:flex; flex-direction:column; gap:5px;">
+                  <div style="font-family:'Libre Caslon Display',serif; font-size:25px;">{{ o.label }}</div>
+                  <div style="font-size:13px; color:{{ o.subFg }};">{{ o.sub }}</div>
+                </div>
+                <div style="font-size:14px; color:{{ o.accent }}; white-space:nowrap;">{{ o.delta }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ s5 }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:24px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:60px; line-height:.98; letter-spacing:-.028em;">{{ ui.q5 }}</div>
+          <div style="display:flex; flex-direction:column; gap:1px; background:rgba(26,20,17,.16); border:1px solid rgba(26,20,17,.16);">
+            <sc-for list="{{ payOpts }}" as="o" hint-placeholder-count="3">
+              <div onClick="{{ o.click }}" style="background:{{ o.bg }}; color:{{ o.fg }}; padding:22px 24px; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:20px;" style-hover="background:#E2D7C9;">
+                <div style="display:flex; flex-direction:column; gap:5px;">
+                  <div style="font-family:'Libre Caslon Display',serif; font-size:25px;">{{ o.label }}</div>
+                  <div style="font-size:13px; color:{{ o.subFg }};">{{ o.sub }}</div>
+                </div>
+                <div style="font-size:14px; color:{{ o.accent }}; white-space:nowrap;">{{ o.delta }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ s6 }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:24px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:60px; line-height:.98; letter-spacing:-.028em;">{{ ui.q6 }}</div>
+          <div style="font-size:15.5px; line-height:1.7; color:#5C4E46; max-width:560px;">{{ ui.q6sub }}</div>
+          <div style="display:flex; flex-direction:column; gap:14px; max-width:520px;">
+            <input value="{{ name }}" onChange="{{ setName }}" placeholder="{{ ui.ph1 }}" style="background:#EAE1D6; border:1px solid rgba(26,20,17,.2); color:#1A1411; font-family:'DM Sans',sans-serif; font-size:15px; padding:17px 18px; outline:none;" style-focus="border-color:#7C2D3A;">
+            <input value="{{ phone }}" onChange="{{ setPhone }}" placeholder="{{ ui.ph2 }}" style="background:#EAE1D6; border:1px solid rgba(26,20,17,.2); color:#1A1411; font-family:'DM Sans',sans-serif; font-size:15px; padding:17px 18px; outline:none;" style-focus="border-color:#7C2D3A;">
+            <div style="display:flex; gap:1px; background:rgba(26,20,17,.16); border:1px solid rgba(26,20,17,.16);">
+              <sc-for list="{{ whenOpts }}" as="o" hint-placeholder-count="3">
+                <div onClick="{{ o.click }}" style="flex:1; background:{{ o.bg }}; color:{{ o.fg }}; padding:15px 12px; font-size:13px; text-align:center; cursor:pointer;" style-hover="background:#E2D7C9;">{{ o.label }}</div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:22px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:64px; line-height:.96; letter-spacing:-.03em;">{{ doneTitle }}</div>
+          <div style="font-size:16px; line-height:1.75; color:#5C4E46; max-width:560px;">{{ doneBody }}</div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <div onClick="{{ goBooking }}" style="cursor:pointer; background:#7C2D3A; color:#FBF6F0; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:19px 34px;" style-hover="background:#1A1411;">{{ ui.pickTime }}</div>
+            <a href="tel:+17183546298" style="border:1px solid rgba(26,20,17,.28); color:#1A1411; font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; padding:19px 30px;" style-hover="border-color:#7C2D3A; color:#7C2D3A;">{{ ui.callInstead }}</a>
+            <div onClick="{{ restart }}" style="font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; padding:19px 8px; color:#8A7A6E; cursor:pointer;" style-hover="color:#7C2D3A;">{{ ui.startOver }}</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showNav }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; align-items:center; gap:16px; margin-top:auto; padding-top:22px;">
+          <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
+            <div onClick="{{ back }}" style="font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; color:#8A7A6E; cursor:pointer; padding:18px 4px;" style-hover="color:#7C2D3A;">{{ ui.back }}</div>
+          </sc-if>
+          <div onClick="{{ next }}" style="background:{{ nextBg }}; color:{{ nextFg }}; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:19px 36px; cursor:{{ nextCursor }}; transition:background .25s ease;" style-hover="background:#1A1411;">{{ nextLabel }}</div>
+          <div style="font-size:12.5px; color:#A29386;">{{ hint }}</div>
+        </div>
+      </sc-if>
+    </div>
+
+    <div style="background:#EAE1D6; border-left:1px solid rgba(26,20,17,.16); padding:56px 36px; display:flex; flex-direction:column; gap:26px; position:sticky; top:104px; align-self:flex-start;">
+      <div style="font-size:10.5px; letter-spacing:.3em; text-transform:uppercase; color:#7C2D3A;">{{ ui.estimate }}</div>
+
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <div style="font-family:'Libre Caslon Display',serif; font-size:76px; line-height:1; letter-spacing:-.03em; color:{{ totalColor }}; transition:color .3s ease;">{{ total }}</div>
+        <div style="font-size:13px; color:#8A7A6E;">{{ totalNote }}</div>
+      </div>
+
+      <sc-if value="{{ hasFour }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:7px; padding:18px 20px; background:#F4EDE6; border-left:2px solid #7C2D3A;">
+          <div style="font-size:10.5px; letter-spacing:.22em; text-transform:uppercase; color:#7C2D3A;">{{ ui.orFour }}</div>
+          <div style="font-family:'Libre Caslon Display',serif; font-size:32px; line-height:1;">{{ four }}</div>
+          <div style="font-size:12.5px; line-height:1.6; color:#8A7A6E;">{{ ui.fourNote }}</div>
+        </div>
+      </sc-if>
+
+      <div style="display:flex; flex-direction:column; gap:1px; background:rgba(26,20,17,.14);">
+        <sc-for list="{{ lines }}" as="l" hint-placeholder-count="4">
+          <div style="background:#EAE1D6; display:flex; justify-content:space-between; gap:14px; padding:13px 0;">
+            <div style="font-size:12.5px; color:#8A7A6E;">{{ l.k }}</div>
+            <div style="font-size:13px; text-align:right; color:{{ l.color }};">{{ l.v }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="font-size:12.5px; line-height:1.7; color:#8A7A6E; padding-top:6px; border-top:1px solid rgba(26,20,17,.14);">{{ caveat }}</div>
+
+      <div style="display:flex; flex-direction:column; gap:9px; margin-top:auto; padding-top:20px; border-top:1px solid rgba(26,20,17,.14);">
+        <div style="font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:#A29386;">{{ ui.studio }}</div>
+        <div style="font-size:13px; line-height:1.6; color:#8A7A6E;">41 Wheeler Avenue, Staten Island<br>{{ ui.hours }}</div>
+        <a href="tel:+17183546298" style="font-size:13px;">718 354 6298</a>
+      </div>
+    </div>
+  </div>
+
+  <sc-if value="{{ exitOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed; inset:0; z-index:120; background:rgba(28,21,18,.82); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; padding:40px;">
+      <div style="background:#EAE1D6; border:1px solid rgba(232,169,133,.4); max-width:560px; width:100%; padding:44px; display:flex; flex-direction:column; gap:20px; box-shadow:0 40px 90px -40px rgba(0,0,0,.8);">
+        <div style="font-size:10.5px; letter-spacing:.3em; text-transform:uppercase; color:#7C2D3A;">{{ ui.exitEyebrow }}</div>
+        <div style="font-family:'Libre Caslon Display',serif; font-size:48px; line-height:1; letter-spacing:-.026em;">{{ ui.exitH }}</div>
+        <div style="font-size:15px; line-height:1.7; color:#5C4E46;">{{ ui.exitSub }}</div>
+        <div style="display:flex; gap:10px;">
+          <input value="{{ exitPhone }}" onChange="{{ setExitPhone }}" placeholder="Phone number" style="flex:1; background:#F4EDE6; border:1px solid rgba(26,20,17,.2); color:#1A1411; font-family:'DM Sans',sans-serif; font-size:15px; padding:17px 18px; outline:none;" style-focus="border-color:#7C2D3A;">
+          <div onClick="{{ submitExit }}" style="background:#7C2D3A; color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:17px 26px; cursor:pointer; white-space:nowrap;" style-hover="background:#1A1411;">{{ ui.exitBtn }}</div>
+        </div>
+        <div onClick="{{ closeExit }}" style="font-size:12.5px; color:#8A7A6E; cursor:pointer; align-self:flex-start;" style-hover="color:#7C2D3A;">{{ ui.exitNo }}</div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const STEP_NAMES = { en: ['What for', 'Treatment', 'History', 'Where', 'Payment', 'Details'],
+  es: ['Qu\u00e9 buscas', 'Tratamiento', 'Historial', 'D\u00f3nde', 'Pago', 'Datos'] };
+
+const UI = {
+  en: { of: 'of', nothingHeld: 'Nothing held, nothing charged',
+    q1: 'What is bothering you?', q2: 'Which treatment?', q3: 'Have you had this done before?',
+    q3sub: 'It changes the number. A touch-up on your own work costs about half, and correcting somebody else\u2019s costs more than starting fresh.',
+    q4: 'Where, and how many of you?', q5: 'How are you paying?', q6: 'Where should it go?',
+    q6sub: 'Your number is already on the right. Leave a name and a phone and it arrives by text with the next three open slots. Nobody will call you unless you ask.',
+    ph1: 'Your name', ph2: 'Phone number',
+    when: ['This week', 'Next two weeks', 'Just looking'],
+    estimate: 'Your estimate', pickOne: 'Pick a treatment and the number appears',
+    cashAll: 'Cash price, all in', cardAll: 'Card price, all in',
+    orFour: 'Or pay in four', fourNote: 'Approved before your appointment. Covers $50 to $4,000.',
+    lCat: 'Category', lTreat: 'Treatment', lList: 'List price', lTime: 'Time in the chair',
+    lHist: 'History', lWhere: 'Where', lPay: 'Paying by',
+    studio: 'Studio', hours: 'Mon\u2013Fri till 8pm \u00b7 Sat 1\u20133',
+    back: '\u2190 Back', cont: 'Continue', send: 'Send me the quote',
+    hintPick: 'Pick one to continue', hintName: 'Name and phone, then it is done',
+    free: 'Free', dash: '\u2014',
+    doneT: 'Your quote is on its way.', thanks: 'Thank you,',
+    pickTime: 'Pick my time', callInstead: 'Call instead', startOver: 'Start over',
+    exitEyebrow: 'Before you go', exitH: 'Leave a number and Aruna will call you back with the price.',
+    exitSub: 'No obligation, no deposit. If a treatment is wrong for your skin she will say so on the phone rather than at the appointment.',
+    exitBtn: 'Call me', exitNo: 'No thanks, I\u2019m still looking' },
+  es: { of: 'de', nothingHeld: 'Nada reservado, nada cobrado',
+    q1: '\u00bfQu\u00e9 te molesta?', q2: '\u00bfQu\u00e9 tratamiento?', q3: '\u00bfTe lo has hecho antes?',
+    q3sub: 'Cambia el n\u00famero. Un retoque de tu propio trabajo cuesta m\u00e1s o menos la mitad, y corregir el de otra persona cuesta m\u00e1s que empezar de cero.',
+    q4: '\u00bfD\u00f3nde, y cu\u00e1ntas son?', q5: '\u00bfC\u00f3mo vas a pagar?', q6: '\u00bfA d\u00f3nde lo enviamos?',
+    q6sub: 'Tu n\u00famero ya est\u00e1 a la derecha. Deja un nombre y un tel\u00e9fono y te llega por mensaje con los tres pr\u00f3ximos huecos. Nadie te llama si no lo pides.',
+    ph1: 'Tu nombre', ph2: 'Tel\u00e9fono',
+    when: ['Esta semana', 'Las pr\u00f3ximas dos semanas', 'Solo estoy viendo'],
+    estimate: 'Tu presupuesto', pickOne: 'Elige un tratamiento y aparece el n\u00famero',
+    cashAll: 'Precio en efectivo, todo incluido', cardAll: 'Precio con tarjeta, todo incluido',
+    orFour: 'O paga en cuatro', fourNote: 'Aprobado antes de tu cita. Cubre de $50 a $4,000.',
+    lCat: 'Categor\u00eda', lTreat: 'Tratamiento', lList: 'Precio de lista', lTime: 'Tiempo en la silla',
+    lHist: 'Historial', lWhere: 'D\u00f3nde', lPay: 'Pagas con',
+    studio: 'Estudio', hours: 'Lun\u2013Vie hasta las 8pm \u00b7 S\u00e1b 1\u20133',
+    back: '\u2190 Atr\u00e1s', cont: 'Continuar', send: 'Env\u00edame el presupuesto',
+    hintPick: 'Elige una opci\u00f3n para continuar', hintName: 'Nombre y tel\u00e9fono, y listo',
+    free: 'Gratis', dash: '\u2014',
+    doneT: 'Tu presupuesto va en camino.', thanks: 'Gracias,',
+    pickTime: 'Elegir mi hora', callInstead: 'Mejor llamo', startOver: 'Empezar de nuevo',
+    exitEyebrow: 'Antes de irte', exitH: 'Deja un n\u00famero y Aruna te llama con el precio.',
+    exitSub: 'Sin compromiso y sin dep\u00f3sito. Si un tratamiento no le va bien a tu piel te lo dir\u00e1 por tel\u00e9fono y no en la cita.',
+    exitBtn: 'Ll\u00e1mame', exitNo: 'No gracias, sigo viendo' }
+};
+
+const HIST_ES = { new: ['Primera vez', 'Primera vez que me lo hago', 'Precio completo'],
+  touchup: ['Un retoque de mi propio trabajo', 'M\u00edo, hecho aqu\u00ed o en otro sitio, hace 6 a 18 meses', 'M\u00e1s o menos la mitad'],
+  correction: ['Corregir trabajo existente', 'Trabajo de otra persona que hay que aclarar o reformar', '+25%, se cotiza tras la consulta'] };
+const PLACE_ES = { studio: ['En el estudio', '41 Wheeler Avenue, Staten Island', 'Sin coste extra'],
+  house3: ['En mi casa, tres de nosotras', 'Long Island, Nueva Jersey o Whitestone', '+$120 de traslado'],
+  party: ['Un grupo de cinco o m\u00e1s', 'Novias y eventos', '+$220, se cotiza'] };
+const PAY_ES = { card: ['Tarjeta, Zelle o Venmo', 'Pagado el mismo d\u00eda', 'Precio de lista'],
+  cash: ['Efectivo', 'Menos en todo el maquillaje permanente', 'Hasta 14% menos'],
+  four: ['Dividido en cuatro', 'Aprobado antes de llegar', 'De $50 a $4,000'] };
+
+const HISTORY = [
+  { k: 'new', label: 'First time', sub: 'First time having this done', mult: 1, delta: 'Full price' },
+  { k: 'touchup', label: 'A touch-up on my own work', sub: 'Yours, done here or elsewhere, 6 to 18 months ago', mult: 0.52, delta: 'About half' },
+  { k: 'correction', label: 'Correcting existing work', sub: 'Somebody else’s work to lift or reshape first', mult: 1.25, delta: '+25%, quoted after consult' }
+];
+
+const PLACES = [
+  { k: 'studio', label: 'At the studio', sub: '41 Wheeler Avenue, Staten Island', add: 0, delta: 'No extra' },
+  { k: 'house3', label: 'At my place, three of us', sub: 'Long Island, New Jersey or Whitestone', add: 120, delta: '+$120 travel' },
+  { k: 'party', label: 'A group of five or more', sub: 'Bridal parties and events', add: 220, delta: '+$220, quoted' }
+];
+
+const PAY = [
+  { k: 'card', label: 'Card, Zelle or Venmo', sub: 'Paid on the day', mult: 1, delta: 'List price' },
+  { k: 'cash', label: 'Cash', sub: 'Lower on all permanent makeup', mult: 0.88, delta: 'Up to 14% less' },
+  { k: 'four', label: 'Split into four', sub: 'Approved before you arrive', mult: 1, delta: '$50–$4,000' }
+];
+
+const WHEN = ['This week', 'Next two weeks', 'Just looking'];
+
+class Component extends DCLogic {
+  state = {
+    d: null, step: 1, seg: null, svc: null, history: null, place: null, pay: null,
+    name: '', phone: '', when: null, done: false, exitOpen: false, exitPhone: '', exitSent: false
+  };
+
+  componentDidMount() {
+    import('./aruna-data.js').then(d => this.setState({ d }));
+    this.onLeave = e => {
+      if (e.clientY <= 4 && !this.state.done && !this.state.exitOpen && !this.dismissed && this.state.step > 1) {
+        this.setState({ exitOpen: true });
+      }
+    };
+    document.addEventListener('mouseout', this.onLeave);
+  }
+  componentWillUnmount() { document.removeEventListener('mouseout', this.onLeave); }
+
+  nav = p => { const f = this.props.onNav; if (f) f(p); };
+
+  goBooking = () => {
+    const b = this.base();
+    const f = this.props.onNav;
+    if (f) f('booking', null, b ? { svc: b.n, dur: b.dur, price: (this.state.d ? this.state.d.money(b) : null) } : null);
+  };
+
+  base() {
+    const { d, svc } = this.state;
+    if (!d || !svc) return null;
+    return d.SERVICES.find(s => s.n === svc) || null;
+  }
+
+  price() {
+    const b = this.base();
+    if (!b) return null;
+    const st = this.state;
+    const h = HISTORY.find(x => x.k === st.history);
+    const p = PLACES.find(x => x.k === st.place);
+    const pay = PAY.find(x => x.k === st.pay);
+    let v = b.price;
+    if (v === 0) return 0;
+    if (h) v = v * h.mult;
+    if (p) v = v + p.add;
+    if (pay && pay.k === 'cash') v = b.cash ? (b.cash + (p ? p.add : 0)) * (h ? h.mult : 1) : v * pay.mult;
+    return Math.round(v / 5) * 5;
+  }
+
+  canAdvance() {
+    const st = this.state;
+    return [true, !!st.seg, !!st.svc, !!st.history, !!st.place, !!st.pay, !!(st.name && st.phone)][st.step];
+  }
+
+  next = () => {
+    if (!this.canAdvance()) return;
+    if (this.state.step === 6) return this.setState({ done: true, exitOpen: false });
+    this.setState(s => ({ step: s.step + 1 }));
+  };
+  back = () => this.setState(s => ({ step: Math.max(1, s.step - 1) }));
+
+  renderVals() {
+    const st = this.state, d = st.d;
+    const lang = this.props.lang || 'en';
+    const es = lang === 'es';
+    const ui = UI[lang] || UI.en;
+    const loc = (map, o, i) => (es && map[o.k] ? map[o.k][i] : [o.label, o.sub, o.delta][i]);
+    const money = n => '$' + Math.round(n).toLocaleString('en-US');
+    const val = this.price();
+    const b = this.base();
+    const on = '#7C2D3A', off = 'transparent';
+
+    const segs = d ? d.SEG_ORDER.map(k => ({
+      label: es && (d.SEG_LABELS_ES || {})[k] ? d.SEG_LABELS_ES[k][1] : d.SEGMENTS[k].label,
+      from: es && (d.SEG_FROM_ES || {})[k] ? d.SEG_FROM_ES[k] : d.SEGMENTS[k].from,
+      bg: st.seg === k ? '#EAE1D6' : '#F4EDE6',
+      fg: '#1A1411',
+      accent: st.seg === k ? '#7C2D3A' : '#8A7A6E',
+      click: () => this.setState({ seg: k, svc: null, step: 2 })
+    })) : [];
+
+    let svcOptions = [];
+    if (d && st.seg) {
+      const picks = d.SEGMENTS[st.seg].picks || [];
+      svcOptions = picks.map(n => d.SERVICES.find(s => s.n === n)).filter(Boolean).map(s => ({
+        n: s.n, dur: s.dur + ' min', price: d.money(s),
+        note: (es && (d.NOTES_ES || {})[s.n]) || s.note || '',
+        bg: st.svc === s.n ? '#EAE1D6' : 'transparent',
+        fg: st.svc === s.n ? '#7C2D3A' : '#1A1411',
+        accent: st.svc === s.n ? '#7C2D3A' : '#5C4E46',
+        click: () => this.setState({ svc: s.n, step: 3 })
+      }));
+    }
+
+    const optMap = { history: HIST_ES, place: PLACE_ES, pay: PAY_ES };
+    const opt = (arr, sel, key) => arr.map(o => ({
+      label: loc(optMap[key] || {}, o, 0), sub: loc(optMap[key] || {}, o, 1), delta: loc(optMap[key] || {}, o, 2),
+      bg: sel === o.k ? '#EAE1D6' : '#F4EDE6',
+      fg: '#1A1411',
+      subFg: sel === o.k ? '#5C4E46' : '#8A7A6E',
+      accent: sel === o.k ? '#7C2D3A' : '#8A7A6E',
+      click: () => this.setState(s => { const n = {}; n[key] = o.k; n.step = Math.min(6, s.step + 1); return n; })
+    }));
+
+    const lines = [];
+    if (st.seg && d) lines.push({ k: ui.lCat, v: (es && (d.SEG_LABELS_ES || {})[st.seg]) ? d.SEG_LABELS_ES[st.seg][1] : d.SEGMENTS[st.seg].label, color: '#1A1411' });
+    if (b) lines.push({ k: ui.lTreat, v: b.n, color: '#1A1411' });
+    if (b) lines.push({ k: ui.lList, v: d.money(b), color: '#5C4E46' });
+    if (b) lines.push({ k: ui.lTime, v: b.dur + ' min', color: '#5C4E46' });
+    if (st.history) lines.push({ k: ui.lHist, v: loc(HIST_ES, HISTORY.find(h => h.k === st.history), 0), color: '#5C4E46' });
+    if (st.place) lines.push({ k: ui.lWhere, v: loc(PLACE_ES, PLACES.find(p => p.k === st.place), 0), color: '#5C4E46' });
+    if (st.pay) lines.push({ k: ui.lPay, v: loc(PAY_ES, PAY.find(p => p.k === st.pay), 0), color: on });
+
+    const hasFour = val !== null && val >= 50 && val <= 4000;
+    const showNav = !st.done;
+    const nextOk = this.canAdvance();
+
+    let caveat = es ? 'Estos son los precios vigentes de reserva del estudio. La consulta es gratis y ahí se confirma el número final antes de reservar nada.' : 'These are the studio’s current booking prices. The consultation is free and confirms the final number before anything is booked.';
+    if (st.history === 'correction') caveat = es ? 'La correcci\u00f3n no se puede cotizar desde un formulario. Esta es una gu\u00eda m\u00e1xima; el n\u00famero real sale al ver el pigmento existente.' : 'Correction work cannot be priced from a form. This is an upper guide; the real number comes once the existing pigment has been looked at.';
+    else if (st.place === 'party') caveat = es ? 'Los grupos se cotizan por evento. Manda cu\u00e1ntas son y qu\u00e9 quieren y el precio vuelve el mismo d\u00eda.' : 'Groups are quoted per party. Send how many of you and what you want and the price comes back the same day.';
+    else if (b && b.price === 0) caveat = es ? 'Veinte minutos, gratis, y puede ser el mismo d\u00eda de tu tratamiento.' : 'Twenty minutes, free, and it can be the same day as your treatment.';
+
+    return {
+      stepNum: st.done ? 6 : st.step,
+      ui: Object.assign({ stepPrefix: es ? 'Paso' : 'Step' }, ui),
+      goBooking: this.goBooking,
+      stepName: st.done ? (es ? 'Listo' : 'Done') : (STEP_NAMES[lang] || STEP_NAMES.en)[st.step - 1],
+      pct: st.done ? '100%' : Math.round((st.step - 1) / 6 * 100) + '%',
+      s1: !st.done && st.step === 1, s2: !st.done && st.step === 2, s3: !st.done && st.step === 3,
+      s4: !st.done && st.step === 4, s5: !st.done && st.step === 5, s6: !st.done && st.step === 6,
+      done: st.done,
+      segs, svcOptions,
+      historyOpts: opt(HISTORY, st.history, 'history'),
+      placeOpts: opt(PLACES, st.place, 'place'),
+      payOpts: opt(PAY, st.pay, 'pay'),
+      whenOpts: WHEN.map((w, wi) => ({
+        label: (ui.when || WHEN)[wi] || w, bg: st.when === w ? '#EAE1D6' : '#F4EDE6',
+        fg: st.when === w ? '#7C2D3A' : '#5C4E46',
+        click: () => this.setState({ when: w })
+      })),
+      name: st.name, phone: st.phone,
+      setName: e => this.setState({ name: e.target.value }),
+      setPhone: e => this.setState({ phone: e.target.value }),
+      showNav, canBack: st.step > 1 && !st.done,
+      back: this.back, next: this.next,
+      nextLabel: st.step === 6 ? ui.send : ui.cont,
+      nextBg: nextOk ? on : 'rgba(26,20,17,.16)',
+      nextFg: nextOk ? '#1A1411' : '#A29386',
+      nextCursor: nextOk ? 'pointer' : 'not-allowed',
+      hint: nextOk ? '' : (st.step === 6 ? ui.hintName : ui.hintPick),
+      total: val === null ? ui.dash : (val === 0 ? ui.free : money(val)),
+      totalColor: val === null ? 'rgba(26,20,17,.28)' : on,
+      totalNote: val === null ? ui.pickOne : (st.pay === 'cash' ? ui.cashAll : ui.cardAll),
+      hasFour,
+      four: hasFour ? money(val / 4) + ' × 4' : '',
+      lines, caveat,
+      doneTitle: st.name ? ui.thanks + ' ' + st.name.split(' ')[0] + '.' : ui.doneT,
+      doneBody: es
+        ? ((val !== null && val > 0 ? 'Tu presupuesto es ' + money(val) + '. ' : '') + 'Aruna te enviar\u00e1 los tres pr\u00f3ximos huecos por mensaje. Si prefieres no esperar, el calendario est\u00e1 abierto ahora, y la consulta es gratis reserves o no.')
+        : ((val !== null && val > 0 ? 'Your estimate is ' + money(val) + '. ' : '') + 'Aruna will text you the next three open slots. If you would rather not wait, the calendar is open now, and the consultation is free whether you book or not.'),
+      restart: () => this.setState({ step: 1, seg: null, svc: null, history: null, place: null, pay: null, name: '', phone: '', when: null, done: false }),
+      exitOpen: st.exitOpen && !st.exitSent,
+      exitPhone: st.exitPhone,
+      setExitPhone: e => this.setState({ exitPhone: e.target.value }),
+      submitExit: () => { this.dismissed = true; this.setState({ exitSent: true, exitOpen: false }); },
+      closeExit: () => { this.dismissed = true; this.setState({ exitOpen: false }); }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

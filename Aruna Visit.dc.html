@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="background:#F4EDE6; color:#1A1411; font-family:'DM Sans',sans-serif;">
+
+  <div style="display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); border-bottom:1px solid rgba(26,20,17,.16);">
+    <div style="padding:120px 44px; display:flex; flex-direction:column; gap:26px; justify-content:center;">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <div style="width:44px; height:1px; background:#7C2D3A;"></div>
+        <div style="font-size:10.5px; letter-spacing:.28em; text-transform:uppercase; color:#7C2D3A;">{{ ui.eyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(46px,4.8vw,82px); line-height:.94; letter-spacing:-.034em;">{{ ui.h1a }}<br>{{ ui.h1b }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.h1c }}</span></div>
+      <div style="font-size:18px; line-height:1.7; color:#5C4E46; max-width:500px;">{{ ui.sub }}</div>
+      <div style="display:flex; gap:14px; align-items:center; padding-top:6px; flex-wrap:wrap;">
+        <div onClick="{{ goBooking }}" style="background:#7C2D3A; color:#FBF6F0; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:20px 36px; cursor:pointer;" style-hover="background:#1A1411;">{{ ui.book }}</div>
+        <div onClick="{{ goQuote }}" style="border:1px solid rgba(26,20,17,.28); color:#1A1411; font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; padding:20px 30px; cursor:pointer;" style-hover="border-color:#7C2D3A; color:#7C2D3A;">{{ ui.cta }}</div>
+        <a href="tel:+17183546298" style="font-size:14px; color:#1A1411; border-bottom:1px solid rgba(26,20,17,.3); padding-bottom:3px;" style-hover="color:#7C2D3A; border-color:#7C2D3A;">{{ ui.orCall }}</a>
+      </div>
+    </div>
+    <div style="background-image:url('https://static.glossgenius.com/public/salon/f893e6ce0d22374c613c44780aa0aee205264592/website_cover_image/d400e009fd15fd892a954cee4f0ce2ce.jpeg'); background-size:cover; background-position:center 36%; background-color:#D8CCC0; min-height:600px;"></div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:rgba(26,20,17,.16); border-bottom:1px solid rgba(26,20,17,.16);">
+    <sc-for list="{{ facts }}" as="f" hint-placeholder-count="4">
+      <div style="background:#F4EDE6; padding:38px 30px; display:flex; flex-direction:column; gap:8px;">
+        <div style="font-family:'Libre Caslon Display',serif; font-size:34px; line-height:1.05; color:#7C2D3A;">{{ f.k }}</div>
+        <div style="font-size:13px; line-height:1.6; color:#5C4E46;">{{ f.v }}</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div data-reveal style="padding:130px 44px;">
+    <div style="display:grid; grid-template-columns:minmax(0,400px) minmax(0,1fr); gap:90px; align-items:start;">
+      <div style="display:flex; flex-direction:column; gap:20px; position:sticky; top:150px;">
+        <div style="font-family:'Libre Caslon Display',serif; font-size:62px; line-height:.94; letter-spacing:-.032em;">{{ ui.arriveA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.arriveB }}</span></div>
+        <div style="font-size:16.5px; line-height:1.72; color:#5C4E46;">{{ ui.arriveSub }}</div>
+      </div>
+      <div style="display:flex; flex-direction:column;">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+          <div style="display:grid; grid-template-columns:66px minmax(0,1fr); gap:28px; padding:30px 0; border-top:1px solid rgba(26,20,17,.18); align-items:start;">
+            <div style="font-family:'Libre Caslon Display',serif; font-size:32px; line-height:1; color:#7C2D3A;">{{ s.n }}</div>
+            <div style="display:flex; flex-direction:column; gap:9px;">
+              <div style="font-family:'Libre Caslon Display',serif; font-size:30px; line-height:1.1;">{{ s.title }}</div>
+              <div style="font-size:16px; line-height:1.75; color:#5C4E46; max-width:620px;">{{ s.body }}</div>
+            </div>
+          </div>
+        </sc-for>
+        <div style="border-top:1px solid rgba(26,20,17,.18);"></div>
+      </div>
+    </div>
+  </div>
+
+  <div data-reveal style="background:#1A1411; color:#FBF6F0; padding:130px 44px;">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:56px; margin-bottom:52px;">
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="width:34px; height:1px; background:#D9A08C;"></div>
+          <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ ui.prepEyebrow }}</div>
+        </div>
+        <div style="font-family:'Libre Caslon Display',serif; font-size:70px; line-height:.94; letter-spacing:-.034em;">{{ ui.prepA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.prepB }}</span></div>
+      </div>
+      <div style="font-size:16.5px; line-height:1.7; color:rgba(251,246,240,.66); max-width:380px; padding-bottom:8px;">{{ ui.prepSub }}</div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:2px; background:rgba(251,246,240,.16);">
+      <sc-for list="{{ prep }}" as="p" hint-placeholder-count="4">
+        <div style="background:#1A1411; padding:34px 30px 40px; display:flex; flex-direction:column; gap:14px;">
+          <div style="font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:#D9A08C;">{{ p.tag }}</div>
+          <div style="font-family:'Libre Caslon Display',serif; font-size:28px; line-height:1.08;">{{ p.title }}</div>
+          <div style="display:flex; flex-direction:column; gap:9px;">
+            <sc-for list="{{ p.rules }}" as="r" hint-placeholder-count="3">
+              <div style="display:grid; grid-template-columns:16px minmax(0,1fr); gap:11px; font-size:14.5px; line-height:1.65; color:rgba(251,246,240,.72);">
+                <div style="color:#D9A08C; font-family:'Libre Caslon Display',serif;">&mdash;</div>
+                <div>{{ r }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div data-reveal style="background:#EAE1D6; padding:130px 44px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:90px; align-items:start;">
+    <div style="display:flex; flex-direction:column; gap:22px;">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div style="width:34px; height:1px; background:#7C2D3A;"></div>
+        <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A;">{{ ui.findEyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:62px; line-height:.94; letter-spacing:-.032em;">{{ ui.findA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.findB }}</span></div>
+      <div style="font-size:16.5px; line-height:1.72; color:#5C4E46; max-width:460px;">{{ ui.findSub }}</div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; padding-top:4px;">
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=41%20Wheeler%20Avenue%2C%20Staten%20Island%2C%20NY%2C%2010314" target="_blank" rel="noopener" style="background:#7C2D3A; color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:17px 30px;" style-hover="background:#1A1411;">{{ ui.maps }}</a>
+        <a href="https://wa.me/17183546298" target="_blank" rel="noopener" style="border:1px solid rgba(26,20,17,.28); color:#1A1411; font-size:12px; letter-spacing:.1em; text-transform:uppercase; padding:17px 28px;" style-hover="border-color:#7C2D3A; color:#7C2D3A;">WhatsApp</a>
+      </div>
+      <div style="border:1px solid rgba(26,20,17,.2); background:#D8CCC0; margin-top:14px;">
+        <iframe title="Map of 41 Wheeler Avenue, Staten Island" src="https://www.openstreetmap.org/export/embed.html?bbox=-74.1585%2C40.6055%2C-74.1385%2C40.6185&amp;layer=mapnik&amp;marker=40.612%2C-74.1485" style="width:100%; height:320px; border:0; display:block; filter:saturate(.72) contrast(1.04);" loading="lazy"></iframe>
+        <div style="display:flex; justify-content:space-between; gap:16px; padding:13px 16px; border-top:1px solid rgba(26,20,17,.2); font-size:12px; color:#5C4E46;">
+          <span>{{ ui.mapNote }}</span>
+          <a href="https://www.openstreetmap.org/?mlat=40.612&amp;mlon=-74.1485#map=16/40.612/-74.1485" target="_blank" rel="noopener" style="color:#7C2D3A;" style-hover="color:#1A1411;">{{ ui.mapBig }}</a>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex; flex-direction:column;">
+      <sc-for list="{{ contact }}" as="c" hint-placeholder-count="5">
+        <div style="display:grid; grid-template-columns:minmax(0,150px) minmax(0,1fr); gap:32px; padding:24px 0; border-top:1px solid rgba(26,20,17,.18); align-items:baseline;">
+          <div style="font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#7C2D3A;">{{ c.k }}</div>
+          <div style="font-size:19px; line-height:1.55;">{{ c.v }}</div>
+        </div>
+      </sc-for>
+      <div style="border-top:1px solid rgba(26,20,17,.18); margin-bottom:26px;"></div>
+      <div style="display:flex; flex-direction:column; gap:9px;">
+        <div style="font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#7C2D3A;">{{ ui.hoursT }}</div>
+        <sc-for list="{{ hours }}" as="h" hint-placeholder-count="7">
+          <div style="display:flex; justify-content:space-between; gap:20px; padding:10px 0; border-bottom:1px solid rgba(26,20,17,.12); font-size:14.5px;">
+            <span style="color:{{ h.color }};">{{ h.day }}</span>
+            <span style="color:{{ h.color }};">{{ h.time }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div data-reveal style="border-top:1px solid rgba(26,20,17,.16); padding:130px 44px; display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:80px; align-items:start;">
+    <div style="display:flex; flex-direction:column; gap:20px; position:sticky; top:150px;">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div style="width:34px; height:1px; background:#7C2D3A;"></div>
+        <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A;">{{ ui.askEyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:58px; line-height:.94; letter-spacing:-.032em;">{{ ui.askA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.askB }}</span></div>
+      <div style="font-size:16.5px; line-height:1.72; color:#5C4E46; max-width:400px;">{{ ui.askSub }}</div>
+      <div style="display:flex; flex-direction:column; gap:10px; padding-top:8px;">
+        <sc-for list="{{ askPoints }}" as="p" hint-placeholder-count="3">
+          <div style="display:grid; grid-template-columns:15px minmax(0,1fr); gap:11px; font-size:14.5px; line-height:1.6; color:#5C4E46;">
+            <div style="color:#7C2D3A; font-family:'Libre Caslon Display',serif;">&mdash;</div>
+            <div>{{ p }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
+    <div style="background:#EAE1D6; padding:44px 42px 48px; display:flex; flex-direction:column; gap:26px;">
+      <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px;">
+        <input value="{{ fName }}" onChange="{{ setFName }}" placeholder="{{ ui.fName }}" style="background:#F4EDE6; border:1px solid rgba(26,20,17,.2); padding:16px 18px; font-family:'DM Sans',sans-serif; font-size:15px; color:#1A1411; outline:none;">
+        <input value="{{ fPhone }}" onChange="{{ setFPhone }}" placeholder="{{ ui.fPhone }}" style="background:#F4EDE6; border:1px solid rgba(26,20,17,.2); padding:16px 18px; font-family:'DM Sans',sans-serif; font-size:15px; color:#1A1411; outline:none;">
+        <input value="{{ fEmail }}" onChange="{{ setFEmail }}" placeholder="{{ ui.fEmail }}" style="background:#F4EDE6; border:1px solid rgba(26,20,17,.2); padding:16px 18px; font-family:'DM Sans',sans-serif; font-size:15px; color:#1A1411; outline:none; grid-column:span 2;">
+      </div>
+      <div style="display:flex; flex-direction:column; gap:11px;">
+        <div style="font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#7C2D3A;">{{ ui.fAbout }}</div>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          <sc-for list="{{ topics }}" as="t" hint-placeholder-count="6">
+            <div onClick="{{ t.click }}" style="background:{{ t.bg }}; border:1px solid {{ t.border }}; color:{{ t.fg }}; font-size:13.5px; padding:12px 18px; cursor:pointer;">{{ t.label }}</div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:11px;">
+        <div style="font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#7C2D3A;">{{ ui.fMsg }}</div>
+        <textarea value="{{ fMsg }}" onChange="{{ setFMsg }}" placeholder="{{ ui.fMsgPh }}" rows="5" style="background:#F4EDE6; border:1px solid rgba(26,20,17,.2); padding:16px 18px; font-family:'DM Sans',sans-serif; font-size:15px; line-height:1.6; color:#1A1411; outline:none; resize:vertical;"></textarea>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:11px;">
+        <div style="font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#7C2D3A;">{{ ui.fReply }}</div>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          <sc-for list="{{ replyOpts }}" as="r" hint-placeholder-count="3">
+            <div onClick="{{ r.click }}" style="background:{{ r.bg }}; border:1px solid {{ r.border }}; color:{{ r.fg }}; font-size:13.5px; padding:12px 18px; cursor:pointer;">{{ r.label }}</div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:18px; flex-wrap:wrap; border-top:1px solid rgba(26,20,17,.16); padding-top:24px;">
+        <div onClick="{{ sendForm }}" style="background:{{ sendBg }}; color:{{ sendFg }}; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:20px 36px; cursor:{{ sendCursor }};" style-hover="{{ sendHover }}">{{ ui.fSend }}</div>
+        <div style="font-size:13px; line-height:1.6; color:#8A7A6E; max-width:280px;">{{ formHint }}</div>
+      </div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ formSent }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#1A1411; color:#FBF6F0; padding:60px 46px; display:flex; flex-direction:column; gap:22px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="width:30px; height:1px; background:#D9A08C;"></div>
+          <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ ui.sentEyebrow }}</div>
+        </div>
+        <div style="font-family:'Libre Caslon Display',serif; font-size:48px; line-height:1;">{{ sentTitle }}</div>
+        <div style="font-size:16.5px; line-height:1.72; color:rgba(251,246,240,.72); max-width:460px;">{{ sentBody }}</div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; padding-top:8px;">
+          <a href="tel:+17183546298" style="background:#D9A08C; color:#1A1411; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:19px 32px;" style-hover="background:#FBF6F0;">{{ ui.orCall }}</a>
+          <div onClick="{{ resetForm }}" style="border:1px solid rgba(251,246,240,.3); color:#FBF6F0; font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; padding:19px 28px; cursor:pointer;" style-hover="border-color:#D9A08C; color:#D9A08C;">{{ ui.askAgain }}</div>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+
+  <div style="background:#7C2D3A; color:#FBF6F0; padding:130px 44px; display:flex; flex-direction:column; align-items:center; gap:28px; text-align:center;">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div style="width:30px; height:1px; background:#E7C3B4;"></div>
+      <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#E7C3B4;">{{ ui.ctaEyebrow }}</div>
+      <div style="width:30px; height:1px; background:#E7C3B4;"></div>
+    </div>
+    <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(48px,5vw,86px); line-height:.92; letter-spacing:-.036em; max-width:900px;">{{ ui.ctaA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#E7C3B4;">{{ ui.ctaB }}</span></div>
+    <div style="font-size:17px; line-height:1.65; color:rgba(251,246,240,.8); max-width:540px;">{{ ui.ctaSub }}</div>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+      <div onClick="{{ goBooking }}" style="background:#FBF6F0; color:#7C2D3A; font-size:12.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; padding:22px 44px; cursor:pointer;" style-hover="background:#1A1411; color:#FBF6F0;">{{ ui.book }}</div>
+      <div onClick="{{ goQuote }}" style="border:1px solid rgba(251,246,240,.4); color:#FBF6F0; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; padding:22px 38px; cursor:pointer;" style-hover="border-color:#FBF6F0; background:rgba(251,246,240,.1);">{{ ui.cta }}</div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const HOURS = [
+  ['12pm – 8pm'], ['10.30am – 8pm'], ['12pm – 8pm'],
+  ['10.30am – 8pm'], ['12pm – 8pm'], ['1pm – 3pm'], ['Closed']
+];
+
+const UI = {
+  en: {
+    eyebrow: 'Visit \u00b7 41 Wheeler Avenue',
+    h1a: 'A house, a', h1b: 'doorbell, and', h1c: 'one chair.',
+    sub: 'The studio is inside a home on a residential street in Staten Island, not a salon floor. That changes how a visit works, so here is all of it before you arrive.',
+    cta: 'Price my treatment', orCall: 'or call 718 354 6298',
+    days: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], closed: 'Closed',
+    facts: [
+      ['Street', 'Free parking directly outside on Wheeler Avenue'],
+      ['Ring', 'The bell, not the phone. Nobody is watching the window'],
+      ['Alone', 'One client in the building at a time'],
+      ['EN / ES', 'Both spoken, on the phone and in the room']
+    ],
+    arriveA: 'What actually', arriveB: 'happens.',
+    arriveSub: 'Five steps, and none of them involve a waiting room, because there is not one.',
+    steps: [
+      ['01', 'You arrive and ring', 'Park on the street and ring the bell rather than waiting in the car or texting from outside. Come on time rather than early \u2014 there is no waiting area, and arriving twenty minutes ahead means standing on a doorstep.'],
+      ['02', 'The consultation, free', 'Twenty minutes before anything permanent. Shape and colour are drawn on and agreed with you, and if your skin is wrong for a technique you hear it here. Changing your mind at this stage costs nothing.'],
+      ['03', 'The work', 'Ninety minutes for brows, three hours for scalp, ten minutes for small laser areas. Nobody is booked over the top of you, so the time is genuinely yours.'],
+      ['04', 'You pay what the site said', 'Cash and card prices are both printed. Nothing gets renegotiated at the door, and pay-in-four is approved before your appointment rather than while you are standing there.'],
+      ['05', 'Your second sitting is booked', 'For permanent makeup, before you leave. Four to six weeks out, already inside the price, and it is the appointment that finishes the work.']
+    ],
+    prepEyebrow: 'Before you come',
+    prepA: 'The week', prepB: 'beforehand.',
+    prepSub: 'Most disappointing results are a preparation problem rather than a technique problem. Read the column for your treatment.',
+    prep: [
+      ['Brows & PMU', 'Come unfilled', ['No brow makeup on the day \u2014 the shape gets drawn from scratch', 'Stop retinol and acids near the brow a week before', 'No alcohol or caffeine that morning, both thin the blood', 'Do not book the week of an event, or the week before a holiday in the sun']],
+      ['Laser', 'Shave, do not wax', ['Shave the area the night before, close but not irritated', 'No waxing, threading or plucking for four weeks \u2014 the laser needs the root', 'No sun, no tan and no self-tanner for two weeks', 'Come without deodorant for underarm sessions']],
+      ['Facials & skin', 'Bare face is fine', ['Stop retinol and strong acids five days before', 'No waxing or threading on the face that week', 'Expect redness after, so leave the evening free', 'Microneedling stays red one to three days \u2014 plan around it']],
+      ['Scalp & body', 'Comfortable and clean', ['Wash your hair the morning of scalp work and skip the product', 'Bring or wear loose clothing for body and massage work', 'Eat beforehand \u2014 scalp sessions run to three hours', 'For post-lipo drainage, bring your surgeon\u2019s clearance']]
+    ],
+    findEyebrow: 'Finding us',
+    findA: 'Wheeler Avenue,', findB: 'Staten Island.',
+    findSub: '41 Wheeler Avenue, Staten Island, NY 10314. Street parking outside the door. House calls are the exception \u2014 those come to you, for groups of three or more.',
+    maps: 'Open in maps', hoursT: 'Opening hours',
+    contact: [
+      ['Address', '41 Wheeler Avenue, Staten Island, NY 10314'],
+      ['Phone', '718 354 6298'],
+      ['Booking', 'Through the site, or by text for house calls'],
+      ['Languages', 'English y espa\u00f1ol'],
+      ['Payment', 'Cash, card, Zelle, Venmo, or four payments']
+    ],
+    book: 'Book an appointment',
+    mapNote: '41 Wheeler Avenue \u00b7 street parking outside', mapBig: 'Larger map',
+    askEyebrow: 'Ask first',
+    askA: 'Ask before you', askB: 'book anything.',
+    askSub: 'If you are not sure a treatment is right for your skin, ask here rather than booking and hoping. Answers come from Aruna, not a call centre.',
+    askPoints: ['She reads these herself, usually the same day.', 'No deposit and no obligation to book afterwards.', 'Write in English or Spanish, whichever you prefer.'],
+    fName: 'Your name', fPhone: 'Phone number', fEmail: 'Email (optional)',
+    fAbout: 'What is it about?',
+    topics: ['Brows or PMU', 'Hair loss', 'Laser', 'Facials or skin', 'Body or massage', 'Training', 'House call', 'Something else'],
+    fMsg: 'Your question', fMsgPh: 'Tell her what you are thinking about, and anything about your skin or previous work that matters.',
+    fReply: 'How should she reply?', replies: ['Text me', 'Call me', 'Email me'],
+    replyPhr: { 'Text me': 'by text', 'Call me': 'by phone', 'Email me': 'by email' },
+    fSend: 'Send the question',
+    hintName: 'Add a name and a phone or email', hintMsg: 'Write your question', hintReady: 'No deposit, no obligation.',
+    sentEyebrow: 'Question sent', sentT: 'It is with Aruna.', thanks: 'Thank you,',
+    askAgain: 'Ask something else',
+    ctaEyebrow: 'Nothing held, nothing charged',
+    ctaA: 'Know the number', ctaB: 'before you knock.',
+    ctaSub: 'Six questions, your card price and cash price side by side, then a time that suits you.'
+  },
+  es: {
+    eyebrow: 'Vis\u00edtanos \u00b7 41 Wheeler Avenue',
+    h1a: 'Una casa, un', h1b: 'timbre y', h1c: 'una sola silla.',
+    sub: 'El estudio est\u00e1 dentro de una casa en una calle residencial de Staten Island, no en un sal\u00f3n. Eso cambia c\u00f3mo funciona una visita, as\u00ed que aqu\u00ed est\u00e1 todo antes de que llegues.',
+    cta: 'Ver mi precio', orCall: 'o llama al 718 354 6298',
+    days: ['Lunes','Martes','Mi\u00e9rcoles','Jueves','Viernes','S\u00e1bado','Domingo'], closed: 'Cerrado',
+    facts: [
+      ['La calle', 'Estacionamiento gratis justo afuera en Wheeler Avenue'],
+      ['El timbre', 'Toca el timbre, no llames. Nadie est\u00e1 mirando por la ventana'],
+      ['Sola', 'Una clienta en el edificio a la vez'],
+      ['EN / ES', 'Los dos, por tel\u00e9fono y en la sala']
+    ],
+    arriveA: 'Qu\u00e9 pasa', arriveB: 'exactamente.',
+    arriveSub: 'Cinco pasos, y ninguno incluye una sala de espera, porque no hay.',
+    steps: [
+      ['01', 'Llegas y tocas el timbre', 'Estaciona en la calle y toca el timbre en lugar de esperar en el coche o escribir desde afuera. Llega a tu hora y no antes: no hay sala de espera, y llegar veinte minutos temprano significa esperar en la puerta.'],
+      ['02', 'La consulta, gratis', 'Veinte minutos antes de cualquier procedimiento permanente. La forma y el color se dibujan y se acuerdan contigo, y si tu piel no es adecuada para una t\u00e9cnica lo sabr\u00e1s aqu\u00ed. Cambiar de opini\u00f3n en esta etapa no cuesta nada.'],
+      ['03', 'El trabajo', 'Noventa minutos para cejas, tres horas para cuero cabelludo, diez minutos para zonas peque\u00f1as de l\u00e1ser. Nadie est\u00e1 agendado encima de ti, as\u00ed que el tiempo es de verdad tuyo.'],
+      ['04', 'Pagas lo que dec\u00eda la p\u00e1gina', 'Los precios en efectivo y con tarjeta est\u00e1n los dos por escrito. Nada se renegocia en la puerta, y el pago en cuatro se aprueba antes de tu cita y no mientras est\u00e1s ah\u00ed de pie.'],
+      ['05', 'Se agenda tu segunda sesi\u00f3n', 'Para maquillaje permanente, antes de irte. De cuatro a seis semanas despu\u00e9s, ya incluida en el precio, y es la cita que termina el trabajo.']
+    ],
+    prepEyebrow: 'Antes de venir',
+    prepA: 'La semana', prepB: 'anterior.',
+    prepSub: 'Casi todos los resultados decepcionantes son un problema de preparaci\u00f3n y no de t\u00e9cnica. Lee la columna de tu tratamiento.',
+    prep: [
+      ['Cejas y PMU', 'Ven sin rellenar', ['Sin maquillaje de cejas ese d\u00eda: la forma se dibuja de cero', 'Deja el retinol y los \u00e1cidos cerca de la ceja una semana antes', 'Sin alcohol ni cafe\u00edna esa ma\u00f1ana, los dos adelgazan la sangre', 'No lo reserves la semana de un evento ni antes de un viaje al sol']],
+      ['L\u00e1ser', 'Rasura, no depiles con cera', ['Rasura la zona la noche anterior, al ras pero sin irritar', 'Sin cera, hilo ni pinzas durante cuatro semanas: el l\u00e1ser necesita la ra\u00edz', 'Sin sol, sin bronceado y sin autobronceante dos semanas', 'Ven sin desodorante para las sesiones de axila']],
+      ['Faciales y piel', 'La cara limpia basta', ['Deja el retinol y los \u00e1cidos fuertes cinco d\u00edas antes', 'Sin cera ni hilo en la cara esa semana', 'Espera rojez despu\u00e9s, as\u00ed que deja la noche libre', 'El microneedling queda rojo de uno a tres d\u00edas: planifica']],
+      ['Cuero cabelludo y cuerpo', 'C\u00f3moda y limpia', ['Lava tu cabello la ma\u00f1ana del trabajo capilar y sin producto', 'Trae o ponte ropa holgada para cuerpo y masaje', 'Come antes: las sesiones capilares llegan a tres horas', 'Para drenaje post-lipo, trae la autorizaci\u00f3n de tu cirujano']]
+    ],
+    findEyebrow: 'C\u00f3mo encontrarnos',
+    findA: 'Wheeler Avenue,', findB: 'Staten Island.',
+    findSub: '41 Wheeler Avenue, Staten Island, NY 10314. Estacionamiento en la calle, en la puerta. Los domicilios son la excepci\u00f3n: esos van a ti, para grupos de tres o m\u00e1s.',
+    maps: 'Abrir en mapas', hoursT: 'Horario de apertura',
+    contact: [
+      ['Direcci\u00f3n', '41 Wheeler Avenue, Staten Island, NY 10314'],
+      ['Tel\u00e9fono', '718 354 6298'],
+      ['Reservas', 'Por la p\u00e1gina, o por mensaje para domicilios'],
+      ['Idiomas', 'English y espa\u00f1ol'],
+      ['Pago', 'Efectivo, tarjeta, Zelle, Venmo o cuatro pagos']
+    ],
+    book: 'Reservar una cita',
+    mapNote: '41 Wheeler Avenue \u00b7 estacionamiento en la calle', mapBig: 'Mapa m\u00e1s grande',
+    askEyebrow: 'Preg\u00fantale antes',
+    askA: 'Pregunta antes de', askB: 'reservar nada.',
+    askSub: 'Si no est\u00e1s segura de que un tratamiento le va bien a tu piel, preg\u00fantalo aqu\u00ed en lugar de reservar y esperar. Las respuestas son de Aruna, no de un centro de llamadas.',
+    askPoints: ['Las lee ella misma, normalmente el mismo d\u00eda.', 'Sin dep\u00f3sito y sin obligaci\u00f3n de reservar despu\u00e9s.', 'Escribe en espa\u00f1ol o en ingl\u00e9s, como prefieras.'],
+    fName: 'Tu nombre', fPhone: 'Tel\u00e9fono', fEmail: 'Correo (opcional)',
+    fAbout: '\u00bfDe qu\u00e9 se trata?',
+    topics: ['Cejas o PMU', 'Ca\u00edda del cabello', 'L\u00e1ser', 'Faciales o piel', 'Cuerpo o masaje', 'Formaci\u00f3n', 'A domicilio', 'Otra cosa'],
+    fMsg: 'Tu pregunta', fMsgPh: 'Cu\u00e9ntale qu\u00e9 est\u00e1s pensando, y lo que importe sobre tu piel o trabajos anteriores.',
+    fReply: '\u00bfC\u00f3mo prefieres que responda?', replies: ['Por mensaje', 'Ll\u00e1mame', 'Por correo'],
+    replyPhr: { 'Por mensaje': 'por mensaje', 'Ll\u00e1mame': 'por tel\u00e9fono', 'Por correo': 'por correo' },
+    fSend: 'Enviar la pregunta',
+    hintName: 'A\u00f1ade un nombre y un tel\u00e9fono o correo', hintMsg: 'Escribe tu pregunta', hintReady: 'Sin dep\u00f3sito y sin compromiso.',
+    sentEyebrow: 'Pregunta enviada', sentT: 'Ya la tiene Aruna.', thanks: 'Gracias,',
+    askAgain: 'Preguntar otra cosa',
+    ctaEyebrow: 'Nada reservado, nada cobrado',
+    ctaA: 'Conoce el n\u00famero', ctaB: 'antes de tocar.',
+    ctaSub: 'Seis preguntas, tu precio con tarjeta y en efectivo uno al lado del otro, y luego una hora que te convenga.'
+  }
+};
+
+class Component extends DCLogic {
+  state = { fName: '', fPhone: '', fEmail: '', fMsg: '', topic: null, reply: null, sent: false };
+
+  set = (k, v) => this.setState({ [k]: v });
+
+  formReady() {
+    const s = this.state;
+    return !!(s.fName.trim() && (s.fPhone.trim() || s.fEmail.trim()) && s.fMsg.trim());
+  }
+
+  sendForm = () => {
+    if (!this.formReady()) return;
+    this.setState({ sent: true });
+  };
+
+  resetForm = () => this.setState({ fName: '', fPhone: '', fEmail: '', fMsg: '', topic: null, reply: null, sent: false });
+
+  renderVals() {
+    const lang = this.props.lang === 'es' ? 'es' : 'en';
+    const ui = UI[lang];
+    const today = (new Date().getDay() + 6) % 7;
+    const st = this.state;
+    const fOk = this.formReady();
+    let formHint = ui.hintReady;
+    if (!st.fName.trim() || (!st.fPhone.trim() && !st.fEmail.trim())) formHint = ui.hintName;
+    else if (!st.fMsg.trim()) formHint = ui.hintMsg;
+    return {
+      ui: Object.assign({}, ui, {
+        eyebrow: String(ui.eyebrow).split(' \u00b7 ').map(p => p.replace(/ /g, '\u00a0')).join(' \u00b7 ')
+      }),
+      goQuote: () => { const f = this.props.onNav; if (f) f('quote'); },
+      goBooking: () => { const f = this.props.onNav; if (f) f('booking'); },
+      askPoints: ui.askPoints,
+      fName: st.fName, fPhone: st.fPhone, fEmail: st.fEmail, fMsg: st.fMsg,
+      setFName: e => this.set('fName', e.target.value),
+      setFPhone: e => this.set('fPhone', e.target.value),
+      setFEmail: e => this.set('fEmail', e.target.value),
+      setFMsg: e => this.set('fMsg', e.target.value),
+      topics: ui.topics.map(t => ({
+        label: t,
+        bg: st.topic === t ? '#7C2D3A' : '#F4EDE6',
+        border: st.topic === t ? '#7C2D3A' : 'rgba(26,20,17,.2)',
+        fg: st.topic === t ? '#FBF6F0' : '#1A1411',
+        click: () => this.setState({ topic: t })
+      })),
+      replyOpts: ui.replies.map(r => ({
+        label: r,
+        bg: st.reply === r ? '#7C2D3A' : '#F4EDE6',
+        border: st.reply === r ? '#7C2D3A' : 'rgba(26,20,17,.2)',
+        fg: st.reply === r ? '#FBF6F0' : '#1A1411',
+        click: () => this.setState({ reply: r })
+      })),
+      sendForm: this.sendForm,
+      resetForm: this.resetForm,
+      sendBg: fOk ? '#7C2D3A' : '#D8CCC0',
+      sendFg: fOk ? '#FBF6F0' : '#8A7A6E',
+      sendCursor: fOk ? 'pointer' : 'default',
+      sendHover: fOk ? 'background:#1A1411;' : '',
+      formHint,
+      formOpen: !st.sent, formSent: st.sent,
+      sentTitle: st.fName.trim() ? ui.thanks + ' ' + st.fName.trim().split(' ')[0] + '.' : ui.sentT,
+      sentBody: lang === 'es'
+        ? 'Aruna responde ' + (st.reply && ui.replyPhr[st.reply] ? ui.replyPhr[st.reply] + ' ' : '') + 'normalmente el mismo d\u00eda, y siempre dentro de un d\u00eda laborable. Si prefieres no esperar, ll\u00e1mala.'
+        : 'Aruna replies ' + (st.reply && ui.replyPhr[st.reply] ? ui.replyPhr[st.reply] + ' ' : '') + 'usually the same day, and always within one working day. If you would rather not wait, call her.',
+      facts: ui.facts.map(f => ({ k: f[0], v: f[1] })),
+      steps: ui.steps.map(s => ({ n: s[0], title: s[1], body: s[2] })),
+      prep: ui.prep.map(p => ({ tag: p[0], title: p[1], rules: p[2] })),
+      contact: ui.contact.map(c => ({ k: c[0], v: c[1] })),
+      hours: HOURS.map((h, i) => ({
+        day: ui.days[i],
+        time: h[0] === 'Closed' ? ui.closed : h[0],
+        color: i === today ? '#7C2D3A' : '#5C4E46'
+      }))
+    };
+  }
+}
+
+</script>
+</body>
+</html>

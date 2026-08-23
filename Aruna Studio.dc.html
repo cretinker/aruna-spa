@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="background:#F4EDE6; color:#1A1411; font-family:'DM Sans',sans-serif;">
+
+  <div style="position:relative; height:72vh; min-height:580px; overflow:hidden; background:#1A1411;">
+    <div style="position:absolute; inset:0; background-image:url('https://static.glossgenius.com/public/salon/f893e6ce0d22374c613c44780aa0aee205264592/website_cover_image/d400e009fd15fd892a954cee4f0ce2ce.jpeg'); background-size:cover; background-position:center 36%; background-color:#D8CCC0;"></div>
+    <div style="position:absolute; inset:0; background:linear-gradient(100deg, rgba(20,15,12,.92) 0%, rgba(20,15,12,.66) 46%, rgba(20,15,12,.2) 100%);"></div>
+    <div style="position:relative; height:100%; display:flex; flex-direction:column; justify-content:flex-end; padding:0 44px 56px; gap:22px; color:#FBF6F0;">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <div style="width:44px; height:1px; background:#D9A08C;"></div>
+        <div style="font-size:10.5px; letter-spacing:.28em; text-transform:uppercase; color:#D9A08C;">{{ ui.eyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(44px, 4.8vw, 80px); line-height:.96; letter-spacing:-.032em; max-width:1000px;">{{ ui.h1a }}<br>{{ ui.h1b }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.h1c }}</span></div>
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:48px;">
+        <div style="font-size:18px; line-height:1.6; color:rgba(251,246,240,.78); max-width:560px;">{{ ui.sub }}</div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; flex-shrink:0;">
+          <div onClick="{{ goQuote }}" style="background:#7C2D3A; color:#FBF6F0; font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:19px 34px; cursor:pointer;" style-hover="background:#FBF6F0; color:#7C2D3A;">{{ ui.cta }}</div>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=41%20Wheeler%20Avenue%2C%20Staten%20Island%2C%20NY%2C%2010314" target="_blank" rel="noopener" style="border:1px solid rgba(251,246,240,.34); color:#FBF6F0; font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; padding:19px 30px;" style-hover="border-color:#D9A08C; color:#D9A08C;">{{ ui.dir }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:rgba(26,20,17,.16); border-top:1px solid rgba(26,20,17,.16); border-bottom:1px solid rgba(26,20,17,.16);">
+    <div style="background:#F4EDE6; padding:44px 30px; display:flex; flex-direction:column; gap:9px;">
+      <div style="font-family:'Libre Caslon Display',serif; font-size:50px; line-height:1; color:#7C2D3A;">2014</div>
+      <div style="font-size:12.5px; color:#8A7A6E;">{{ ui.s1 }}</div>
+    </div>
+    <div style="background:#F4EDE6; padding:44px 30px; display:flex; flex-direction:column; gap:9px;">
+      <div style="font-family:'Libre Caslon Display',serif; font-size:50px; line-height:1; color:#7C2D3A;">20 yrs</div>
+      <div style="font-size:12.5px; color:#8A7A6E;">{{ ui.s2 }}</div>
+    </div>
+    <div style="background:#F4EDE6; padding:44px 30px; display:flex; flex-direction:column; gap:9px;">
+      <div style="font-family:'Libre Caslon Display',serif; font-size:50px; line-height:1; color:#7C2D3A;">{{ count }}</div>
+      <div style="font-size:12.5px; color:#8A7A6E;">{{ ui.s3 }}</div>
+    </div>
+    <div style="background:#F4EDE6; padding:44px 30px; display:flex; flex-direction:column; gap:9px;">
+      <div style="font-family:'Libre Caslon Display',serif; font-size:50px; line-height:1; color:#7C2D3A;">EN / ES</div>
+      <div style="font-size:12.5px; color:#8A7A6E;">{{ ui.s4 }}</div>
+    </div>
+  </div>
+
+  <div data-reveal style="padding:130px 44px; display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:64px; align-items:start;">
+    <div style="font-family:'Libre Caslon Display',serif; font-size:64px; line-height:.96; letter-spacing:-.03em;">{{ ui.storyH }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.storyHi }}</span></div>
+    <div style="display:flex; flex-direction:column; gap:18px; font-size:15.5px; line-height:1.8; color:#5C4E46;">
+      <div>{{ ui.p1 }}</div>
+      <div>{{ ui.p2 }}</div>
+      <div>{{ ui.p3 }}</div>
+    </div>
+  </div>
+
+  <div data-reveal style="background:#EAE1D6; border-top:1px solid rgba(26,20,17,.16); padding:130px 44px; display:flex; flex-direction:column; gap:44px;">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:30px;">
+      <div style="font-family:'Libre Caslon Display',serif; font-size:72px; line-height:.94; letter-spacing:-.032em;">{{ ui.teamA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.teamB }}</span></div>
+      <div style="font-size:12.5px; color:#8A7A6E;">{{ ui.teamNote }}</div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:26px;">
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="height:320px; background:#F4EDE6; border:1px solid rgba(26,20,17,.16); display:flex; align-items:center; justify-content:center; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(26,20,17,.28);">{{ ui.photoSlot }}</div>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:34px; line-height:1.05;">Mary Aruna</div>
+          <div style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#7C2D3A;">{{ ui.r1 }}</div>
+          <div style="font-size:13.5px; line-height:1.7; color:#5C4E46;">{{ ui.r1b }}</div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="height:320px; background:#F4EDE6; border:1px solid rgba(26,20,17,.16); display:flex; align-items:center; justify-content:center; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(26,20,17,.28);">{{ ui.photoSlot }}</div>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:28px;">{{ ui.nameTbc }}</div>
+          <div style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#7C2D3A;">{{ ui.r2 }}</div>
+          <div style="font-size:13.5px; line-height:1.7; color:#5C4E46;">{{ ui.r2b }}</div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="height:320px; background:#F4EDE6; border:1px solid rgba(26,20,17,.16); display:flex; align-items:center; justify-content:center; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(26,20,17,.28);">{{ ui.photoSlot }}</div>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:28px;">{{ ui.nameTbc }}</div>
+          <div style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#7C2D3A;">{{ ui.r3 }}</div>
+          <div style="font-size:13.5px; line-height:1.7; color:#5C4E46;">{{ ui.r3b }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div data-reveal style="padding:130px 44px; display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:64px; align-items:start;">
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div style="font-family:'Libre Caslon Display',serif; font-size:64px; line-height:.94; letter-spacing:-.03em;">{{ ui.polA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.polB }}</span></div>
+      <div style="font-size:14.5px; line-height:1.75; color:#5C4E46;">{{ ui.polSub }}</div>
+    </div>
+    <div style="display:flex; flex-direction:column;">
+      <div style="border-top:1px solid rgba(26,20,17,.16); padding:22px 0; display:flex; flex-direction:column; gap:8px;">
+        <div style="font-family:'Libre Caslon Display',serif; font-size:30px; color:#7C2D3A;">Cancellations</div>
+        <div style="font-size:14.5px; line-height:1.75; color:#5C4E46;">New brow and permanent makeup clients: $150 for a no-show or a cancellation inside 24 hours. Move it before then and it costs nothing.</div>
+      </div>
+      <div style="border-top:1px solid rgba(26,20,17,.16); padding:22px 0; display:flex; flex-direction:column; gap:8px;">
+        <div style="font-family:'Libre Caslon Display',serif; font-size:30px; color:#7C2D3A;">Deposits</div>
+        <div style="font-size:14.5px; line-height:1.75; color:#5C4E46;">$100 on the Beauty Nap and on new house-call clients, $60 on full body massage. They come off the treatment price. They are not an extra.</div>
+      </div>
+      <div style="border-top:1px solid rgba(26,20,17,.16); padding:22px 0; display:flex; flex-direction:column; gap:8px;">
+        <div style="font-family:'Libre Caslon Display',serif; font-size:30px; color:#7C2D3A;">Your included touch-up</div>
+        <div style="font-size:14.5px; line-height:1.75; color:#5C4E46;">Four to six weeks after your first visit, eight at the very outside. Miss that window and the regular touch-up price applies, because the work has to start again.</div>
+      </div>
+      <div style="border-top:1px solid rgba(26,20,17,.16); padding:22px 0; display:flex; flex-direction:column; gap:8px;">
+        <div style="font-family:'Libre Caslon Display',serif; font-size:30px; color:#7C2D3A;">Paying</div>
+        <div style="font-size:14.5px; line-height:1.75; color:#5C4E46;">Cash, card, Zelle and Venmo. Cash is lower on permanent makeup and on the post-lipo package, and both numbers are printed. $50 to $4,000 can be split into four.</div>
+      </div>
+      <div style="border-top:1px solid rgba(26,20,17,.16); border-bottom:1px solid rgba(26,20,17,.16); padding:22px 0; display:flex; flex-direction:column; gap:8px;">
+        <div style="font-family:'Libre Caslon Display',serif; font-size:30px; color:#7C2D3A;">Full body massage</div>
+        <div style="font-size:14.5px; line-height:1.75; color:#5C4E46;">Women only, existing clients or personal recommendation. It is somebody&rsquo;s house, and that is the trade-off.</div>
+      </div>
+    </div>
+  </div>
+
+  <div data-reveal style="background:#EAE1D6; border-top:1px solid rgba(26,20,17,.16); padding:130px 44px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:64px; align-items:start;">
+    <div style="display:flex; flex-direction:column; gap:18px;">
+      <div style="font-family:'Libre Caslon Display',serif; font-size:64px; line-height:.94; letter-spacing:-.03em;">{{ ui.getA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.getB }}</span></div>
+      <div style="font-size:15px; line-height:1.75; color:#5C4E46;">{{ ui.getSub }}</div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=41%20Wheeler%20Avenue%2C%20Staten%20Island%2C%20NY%2C%2010314" target="_blank" rel="noopener" style="background:#7C2D3A; color:#FBF6F0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:16px 28px;" style-hover="background:#1A1411;">{{ ui.maps }}</a>
+        <a href="tel:+17183546298" style="border:1px solid rgba(26,20,17,.28); color:#1A1411; font-size:12px; letter-spacing:.1em; text-transform:uppercase; padding:16px 26px;" style-hover="border-color:#7C2D3A; color:#7C2D3A;">718 354 6298</a>
+        <a href="https://wa.me/17183546298" target="_blank" rel="noopener" style="border:1px solid rgba(26,20,17,.28); color:#1A1411; font-size:12px; letter-spacing:.1em; text-transform:uppercase; padding:16px 26px;" style-hover="border-color:#7C2D3A; color:#7C2D3A;">WhatsApp</a>
+      </div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#7C2D3A; margin-bottom:4px;">{{ ui.hoursT }}</div>
+      <sc-for list="{{ hours }}" as="h" hint-placeholder-count="7">
+        <div style="display:flex; justify-content:space-between; gap:20px; padding:11px 0; border-bottom:1px solid rgba(26,20,17,.12); font-size:14.5px;">
+          <span style="color:{{ h.color }};">{{ h.day }}</span>
+          <span style="color:{{ h.color }};">{{ h.time }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="background:#7C2D3A; color:#FBF6F0; padding:110px 44px; display:flex; align-items:flex-end; justify-content:space-between; gap:56px;">
+    <div style="display:flex; flex-direction:column; gap:11px; max-width:620px;">
+      <div style="font-family:'Libre Caslon Display',serif; font-size:70px; line-height:.94; letter-spacing:-.032em;">{{ ui.ctaA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic;">{{ ui.ctaB }}</span></div>
+      <div style="font-size:14.5px; line-height:1.65; color:rgba(251,246,240,.78);">{{ ui.ctaSub }}</div>
+    </div>
+    <div onClick="{{ goQuote }}" style="background:#F4EDE6; color:#7C2D3A; font-size:12.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; padding:20px 40px; cursor:pointer; white-space:nowrap;" style-hover="background:#fff; color:#1A1411;">{{ ui.cta }}</div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const UI = {
+  en: {
+    eyebrow: '41 Wheeler Avenue \u00b7 Staten Island',
+    h1a: 'One chair, one client,', h1b: 'and', h1c: 'no one waiting.',
+    sub: 'Aruna has worked out of this house since 2014. You will not walk across a salon floor, wait behind anyone, or be handed to someone else halfway through. English y espa\u00f1ol.',
+    cta: 'Price my treatment', dir: 'Directions',
+    s1: 'In the same room since', s2: 'Of combined experience behind the chair',
+    s3: 'Treatments, and not one of them is price on request', s4: 'Both spoken in the studio',
+    storyH: 'Twelve years in one room, and the same answer every time you ask', storyHi: 'what it costs.',
+    p1: 'Most permanent makeup is sold on a consultation whose real job is getting you through the door before anyone says a number. Here the price list is public and the consultation is free, and the two have nothing to do with each other.',
+    p2: 'It is why your second sitting is inside the price rather than billed four weeks later, why the cash price is printed rather than negotiated, and why nobody here quotes one number in a message and another at the door.',
+    p3: 'The trade-off is capacity. Ninety minutes for a set of brows, one person at a time. Saturdays are short, Sundays are closed, and the calendar fills three weeks out.',
+    teamA: 'The', teamB: 'team.', teamNote: 'Photographs pending the studio\u2019s own shoot.',
+    r1: 'Founder \u00b7 permanent makeup', r1b: 'Brows, lips, eyeliner and scalp micropigmentation. Teaches the Perfecting Brows course to working artists.',
+    r2: 'Esthetician \u00b7 skin & laser', r2b: 'Facials, dermaplaning, microneedling and laser hair removal across face and body.',
+    r3: 'Massage & body', r3b: 'Lymphatic drainage, post-lipo recovery courses and body sculpting.',
+    nameTbc: 'Name to confirm', photoSlot: 'Photo slot',
+    polA: 'Policies, in', polB: 'plain terms.',
+    polSub: 'All of it comes down to one chair. A slot you do not use is a slot nobody else could have had.',
+    getA: 'Getting', getB: 'here.',
+    getSub: '41 Wheeler Avenue, Staten Island, NY 10314. Street parking outside. The studio is inside the house, so ring the bell rather than wait in the car.',
+    maps: 'Open in maps', hoursT: 'Opening hours',
+    ctaA: 'Bring the question you are', ctaB: 'embarrassed to ask.',
+    ctaSub: 'Twenty minutes, free, same day as your treatment if you want. If something is wrong for your skin you will hear it before it is booked, not after it is done.'
+  },
+  es: {
+    eyebrow: '41 Wheeler Avenue \u00b7 Staten Island',
+    h1a: 'Una silla, una clienta,', h1b: 'y', h1c: 'nadie esperando.',
+    sub: 'Aruna trabaja en esta casa desde 2014. No vas a cruzar un sal\u00f3n, esperar detr\u00e1s de nadie, ni que te pasen a otra persona a mitad del tratamiento. English y espa\u00f1ol.',
+    cta: 'Ver mi precio', dir: 'C\u00f3mo llegar',
+    s1: 'En la misma sala desde', s2: 'De experiencia combinada detr\u00e1s de la silla',
+    s3: 'Tratamientos, y ninguno es \u00abprecio a consultar\u00bb', s4: 'Los dos se hablan en el estudio',
+    storyH: 'Doce a\u00f1os en una sala, y la misma respuesta cada vez que preguntas', storyHi: 'cu\u00e1nto cuesta.',
+    p1: 'Casi todo el maquillaje permanente se vende con una consulta cuyo verdadero trabajo es meterte por la puerta antes de que alguien diga un n\u00famero. Aqu\u00ed la lista de precios es p\u00fablica y la consulta es gratis, y las dos cosas no tienen nada que ver.',
+    p2: 'Por eso tu segunda sesi\u00f3n va dentro del precio en lugar de cobrarse cuatro semanas despu\u00e9s, por eso el precio en efectivo est\u00e1 por escrito y no se negocia, y por eso aqu\u00ed nadie te da un n\u00famero por mensaje y otro en la puerta.',
+    p3: 'El intercambio es la capacidad. Noventa minutos para unas cejas, una persona a la vez. Los s\u00e1bados son cortos, los domingos cerramos, y la agenda se llena con tres semanas de antelaci\u00f3n.',
+    teamA: 'El', teamB: 'equipo.', teamNote: 'Fotos pendientes de la sesi\u00f3n propia del estudio.',
+    r1: 'Fundadora \u00b7 maquillaje permanente', r1b: 'Cejas, labios, delineado y micropigmentaci\u00f3n capilar. Ense\u00f1a el curso Perfecting Brows a artistas en activo.',
+    r2: 'Esteticista \u00b7 piel y l\u00e1ser', r2b: 'Faciales, dermaplaning, microneedling y depilaci\u00f3n l\u00e1ser de cara y cuerpo.',
+    r3: 'Masaje y cuerpo', r3b: 'Drenaje linf\u00e1tico, planes de recuperaci\u00f3n post-lipo y moldeado corporal.',
+    nameTbc: 'Nombre por confirmar', photoSlot: 'Espacio para foto',
+    polA: 'Las pol\u00edticas, en', polB: 'palabras claras.',
+    polSub: 'Todo se reduce a una silla. Un hueco que no usas es un hueco que nadie m\u00e1s pudo tener.',
+    getA: 'C\u00f3mo', getB: 'llegar.',
+    getSub: '41 Wheeler Avenue, Staten Island, NY 10314. Estacionamiento en la calle. El estudio est\u00e1 dentro de la casa, as\u00ed que toca el timbre en lugar de esperar en el coche.',
+    maps: 'Abrir en mapas', hoursT: 'Horario de apertura',
+    ctaA: 'Trae la pregunta que te da', ctaB: 'verg\u00fcenza hacer.',
+    ctaSub: 'Veinte minutos, gratis, el mismo d\u00eda de tu tratamiento si quieres. Si algo no le va bien a tu piel lo sabr\u00e1s antes de reservarlo, no despu\u00e9s de hac\u00e9rtelo.'
+  }
+};
+
+const DAYS_ES = ['Lunes','Martes','Mi\u00e9rcoles','Jueves','Viernes','S\u00e1bado','Domingo'];
+
+const HOURS = [
+  ['Monday', '12pm – 8pm'], ['Tuesday', '10.30am – 8pm'], ['Wednesday', '12pm – 8pm'],
+  ['Thursday', '10.30am – 8pm'], ['Friday', '12pm – 8pm'], ['Saturday', '1pm – 3pm'], ['Sunday', 'Closed']
+];
+
+class Component extends DCLogic {
+  state = { count: 48 };
+  componentDidMount() {
+    import('./aruna-data.js').then(m => this.setState({ count: m.SERVICES.length })).catch(() => {});
+  }
+  renderVals() {
+    const today = (new Date().getDay() + 6) % 7;
+    const lang = this.props.lang || 'en';
+    const es = lang === 'es';
+    const ui = UI[lang] || UI.en;
+    return {
+      ui,
+      count: this.state.count,
+      goQuote: () => { const f = this.props.onNav; if (f) f('quote'); },
+      hours: HOURS.map((h, i) => ({
+        day: es ? DAYS_ES[i] : h[0],
+        time: h[1] === 'Closed' ? (es ? 'Cerrado' : 'Closed') : h[1],
+        color: i === today ? '#7C2D3A' : '#5C4E46'
+      }))
+    };
+  }
+}
+
+</script>
+</body>
+</html>

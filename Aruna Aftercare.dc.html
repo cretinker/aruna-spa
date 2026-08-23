@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="background:#F4EDE6; color:#1A1411; font-family:'DM Sans',sans-serif;">
+
+  <div style="background:#1A1411; color:#FBF6F0; padding:126px 44px 96px; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:70px; align-items:end;">
+    <div style="display:flex; flex-direction:column; gap:26px;">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <div style="width:44px; height:1px; background:#D9A08C;"></div>
+        <div style="font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ ui.eyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(46px,4.9vw,84px); line-height:.93; letter-spacing:-.035em;">{{ ui.h1a }}<br>{{ ui.h1b }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.h1c }}</span></div>
+      <div style="font-size:18.5px; line-height:1.7; color:rgba(251,246,240,.76); max-width:540px;">{{ ui.sub }}</div>
+    </div>
+    <div style="background:#241B16; border-left:2px solid #D9A08C; padding:30px 32px; display:flex; flex-direction:column; gap:11px;">
+      <div style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#D9A08C;">{{ ui.ruleT }}</div>
+      <div style="font-size:16px; line-height:1.72; color:rgba(251,246,240,.82);">{{ ui.ruleB }}</div>
+    </div>
+  </div>
+
+  <div style="display:flex; gap:1px; background:rgba(26,20,17,.16); border-bottom:1px solid rgba(26,20,17,.16); flex-wrap:wrap; position:sticky; top:104px; z-index:40;">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+      <div onClick="{{ t.click }}" style="background:{{ t.bg }}; color:{{ t.fg }}; padding:20px 24px; font-size:12px; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; flex:1; text-align:center; min-width:160px;" style-hover="background:#EFE7DE;">{{ t.label }}</div>
+    </sc-for>
+  </div>
+
+  <div data-reveal style="padding:90px 44px 40px; display:grid; grid-template-columns:minmax(0,360px) minmax(0,1fr); gap:80px; align-items:start;">
+    <div style="display:flex; flex-direction:column; gap:20px; position:sticky; top:190px;">
+      <div style="font-family:'Libre Caslon Display',serif; font-size:54px; line-height:.94; letter-spacing:-.03em;">{{ cur.headA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ cur.headB }}</span></div>
+      <div style="font-size:16px; line-height:1.72; color:#5C4E46;">{{ cur.intro }}</div>
+      <div style="border:1px solid rgba(26,20,17,.2); padding:20px 22px; display:flex; flex-direction:column; gap:8px;">
+        <div style="font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:#7C2D3A;">{{ ui.callT }}</div>
+        <div style="font-size:14.5px; line-height:1.65; color:#3A312B;">{{ cur.call }}</div>
+        <a href="tel:+17183546298" style="font-size:13px; letter-spacing:.08em; color:#7C2D3A; padding-top:4px;" style-hover="color:#1A1411;">718 354 6298 &rarr;</a>
+      </div>
+    </div>
+    <div style="display:flex; flex-direction:column; padding-bottom:60px;">
+      <sc-for list="{{ cur.days }}" as="d" hint-placeholder-count="5">
+        <div style="display:grid; grid-template-columns:120px minmax(0,1fr); gap:34px; padding:28px 0; border-top:1px solid rgba(26,20,17,.18); align-items:start;">
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <div style="font-family:'Libre Caslon Display',serif; font-size:26px; line-height:1; color:#7C2D3A; white-space:nowrap;">{{ d.when }}</div>
+            <div style="font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#8A7A6E;">{{ d.tag }}</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="font-family:'Libre Caslon Display',serif; font-size:23px; line-height:1.16;">{{ d.t }}</div>
+            <div style="font-size:15.5px; line-height:1.74; color:#3A312B;">{{ d.b }}</div>
+          </div>
+        </div>
+      </sc-for>
+      <div style="border-top:1px solid rgba(26,20,17,.18);"></div>
+    </div>
+  </div>
+
+  <div data-reveal style="background:#1A1411; color:#FBF6F0; padding:110px 44px;">
+    <div style="display:flex; flex-direction:column; gap:18px; max-width:700px; margin-bottom:44px;">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div style="width:34px; height:1px; background:#D9A08C;"></div>
+        <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#D9A08C;">{{ ui.neverEyebrow }}</div>
+      </div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:60px; line-height:.94; letter-spacing:-.032em;">{{ ui.neverA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.neverB }}</span></div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2px; background:rgba(251,246,240,.16);">
+      <sc-for list="{{ nevers }}" as="x" hint-placeholder-count="6">
+        <div style="background:#1A1411; padding:26px 28px 30px; display:grid; grid-template-columns:22px minmax(0,1fr); gap:14px; align-items:start;">
+          <div style="font-family:'Libre Caslon Display',serif; font-size:20px; line-height:1.2; color:#D9A08C;">&times;</div>
+          <div style="font-size:15px; line-height:1.68; color:rgba(251,246,240,.78);">{{ x }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="background:#7C2D3A; color:#FBF6F0; padding:110px 44px; display:flex; flex-direction:column; align-items:center; gap:26px; text-align:center;">
+    <div style="font-family:'Libre Caslon Display',serif; font-size:clamp(40px,4.2vw,70px); line-height:.93; letter-spacing:-.034em; max-width:860px;">{{ ui.ctaA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#E7C3B4;">{{ ui.ctaB }}</span></div>
+    <div style="font-size:16.5px; line-height:1.65; color:rgba(251,246,240,.8); max-width:520px;">{{ ui.ctaSub }}</div>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; padding-top:4px;">
+      <div onClick="{{ goBooking }}" style="background:#FBF6F0; color:#7C2D3A; font-size:12.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; padding:21px 40px; cursor:pointer;" style-hover="background:#1A1411; color:#FBF6F0;">{{ ui.ctaBook }}</div>
+      <div onClick="{{ goFaq }}" style="border:1px solid rgba(251,246,240,.4); color:#FBF6F0; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; padding:21px 34px; cursor:pointer;" style-hover="border-color:#FBF6F0; background:rgba(251,246,240,.1);">{{ ui.ctaFaq }}</div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1400, &quot;height&quot;: 900}, &quot;lang&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;en&quot;, &quot;es&quot;], &quot;default&quot;: &quot;en&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;onNav&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;(page: string) =&gt; void&quot;}}">
+const UI = {
+  en: {
+    eyebrow: 'Aftercare \u00b7 the days after',
+    h1a: 'The treatment is', h1b: 'ninety minutes.', h1c: 'The result is ten days.',
+    sub: 'What you do after you leave the chair decides how well the work holds. Pick your treatment and follow the days \u2014 it is shorter and less delicate than people fear.',
+    ruleT: 'The one rule over all of it',
+    ruleB: 'When something looks wrong, photograph it and send it before you treat it yourself. A thirty-second reply from Aruna beats an evening of guessing, and catching something early is almost always simple.',
+    callT: 'Unsure? Ask first',
+    neverEyebrow: 'Whatever the treatment',
+    neverA: 'Six things', neverB: 'never to do.',
+    neverSub: '',
+    nevers: [
+      'Do not pick, scratch or peel anything. Ever. What flakes off on its own takes pigment with it only if you help it.',
+      'No pools, saunas, hot tubs or steam rooms while anything is healing \u2014 soaking and heat are how pigment and lasered skin are both ruined.',
+      'No direct sun on healing skin, and SPF 30 or higher on it for a month once it has closed.',
+      'No gym sweat for the first 48 hours after permanent makeup. Salt sits in the strokes.',
+      'No retinol, acids or exfoliants on or near the area until it is fully healed.',
+      'No makeup on top of healing permanent makeup. On the day it looks finished, it still is not sealed.'
+    ],
+    ctaA: 'Booked and want this', ctaB: 'in your pocket?',
+    ctaSub: 'These instructions are repeated on paper at your appointment, and Aruna answers healing questions by text in English or Spanish.',
+    ctaBook: 'Book an appointment', ctaFaq: 'All questions',
+    callLines: {
+      pmu: 'Heavy swelling past day three, weeping that does not slow after day two, or any sign of infection \u2014 photograph it and call the same day.',
+      scalp: 'Redness is normal for 48 hours. Anything raised, hot or spreading after that is a same-day photograph and call.',
+      laser: 'Blistering is not a normal laser reaction. Cool water, nothing on it, and a photo to the studio the same day.',
+      skin: 'Redness past day three after microneedling, or any reaction after a facial that worsens overnight \u2014 send a photo before putting anything on it.'
+    },
+    tabs: [['pmu', 'Brows, lips & liner'], ['scalp', 'Scalp'], ['laser', 'Laser'], ['skin', 'Facials & needling']],
+    plans: {
+      pmu: {
+        headA: 'Permanent makeup,', headB: 'day by day.',
+        intro: 'Brows, lips and eyeliner all heal on this arc. The look changes dramatically across ten days \u2014 that is the process working, not the work failing.',
+        days: [
+          ['Day 0', 'Leaving the chair', 'Blot gently with clean tissue every hour until weeping stops. The colour looks strong and the edges sharp \u2014 tonight is the boldest it will ever look.', 'Today'],
+          ['Days 1\u20132', 'Clean and thin', 'Wash the area twice a day with the cleanser you were given, pat dry, apply the ointment in the thinnest layer you can manage. Thick ointment suffocates the skin.', 'Care'],
+          ['Days 3\u20135', 'The flaking starts', 'Edges lift and flake, colour looks patchy, and this is the stage people panic at. Do not touch it. What flakes was always going to flake.', 'Hands off'],
+          ['Days 6\u20139', 'The ghost stage', 'The flaking finishes and the colour suddenly looks too soft, even gone. Pigment is settling under new skin \u2014 it returns over the next two weeks.', 'Patience'],
+          ['Day 10+', 'Settled', 'Skin is closed and daily life is back to normal. The true colour emerges over weeks four to six \u2014 which is exactly when the included touch-up is booked.', 'Touch-up']
+        ]
+      },
+      scalp: {
+        headA: 'Scalp,', headB: 'day by day.',
+        intro: 'Scalp micropigmentation heals faster than brows but punishes sweat and sun more. The first four days decide most of it.',
+        days: [
+          ['Days 0\u20134', 'Dry means dry', 'No washing the scalp, no sweating hard, no helmets or tight hats. Redness fades within 48 hours. This is the whole discipline of it.', 'Strict'],
+          ['Days 5\u20136', 'First wash', 'Lukewarm water and a gentle, fragrance-free wash, fingertips only. No scrubbing, no exfoliating anything off.', 'Gentle'],
+          ['Days 7\u201310', 'Moisturise', 'Light, fragrance-free moisturiser daily. Gym is fine again from day seven. The dots soften from tattoo-fresh to hair-like across this stretch.', 'Easing'],
+          ['Day 10+', 'Normal, plus SPF', 'Everything is back to normal except sun: SPF 30 on the scalp whenever it is exposed, permanently. Sun is what fades this work.', 'Forever'],
+          ['Weeks 4\u20136', 'The second pass', 'Density and any light spots are finished at the second sitting, once the first has fully settled. It is part of the treatment, not a repair.', 'Included']
+        ]
+      },
+      laser: {
+        headA: 'Laser,', headB: 'session by session.',
+        intro: 'Laser aftercare is short \u2014 48 hours of care per session \u2014 but it repeats every visit, and the prep before each one matters as much.',
+        days: [
+          ['Before', 'Shave, never wax', 'Shave the area within 24 hours of each session. Waxing or plucking removes the root the laser needs. No self-tanner for two weeks before.', 'Prep'],
+          ['Hours 0\u201348', 'Cool and loose', 'Redness and goosebump-like bumps are normal and fade within hours to two days. Cool compresses help. Loose clothing over the area, no hot showers today.', 'Calm'],
+          ['Days 2\u20137', 'The shedding', 'Treated hairs push out and shed over one to three weeks. It looks like regrowth \u2014 it is the opposite. Let it fall, do not pluck.', 'Shedding'],
+          ['Between', 'Sun discipline', 'SPF 30+ on exposed treated areas every day between sessions. Tanned skin cannot be lasered safely, and one beach week can postpone a session.', 'Every day'],
+          ['Weeks 4\u20136', 'Next session', 'Sessions sit four to six weeks apart to catch each growth cycle. Consistency is most of the result \u2014 it is why the course exists.', 'Rhythm']
+        ]
+      },
+      skin: {
+        headA: 'Facials & needling,', headB: 'day by day.',
+        intro: 'A facial asks a day of restraint; microneedling asks three. Both reward doing nothing far more than doing something.',
+        days: [
+          ['Hours 0\u201324', 'Do nothing', 'No makeup, no actives, no touching. After microneedling: no washing at all for the first six hours. Redness tonight is the treatment working.', 'Restraint'],
+          ['Days 1\u20133', 'Bland and hydrated', 'Gentle cleanser, plain moisturiser, SPF. Microneedling skin stays pink into day three and can flake lightly \u2014 moisturise, never exfoliate it off.', 'Simple'],
+          ['Days 3\u20135', 'Actives return', 'Retinol and acids come back five days after needling, two after a facial. If it stings on return, wait two more days.', 'Slowly'],
+          ['Days 5\u201310', 'The glow window', 'Collagen from needling builds over weeks, but the surface glow lands here. Book events for this window, never the day after a treatment.', 'Payoff'],
+          ['Weeks 4\u20136', 'The next one', 'Skin cycles roughly monthly, which is why the courses are spaced this way. Results compound when the rhythm holds.', 'Rhythm']
+        ]
+      }
+    }
+  },
+  es: {
+    eyebrow: 'Cuidados \u00b7 los d\u00edas despu\u00e9s',
+    h1a: 'El tratamiento dura', h1b: 'noventa minutos.', h1c: 'El resultado, diez d\u00edas.',
+    sub: 'Lo que haces despu\u00e9s de dejar la silla decide qu\u00e9 tan bien se conserva el trabajo. Elige tu tratamiento y sigue los d\u00edas: es m\u00e1s corto y menos delicado de lo que la gente teme.',
+    ruleT: 'La regla por encima de todo',
+    ruleB: 'Cuando algo se vea mal, fotograf\u00edalo y env\u00edalo antes de tratarlo t\u00fa misma. Una respuesta de treinta segundos de Aruna vale m\u00e1s que una noche de adivinar, y detectar algo temprano casi siempre es simple.',
+    callT: '\u00bfDudas? Pregunta primero',
+    neverEyebrow: 'Sea cual sea el tratamiento',
+    neverA: 'Seis cosas que', neverB: 'nunca se hacen.',
+    neverSub: '',
+    nevers: [
+      'No rasques, piques ni despegues nada. Nunca. Lo que se cae solo se lleva pigmento \u00fanicamente si lo ayudas.',
+      'Nada de piscinas, saunas, jacuzzis ni vapor mientras algo cicatriza: el remojo y el calor arruinan tanto el pigmento como la piel tratada con l\u00e1ser.',
+      'Nada de sol directo en piel que cicatriza, y SPF 30 o m\u00e1s durante un mes cuando haya cerrado.',
+      'Nada de sudor de gimnasio las primeras 48 horas tras maquillaje permanente. La sal se asienta en los trazos.',
+      'Nada de retinol, \u00e1cidos ni exfoliantes en la zona o cerca hasta que sane por completo.',
+      'Nada de maquillaje sobre maquillaje permanente en cicatrizaci\u00f3n. El d\u00eda que se ve terminado, todav\u00eda no est\u00e1 sellado.'
+    ],
+    ctaA: '\u00bfReservada y quieres esto', ctaB: 'en el bolsillo?',
+    ctaSub: 'Estas instrucciones se repiten en papel en tu cita, y Aruna contesta dudas de cicatrizaci\u00f3n por mensaje en ingl\u00e9s o espa\u00f1ol.',
+    ctaBook: 'Reservar una cita', ctaFaq: 'Todas las preguntas',
+    callLines: {
+      pmu: 'Hinchaz\u00f3n fuerte despu\u00e9s del d\u00eda tres, supuraci\u00f3n que no baja tras el d\u00eda dos, o cualquier se\u00f1al de infecci\u00f3n: foto y llamada el mismo d\u00eda.',
+      scalp: 'El enrojecimiento es normal 48 horas. Algo abultado, caliente o que se extiende despu\u00e9s de eso es foto y llamada el mismo d\u00eda.',
+      laser: 'Las ampollas no son una reacci\u00f3n normal del l\u00e1ser. Agua fresca, nada encima, y una foto al estudio el mismo d\u00eda.',
+      skin: 'Rojez despu\u00e9s del d\u00eda tres tras microneedling, o cualquier reacci\u00f3n tras un facial que empeore de una noche a otra: env\u00eda una foto antes de ponerte nada.'
+    },
+    tabs: [['pmu', 'Cejas, labios y delineado'], ['scalp', 'Cuero cabelludo'], ['laser', 'L\u00e1ser'], ['skin', 'Faciales y microneedling']],
+    plans: {
+      pmu: {
+        headA: 'Maquillaje permanente,', headB: 'd\u00eda a d\u00eda.',
+        intro: 'Cejas, labios y delineado cicatrizan con este mismo arco. El aspecto cambia mucho a lo largo de diez d\u00edas: eso es el proceso funcionando, no el trabajo fallando.',
+        days: [
+          ['D\u00eda 0', 'Al salir de la silla', 'Seca suavemente con pa\u00f1uelo limpio cada hora hasta que pare la supuraci\u00f3n. El color se ve fuerte y los bordes marcados: esta noche es lo m\u00e1s intenso que se ver\u00e1 nunca.', 'Hoy'],
+          ['D\u00edas 1\u20132', 'Limpio y fino', 'Lava la zona dos veces al d\u00eda con el limpiador que te dieron, seca a toques, aplica la pomada en la capa m\u00e1s fina posible. La pomada gruesa asfixia la piel.', 'Cuidado'],
+          ['D\u00edas 3\u20135', 'Empieza a descamar', 'Los bordes se levantan, el color se ve parchado, y esta es la etapa donde la gente entra en p\u00e1nico. No lo toques. Lo que se descama siempre se iba a descamar.', 'Sin tocar'],
+          ['D\u00edas 6\u20139', 'La etapa fantasma', 'Termina la descamaci\u00f3n y el color de pronto se ve demasiado suave, casi ido. El pigmento se asienta bajo piel nueva: vuelve en las siguientes dos semanas.', 'Paciencia'],
+          ['D\u00eda 10+', 'Asentado', 'La piel cerr\u00f3 y la vida normal vuelve. El color real emerge entre las semanas cuatro y seis, que es justo cuando se agenda el retoque incluido.', 'Retoque']
+        ]
+      },
+      scalp: {
+        headA: 'Cuero cabelludo,', headB: 'd\u00eda a d\u00eda.',
+        intro: 'La micropigmentaci\u00f3n capilar cicatriza m\u00e1s r\u00e1pido que las cejas pero castiga m\u00e1s el sudor y el sol. Los primeros cuatro d\u00edas deciden casi todo.',
+        days: [
+          ['D\u00edas 0\u20134', 'Seco significa seco', 'No lavar el cuero cabelludo, no sudar fuerte, sin cascos ni gorras apretadas. La rojez baja en 48 horas. Esta es toda la disciplina.', 'Estricto'],
+          ['D\u00edas 5\u20136', 'Primer lavado', 'Agua tibia y un lavado suave sin fragancia, solo con las yemas. Sin frotar, sin exfoliar nada.', 'Suave'],
+          ['D\u00edas 7\u201310', 'Hidratar', 'Hidratante ligero sin fragancia a diario. El gimnasio vuelve desde el d\u00eda siete. Los puntos pasan de reci\u00e9n tatuados a parecer cabello en este tramo.', 'Aflojando'],
+          ['D\u00eda 10+', 'Normal, m\u00e1s SPF', 'Todo vuelve a la normalidad excepto el sol: SPF 30 en el cuero cabelludo siempre que est\u00e9 expuesto, para siempre. El sol es lo que desvanece este trabajo.', 'Siempre'],
+          ['Semanas 4\u20136', 'La segunda pasada', 'La densidad y cualquier punto claro se terminan en la segunda sesi\u00f3n, cuando la primera asent\u00f3 del todo. Es parte del tratamiento, no una reparaci\u00f3n.', 'Incluida']
+        ]
+      },
+      laser: {
+        headA: 'L\u00e1ser,', headB: 'sesi\u00f3n a sesi\u00f3n.',
+        intro: 'El cuidado del l\u00e1ser es corto \u2014 48 horas por sesi\u00f3n \u2014 pero se repite en cada visita, y la preparaci\u00f3n antes de cada una importa igual.',
+        days: [
+          ['Antes', 'Rasura, nunca cera', 'Rasura la zona dentro de las 24 horas previas a cada sesi\u00f3n. La cera o las pinzas quitan la ra\u00edz que el l\u00e1ser necesita. Sin autobronceador dos semanas antes.', 'Preparaci\u00f3n'],
+          ['Horas 0\u201348', 'Fresco y holgado', 'La rojez y los bultitos como piel de gallina son normales y bajan entre horas y dos d\u00edas. Compresas frescas ayudan. Ropa holgada encima, sin duchas calientes hoy.', 'Calma'],
+          ['D\u00edas 2\u20137', 'La ca\u00edda', 'Los vellos tratados se expulsan y caen a lo largo de una a tres semanas. Parece que crece: es lo contrario. D\u00e9jalo caer, no lo arranques.', 'Ca\u00edda'],
+          ['Entre sesiones', 'Disciplina de sol', 'SPF 30+ en zonas tratadas expuestas todos los d\u00edas entre sesiones. La piel bronceada no se puede tratar con seguridad, y una semana de playa puede aplazar una sesi\u00f3n.', 'Cada d\u00eda'],
+          ['Semanas 4\u20136', 'Siguiente sesi\u00f3n', 'Las sesiones van cada cuatro a seis semanas para atrapar cada ciclo de crecimiento. La constancia es la mayor parte del resultado: por eso existe el plan.', 'Ritmo']
+        ]
+      },
+      skin: {
+        headA: 'Faciales y microneedling,', headB: 'd\u00eda a d\u00eda.',
+        intro: 'Un facial pide un d\u00eda de moderaci\u00f3n; el microneedling pide tres. Los dos premian no hacer nada mucho m\u00e1s que hacer algo.',
+        days: [
+          ['Horas 0\u201324', 'No hagas nada', 'Sin maquillaje, sin activos, sin tocar. Tras microneedling: nada de lavar durante las primeras seis horas. La rojez de esta noche es el tratamiento funcionando.', 'Moderaci\u00f3n'],
+          ['D\u00edas 1\u20133', 'Simple e hidratado', 'Limpiador suave, hidratante simple, SPF. La piel con microneedling sigue rosada hasta el d\u00eda tres y puede descamar un poco: hidrata, nunca lo exfolies.', 'Simple'],
+          ['D\u00edas 3\u20135', 'Vuelven los activos', 'El retinol y los \u00e1cidos vuelven cinco d\u00edas despu\u00e9s del microneedling, dos despu\u00e9s de un facial. Si arde al volver, espera dos d\u00edas m\u00e1s.', 'Despacio'],
+          ['D\u00edas 5\u201310', 'La ventana del brillo', 'El col\u00e1geno del microneedling se construye en semanas, pero el brillo superficial llega aqu\u00ed. Agenda eventos para esta ventana, nunca el d\u00eda despu\u00e9s.', 'Recompensa'],
+          ['Semanas 4\u20136', 'El siguiente', 'La piel cicla m\u00e1s o menos cada mes, por eso los planes se espacian as\u00ed. Los resultados se acumulan cuando el ritmo se mantiene.', 'Ritmo']
+        ]
+      }
+    }
+  }
+};
+
+class Component extends DCLogic {
+  state = { tab: 'pmu' };
+
+  componentDidMount() { window.scrollTo({ top: 0, behavior: 'auto' }); }
+
+  nav = p => { const f = this.props.onNav; if (f) f(p); };
+
+  renderVals() {
+    const es = this.props.lang === 'es';
+    const ui = UI[es ? 'es' : 'en'];
+    const tab = this.state.tab;
+    const plan = ui.plans[tab];
+
+    return {
+      ui,
+      nevers: ui.nevers,
+      tabs: ui.tabs.map(t => ({
+        label: t[1],
+        bg: tab === t[0] ? '#1A1411' : '#F4EDE6',
+        fg: tab === t[0] ? '#FBF6F0' : '#5C4E46',
+        click: () => this.setState({ tab: t[0] })
+      })),
+      cur: {
+        headA: plan.headA, headB: plan.headB, intro: plan.intro,
+        call: ui.callLines[tab],
+        days: plan.days.map(d => ({ when: d[0], t: d[1], b: d[2], tag: d[3] }))
+      },
+      goBooking: () => this.nav('booking'),
+      goFaq: () => this.nav('faq')
+    };
+  }
+}
+
+</script>
+</body>
+</html>
