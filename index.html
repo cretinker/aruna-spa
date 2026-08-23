@@ -41,8 +41,9 @@
 
 <div style="background:#F4EDE6; color:#1A1411; font-family:'DM Sans',sans-serif; min-height:100vh;">
 
-  <div style="position:fixed; top:0; left:0; right:0; z-index:80;" onMouseLeave="{{ closeMenu }}">
-    <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; padding:9px 40px; background:#1A1411; color:rgba(251,246,240,.82); font-size:12px;">
+  <!-- Static Top Header (No Scrolling/Sticky Nav) -->
+  <header style="position:relative; z-index:50; background:#1A1411;" onMouseLeave="{{ closeMenu }}">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; padding:10px 40px; background:#140F0D; color:rgba(251,246,240,.85); font-size:12px; border-bottom:1px solid rgba(251,246,240,.08);">
       <div style="font-weight:500; color:#D9A08C;">{{ t.utilFinance }}</div>
       <div style="display:flex; gap:22px; align-items:center;">
         <span>41 Wheeler Avenue, Staten Island</span>
@@ -52,14 +53,13 @@
       </div>
     </div>
 
-    <div style="position:relative; background:{{ navBg }}; backdrop-filter:blur(16px); border-bottom:1px solid {{ navLine }}; transition:background .4s ease, border-color .4s ease;">
-      <div style="position:absolute; left:0; bottom:-1px; height:1px; width:{{ progress }}; background:linear-gradient(90deg, rgba(232,169,133,.15), #E8A985); transition:width .12s linear;"></div>
-      <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; padding:{{ navPad }} 40px; transition:padding .4s cubic-bezier(.16,1,.3,1);">
+    <div style="position:relative; background:#1A1411; border-bottom:1px solid rgba(251,246,240,.12);">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; padding:18px 40px;">
         <div onClick="{{ goHome }}" style="display:flex; flex-direction:column; gap:5px; cursor:pointer; flex-shrink:0;">
-          <div style="font-family:'Libre Caslon Display',serif; font-size:{{ logoSize }}; letter-spacing:.2em; line-height:1; color:#FBF6F0; transition:font-size .4s cubic-bezier(.16,1,.3,1);">ARUNA</div>
-          <div style="font-size:8.5px; letter-spacing:.3em; text-transform:uppercase; color:#D9A08C; white-space:nowrap;">Spa &middot; Staten Island &middot; est. 2014</div>
+          <div style="font-family:'Libre Caslon Display',serif; font-size:28px; letter-spacing:.18em; line-height:1; color:#FBF6F0;">ARUNA</div>
+          <div style="font-size:8.5px; letter-spacing:.28em; text-transform:uppercase; color:#D9A08C; white-space:nowrap;">Spa &middot; Staten Island &middot; est. 2014</div>
         </div>
-        <div data-nav-links style="display:flex; gap:14px; font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:rgba(251,246,240,.72); flex:0 1 auto; justify-content:center; white-space:nowrap;">
+        <div data-nav-links style="display:flex; gap:16px; font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:rgba(251,246,240,.75); flex:0 1 auto; justify-content:center; white-space:nowrap;">
           <div onClick="{{ goHome }}" onMouseEnter="{{ closeMenu }}" style="cursor:pointer; color:{{ cHome }}; white-space:nowrap;" style-hover="color:#D9A08C;">{{ t.navHome }}</div>
           <div onClick="{{ goAbout }}" onMouseEnter="{{ closeMenu }}" style="cursor:pointer; color:{{ cAbout }}; white-space:nowrap;" style-hover="color:#D9A08C;">{{ t.navAbout }}</div>
           <div onMouseEnter="{{ openTreatments }}" onClick="{{ goServices }}" style="cursor:pointer; color:{{ cTreat }}; display:flex; align-items:center; gap:6px; white-space:nowrap;" style-hover="color:#D9A08C;">{{ t.navTreat }} <span style="font-size:8px; opacity:.6;">&#9660;</span></div>
@@ -69,8 +69,8 @@
           <div onClick="{{ goVisit }}" onMouseEnter="{{ closeMenu }}" style="cursor:pointer; color:{{ cVisit }}; white-space:nowrap;" style-hover="color:#D9A08C;">{{ t.navVisit }}</div>
         </div>
         <div style="display:flex; align-items:center; gap:16px; flex-shrink:0;">
-          <div onClick="{{ goBook2 }}" style="font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:{{ cBook }}; cursor:pointer; white-space:nowrap;" style-hover="color:#D9A08C;">{{ t.navCtaBook }}</div>
-          <div onClick="{{ goQuote }}" style="background:#7C2D3A; color:#FBF6F0; font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:14px 22px; cursor:pointer; white-space:nowrap; box-shadow:0 0 0 1px rgba(124,45,58,.35), 0 8px 24px -12px rgba(124,45,58,.7); transition:background .3s ease, color .3s ease;" style-hover="background:#FBF6F0; color:#7C2D3A;">{{ t.navCta }}</div>
+          <div onClick="{{ goBook2 }}" style="font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:{{ cBook }}; cursor:pointer; white-space:nowrap;" style-hover="color:#D9A08C;">{{ t.navCtaBook }}</div>
+          <div onClick="{{ goQuote }}" style="background:#7C2D3A; color:#FBF6F0; font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:13px 22px; cursor:pointer; white-space:nowrap; box-shadow:0 0 0 1px rgba(124,45,58,.35), 0 8px 24px -12px rgba(124,45,58,.7); transition:background .3s ease, color .3s ease;" style-hover="background:#FBF6F0; color:#7C2D3A;">{{ t.navCta }}</div>
         </div>
       </div>
 
@@ -101,10 +101,7 @@
         </div>
       </sc-if>
     </div>
-  </div>
-
-  <div style="height:{{ topPad }};"></div>
-  <div style="height:{{ heroLift }}; margin-top:{{ heroLiftNeg }};"></div>
+  </header>
 
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
     <dc-import name="Aruna Home" on-nav="{{ go }}" lang="{{ lang }}" hint-size="100%,2400px"></dc-import>
@@ -160,8 +157,9 @@
       </sc-for>
     </div>
   </sc-if>
-  <div style="background:#1A1411; color:#FBF6F0;">
 
+  <!-- Grounded Editorial Footer -->
+  <footer style="background:#1A1411; color:#FBF6F0;">
     <div style="display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:56px; align-items:center; padding:64px 40px; border-bottom:1px solid rgba(251,246,240,.14);">
       <div style="display:flex; flex-direction:column; gap:14px;">
         <div style="font-family:'Libre Caslon Display',serif; font-size:46px; line-height:1.02; letter-spacing:-.03em;">{{ t.ftCtaA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ t.ftCtaB }}</span></div>
@@ -174,7 +172,6 @@
     </div>
 
     <div style="display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1.05fr); gap:52px; padding:60px 40px 56px;">
-
       <div style="display:flex; flex-direction:column; gap:18px;">
         <div style="font-family:'Libre Caslon Display',serif; font-size:30px; letter-spacing:.2em; color:#FBF6F0;">ARUNA</div>
         <div style="font-size:14px; line-height:1.7; color:rgba(251,246,240,.62); max-width:310px;">{{ t.ftBlurb }}</div>
@@ -222,20 +219,7 @@
       <div>{{ t.ftRights }}</div>
       <div>{{ t.ftFinance }}</div>
     </div>
-  </div>
-
-  <sc-if value="{{ showBar }}" hint-placeholder-val="{{ false }}">
-    <div style="position:fixed; bottom:0; left:0; right:0; z-index:70; background:rgba(26,20,17,.97); backdrop-filter:blur(16px); border-top:1px solid rgba(217,160,140,.4); color:#FBF6F0; padding:15px 40px; display:flex; align-items:center; justify-content:space-between; gap:24px; animation:arunaRise .4s cubic-bezier(.16,1,.3,1) both;">
-      <div style="display:flex; align-items:center; gap:26px;">
-        <div style="font-family:'Libre Caslon Display',serif; font-size:21px; color:#FBF6F0;">{{ barLine }}</div>
-        <div style="font-size:12.5px; color:rgba(251,246,240,.6);">{{ t.barSub }}</div>
-      </div>
-      <div style="display:flex; align-items:center; gap:14px;">
-        <a href="tel:+17183546298" style="font-size:12.5px; letter-spacing:.08em; color:rgba(251,246,240,.72);" style-hover="color:#D9A08C;">718 354 6298</a>
-        <div onClick="{{ goQuote }}" style="background:#D9A08C; color:#1A1411; font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; padding:15px 30px; cursor:pointer;" style-hover="background:#FBF6F0;">{{ t.barCta }}</div>
-      </div>
-    </div>
-  </sc-if>
+  </footer>
 
   <sc-if value="{{ exitOpen }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ exitClose }}" style="position:fixed; inset:0; z-index:95; background:rgba(26,20,17,.74); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; padding:24px;">
@@ -286,9 +270,8 @@ const EN = {
   utilToday: 'Today', utilClosed: 'Closed today',
   menuCount: 'treatments, not one of them price on request', menuAll: 'The complete list \u2192',
   barCta: 'Price my treatment',
-  barLines: { booking: '', aftercare: 'The ten days after, day by day', gifts: 'A gift that actually gets used', treatment: 'Every minute accounted for before you book', packages: 'Bought as a course, priced per visit', results: 'Photographed at six weeks, not six days', financing: 'Four payments, approved before you arrive', faq: 'Every answer in full, no phone call needed', about: 'Twelve years in one room, every price printed', visit: 'Free consultation before anything permanent', home: 'Know the number before you sit down', segment: 'Six questions and you will know the price', services: 'Every price above, or get yours in a minute', studio: 'Free consultation, same day if you want it', quote: '' },
   barSub: 'Free consultation \u00b7 cash and card price shown together \u00b7 pay in four',
-  ftBlurb: 'A home studio on Staten Island doing permanent makeup, skin, laser and hair-loss work since 2014. One chair, one client, and every price printed.',
+  ftBlurb: 'A private sanctuary in Staten Island specializing in eyebrows, permanent makeup, scalp micropigmentation, clinical facials and laser hair removal since 2014. One client at a time, every rate published upfront.',
   ftTreat: 'Treatments', ftVisit: 'Visit', ftHours: 'Hours',
   ftCtaA: 'Every price is on this site.', ftCtaB: 'Start with yours.',
   ftBefore: 'Before you book', ftAfter: 'After your visit',
@@ -317,13 +300,11 @@ const HOURS = [
 ];
 
 class Component extends DCLogic {
-  state = { page: 'home', seg: 'brows', menu: false, scrolled: false, showBar: false, count: 48, progress: 0, lang: 'en', d: null, bookSvc: null, bookDur: 90, bookPrice: null, tKey: 'microblading', exitOpen: false, exitDone: false, exName: '', exPhone: '' };
+  state = { page: 'home', seg: 'brows', menu: false, count: 32, lang: 'en', d: null, bookSvc: null, bookDur: 90, bookPrice: null, tKey: 'microblading', exitOpen: false, exitDone: false, exName: '', exPhone: '' };
 
   componentDidMount() {
     this.readHash();
     window.addEventListener('hashchange', this.readHash);
-    window.addEventListener('scroll', this.onScroll, { passive: true });
-
     this.observe();
     import('./aruna-data.js').then(m => this.setState({ d: m, count: m.SERVICES.length })).catch(() => {});
     try { const L = localStorage.getItem('aruna-lang'); if (L === 'es' || L === 'en') this.setState({ lang: L }); } catch (e) {}
@@ -353,7 +334,6 @@ class Component extends DCLogic {
   componentWillUnmount() {
     window.removeEventListener('hashchange', this.readHash);
     document.removeEventListener('mouseout', this.onExit);
-    window.removeEventListener('scroll', this.onScroll);
     if (this.io) this.io.disconnect();
   }
 
@@ -366,16 +346,6 @@ class Component extends DCLogic {
     if (known.indexOf(h) > -1) return this.setState({ page: h });
     if (SEG_META.some(s => s[0] === h)) return this.setState({ page: 'segment', seg: h });
     this.setState({ page: 'home' });
-  };
-
-  onScroll = () => {
-    const y = window.scrollY || 0;
-    const sc = y > 40, bar = y > 700 && this.state.page !== 'quote';
-    const h = document.documentElement.scrollHeight - window.innerHeight;
-    const pr = h > 0 ? Math.min(1, y / h) : 0;
-    if (sc !== this.state.scrolled || bar !== this.state.showBar || Math.abs(pr - this.state.progress) > 0.004) {
-      this.setState({ scrolled: sc, showBar: bar, progress: pr });
-    }
   };
 
   observe() {
@@ -410,7 +380,6 @@ class Component extends DCLogic {
 
   renderVals() {
     const st = this.state;
-    const sc = st.scrolled;
     const D = st.lang === 'es' && st.d && st.d.T ? st.d.T.es : EN;
     const esLabels = (st.d && st.d.SEG_LABELS_ES) || {};
     const segLabel = m => (st.lang === 'es' && esLabels[m[0]] ? esLabels[m[0]][0] : m[1]);
@@ -418,13 +387,6 @@ class Component extends DCLogic {
     SEG_META.forEach(s => { segGo[s[0]] = () => this.go('segment', s[0]); });
     const todayIdx = (new Date().getDay() + 6) % 7;
     const t = HOURS[todayIdx];
-    const barLines = {
-      home: 'Know the number before you sit down',
-      segment: 'Six questions and you will know the price',
-      services: 'Every price above, or get yours in a minute',
-      studio: 'Free consultation, same day if you want it',
-      es: 'Conoce el precio antes de sentarte'
-    };
 
     return {
       go: this.go, segGo,
@@ -489,14 +451,6 @@ class Component extends DCLogic {
       closeMenu: () => this.setState({ menu: false }),
       menuOpen: st.menu,
       count: st.count,
-      navBg: sc ? 'rgba(26,20,17,.96)' : (st.page === 'home' ? 'transparent' : '#1A1411'),
-      navLine: sc ? 'rgba(217,160,140,.3)' : (st.page === 'home' ? 'rgba(251,246,240,.16)' : 'rgba(251,246,240,.14)'),
-      navPad: sc ? '16px' : '24px',
-      logoSize: sc ? '24px' : '30px',
-      topPad: sc ? '104px' : '124px',
-      heroLift: '0px',
-      heroLiftNeg: st.page === 'home' ? (sc ? '-104px' : '-124px') : '0px',
-      progress: Math.round(st.progress * 1000) / 10 + '%',
       cHome: st.page === 'home' ? '#D9A08C' : 'rgba(251,246,240,.72)',
       cVisit: st.page === 'visit' ? '#D9A08C' : 'rgba(251,246,240,.72)',
       goVisit: () => this.go('visit'),
@@ -512,8 +466,6 @@ class Component extends DCLogic {
       isTreatment: st.page === 'treatment', tKey: st.tKey,
       bookSvc: st.bookSvc, bookDur: st.bookDur, bookPrice: st.bookPrice,
       seg: st.seg,
-      showBar: st.showBar,
-      barLine: (D.barLines && D.barLines[st.page]) || (D.barLines && D.barLines.home) || barLines.home,
       segGroups: [
         { title: D.grpTreat || 'By treatment', keys: ['brows', 'hairloss', 'laser', 'skin', 'body'] },
         { title: D.grpWho || 'By who it is for', keys: ['men', 'bridal', 'recovery', 'house', 'training'] }
@@ -533,7 +485,6 @@ class Component extends DCLogic {
     };
   }
 }
-
 </script>
 </body>
 </html>
