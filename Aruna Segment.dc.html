@@ -207,7 +207,7 @@
     <!-- ══════════ FINANCING LADDER — clinical, high ticket ══════════ -->
     <sc-if value="{{ showFinance }}" hint-placeholder-val="{{ false }}">
       <div data-reveal style="background:#1A1411; color:#FBF6F0; padding:120px 44px; display:grid; grid-template-columns:minmax(0,340px) minmax(0,1fr); gap:76px; align-items:start;">
-        <div style="display:flex; flex-direction:column; gap:18px;">
+        <div style="display:flex; flex-direction:column; gap:18px; position:sticky; top:24px;">
           <div style="font-family:'Libre Caslon Display',serif; font-size:60px; line-height:.94; letter-spacing:-.03em;">{{ ui.finA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#D9A08C;">{{ ui.finB }}</span></div>
           <div style="font-size:16px; line-height:1.7; color:rgba(251,246,240,.66);">{{ ladderNote }}</div>
           <div onClick="{{ goQuote }}" style="align-self:flex-start; margin-top:6px; border:1px solid rgba(251,246,240,.3); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; padding:16px 28px; cursor:pointer; transition:background .3s ease, color .3s ease, border-color .3s ease;" style-hover="background:#D9A08C; border-color:#D9A08C; color:#100C0A;">{{ ui.finCta }}</div>
@@ -258,7 +258,7 @@
     <!-- ══════════ AFTERCARE — PMU segments ══════════ -->
     <sc-if value="{{ showSettling }}" hint-placeholder-val="{{ false }}">
       <div data-reveal style="color:#1A1411; padding:120px 44px; display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); gap:76px; align-items:start;">
-        <div style="display:flex; flex-direction:column; gap:18px;">
+        <div style="display:flex; flex-direction:column; gap:18px; position:sticky; top:24px;">
           <div style="font-family:'Libre Caslon Display',serif; font-size:60px; line-height:.94; letter-spacing:-.03em;">{{ ui.afterA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.afterB }}</span></div>
           <div style="font-size:16px; line-height:1.7; color:#5C4E46;">{{ ui.afterSub }}</div>
         </div>
@@ -275,7 +275,7 @@
 
     <!-- ══════════ FAQ ══════════ -->
     <div data-reveal style="background:{{ faqBg }}; color:#1A1411; border-top:1px solid rgba(26,20,17,.16); padding:120px 44px; display:grid; grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr); gap:64px; align-items:start;">
-      <div style="font-family:'Libre Caslon Display',serif; font-size:60px; line-height:.96; letter-spacing:-.028em;">{{ ui.faqA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.faqB }}</span></div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:60px; line-height:.96; letter-spacing:-.028em; position:sticky; top:24px;">{{ ui.faqA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.faqB }}</span></div>
       <div style="display:flex; flex-direction:column;">
         <sc-for list="{{ faq }}" as="f" hint-placeholder-count="3">
           <div style="border-top:1px solid rgba(26,20,17,.18); padding:26px 0; display:flex; flex-direction:column; gap:10px;">

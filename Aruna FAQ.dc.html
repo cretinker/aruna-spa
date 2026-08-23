@@ -28,13 +28,12 @@
     </div>
   </div>
 
-  <div data-reveal style="padding:70px 44px 110px;">
+  <div data-reveal style="padding:70px 44px 80px;">
     <sc-for list="{{ groups }}" as="g" hint-placeholder-count="6">
-      <div style="padding-bottom:56px;">
-        <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:22px;">
+      <div style="padding-bottom:72px; display:grid; grid-template-columns:minmax(0,340px) minmax(0,1fr); gap:60px; align-items:start; border-bottom:1px solid rgba(26,20,17,.16); margin-bottom:56px;">
+        <div style="display:flex; flex-direction:column; gap:12px; position:sticky; top:24px;">
           <div style="font-family:'Libre Caslon Display',serif; font-size:44px; line-height:1; letter-spacing:-.028em;">{{ g.title }}</div>
-          <div style="height:1px; background:rgba(26,20,17,.2); flex:1;"></div>
-          <div style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#8A7A6E; white-space:nowrap;">{{ g.count }}</div>
+          <div style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#8A7A6E;">{{ g.count }}</div>
         </div>
         <div style="display:flex; flex-direction:column;">
           <sc-for list="{{ g.items }}" as="q" hint-placeholder-count="4">

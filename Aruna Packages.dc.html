@@ -89,14 +89,15 @@
     </div>
   </div>
 
-  <div data-reveal style="background:#EAE1D6; padding:120px 44px; border-bottom:1px solid rgba(26,20,17,.16);">
-    <div style="display:flex; flex-direction:column; gap:18px; margin-bottom:46px; max-width:660px;">
+  <div data-reveal style="background:#EAE1D6; padding:120px 44px; border-bottom:1px solid rgba(26,20,17,.16); display:grid; grid-template-columns:minmax(0,340px) minmax(0,1fr); gap:60px; align-items:start;">
+    <div style="display:flex; flex-direction:column; gap:18px; position:sticky; top:24px;">
       <div style="display:flex; align-items:center; gap:14px;">
         <div style="width:34px; height:1px; background:#7C2D3A;"></div>
         <div style="font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#7C2D3A;">{{ ui.cmpEyebrow }}</div>
       </div>
-      <div style="font-family:'Libre Caslon Display',serif; font-size:62px; line-height:.94; letter-spacing:-.032em;">{{ ui.cmpA }} <span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.cmpB }}</span></div>
-      <div style="font-size:16.5px; line-height:1.7; color:#5C4E46;">{{ ui.cmpSub }}</div>
+      <div style="font-family:'Libre Caslon Display',serif; font-size:56px; line-height:.94; letter-spacing:-.032em;">{{ ui.cmpA }}<br><span style="font-family:'Libre Caslon Text',serif; font-style:italic; color:#7C2D3A;">{{ ui.cmpB }}</span></div>
+      <div style="font-size:16px; line-height:1.7; color:#5C4E46;">{{ ui.cmpSub }}</div>
+      <div style="font-size:13px; line-height:1.6; color:#8A7A6E; padding-top:10px;">{{ ui.cmpNote }}</div>
     </div>
     <div style="border:1px solid rgba(26,20,17,.2); background:#F4EDE6;">
       <div style="display:grid; grid-template-columns:minmax(0,1.5fr) repeat(4,minmax(0,1fr)); background:#1A1411; color:#FBF6F0;">
@@ -114,7 +115,6 @@
         </div>
       </sc-for>
     </div>
-    <div style="font-size:13px; line-height:1.6; color:#8A7A6E; padding-top:16px; max-width:700px;">{{ ui.cmpNote }}</div>
   </div>
 
   <div data-reveal style="background:#1A1411; color:#FBF6F0; padding:120px 44px;">
